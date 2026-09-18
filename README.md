@@ -1,4 +1,4 @@
-##BMEN 600 Project - Fall 2026
+### BMEN 600 Project - Fall 2026
 ## Team Name - Group 5: “The Singing Oats”🎤🥣
 # Team members: Jamie Sanson, Yassien Tawfik, Anna Klygina
 
@@ -13,13 +13,13 @@ Are the gait deficits associated with Parkinson's disease sufficient for diagnos
 
 ### Dataset
 
-A) https://physionet.org/content/multimodal-gait-dataset/1.0.0/
+A) https://physionet.org/content/multimodal-gait-dataset/1.0.0/ <br>
 B) https://physionet.org/content/gaitpdb/1.0.0/
 
 ### Biggest Uncertainty
 It is unclear whether the Parkinson dataset segments the force plate data into the various phases of gait. We expect that we can quantify differences in the vertical ground reaction forces across heel strike, foot flat, and toe off in either proportional time duration or mean forces, however this is dependent on whether or not we can identify those segments of gait from the force place data alone.
 
-[1] S. Zafar, F. Lui, and S. Yaddanapudi, “Parkinson disease,” Parkinson Disease, https://www.ncbi.nlm.nih.gov/books/NBK470193/ (accessed Sep. 18, 2026).
+[1] S. Zafar, F. Lui, and S. Yaddanapudi, “Parkinson disease,” Parkinson Disease, https://www.ncbi.nlm.nih.gov/books/NBK470193/ (accessed Sep. 18, 2026). <br>
 [2] S. M. Kim, D. H. Kim, Y. Yang, S. W. Ha, and J. H. Han, “Gait patterns in parkinson’s disease with or without cognitive impairment,” Dementia and Neurocognitive Disorders, vol. 17, no. 2, p. 57, Jul. 2018. doi:10.12779/dnd.2018.17.2.57
 
 ...
@@ -33,8 +33,8 @@ Fritz, T.H., Girbardt, J., Rullmann, M. et al. Music engages the phasic dopamine
 Does listening to music meaningfully alter arousal, quantified by dopamine dynamics in the dorsal striatum?
 
 ### Dataset
-https://physionet.org/content/multimodal-nback-music/1.0.0/
-https://link.springer.com/article/10.1007/s00259-026-07837-y
+A) https://physionet.org/content/multimodal-nback-music/1.0.0/ <br>
+B) https://link.springer.com/article/10.1007/s00259-026-07837-y
 
 ### Biggest Uncertainty
 Whether we’ll be able to quantify cognitive arousal in a manner that divorces itself from dopamine dynamics in the striatum. One idea may be to find a dataset which quantifies arousal using a standardized working memory task (e.g., delayed-match-to-sample), however we still need to find a dataset for this.
