@@ -56,3 +56,7 @@ Whether we’ll be able to quantify cognitive arousal in a manner that divorces 
 ## Current Decision
 
 We are currently leaning toward Candidate Project 1 because it more closely aligns with our interests, and because we feel that it would be a more powerful project to pursue in terms of the types of analyses available to us. Moreover, our second candidate project relies on a dataset that we have not yet found.
+
+### Project Plan
+
+The Project Plan can be found here: https://docs.google.com/spreadsheets/d/1qsDRWUfYqdONmI8UFPvRK-xRhOAi-h_beDHfc5vx1Co/edit?usp=sharing 
