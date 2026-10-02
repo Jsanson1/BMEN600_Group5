@@ -20,7 +20,7 @@ How this file works (full rules: CLAUDE.md sections 5 and 7):
 | Mon 2026-11-30 or Fri 12-04 | Final presentation: 5 minutes plus about 5 minutes of questions; everyone speaks for at least 1 minute |
 | **Fri 2026-12-04, 11:59 pm** | **Final Project** on D2L: one PDF, at most 10 pages excluding title page and references, including the repo link and the commit ID of the graded version. Final ITP evaluation the same day. |
 
-Team contract: set internal due dates early enough for a team review before every real deadline. Put them in each task's `due` field.
+Team contract: set internal due dates early enough for a team review before every real deadline. Put them in each task's `due` field. The group's higher-level project plan is the Google Sheet linked from README.md; this board is the day-to-day work list that the agents read.
 
 ## Board
 
@@ -37,7 +37,7 @@ owner: anna | status: todo | branch: - | due: 2026-10-05 | updated: 2026-10-02
 owner: yassien | status: todo | branch: - | due: 2026-10-05 | updated: 2026-10-02
 
 ### T-005 · Re-clone the repo outside OneDrive (CONTRIBUTING.md step 1; the old clone has no uncommitted work) and do the one-time setup
-owner: jamie | status: todo | branch: - | due: 2026-10-05 | updated: 2026-10-02
+owner: jamie | status: doing | branch: - | due: 2026-10-05 | updated: 2026-10-02
 
 ### T-006 · Confirm the repo workflow (D-002) and the pull request review rule (D-003)
 owner: group | status: decide | branch: - | due: 2026-10-05 | updated: 2026-10-02
