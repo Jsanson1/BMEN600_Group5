@@ -16,10 +16,10 @@ Parkinson disease (PD) is the fastest-growing neurodegenerative disorder worldwi
 
 Are the gait deficits associated with Parkinson's disease sufficient for diagnosis?
 
-### Dataset
+### Datasets
 
-- A) [https://physionet.org/content/multimodal-gait-dataset/1.0.0/](https://physionet.org/content/multimodal-gait-dataset/1.0.0/)
-- B) [https://physionet.org/content/gaitpdb/1.0.0/](https://physionet.org/content/gaitpdb/1.0.0/)
+- WearGait-PD: https://doi.org/10.1038/s41597-026-06806-2
+- GaitPDB: https://doi.org/10.1038/s44360-026-00096-z 
 
 ### Biggest Uncertainty
 
