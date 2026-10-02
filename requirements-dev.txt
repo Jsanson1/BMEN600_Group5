@@ -1,0 +1,4 @@
+# Developer tools, not needed to run the analysis. Install with:
+#   python -m pip install -r requirements-dev.txt
+# GitHub Actions installs this exact version, so local and CI checks agree.
+ruff==0.16.10

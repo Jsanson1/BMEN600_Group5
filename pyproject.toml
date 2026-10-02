@@ -1,0 +1,18 @@
+# Shared tool settings for BMEN 600 Group 5. Our team contract asks for ruff
+# checks so everyone's code follows one format. The analysis packages are
+# listed in requirements.txt; ruff itself is pinned in requirements-dev.txt.
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+# Ruff also formats Python code blocks inside Markdown files; keep it to real
+# code so a snippet in a README cannot fail the checks.
+extend-exclude = ["data", "*.md"]
+
+[tool.ruff.lint]
+# Ruff's default rules (E4, E7, E9, F) plus import sorting (I).
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+# Notebooks import in later cells and keep exploratory imports around.
+"*.ipynb" = ["E402", "F401"]

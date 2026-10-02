@@ -1,0 +1,4 @@
+#!/bin/sh
+# Runs the repository guardrails (tools/repo_checks.sh) before every commit.
+# Switched on once per clone with:  git config core.hooksPath .githooks
+exec sh "$(git rev-parse --show-toplevel)/tools/repo_checks.sh" staged

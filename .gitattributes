@@ -1,0 +1,24 @@
+# Line endings: store LF in the repository and check files out in each
+# computer's native style. Our team mixes Windows and Mac, and this stops
+# whole-file "changes" that are really only CRLF versus LF.
+* text=auto
+
+# Shell scripts and git hooks must keep LF endings or they break in
+# Git Bash on Windows and on macOS.
+*.sh text eol=lf
+.githooks/* text eol=lf
+
+# Each member's log is append-only. If two of one member's sessions append
+# at the same time, keep both entries instead of raising a merge conflict.
+members/*/log.md merge=union
+
+# Binary files: never try to diff or merge them as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.docx binary
+*.pptx binary
+*.xlsx binary
+*.zip binary

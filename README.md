@@ -4,9 +4,11 @@
 
 ### Team members: Jamie Sanson, Yassien Tawfik, Anna Klygina
 
+> **Working in this repo?** People: read [CONTRIBUTING.md](CONTRIBUTING.md). AI agents: follow [CLAUDE.md](CLAUDE.md). Tasks and deadlines: [TASKS.md](TASKS.md).
+
 ## Candidate Project 1
 
-Evaluating gait data to diagnose Parkingson’s disease using gait and motion analysis vertical ground reaction forces.
+Evaluating gait data to diagnose Parkinson's disease using gait and motion analysis vertical ground reaction forces.
 
 ### Biomedical Problem
 

@@ -1,12 +1,44 @@
+# Python
 __pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
 
+# Virtual environments
 .venv/
 venv/
 env/
 ENV/
 
+# Jupyter
 .ipynb_checkpoints/
+
+# Secrets: never commit these (the repo is public)
 .env
 .env.*
+!.env.example
 
+# Data: raw and intermediate datasets are never committed. Only the README in
+# each folder is tracked: it holds the download steps, licence and version
+# (see CLAUDE.md section 6).
+data/raw/*
+data/interim/*
+!data/raw/README.md
+!data/interim/README.md
+!**/.gitkeep
+
+# Operating system and editor clutter
 .DS_Store
+Thumbs.db
+desktop.ini
+~$*
+.vscode/
+.idea/
+
+# Personal Claude Code settings (the shared ones are .claude/settings.json)
+.claude/settings.local.json
+CLAUDE.local.md
+
+# State written by personal AI companion tools
+.morebee/

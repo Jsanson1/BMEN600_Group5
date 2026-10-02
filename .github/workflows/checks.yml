@@ -1,0 +1,42 @@
+name: checks
+
+# The same guardrails as the local pre-commit hook, plus ruff with the pinned
+# version from requirements-dev.txt. Runs on every pull request and on every
+# push to main, so a problem shows up even if someone's hook is not switched on.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          # Two commits, so a pull request's merge commit can be compared with its base.
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install ruff
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Ruff lint
+        run: ruff check --output-format=github .
+
+      - name: Ruff format
+        run: ruff format --check --diff .
+
+      - name: Conflict markers, large files, secrets
+        run: sh tools/repo_checks.sh all
+
+      - name: Two-lane rule (pull requests must not change coordination files)
+        if: github.event_name == 'pull_request'
+        run: sh tools/repo_checks.sh pr HEAD^1
