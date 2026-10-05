@@ -50,3 +50,9 @@ Entry format:
 - **CRediT roles:** Software, Data curation, Validation.
 - **AI use:** Claude (cloud session with Jamie's PC linked) did all of it; Jamie has not yet reviewed it. The download of the remaining 69 recordings is waiting on Jamie.
 - **Verified:** checksum of the fetched demographics file; loader output against the HTML table (identical counts, ages, sex, Hoehn and Yahr); every number in §5 traced to a line in `results/figure1_summary.txt`, `results/event_detection_checks.txt` or `results/table1_participants.md`. Not verified: the full dataset.
+
+### 2026-10-05 · T-010, T-009, T-007 · Full-data run, §5 final numbers, pull requests #2 and #3
+- **Did:** Jamie's restarted download completed at 14:39; verified all 311 files against `SHA256SUMS.txt`, ran `make_table1.py`, `make_figure1.py` and `check_event_detection.py` on all 306 recordings, committed `results/` and `figures/` (replacing the provisional run), updated every number in §5 (markdown and Google Doc, including the Table 1 cells and the figure image) and opened pull request #2 (T-010 with T-007) and pull request #3 (T-009). Final usual-walk numbers: 93 PD, 72 controls; swing-time asymmetry AUC 0.76; stride-time CV AUC 0.60 and 0.58 within the 60 to 80 year band.
+- **CRediT roles:** Formal analysis, Software, Validation, Visualization, Writing – original draft.
+- **AI use:** Claude (cloud session with Jamie's PC linked and the Google Docs connector) did the run, the text updates and the pull requests. Jamie restarted the download; he has not yet reviewed the code, the figures or §5.
+- **Verified:** checksums of all 311 files; the Doc's Table 1 cells compared with `results/table1_participants.csv` by script; every number in the Doc text compared with the results files by script; the figure inspected. Not verified: the pull requests' CI runs were still queued when this entry was written.
