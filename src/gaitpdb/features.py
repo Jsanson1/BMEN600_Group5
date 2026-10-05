@@ -13,7 +13,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from .events import DEFAULT_THRESHOLD_N, stride_table
+from .events import DEFAULT_THRESHOLD_N, STRIDE_RATIO_LIMITS, stride_table
 
 FEATURE_COLUMNS = [
     "n_strides_left",
@@ -39,10 +39,14 @@ def _asym(left: float, right: float) -> float:
     return float(100.0 * abs(left - right) / np.mean([left, right]))
 
 
-def record_features(df: pd.DataFrame, threshold_n: float = DEFAULT_THRESHOLD_N) -> dict:
+def record_features(
+    df: pd.DataFrame,
+    threshold_n: float = DEFAULT_THRESHOLD_N,
+    ratio_limits: tuple[float, float] | None = STRIDE_RATIO_LIMITS,
+) -> dict:
     """Spatiotemporal features for one loaded record (output of io.load_record)."""
-    left = stride_table(df["L_total"].to_numpy(), threshold_n)
-    right = stride_table(df["R_total"].to_numpy(), threshold_n)
+    left = stride_table(df["L_total"].to_numpy(), threshold_n, ratio_limits)
+    right = stride_table(df["R_total"].to_numpy(), threshold_n, ratio_limits)
     kl = left[left["kept"]] if not left.empty else left
     kr = right[right["kept"]] if not right.empty else right
     both = pd.concat([kl, kr], ignore_index=True)
