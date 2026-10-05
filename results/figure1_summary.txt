@@ -9,6 +9,11 @@ Cadence, strides/min, mean (SD): control 53.3 (4.3), PD 53.0 (4.7)
 Walking speed on this walk from demographics.txt (Speed_01), m/s, mean (SD): control 1.22 (0.16), PD 1.04 (0.20); n with a value: 127
 Example record in panel A: GaCo01_01
 
+Age checks (controls are younger on average), age band 60 to 80:
+  stride_time_cv_pct: rho with age Control +0.24 (p 0.072); rho with age PD +0.21 (p 0.074); within the band (n 37 control, 48 PD): AUC 0.64, p 0.03
+  swing_time_asymmetry_pct: rho with age Control -0.04 (p 0.79); rho with age PD -0.21 (p 0.076); within the band (n 37 control, 48 PD): AUC 0.76, p 4.2e-05
+  swing_pct_mean: rho with age Control +0.09 (p 0.5); rho with age PD -0.19 (p 0.11); within the band (n 37 control, 48 PD): AUC 0.31, p 0.0031
+
 All features, usual walk, one row per participant (AUC > 0.5 means higher in PD):
                   feature  control_median  pd_median  auc_pd_higher  p_mann_whitney  n_control  n_pd
  swing_time_asymmetry_pct            1.88       5.37          0.794        1.41e-08         56    71

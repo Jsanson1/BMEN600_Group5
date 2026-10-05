@@ -124,6 +124,35 @@ def compare_groups(feats: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values("p_mann_whitney").reset_index(drop=True)
 
 
+AGE_BAND = (60, 80)
+
+
+def age_checks(feats: pd.DataFrame) -> list[str]:
+    """Is a group difference an age artefact? Spearman rho with age within each
+    group, and the group comparison restricted to AGE_BAND."""
+    lines = [
+        f"Age checks (controls are younger on average), age band {AGE_BAND[0]} to {AGE_BAND[1]}:"
+    ]
+    band = feats[feats["Age"].between(*AGE_BAND)]
+    for col in ("stride_time_cv_pct", "swing_time_asymmetry_pct", "swing_pct_mean"):
+        parts = []
+        for group in ("Control", "PD"):
+            g = feats[feats["group"] == group].dropna(subset=["Age", col])
+            rho = stats.spearmanr(g["Age"], g[col])
+            parts.append(
+                f"rho with age {group} {rho.statistic:+.2f} (p {rho.pvalue:.2g})"
+            )
+        pd_ = band.loc[band["group"] == "PD", col].dropna()
+        co = band.loc[band["group"] == "Control", col].dropna()
+        u = stats.mannwhitneyu(pd_, co, alternative="two-sided")
+        parts.append(
+            f"within the band (n {len(co)} control, {len(pd_)} PD): AUC "
+            f"{u.statistic / (len(pd_) * len(co)):.2f}, p {u.pvalue:.2g}"
+        )
+        lines.append(f"  {col}: " + "; ".join(parts))
+    return lines
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", default="data/raw/gaitpdb")
@@ -214,6 +243,8 @@ def main() -> None:
         f"Cadence, strides/min, mean (SD): control {feats.loc[feats.group == 'Control', 'cadence_strides_per_min'].mean():.1f} ({feats.loc[feats.group == 'Control', 'cadence_strides_per_min'].std():.1f}), PD {feats.loc[feats.group == 'PD', 'cadence_strides_per_min'].mean():.1f} ({feats.loc[feats.group == 'PD', 'cadence_strides_per_min'].std():.1f})",
         f"Walking speed on this walk from demographics.txt (Speed_01), m/s, mean (SD): control {feats.loc[feats.group == 'Control', 'Speed_01'].mean():.2f} ({feats.loc[feats.group == 'Control', 'Speed_01'].std():.2f}), PD {feats.loc[feats.group == 'PD', 'Speed_01'].mean():.2f} ({feats.loc[feats.group == 'PD', 'Speed_01'].std():.2f}); n with a value: {int(feats['Speed_01'].notna().sum())}",
         f"Example record in panel A: {parse_record_name(ex_path).record}",
+        "",
+        *age_checks(feats),
         "",
         "All features, usual walk, one row per participant (AUC > 0.5 means higher in PD):",
         by_group.to_string(index=False, float_format=lambda v: f"{v:.3g}"),
