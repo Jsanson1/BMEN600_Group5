@@ -68,3 +68,9 @@ Entry format:
 - **CRediT roles:** Validation, Software, Investigation, Project administration.
 - **AI use:** Claude (cloud session with Jamie's PC linked) did all of it; Jamie has not yet reviewed. The two references were read in the browser on Jamie's PC (NCBI Bookshelf; dnd.or.kr).
 - **Verified:** byte-for-byte comparison of the committed `results/` files and the PNG between the clean environment and the working one; the two references' authors, titles, venues and years against the publisher pages. Not verified: Windows or macOS installs; whether Anna and Yassien accept the notes left for them.
+
+### 2026-10-05 · T-026 · Data-quality report for §3
+- **Did:** Claimed T-026 (Jamie's "explore the data and report on quality issues" part of the Dataset section, as assigned in the Project Timeline sheet). Wrote `scripts/check_data_quality.py` and ran it on all 306 recordings; `results/data_quality.txt` holds the report and `results/data_quality_records.csv` one row per recording (commit `d920207` on `jamie/T-026-data-quality`). Put the findings under §3 in the Doc and corrected `data/raw/README.md` on the walk numbers (`9f3e320` on the T-010 branch). Added Jamie's input on the logistic regression to the §4 note, as the sheet asks of each model owner.
+- **CRediT roles:** Data curation, Validation, Investigation.
+- **AI use:** Claude (cloud session) wrote and ran the script and wrote the notes; Jamie has not yet reviewed. The PhysioNet page and `format.txt` were read in full for the walk-number question.
+- **Verified:** every number in the §3 note comes from the script's output on the checksum-verified data; the flagged recordings were inspected stride by stride. Not verified: ethics and consent statements in the source papers (abstracts only); nothing has been run on Windows or macOS.
