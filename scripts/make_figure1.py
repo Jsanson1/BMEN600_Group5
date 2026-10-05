@@ -111,10 +111,13 @@ def main() -> None:
     fig_dir.mkdir(parents=True, exist_ok=True)
 
     manifest = build_manifest(data_dir)
-    demo = load_demographics(data_dir)[
-        ["ID", "group", "Age", "sex", "HoehnYahr", "UPDRSM"]
-    ]
     usual = manifest[manifest["walk"] == 1].copy()
+    demo_path = data_dir / "demographics.txt"
+    if demo_path.exists():
+        demo = load_demographics(data_dir)[["ID", "Age", "sex", "HoehnYahr", "UPDRSM"]]
+    else:
+        print("warning: demographics.txt not found; no age, sex or severity columns")
+        demo = pd.DataFrame(columns=["ID", "Age", "sex", "HoehnYahr", "UPDRSM"])
 
     rows = []
     for _, r in usual.iterrows():
@@ -131,10 +134,6 @@ def main() -> None:
         pd.DataFrame(rows)
         .merge(demo, left_on="participant", right_on="ID", how="left")
         .drop(columns="ID")
-    )
-    # the merge brings a second 'group' column from demographics; keep the manifest's
-    feats = feats.rename(columns={"group_x": "group"}).drop(
-        columns=[c for c in feats.columns if c == "group_y"]
     )
     feats.to_csv(out / "features_usual_walk.csv", index=False)
 
