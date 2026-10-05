@@ -119,12 +119,22 @@ def load_demographics(data_dir: str | Path) -> pd.DataFrame:
     * Group is coded 1 = PD, 2 = control; a ``group`` column with ``PD`` /
       ``Control`` is added. Gender is coded 1 = male, 2 = female; a ``sex``
       column with ``M`` / ``F`` is added.
+    * The file is tab-separated with Windows line endings, a variable number
+      of trailing tabs per line (26 to 30 fields against 20 named columns)
+      and 69 empty lines at the end, so it is parsed by hand rather than
+      with ``pd.read_csv``, which refuses the ragged rows.
     """
     path = Path(data_dir) / "demographics.txt"
-    df = pd.read_csv(path, sep="\t", na_values=["NaN"])
-    df = df.loc[:, ~df.columns.str.startswith("Unnamed")]
+    rows = [line.split("\t") for line in path.read_text(encoding="utf-8").splitlines()]
+    header = [h.strip() for h in rows[0] if h.strip()]
+    n = len(header)
+    data = [
+        (r + [""] * n)[:n] for r in rows[1:] if r and r[0].strip()
+    ]  # pad short rows, cut trailing tabs, skip empty lines
+    df = pd.DataFrame(data, columns=header).replace({"": np.nan, "NaN": np.nan})
+    for col in header[2:]:  # everything after ID and Study is numeric
+        df[col] = pd.to_numeric(df[col], errors="coerce")
     df["ID"] = df["ID"].str.strip().replace({"Juc010": "JuCo10"})
-    df["Height"] = pd.to_numeric(df["Height"], errors="coerce")
     tall = df["Height"] > 3  # centimetres
     df.loc[tall, "Height"] = df.loc[tall, "Height"] / 100.0
     df["group"] = df["Group"].map({1: "PD", 2: "Control"})
