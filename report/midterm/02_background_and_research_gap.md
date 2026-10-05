@@ -1,6 +1,6 @@
 # Section 2. Background and Research Gap
 
-_Draft 1, 2026-10-05, Jamie (lead) with Anna reviewing. About 560 words of body text. Citations are the S-numbers from `sources.md`; they become IEEE numbers when the sections are merged. Open points for the group are in the comment block at the end._
+_Draft 1, 2026-10-05, Jamie (lead) with Anna reviewing. About 790 words of body text, which is roughly a quarter over the one-page target; the comment block at the end lists where to cut. Citations are the S-numbers from `sources.md`; they become IEEE numbers when the sections are merged._
 
 Parkinson's disease (PD) is diagnosed clinically, from the history and the neurological examination, and that diagnosis is less reliable than is often assumed. A meta-analysis of studies with pathological confirmation found a pooled accuracy of 80.6%, falling to 73.8% when the diagnosis was made mainly by non-specialists, with no improvement over the preceding 25 years and the greatest difficulty in early disease [S1]. The number of people affected is projected to reach 25.2 million by 2050, a 112% increase on 2021 that is driven mostly by population ageing [S2], so the shortage of movement-disorder specialists will widen rather than close. Gait impairment is one of the most common and disabling features of the disease, yet in routine care it is described rather than measured; quantifying several gait features at once, in particular speed, stride-to-stride variability and left-right asymmetry, is more sensitive to the disease than any single measure [S3].
 
@@ -14,6 +14,6 @@ What remains unresolved, then, is not whether gait differs in PD but whether a s
 OPEN POINTS, to settle before this is final:
 1. The last paragraph states the plan (three models, grouped CV, leave-one-study-out, optional WearGait-PD). It has to match Anna's §4 and the research question in §1 word for word. Edit either side, but keep them identical.
 2. If the group decides WearGait-PD is out of scope, delete the sentence about it and the clause "and, for the first time, an independent cohort" in paragraph 2.
-3. Word count target for the final PDF is about 1 page for this section. This draft is at the upper end; the easiest cut is the sentence on S10 if space is short.
+3. Length: the final PDF allows about one page for this section, roughly 600 words. Cuts that lose least, in order: the sentence on S10 (the systematic review); the clause on WearGait-PD in paragraph 2 if it is out of scope; the second half of the S1 sentence (keep 80.6% and the early-disease point).
 4. S8 is the PhysioNet platform citation that the site asks for; keep it paired with S7.
 -->
