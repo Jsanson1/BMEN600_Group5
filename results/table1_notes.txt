@@ -1,0 +1,4 @@
+Participants in demographics.txt without a record file: ['GaCo12', 'GaCo16', 'GaPt03', 'GaPt04', 'GaPt06', 'JuCo05', 'JuCo07', 'JuCo10', 'JuCo11', 'JuCo12', 'JuCo14', 'JuCo17', 'JuPt02', 'JuPt27', 'SiCo06', 'SiCo12', 'SiCo18', 'SiPt05', 'SiPt08', 'SiPt16', 'SiPt22', 'SiPt25', 'SiPt33', 'SiPt35']
+Record files without a demographics row: none
+Total record files: 237; total participants with recordings: 142
+Ages missing: 0; Hoehn and Yahr missing among PD: 0
