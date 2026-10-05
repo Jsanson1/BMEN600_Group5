@@ -23,41 +23,41 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 -->
 
 ## T-009 · Midterm §2 Background and Research Gap
-_Updated 2026-10-05 09:25 by Claude (cloud session) for Jamie · branch `jamie/T-009-background-gap` at `210234e`+1_
+_Updated 2026-10-05 11:05 by Claude (cloud session) for Jamie · branch `jamie/T-009-background-gap` at `bb198d3`+2_
 
-- **Now:** Draft 1 of §2 is on the branch: `report/midterm/02_background_and_research_gap.md` (about 790 words, needs cutting to about 600) and `report/midterm/sources.md` (14 verified sources with how each was checked and what it supports). Not yet reviewed by Jamie.
-- **Validated:** every cited source was opened on 2026-10-05 (PubMed record, publisher page or PhysioNet page) and the cited numbers match the record. **Not verified:** nothing in the draft has been checked by a human yet; the closing paragraph states an analysis plan that still has to be agreed with Anna's §1 and §4.
-- **Next:** Jamie reads the draft and `sources.md`, then either edits on the branch or sends comments; then open the pull request for Anna to review.
-- **Blocked / needs a decision:** group needs to settle the research question wording, whether WearGait-PD is in scope, and the "four models" in the Methods row of the Project Timeline sheet (only three are listed).
-- **For teammates:** @anna: the last paragraph of §2 must match §1 and §4 word for word; edit either side. @yassien: `sources.md` row S7 has the dataset facts for §3 (counts, sensors, licence ODC-By 1.0, DOI 10.13026/C24H3N). The README's "GaitPDB" DOI points at a Nature Health comment about PhysioNet, not at the dataset; the real one is https://physionet.org/content/gaitpdb/1.0.0/ (fix goes with T-008).
+- **Now:** Draft 2 of §2 is in the shared Google Doc "BMEN 600 Group 5 – Midterm Research Plan (draft)" (owner Jamie; link in the group chat) and mirrored in `report/midterm/02_background_and_research_gap.md`. Jamie read draft 1 and found it stilted; draft 2 is plainer. Still about 760 words against a 600-word target.
+- **Validated:** all 14 sources opened and checked on 2026-10-05 (`report/midterm/sources.md`). **Not verified:** draft 2 not yet reviewed by Jamie or Anna.
+- **Next:** Jamie sends a sample of his own writing; §2 gets one more pass in his voice and is cut to one page; then Anna reviews in the Doc.
+- **Blocked / needs a decision:** D-005 (dataset emphasis) to be confirmed by the group.
+- **For teammates:** @anna: the research question at the top of §1 in the Doc is a proposal; the last paragraph of §2 and §4 must say the same thing. @yassien: the verified dataset facts for §3 are in the Doc under §3 and in `sources.md` row S7.
 - **Not pushed:** nothing.
 
 ## T-010 · Midterm §5 Preliminary Results
-_Updated 2026-10-05 09:25 by Claude (cloud session) for Jamie · branch `jamie/T-010-preliminary-results` not created yet, main at `30f0072`_
+_Updated 2026-10-05 11:05 by Claude (cloud session) for Jamie · branch `jamie/T-010-preliminary-results` at `3b86da6`+1_
 
-- **Now:** Waiting for the data. The PhysioNet "Gait in Parkinson's Disease" files (288.4 MB, 306 records, 166 participants) cannot be downloaded from the agent's side; Jamie downloads the ZIP into `data/raw/gaitpdb/` on his PC.
-- **Validated:** data format read from `format.txt` on PhysioNet (19 columns: time, 8 left sensors, 8 right sensors, left total, right total; 100 Hz; names `<Study><Group><Subject>_<Walk>.txt`, walk 10 in Ga = dual task). `demographics.txt` read in full: one participant (JuCo10, listed as "Juc010") has no recording; Ju heights are in cm while Ga and Si are in m. **Not verified:** nothing run on the signals yet.
-- **Next:** once the ZIP is in place: loader + manifest, Table 1 (participants and records by study and group, with age, sex, H&Y), Figure 1 (example VGRF trace with detected strides, stride-time variability by group), then the §5 text.
-- **Blocked / needs a decision:** data download by Jamie; whether WearGait-PD (Synapse account needed) is in scope.
-- **For teammates:** none.
+- **Now:** Loader, gait-event detection (20 N threshold on the per-foot total force, 0.1 s minimum phase), spatiotemporal features (stride, swing, stance timing, CV, cadence, asymmetry) and the two scripts (`scripts/make_table1.py`, `scripts/make_figure1.py`) are written and pushed. Jamie's download of the PhysioNet ZIP is in progress (61 of 288 MB at 11:04); the scripts have been run only on the 47 records available so far.
+- **Validated:** on those 47 records: stride times 0.9 to 1.3 s, swing 29 to 37% of stride, at most 6 strides removed per record; stride time insensitive to the threshold (10, 20, 50 N). Figure 1 panel A inspected: markers sit on the force rise and fall. Usual walks so far (14 control, 9 PD): stride-time CV median 5.5% vs 7.1%, p = 0.14 (Mann-Whitney), swing-time asymmetry 1.5% vs 4.1%. **Not verified:** nothing on the full dataset; Table 1 not yet produced (demographics.txt is not among the files downloaded so far).
+- **Next:** when the ZIP is complete: `sha256sum -c SHA256SUMS.txt`, run both scripts on the full data, commit `results/` and `figures/`, write §5 (about one page: Table 1, Figure 1, what they show, what changes, the main remaining limitation, the work left).
+- **Blocked / needs a decision:** the download. A reminder is set for 12:25 to pick this up.
+- **For teammates:** @anna @yassien: `src/gaitpdb` is the shared loader; build on it rather than re-reading the text files. Turns in the corridor inflate stride-time CV; tighter outlier rules are a known refinement, see the branch's commit message.
 - **Not pushed:** nothing.
 
-## T-007 · Project structure
-_Updated 2026-10-05 09:25 by Claude (cloud session) for Jamie · branch `jamie/T-007-project-structure` not created yet_
+## T-016 · Onboarding without a terminal
+_Updated 2026-10-05 11:05 by Claude (cloud session) for Jamie · branch `jamie/T-016-cowork-onboarding` at `8847d24`, pull request #1 open_
 
-- **Now:** Claimed so the loader, `requirements.txt` and `data/raw/README.md` for T-010 have a home. Nothing written yet.
-- **Validated:** nothing. **Not verified:** nothing.
-- **Next:** create `src/`, `scripts/`, `data/raw/gaitpdb/README.md` (download steps, licence, version), `requirements.txt`, together with the first T-010 code.
+- **Now:** CONTRIBUTING.md rewritten for teammates who use GitHub Desktop and the Claude desktop app (no terminal); CLAUDE.md §4 step 3 and §10 adjusted. Pull request #1 is open with checks green.
+- **Validated:** repo checks and GitHub Actions pass. **Not verified:** the GitHub Desktop steps have not been clicked through by a teammate.
+- **Next:** Jamie merges #1 (the agent's merge was stopped by the no-merge-without-review rule), then marks T-016 done and deletes the branch.
 - **Blocked / needs a decision:** none.
 - **For teammates:** none.
 - **Not pushed:** nothing.
 
-## T-005 · Re-clone outside OneDrive and do the one-time setup
-_Updated 2026-10-02 15:30 by Claude (cloud session linked to Jamie's PC) · no branch, coordination only_
+## T-007 · Project structure
+_Updated 2026-10-05 11:05 by Claude (cloud session) for Jamie · folded into the T-010 branch_
 
-- **Now:** Clone at `C:\Users\jamie\Documents\BMEN600_Group5` with hook, filemode and identity set; old OneDrive clone deleted on 2026-10-02 (it had no uncommitted work).
-- **Validated:** `git fsck` clean, all tracked files identical to a fresh clone. **Not verified:** whether `ruff` is installed on the Windows side.
-- **Next:** `python -m pip install -r requirements-dev.txt`, then `ruff --version`; the next `/start` sets this task to `done`.
+- **Now:** `src/`, `scripts/`, `requirements.txt`, `data/raw/README.md` (download steps, licence, checksum) exist on `jamie/T-010-preliminary-results`; `results/` and `figures/` are created by the scripts.
+- **Validated:** `ruff check` and `ruff format` clean. **Not verified:** a fresh install from `requirements.txt` on Windows.
+- **Next:** merge with T-010; then T-008 (README front page) can start.
 - **Blocked / needs a decision:** none.
 - **For teammates:** none.
 - **Not pushed:** nothing.
