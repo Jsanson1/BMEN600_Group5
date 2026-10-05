@@ -1,6 +1,7 @@
 """Per-record spatiotemporal features from the stride tables of both feet.
 
-Every feature is computed from kept strides only (see events.stride_table).
+Every feature except cadence is computed from kept strides only (see
+events.stride_table); cadence counts every complete left-foot stride.
 Variability is the coefficient of variation, 100 * SD / mean, the measure
 used by the studies that produced this database. Asymmetry is
 100 * |left - right| / mean(left, right) of the per-foot mean, which is the
@@ -67,7 +68,7 @@ def record_features(df: pd.DataFrame, threshold_n: float = DEFAULT_THRESHOLD_N) 
         "swing_time_cv_pct": float(np.mean([_cv(kl["swing_s"]), _cv(kr["swing_s"])])),
         "stance_time_mean_s": float(both["stance_s"].mean()),
         "swing_pct_mean": float(both["swing_pct"].mean()),
-        "cadence_strides_per_min": float(len(kl) / duration_min),
+        "cadence_strides_per_min": float(len(left) / duration_min),
         "stride_time_asymmetry_pct": _asym(
             kl["stride_s"].mean(), kr["stride_s"].mean()
         ),
