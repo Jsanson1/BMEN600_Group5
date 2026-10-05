@@ -71,3 +71,30 @@ owner: group | status: todo | branch: - | due: 2026-10-16 | updated: 2026-10-05
 
 ### T-016 · Onboarding for teammates who use the Claude desktop app and no terminal: GitHub Desktop steps in CONTRIBUTING.md, plain-language paste-in message, git lock-file note in CLAUDE.md
 owner: jamie | status: done | branch: jamie/T-016-cowork-onboarding | due: 2026-10-06 | updated: 2026-10-05
+
+### T-017 · Project: pre-processing pipeline for the gait records: cleaning rules, missing values, outlier strides, documentation of every step (lead anna, collaborators yassien, jamie; mirrors the Project Timeline sheet; builds on src/gaitpdb/events.py from T-010)
+owner: anna | status: todo | branch: - | due: - | updated: 2026-10-05
+
+### T-018 · Project: spatiotemporal feature extraction: define the feature set, implement it, produce the feature table and a feature dictionary (lead yassien, collaborators anna, jamie; builds on src/gaitpdb/features.py from T-010)
+owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
+
+### T-019 · Project: random forest model: train, tune, report performance and feature importances under the agreed evaluation (lead yassien)
+owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
+
+### T-020 · Project: support vector machine: scaling, kernel and regularisation choice, train, evaluate, report (lead anna)
+owner: anna | status: todo | branch: - | due: - | updated: 2026-10-05
+
+### T-021 · Project: logistic regression: fit, check assumptions, report coefficients and performance (lead jamie)
+owner: jamie | status: todo | branch: - | due: - | updated: 2026-10-05
+
+### T-022 · Project: compare the three models: shared splits and metrics, comparison tables and figures, statistical comparison where appropriate (lead jamie, collaborators all; after T-019, T-020, T-021)
+owner: jamie | status: todo | branch: - | due: - | updated: 2026-10-05
+
+### T-023 · Project: discussion: interpret the results against the research question and the background, limitations, ethics, future work (lead jamie, collaborators all; after T-022)
+owner: jamie | status: todo | branch: - | due: - | updated: 2026-10-05
+
+### T-024 · Project: conclusion: key findings, direct answer to the research question, next steps (lead yassien, collaborators all; after T-023)
+owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
+
+### T-025 · Project: WearGait-PD external test: Synapse account and data-use terms, loader for its insole or walkway timings, run the final models on it (owner to be agreed; after T-022)
+owner: - | status: todo | branch: - | due: - | updated: 2026-10-05
