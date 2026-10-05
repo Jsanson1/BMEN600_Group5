@@ -23,7 +23,7 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 -->
 
 ## T-009 · Midterm §2 Background and Research Gap
-_Updated 2026-10-05 10:20 by Claude (cloud session) for Jamie · branch `jamie/T-009-background-gap` at `210234e`+1_
+_Updated 2026-10-05 09:25 by Claude (cloud session) for Jamie · branch `jamie/T-009-background-gap` at `210234e`+1_
 
 - **Now:** Draft 1 of §2 is on the branch: `report/midterm/02_background_and_research_gap.md` (about 790 words, needs cutting to about 600) and `report/midterm/sources.md` (14 verified sources with how each was checked and what it supports). Not yet reviewed by Jamie.
 - **Validated:** every cited source was opened on 2026-10-05 (PubMed record, publisher page or PhysioNet page) and the cited numbers match the record. **Not verified:** nothing in the draft has been checked by a human yet; the closing paragraph states an analysis plan that still has to be agreed with Anna's §1 and §4.
@@ -33,7 +33,7 @@ _Updated 2026-10-05 10:20 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-010 · Midterm §5 Preliminary Results
-_Updated 2026-10-05 10:20 by Claude (cloud session) for Jamie · branch `jamie/T-010-preliminary-results` not created yet, main at `30f0072`_
+_Updated 2026-10-05 09:25 by Claude (cloud session) for Jamie · branch `jamie/T-010-preliminary-results` not created yet, main at `30f0072`_
 
 - **Now:** Waiting for the data. The PhysioNet "Gait in Parkinson's Disease" files (288.4 MB, 306 records, 166 participants) cannot be downloaded from the agent's side; Jamie downloads the ZIP into `data/raw/gaitpdb/` on his PC.
 - **Validated:** data format read from `format.txt` on PhysioNet (19 columns: time, 8 left sensors, 8 right sensors, left total, right total; 100 Hz; names `<Study><Group><Subject>_<Walk>.txt`, walk 10 in Ga = dual task). `demographics.txt` read in full: one participant (JuCo10, listed as "Juc010") has no recording; Ju heights are in cm while Ga and Si are in m. **Not verified:** nothing run on the signals yet.
@@ -43,7 +43,7 @@ _Updated 2026-10-05 10:20 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-007 · Project structure
-_Updated 2026-10-05 10:20 by Claude (cloud session) for Jamie · branch `jamie/T-007-project-structure` not created yet_
+_Updated 2026-10-05 09:25 by Claude (cloud session) for Jamie · branch `jamie/T-007-project-structure` not created yet_
 
 - **Now:** Claimed so the loader, `requirements.txt` and `data/raw/README.md` for T-010 have a home. Nothing written yet.
 - **Validated:** nothing. **Not verified:** nothing.
