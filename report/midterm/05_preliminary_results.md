@@ -25,6 +25,6 @@ The data can support a properly validated estimate of how separable established 
 | All                 | PD      |                            93 |                             81 |          165 | 1 (1–7)                      | 121 (44–264)          | 66.3 ± 9.5   |         35 | 2 (2–3)          | 19.3 ± 7.7    |
 | All                 | Control |                            73 |                             61 |           72 | 1 (1–3)                      | 121 (40–121)          | 63.7 ± 8.6   |         33 |                  |               |
 
-**Figure 1.** A: total vertical force under each foot in one usual-walk recording, with the detected heel strikes (▲) and toe offs (▽) of the kept strides. B: stride-time variability (coefficient of variation) and C: swing-time asymmetry between the legs, one point per participant on the usual walk, bar at the median.
+**Figure 1.** A: total vertical force under each foot in one usual-walk recording (control participant GaCo01), with the detected heel strikes (▲) and toe offs (▽) of the kept strides. B: stride-time variability (coefficient of variation) and C: swing-time asymmetry between the legs, one point per participant on the usual walk, bar at the median.
 
 ![Figure 1](../../figures/figure1_events_and_variability.png)
