@@ -44,7 +44,7 @@ Claude Code users can type `/start` (or `/start T-007` to also claim a task). Ot
 
 1. **Look before touching anything.** Run `git status -sb` and `git stash list`. If there are uncommitted or stashed changes, work out whose they are. Your human's unfinished work from an earlier session: commit it on its branch (`[T-007] WIP ...`) and push it. Anything you cannot explain: stop and ask. Never discard, reset or overwrite it.
 2. **Get current.** `git switch main && git pull --rebase`
-3. **One-time setup, if missing.** `git config core.hooksPath` should print `.githooks`; if it does not, run `git config core.hooksPath .githooks`. `ruff --version` should work; if it does not, run `python -m pip install -r requirements-dev.txt` (`python3` on a Mac). If your human's setup task on the board (T-003, T-004 or T-005) is still `todo` and both checks now pass, set it to `done` on `main` and say so.
+3. **One-time setup, if missing.** `git config core.hooksPath` should print `.githooks`; if it does not, run `git config core.hooksPath .githooks`. `ruff --version` should work; if it does not, run `python -m pip install -r requirements-dev.txt` (`python3` on a Mac); if you cannot install it where the commits are made, say so and move on, GitHub runs the same checks. If your human's setup task on the board (T-003, T-004 or T-005) is still `todo` and the hook is on, set it to `done` on `main` and say so.
 4. **Read**, in this order: `TASKS.md`; `DECISIONS.md`; your human's `members/<short>/handoff.md`; the other members' `handoff.md` files (look for `@<short>`); `git log --oneline -15`. If your human's own folder is missing, create it by copying `members/_template/` and filling in their name (coordination lane). If another member's folder is missing, skip it and mention that in your report.
 5. **Report to your human**, in about ten lines:
 
@@ -130,6 +130,7 @@ The course allows AI tools but forbids using them "to fabricate sources, results
 - **The hook says you are committing coordination files on a branch:** unstage them with `git reset -q -- TASKS.md members/`, commit the rest, then make the coordination edit on `main` (section 7, step 3).
 - **You committed on `main` by mistake and have not pushed:** save the commit on a branch with `git branch <short>/<task-id>-<slug>`, then ask your human before moving `main` back.
 - **A teammate's entry on the board or in their handoff looks stale or wrong:** do not edit it. Mention it under *For teammates* in your handoff and tell your human.
+- **git says "Operation not permitted" or "could not lock config file" while you work on your human's computer through a folder link:** git uses temporary lock files, and your tool cannot delete them until your human allows deletion inside the repo folder. Ask for that permission (your tool has a request for it), then retry the same command. Never work around it by copying the repo somewhere else.
 
 ## 11. Where things are
 
