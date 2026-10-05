@@ -6,7 +6,7 @@ results/features_usual_walk_by_group.csv (median per group, AUC and
 Mann-Whitney p for every feature) and results/figure1_summary.txt with the
 numbers quoted in the text.
 
-    python scripts/make_figure1.py [--data data/raw/gaitpdb] [--example GaPt03_01]
+    python scripts/make_figure1.py [--data data/raw/gaitpdb] [--example GaCo01_01]
 """
 
 from __future__ import annotations
@@ -156,7 +156,7 @@ def age_checks(feats: pd.DataFrame) -> list[str]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", default="data/raw/gaitpdb")
-    ap.add_argument("--example", default="GaPt03_01")
+    ap.add_argument("--example", default="GaCo01_01")
     ap.add_argument("--out", default="results")
     ap.add_argument("--fig", default="figures")
     args = ap.parse_args()
