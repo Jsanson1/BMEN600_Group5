@@ -68,3 +68,6 @@ owner: yassien | status: todo | branch: - | due: 2026-10-09 | updated: 2026-10-0
 
 ### T-015 · Midterm: review and revise all sections, assemble the PDF (max 6 pages + references), add the repo link, submit on D2L (all)
 owner: group | status: todo | branch: - | due: 2026-10-16 | updated: 2026-10-05
+
+### T-016 · Onboarding for teammates who use the Claude desktop app and no terminal: GitHub Desktop steps in CONTRIBUTING.md, plain-language paste-in message, git lock-file note in CLAUDE.md
+owner: jamie | status: doing | branch: jamie/T-016-cowork-onboarding | due: 2026-10-06 | updated: 2026-10-05
