@@ -28,7 +28,7 @@ Team contract: set internal due dates early enough for a team review before ever
 owner: jamie | status: done | branch: bootstrap commit on main | due: 2026-10-02 | updated: 2026-10-02
 
 ### T-002 · Decide the final topic, research question and dataset
-owner: group | status: decide | branch: - | due: 2026-10-05 | updated: 2026-10-02
+owner: group | status: done | branch: - | due: 2026-10-05 | updated: 2026-10-05
 
 ### T-003 · One-time repo setup and a first `/start` (CONTRIBUTING.md), then mark this done
 owner: anna | status: todo | branch: - | due: 2026-10-05 | updated: 2026-10-02
@@ -37,7 +37,7 @@ owner: anna | status: todo | branch: - | due: 2026-10-05 | updated: 2026-10-02
 owner: yassien | status: todo | branch: - | due: 2026-10-05 | updated: 2026-10-02
 
 ### T-005 · Re-clone the repo outside OneDrive (CONTRIBUTING.md step 1; the old clone has no uncommitted work) and do the one-time setup
-owner: jamie | status: doing | branch: - | due: 2026-10-05 | updated: 2026-10-02
+owner: jamie | status: done | branch: - | due: 2026-10-05 | updated: 2026-10-05
 
 ### T-006 · Confirm the repo workflow (D-002) and the pull request review rule (D-003)
 owner: group | status: decide | branch: - | due: 2026-10-05 | updated: 2026-10-02

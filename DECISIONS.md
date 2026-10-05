@@ -28,3 +28,16 @@ Status: Proposed by Jamie. To be confirmed at the next meeting (T-006).
 - Every pull request gets a look from one teammate before it is merged. Their AI can do a first-pass review, but a human approves. The checks must be green, then the author merges.
 - Exception: tiny docs or typo fixes may be self-merged; say so in the pull request.
 - Why: every member has to be able to explain the data, methods and results in the final presentation, and reviewing each other's work is the cheapest way to share that understanding.
+
+### D-004 · 2026-10-02 · Project, models and section leads for the midterm
+Status: Accepted (group decision at the Friday 2 October meeting, reported by Jamie on 5 October)
+- Candidate Project 1 is the project: detecting Parkinson's disease from gait recordings.
+- Three models, one owner each: random forest (Yassien), support vector machine (Anna), regression (Jamie). The earlier "four models" wording is superseded.
+- Section leads and reviewers for the Midterm Research Plan are as in the Project Timeline sheet (linked from README.md) and mirrored on the board as T-009 to T-015.
+- The writing happens in the shared Google Doc "BMEN 600 Group 5 – Midterm Research Plan (draft)"; the repository holds code, results, figures and the verified-sources ledger (`report/midterm/sources.md`).
+
+### D-005 · 2026-10-05 · Which dataset the midterm analyses use
+Status: Proposed by Jamie. To be confirmed at the next meeting.
+- All midterm analyses use the PhysioNet "Gait in Parkinson's Disease" database v1.0.0 (open access, no account, downloaded). One independent case is one participant; participants contribute 1 to 7 recordings and are never split across training and test folds.
+- WearGait-PD (Synapse, account required) is named in the plan as an external test set "if time allows". Nobody starts on it before the midterm is submitted.
+- The README's "GaitPDB" link points at a Nature Health comment about PhysioNet, not at the dataset; it is corrected under T-008.
