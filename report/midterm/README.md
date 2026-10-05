@@ -1,6 +1,6 @@
 # Midterm Research Plan drafts
 
-One Markdown file per section, named by section number, plus `sources.md`, the table of verified references. Drafts are written here (on a branch, merged by pull request) and pasted into the shared document when the group assembles the PDF.
+The live document is the shared Google Doc "BMEN 600 Group 5 – Midterm Research Plan (draft)" (link in DECISIONS.md D-004 and in the group chat). This folder keeps what belongs with the code: `sources.md`, the table of verified references everyone cites from, and a Markdown snapshot of each section at the time its figures or tables were produced, so a reader of the repository can see the text that goes with the scripts.
 
 | File | Section | Lead | Reviewer |
 |---|---|---|---|
