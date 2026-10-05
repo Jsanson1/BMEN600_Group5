@@ -1,14 +1,14 @@
-"""Two checks on the gait-event detection, quoted in the Preliminary Results.
+"""Robustness checks on the gait-event detection, quoted in the Preliminary Results.
 
-1. Threshold sensitivity: features recomputed with contact thresholds of 10 and
-   50 N instead of the default 20 N, on every usual-walk record.
-2. The relative stride rule: stride-time variability (CV) computed from all
-   strides that pass the absolute limits (0.5 to 2.5 s, swing 10 to 70%),
-   against the CV from the strides that also pass the relative rule (0.7 to
-   1.3 times the record's median stride), and whether the group difference
-   changes.
+For every usual-walk record, the features are recomputed with contact thresholds
+of 10, 20 (default) and 50 N, each with and without the relative stride rule
+(strides outside 0.7 to 1.3 times the record's median stride are dropped). For
+each setting the script reports, per group, the median stride-time CV and
+swing-time asymmetry, the AUC and Mann-Whitney p of the group comparison, and
+the median absolute change of each feature relative to the default setting.
 
-Writes results/event_detection_checks.txt.
+Writes results/event_detection_checks.csv (one row per setting) and
+results/event_detection_checks.txt (the same, readable).
 
     python scripts/check_event_detection.py [--data data/raw/gaitpdb]
 """
@@ -19,7 +19,6 @@ import argparse
 import sys
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 from scipy import stats
 
@@ -30,34 +29,15 @@ from gaitpdb import (  # noqa: E402
     find_data_dir,
     load_record,
     record_features,
-    stride_table,
 )
-from gaitpdb.events import STRIDE_LIMITS_S, STRIDE_RATIO_LIMITS  # noqa: E402
+from gaitpdb.events import STRIDE_RATIO_LIMITS  # noqa: E402
 
 THRESHOLDS_N = (10.0, DEFAULT_THRESHOLD_N, 50.0)
 COMPARED = ("stride_time_mean_s", "stride_time_cv_pct", "swing_time_asymmetry_pct")
 
 
-def untrimmed_cv(df: pd.DataFrame) -> tuple[float, int, int]:
-    """Mean of the two feet's stride-time CV using only the absolute limits.
-
-    Returns (cv_pct, strides the relative rule removes, strides before it).
-    """
-    lo, hi = STRIDE_LIMITS_S
-    cvs, dropped, total = [], 0, 0
-    for col in ("L_total", "R_total"):
-        st = stride_table(df[col].to_numpy())
-        plausible = st["stride_s"].between(lo, hi) & st["swing_pct"].between(10, 70)
-        s = st.loc[plausible, "stride_s"].to_numpy()
-        if len(s) < 3:
-            return np.nan, dropped, total
-        dropped += int((plausible & ~st["kept"]).sum())
-        total += len(s)
-        cvs.append(100.0 * s.std(ddof=1) / s.mean())
-    return float(np.mean(cvs)), dropped, total
-
-
 def auc_and_p(feats: pd.DataFrame, col: str) -> tuple[float, float]:
+    """AUC = P(PD value > control value), from the Mann-Whitney U, and its p."""
     pd_ = feats.loc[feats["group"] == "PD", col].dropna()
     co = feats.loc[feats["group"] == "Control", col].dropna()
     u = stats.mannwhitneyu(pd_, co, alternative="two-sided")
@@ -75,66 +55,58 @@ def main() -> None:
 
     manifest = build_manifest(data_dir)
     usual = manifest[manifest["walk"] == 1]
-    per_threshold = {t: [] for t in THRESHOLDS_N}
-    trimmed = []
+    settings = [(t, rule) for t in THRESHOLDS_N for rule in (False, True)]
+    frames: dict[tuple[float, bool], list[dict]] = {s: [] for s in settings}
     for _, r in usual.iterrows():
         df = load_record(r["path"])
-        for t in THRESHOLDS_N:
-            ft = record_features(df, threshold_n=t)
+        for t, rule in settings:
+            ft = record_features(
+                df, threshold_n=t, ratio_limits=STRIDE_RATIO_LIMITS if rule else None
+            )
             ft.update(record=r["record"], group=r["group"])
-            per_threshold[t].append(ft)
-        cv, dropped, total = untrimmed_cv(df)
-        trimmed.append(
-            {
-                "record": r["record"],
-                "group": r["group"],
-                "stride_time_cv_absolute_rules_pct": cv,
-                "dropped": dropped,
-                "total": total,
-            }
-        )
-    frames = {
-        t: pd.DataFrame(rows).set_index("record") for t, rows in per_threshold.items()
-    }
-    base = frames[DEFAULT_THRESHOLD_N]
-    trimmed = pd.DataFrame(trimmed).set_index("record")
+            frames[(t, rule)].append(ft)
+    tables = {s: pd.DataFrame(rows).set_index("record") for s, rows in frames.items()}
+    base = tables[(DEFAULT_THRESHOLD_N, True)]
 
-    lines = [f"Usual-walk records: {len(base)}", ""]
-    lines.append(
-        f"1. Contact threshold sensitivity (reference {DEFAULT_THRESHOLD_N:g} N). "
-        "Median absolute change per record, and the group comparison at each threshold:"
-    )
-    for t in THRESHOLDS_N:
-        f = frames[t]
-        parts = []
+    rows = []
+    for (t, rule), f in tables.items():
+        row = {
+            "threshold_n": t,
+            "relative_stride_rule": rule,
+            "records": len(f),
+            "strides_removed": int(f["n_strides_removed"].sum()),
+        }
         for col in COMPARED:
-            diff = (f[col] - base[col]).abs().median()
             auc, p = auc_and_p(f.reset_index(), col)
-            parts.append(f"{col}: median |change| {diff:.3g}, AUC {auc:.2f}, p {p:.2g}")
-        lines.append(f"  {t:g} N: " + "; ".join(parts))
-    lines.append("")
-    lines.append(
-        f"2. Stride-time CV from strides passing the absolute limits only "
-        f"({STRIDE_LIMITS_S[0]:g} to {STRIDE_LIMITS_S[1]:g} s, swing 10 to 70%) "
-        f"-> after the relative rule ({STRIDE_RATIO_LIMITS[0]:g} to "
-        f"{STRIDE_RATIO_LIMITS[1]:g} x the record median), one value per "
-        "participant, mean of the two feet:"
-    )
-    both = base.join(trimmed, rsuffix="_t")
-    for group in ("Control", "PD"):
-        g = both[both["group"] == group]
+            row[f"{col}: control median"] = f.loc[f["group"] == "Control", col].median()
+            row[f"{col}: PD median"] = f.loc[f["group"] == "PD", col].median()
+            row[f"{col}: AUC"] = auc
+            row[f"{col}: p"] = p
+            row[f"{col}: median |change| vs default"] = (
+                (f[col] - base[col]).abs().median()
+            )
+        rows.append(row)
+    table = pd.DataFrame(rows)
+    table.to_csv(out / "event_detection_checks.csv", index=False)
+
+    lines = [
+        f"Usual-walk records: {len(base)}. Default setting: {DEFAULT_THRESHOLD_N:g} N with "
+        f"the relative stride rule ({STRIDE_RATIO_LIMITS[0]:g} to {STRIDE_RATIO_LIMITS[1]:g} x "
+        "the record median). AUC = probability that a PD participant has the higher value; "
+        "p from a two-sided Mann-Whitney test; |change| is per record, against the default.",
+        "",
+    ]
+    for _, row in table.iterrows():
         lines.append(
-            f"  {group}: CV median {g['stride_time_cv_absolute_rules_pct'].median():.2f} % -> "
-            f"{g['stride_time_cv_pct'].median():.2f} %; strides removed by the relative rule "
-            f"{int(g['dropped'].sum())} of {int(g['total'].sum())} "
-            f"(mean {g['dropped'].mean():.2f} per record)"
+            f"{row['threshold_n']:g} N, relative rule {'on ' if row['relative_stride_rule'] else 'off'}: "
+            f"{row['strides_removed']} strides removed"
         )
-    for col, label in (
-        ("stride_time_cv_absolute_rules_pct", "absolute limits only"),
-        ("stride_time_cv_pct", "with the relative rule"),
-    ):
-        auc, p = auc_and_p(both.reset_index(), col)
-        lines.append(f"  {label}: AUC {auc:.2f}, Mann-Whitney p {p:.2g}")
+        for col in COMPARED:
+            lines.append(
+                f"    {col}: control {row[f'{col}: control median']:.3g}, "
+                f"PD {row[f'{col}: PD median']:.3g}, AUC {row[f'{col}: AUC']:.2f}, "
+                f"p {row[f'{col}: p']:.2g}, median |change| {row[f'{col}: median |change| vs default']:.3g}"
+            )
     text = "\n".join(lines) + "\n"
     (out / "event_detection_checks.txt").write_text(text, encoding="utf-8")
     print(text)

@@ -73,7 +73,9 @@ def _remove_short_runs(mask: np.ndarray, value: bool, min_len: int) -> np.ndarra
 
 
 def stride_table(
-    force: np.ndarray, threshold_n: float = DEFAULT_THRESHOLD_N
+    force: np.ndarray,
+    threshold_n: float = DEFAULT_THRESHOLD_N,
+    ratio_limits: tuple[float, float] | None = STRIDE_RATIO_LIMITS,
 ) -> pd.DataFrame:
     """One row per complete stride (HS, TO, next HS) for one foot.
 
@@ -81,7 +83,8 @@ def stride_table(
     and ``kept`` (False for strides outside STRIDE_LIMITS_S, with a swing
     fraction outside 10-70%, or outside STRIDE_RATIO_LIMITS times the median
     of the strides that passed the first two rules; these are turns, pauses
-    and detection errors).
+    and detection errors). ``ratio_limits=None`` switches the relative rule
+    off, which the check script uses to show what the rule does.
     """
     hs, to = contact_events(force, threshold_n)
     rows = []
@@ -111,7 +114,10 @@ def stride_table(
         return df
     lo, hi = STRIDE_LIMITS_S
     plausible = df["stride_s"].between(lo, hi) & df["swing_pct"].between(10, 70)
+    if ratio_limits is None:
+        df["kept"] = plausible
+        return df
     median = df.loc[plausible, "stride_s"].median()
-    r_lo, r_hi = STRIDE_RATIO_LIMITS
+    r_lo, r_hi = ratio_limits
     df["kept"] = plausible & df["stride_s"].between(r_lo * median, r_hi * median)
     return df

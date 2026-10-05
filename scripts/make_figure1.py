@@ -141,10 +141,14 @@ def main() -> None:
     usual = manifest[manifest["walk"] == 1].copy()
     demo_path = data_dir / "demographics.txt"
     if demo_path.exists():
-        demo = load_demographics(data_dir)[["ID", "Age", "sex", "HoehnYahr", "UPDRSM"]]
+        demo = load_demographics(data_dir)[
+            ["ID", "Age", "sex", "HoehnYahr", "UPDRSM", "Speed_01"]
+        ]
     else:
         print("warning: demographics.txt not found; no age, sex or severity columns")
-        demo = pd.DataFrame(columns=["ID", "Age", "sex", "HoehnYahr", "UPDRSM"])
+        demo = pd.DataFrame(
+            columns=["ID", "Age", "sex", "HoehnYahr", "UPDRSM", "Speed_01"]
+        )
 
     rows = []
     for _, r in usual.iterrows():
@@ -207,6 +211,8 @@ def main() -> None:
         f"Swing-time asymmetry, median (IQR): control {aco.median():.2f} ({aco.quantile(0.25):.2f}–{aco.quantile(0.75):.2f}) %, PD {apd.median():.2f} ({apd.quantile(0.25):.2f}–{apd.quantile(0.75):.2f}) %; AUC {asym_row['auc_pd_higher']:.2f}, Mann-Whitney p = {asym_row['p_mann_whitney']:.2g}",
         f"Stride time, mean (SD): control {feats.loc[feats.group == 'Control', 'stride_time_mean_s'].mean():.3f} ({feats.loc[feats.group == 'Control', 'stride_time_mean_s'].std():.3f}) s, PD {feats.loc[feats.group == 'PD', 'stride_time_mean_s'].mean():.3f} ({feats.loc[feats.group == 'PD', 'stride_time_mean_s'].std():.3f}) s",
         f"Swing %, mean (SD): control {feats.loc[feats.group == 'Control', 'swing_pct_mean'].mean():.1f} ({feats.loc[feats.group == 'Control', 'swing_pct_mean'].std():.1f}), PD {feats.loc[feats.group == 'PD', 'swing_pct_mean'].mean():.1f} ({feats.loc[feats.group == 'PD', 'swing_pct_mean'].std():.1f})",
+        f"Cadence, strides/min, mean (SD): control {feats.loc[feats.group == 'Control', 'cadence_strides_per_min'].mean():.1f} ({feats.loc[feats.group == 'Control', 'cadence_strides_per_min'].std():.1f}), PD {feats.loc[feats.group == 'PD', 'cadence_strides_per_min'].mean():.1f} ({feats.loc[feats.group == 'PD', 'cadence_strides_per_min'].std():.1f})",
+        f"Walking speed on this walk from demographics.txt (Speed_01), m/s, mean (SD): control {feats.loc[feats.group == 'Control', 'Speed_01'].mean():.2f} ({feats.loc[feats.group == 'Control', 'Speed_01'].std():.2f}), PD {feats.loc[feats.group == 'PD', 'Speed_01'].mean():.2f} ({feats.loc[feats.group == 'PD', 'Speed_01'].std():.2f}); n with a value: {int(feats['Speed_01'].notna().sum())}",
         f"Example record in panel A: {parse_record_name(ex_path).record}",
         "",
         "All features, usual walk, one row per participant (AUC > 0.5 means higher in PD):",
