@@ -39,7 +39,7 @@ Data are never committed. Download steps, checksums and the known quirks of the 
 
 ## How to run
 
-Python 3.11 or newer.
+Platform: plain Python scripts run from a terminal (no notebook or MATLAB), Python 3.11 or newer, packages numpy, pandas, scipy, scikit-learn, matplotlib and tabulate (`requirements.txt`). Tested on Linux; nothing in the code is platform-specific.
 
 ```
 python -m pip install -r requirements.txt
