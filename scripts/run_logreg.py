@@ -11,14 +11,16 @@ whose penalty strength is chosen by an inner participant-grouped
 cross-validation on the training participants of each outer fold. Swing-time
 asymmetry enters as log(1 + x): on the raw value the linearity-in-the-logit
 check fails (reported at the end of the summary) and on the transformed value
-it passes. Evaluated
-under repeated participant-grouped cross-validation (5 folds x 20 repeats) and
-leave-one-study-out.
+it passes. Evaluated under repeated participant-grouped cross-validation
+(5 folds x 20 repeats) and leave-one-study-out, with the splits fixed in
+gaitpdb.evaluation.
 
 Reads results/features_usual_walk.csv (made by scripts/make_figure1.py) and
-writes results/logreg_folds.csv (every fold), results/logreg_summary.txt,
-results/logreg_coefficients.csv (odds ratios per SD with bootstrap intervals,
-model fitted on all participants) and results/logreg_loso_predictions.csv.
+writes results/logreg_summary.txt; results/logreg_folds.csv (every fold),
+results/logreg_cv_predictions.csv and results/logreg_loso_predictions.csv (one
+row per participant and input set; scripts/compare_models.py reads all three);
+and results/logreg_coefficients.csv (odds ratios per SD with bootstrap
+intervals, model fitted on all participants).
 
     python scripts/run_logreg.py [--features results/features_usual_walk.csv]
 """
@@ -41,13 +43,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gaitpdb.evaluation import (  # noqa: E402
     COVARIATES,
     MODEL_FEATURES,
+    N_REPEATS,
+    N_SPLITS,
+    SEED,
     bootstrap_auc,
     calibration_table,
     cv_predictions,
-    evaluate,
+    evaluate_model,
     load_feature_table,
-    loso_predictions,
     summarise,
+    write_model_outputs,
 )
 
 C_GRID = np.logspace(-3, 2, 11)
@@ -56,7 +61,6 @@ INPUT_SETS = {
     "gait only": MODEL_FEATURES,
     "gait + covariates": MODEL_FEATURES + COVARIATES,
 }
-N_SPLITS, N_REPEATS, SEED = 5, 20, 0
 
 
 LOG_TRANSFORMED = ["swing_time_asymmetry_pct"]
@@ -195,21 +199,26 @@ def main() -> None:
         f"{len(df)} participants ({int(df['y'].sum())} PD, {int((1 - df['y']).sum())} controls), "
         "one usual-walk recording each.",
         f"Outer evaluation: {N_SPLITS}-fold participant-grouped cross-validation repeated "
-        f"{N_REPEATS} times (interval = 2.5th to 97.5th percentile over repeats), and "
-        "leave-one-study-out (interval = bootstrap over the held-out participants).",
+        f"{N_REPEATS} times, and leave-one-study-out. Cross-validation: mean over the "
+        f"{N_SPLITS * N_REPEATS} test folds, 95% interval corrected for the overlap between "
+        "training sets (Nadeau and Bengio 2003), then in brackets the 2.5th to 97.5th "
+        f"percentile of the {N_REPEATS} repeat means, which shows the effect of the split "
+        "alone. Leave-one-study-out: 95% interval from a bootstrap over the held-out "
+        "participants.",
         "",
     ]
-    all_folds = []
+    outputs = []
     for name, cols in INPUT_SETS.items():
         factory = make_factory(cols)
-        folds = evaluate(factory, df, cols, "cv", N_SPLITS, N_REPEATS, SEED)
-        folds.insert(0, "model", f"logreg: {name}")
-        all_folds.append(folds)
-        s = summarise(folds)
+        result = evaluate_model(factory, df, cols, f"logreg: {name}")
+        outputs.append(result)
+        s = summarise(result["folds"])
         lines.append(f"[{name}] repeated grouped CV:")
         for m in ("auc", "brier", "balanced_accuracy", "sensitivity", "specificity"):
             lines.append(
-                f"    {m}: {s.loc[m, 'mean']:.3f} ({s.loc[m, 'ci_low']:.3f} to {s.loc[m, 'ci_high']:.3f})"
+                f"    {m}: {s.loc[m, 'mean']:.3f} ({s.loc[m, 'ci_low']:.3f} to "
+                f"{s.loc[m, 'ci_high']:.3f}) [repeats {s.loc[m, 'repeat_low']:.3f} to "
+                f"{s.loc[m, 'repeat_high']:.3f}]"
             )
         if name == "gait only":
             oof = cv_predictions(factory, df, cols, N_SPLITS, SEED)
@@ -222,9 +231,7 @@ def main() -> None:
                 lines.append(
                     f"    n = {r.n}: predicted {r.mean_predicted:.2f}, observed {r.observed_pd:.2f}"
                 )
-        pred = loso_predictions(factory, df, cols)
-        if name == "gait + covariates":
-            pred.to_csv(out / "logreg_loso_predictions.csv", index=False)
+        pred = result["loso_predictions"]
         lines.append(f"[{name}] leave-one-study-out AUC (train on the other two):")
         for study in ("Ga", "Ju", "Si"):
             sub = pred[pred["study"] == study]
@@ -238,7 +245,7 @@ def main() -> None:
             f"    all out-of-study predictions pooled: {point:.3f} ({lo:.3f} to {hi:.3f})"
         )
         lines.append("")
-    pd.concat(all_folds).to_csv(out / "logreg_folds.csv", index=False)
+    write_model_outputs(outputs, out, "logreg")
 
     coefs, C = odds_ratios(df, MODEL_FEATURES + COVARIATES)
     coefs.to_csv(out / "logreg_coefficients.csv", index=False)
