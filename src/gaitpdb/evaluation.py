@@ -389,6 +389,19 @@ def summarise(folds: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def rank_auc(y_true: np.ndarray, p: np.ndarray) -> float:
+    """AUC as the Mann-Whitney statistic, ties counting one half.
+
+    The same number as sklearn's roc_auc_score (tests/test_evaluation.py checks
+    this) at a fraction of the cost, which matters inside the bootstrap loops.
+    """
+    y = np.asarray(y_true) == 1
+    n_pos = int(y.sum())
+    n_neg = len(y) - n_pos
+    ranks = stats.rankdata(np.asarray(p, dtype=float))
+    return float((ranks[y].sum() - n_pos * (n_pos + 1) / 2) / (n_pos * n_neg))
+
+
 def bootstrap_auc(
     y_true: np.ndarray, p: np.ndarray, n_boot: int = 2000, seed: int = SEED
 ) -> tuple[float, float, float]:
@@ -403,7 +416,7 @@ def bootstrap_auc(
         idx = rng.integers(0, n, n)
         if y_true[idx].min() == y_true[idx].max():
             continue
-        vals.append(roc_auc_score(y_true[idx], p[idx]))
+        vals.append(rank_auc(y_true[idx], p[idx]))
     return point, float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))
 
 
@@ -428,7 +441,7 @@ def paired_bootstrap_auc(
         idx = rng.integers(0, n, n)
         if y[idx].min() == y[idx].max():
             continue
-        vals.append(roc_auc_score(y[idx], a[idx]) - roc_auc_score(y[idx], b[idx]))
+        vals.append(rank_auc(y[idx], a[idx]) - rank_auc(y[idx], b[idx]))
     return (
         float(point),
         float(np.percentile(vals, 2.5)),
