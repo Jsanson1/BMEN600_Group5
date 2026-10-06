@@ -93,7 +93,7 @@ _Updated 2026-10-06 13:10 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-025 · WearGait-PD external test (preparation only)
-_Updated 2026-10-06 13:35 by Claude (cloud session) for Jamie · branch `jamie/T-025-weargait-access` at `d5118c5` · pull request #7 open_
+_Updated 2026-10-06 13:30 by Claude (cloud session) for Jamie · branch `jamie/T-025-weargait-access` at `d5118c5` · pull request #7 open_
 
 - **Now:** Claimed for the parts that do not wait on T-022. The Scientific Data article describing WearGait-PD was read in full and turned into a section of `data/raw/README.md` (source, licence, how access works, participants, sites, the ten task codes, file layout, how we plan to use it, the authors' caveats) plus one sentence in the README plan; pull request #7 (https://github.com/Jsanson1/BMEN600_Group5/pull/7, stacked on #4). The same facts are in the Google Doc as notes under §3 (dataset facts and responsible use, for Yassien) and §4 (external test design, for Anna).
 - **Validated:** every fact against the article text (doi 10.1038/s41597-026-06806-2) and its citation metadata on 2026-10-06. **Not verified:** the files themselves (nobody has a Synapse account yet), the column names and units (the article's Supplementary Table S5, not read), and my stride-count estimate for the short walkway passes.
