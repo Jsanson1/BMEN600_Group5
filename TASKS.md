@@ -46,7 +46,7 @@ owner: group | status: decide | branch: - | due: 2026-10-05 | updated: 2026-10-0
 owner: jamie | status: review | branch: jamie/T-007-project-structure | due: 2026-10-09 | updated: 2026-10-05
 
 ### T-008 · README front page: research question, dataset access, file map, how to run (graded; after T-007)
-owner: - | status: todo | branch: - | due: 2026-10-12 | updated: 2026-10-02
+owner: jamie | status: doing | branch: jamie/T-008-readme-front-page | due: 2026-10-12 | updated: 2026-10-06
 
 ### T-009 · Midterm §2 Background and Research Gap: literature review, existing ML approaches and their limits, the gap (lead jamie, reviewer anna; mirrors the Project Timeline sheet)
 owner: jamie | status: review | branch: jamie/T-009-background-gap | due: 2026-10-09 | updated: 2026-10-05
