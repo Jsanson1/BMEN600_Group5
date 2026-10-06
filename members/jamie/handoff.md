@@ -83,7 +83,7 @@ _Updated 2026-10-06 13:05 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-028 · Citation renumbering helper (for T-015)
-_Updated 2026-10-06 13:15 by Claude (cloud session) for Jamie · branch `jamie/T-028-assembly-helper` at `5808fe0` · pull request #6 open (stacked on #3)_
+_Updated 2026-10-06 13:10 by Claude (cloud session) for Jamie · branch `jamie/T-028-assembly-helper` at `5808fe0` · pull request #6 open (stacked on #3)_
 
 - **Now:** `scripts/renumber_citations.py` turns [S#] citations into IEEE numbers in order of first citation and emits the reference list from `sources.md`; `report/midterm/README.md` says how to use it at assembly (export the Doc as plain text, run, paste back).
 - **Validated:** on §5 followed by §2 (13 references, correct order, warnings for the uncited ledger rows). **Not verified:** the Doc's plain-text export.
