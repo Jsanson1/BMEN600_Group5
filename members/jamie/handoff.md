@@ -73,11 +73,11 @@ _Updated 2026-10-06 15:05 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-022 · Model comparison (scaffolding and baselines; the three-model comparison waits for T-019 and T-020)
-_Updated 2026-10-06 15:05 by Claude (cloud session) for Jamie · branch `jamie/T-022-model-comparison` at `9910bc4` · pull request #8 open (stacked on #4)_
+_Updated 2026-10-06 15:15 by Claude (cloud session) for Jamie · branch `jamie/T-022-model-comparison` at `0c8d3aa` · pull request #8 open (stacked on #5)_
 
 - **Now:** `scripts/run_baselines.py` (chance, and a logistic regression on each timing feature alone) and `scripts/compare_models.py` (reads every model's three result files, refuses mismatched folds or participants, writes `results/model_comparison.{txt,md,csv}`, `results/model_comparison_pairs.csv` and Figure 3) are in pull request #8 (https://github.com/Jsanson1/BMEN600_Group5/pull/8). Result with the log-loss-tuned regression: swing-time asymmetry alone gives 0.76 within and 0.75 across protocols; the six-feature regression 0.81 and 0.76, a drop of 0.057 (0.025 to 0.093); its gain over the single feature is +0.057 (+0.002 to +0.113; p 0.043, Holm 0.13) within and +0.005 (-0.049 to +0.065) across. Stride-time variability alone: 0.60 within, 0.57 across.
 - **Validated:** two runs byte-identical, PDF included, and the same in a fresh virtual environment; both mismatch guards triggered on purpose and stop with a message; an independent review agent recomputed the corrected interval, Holm values and drop by hand. **Not verified:** the SVM and random forest (not written); a run on Windows or macOS.
-- **Next:** teammate review of #8, merge after #4. When T-019 and T-020 write their result files, run `compare_models.py` (nothing else to change), then write the comparison tables and text for the final report.
+- **Next:** teammate review of #8, merge after #5 (the branch includes #5 because both edit one README paragraph; a dry run merging #2, #3, #4, #5, #6, #7 and #8 in that order onto `main` has no conflicts and passes the tests and ruff). When T-019 and T-020 write their result files, run `compare_models.py` (nothing else to change), then write the comparison tables and text for the final report.
 - **Blocked / needs a decision:** the three-model comparison waits for T-019 (Yassien) and T-020 (Anna).
 - **For teammates:** @anna @yassien: your model appears in the table, the pairwise tests and Figure 3 as soon as your script writes `results/<svm|rf>_{folds,cv_predictions,loso_predictions}.csv` through `write_model_outputs`.
 - **Not pushed:** nothing.
