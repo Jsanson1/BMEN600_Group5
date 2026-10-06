@@ -27,10 +27,10 @@ Data are never committed. Download steps, checksums and the known quirks of the 
 
 | Path | What it holds |
 |---|---|
-| `src/gaitpdb/` | The shared Python package: `io.py` reads the record files and `demographics.txt`; `events.py` finds heel strikes and toe offs from the per-foot total force and flags which strides to keep; `features.py` turns one recording into stride, swing and stance timing, their variability, cadence and left-right asymmetry. |
+| `src/gaitpdb/` | The shared Python package: `io.py` reads the record files and `demographics.txt`; `events.py` finds heel strikes and toe offs from the per-foot total force and flags which strides to keep; `features.py` turns one recording into stride, swing and stance timing, their variability, cadence and left-right asymmetry; `evaluation.py` fixes the model inputs, the participant-grouped and leave-one-study-out splits and the metrics that all three models share. |
 | `scripts/` | One script per output (see "How to run"). |
 | `results/` | Tables and numbers produced by the scripts: `table1_participants.md`, `features_usual_walk.csv` (one row per usual-walk recording), `features_usual_walk_by_group.csv`, `figure1_summary.txt`, `event_detection_checks.txt`, `data_quality.txt`, `dual_task_check.txt`. |
-| `figures/` | Figure 1 (PNG and PDF). |
+| `figures/` | Figure 1 (events and the two headline features) and Figure 2 (the evaluation design), PNG and PDF. |
 | `report/midterm/` | Markdown snapshots of the midterm sections that go with the code, and `sources.md`, the table of every reference with how it was verified and what it supports. |
 | `data/raw/README.md` | How to obtain the data. |
 | `members/`, `TASKS.md`, `DECISIONS.md` | Who did what, the task board, and the group's decisions (the paper's Author Contributions and AI-Assisted Work sections are written from `members/*/log.md`). |
@@ -49,6 +49,8 @@ python scripts/make_figure1.py           # Figure 1 -> figures/, plus results/fe
 python scripts/check_event_detection.py  # contact-threshold and stride-rule sensitivity -> results/event_detection_checks.{csv,txt}
 python scripts/check_data_quality.py     # data-quality report -> results/data_quality.{txt,csv}
 python scripts/check_dual_task.py        # does the pipeline reproduce the published dual-task effect? -> results/dual_task_check.txt
+python scripts/run_logreg.py             # logistic regression under the shared evaluation -> results/logreg_*.{txt,csv}
+python scripts/make_figure2.py           # Figure 2, the evaluation design drawn from the participant counts -> figures/
 ```
 
 Each script accepts `--data <folder>` if the data live elsewhere. Together they take a few minutes on a laptop. Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte.
