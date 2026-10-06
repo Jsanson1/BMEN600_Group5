@@ -104,3 +104,9 @@ Entry format:
 - **CRediT roles:** Software, Validation.
 - **AI use:** Claude (cloud session) wrote the tests and the calibration code; Jamie has not yet reviewed them.
 - **Verified:** the tests pass; the baseline re-run reproduces the earlier numbers exactly with the new metric added. Not verified: pytest in GitHub Actions (shared workflow; the group's call).
+
+### 2026-10-06 · T-021 · Assumption check and the log transform of asymmetry
+- **Did:** Added the linearity-in-the-logit check the sheet asks of the regression owner (squared-term likelihood-ratio test per input). Raw swing-time asymmetry failed it (p 0.004); it now enters the model as log(1 + x), which passes (p 0.66) and improves the fit: gait-only AUC 0.81 within protocol, 0.73 across (per study 0.81, 0.75, 0.71). Found that adding age and sex leaves per-study AUCs unchanged but lowers the pooled out-of-study AUC to 0.66, because age differs between sub-studies (`698f968`). Updated §5 (markdown and Doc), the README's results line and pull request #4.
+- **CRediT roles:** Formal analysis, Methodology, Software.
+- **AI use:** Claude (cloud session) ran the check, chose the transform and wrote the text; Jamie has not yet reviewed. The transform was adopted because a stated assumption check failed, not because it raised the score.
+- **Verified:** the check passes after the transform; the numbers in §5 match `results/logreg_summary.txt`. Not verified: teammate review.
