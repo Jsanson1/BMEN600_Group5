@@ -60,7 +60,7 @@ Table 1 (`results/table1_participants.md`) describes the participants and record
 
 ![Figure 1: force trace with detected events; stride-time variability and swing-time asymmetry by group](figures/figure1_events_and_variability.png)
 
-On the usual walk, the swing-time asymmetry between the legs separates PD from controls far better (AUC 0.76) than stride-time variability (AUC 0.60), and the latter weakens once the age difference between the groups is taken into account; the numbers are in `results/figure1_summary.txt`. The controls are younger than the patients (63.7 vs 66.3 years), which the PhysioNet description does not mention, and 54 of the 165 participants contribute more than one recording, which is why every evaluation splits by participant.
+On the usual walk, the swing-time asymmetry between the legs separates PD from controls far better (AUC 0.76) than stride-time variability (AUC 0.60), and the latter weakens once the age difference between the groups is taken into account; the numbers are in `results/figure1_summary.txt`. The controls are younger than the patients (63.7 vs 66.3 years), which the PhysioNet description does not mention, and 54 of the 165 participants contribute more than one recording, which is why every evaluation splits by participant. A first logistic regression on six timing features, under the shared evaluation in `src/gaitpdb/evaluation.py`, reaches an AUC of 0.81 within protocol and 0.73 when each sub-study is held out (`results/logreg_summary.txt`, from `scripts/run_logreg.py`); age and sex alone give 0.58.
 
 ## Plan
 
