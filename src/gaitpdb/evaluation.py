@@ -31,7 +31,7 @@ from collections.abc import Callable, Iterator
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator
-from sklearn.metrics import balanced_accuracy_score, roc_auc_score
+from sklearn.metrics import balanced_accuracy_score, brier_score_loss, roc_auc_score
 from sklearn.model_selection import StratifiedGroupKFold
 
 MODEL_FEATURES = [
@@ -102,11 +102,12 @@ def leave_one_study_out(
 
 
 def fold_metrics(y_true: np.ndarray, p: np.ndarray) -> dict:
-    """AUC, balanced accuracy, sensitivity and specificity at THRESHOLD."""
+    """AUC, balanced accuracy, sensitivity and specificity at THRESHOLD, Brier score."""
     pred = (p >= THRESHOLD).astype(int)
     pos, neg = y_true == 1, y_true == 0
     return {
         "auc": roc_auc_score(y_true, p),
+        "brier": brier_score_loss(y_true, p),
         "balanced_accuracy": balanced_accuracy_score(y_true, pred),
         "sensitivity": float(pred[pos].mean()) if pos.any() else np.nan,
         "specificity": float(1 - pred[neg].mean()) if neg.any() else np.nan,
@@ -161,7 +162,7 @@ def summarise(folds: pd.DataFrame) -> pd.DataFrame:
     the answer depends on how participants were split. For leave-one-study-out
     there is one fold per study and no interval; use ``bootstrap_auc`` for one.
     """
-    metrics = ["auc", "balanced_accuracy", "sensitivity", "specificity"]
+    metrics = ["auc", "brier", "balanced_accuracy", "sensitivity", "specificity"]
     if folds["scheme"].iloc[0] == "loso":
         out = folds.set_index("fold")[metrics + ["n_test", "n_test_pd"]]
         return out
@@ -194,6 +195,38 @@ def bootstrap_auc(
             continue
         vals.append(roc_auc_score(y_true[idx], p[idx]))
     return point, float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))
+
+
+def cv_predictions(
+    factory: Factory,
+    df: pd.DataFrame,
+    columns: list[str],
+    n_splits: int = 5,
+    seed: int = 0,
+) -> pd.DataFrame:
+    """Out-of-fold predicted probabilities for every participant, one repeat of the CV."""
+    X = df[columns].to_numpy(dtype=float)
+    y = df["y"].to_numpy()
+    p = np.full(len(df), np.nan)
+    for _, _, tr, te in repeated_grouped_cv(df, n_splits, n_repeats=1, seed=seed):
+        model = factory()
+        model.fit(X[tr], y[tr])
+        p[te] = model.predict_proba(X[te])[:, 1]
+    return pd.DataFrame(
+        {"participant": df["participant"], "study": df["study"], "y": y, "p": p}
+    )
+
+
+def calibration_table(
+    y_true: np.ndarray, p: np.ndarray, n_bins: int = 5
+) -> pd.DataFrame:
+    """Observed PD fraction against mean predicted probability, in quantile bins."""
+    d = pd.DataFrame({"y": np.asarray(y_true), "p": np.asarray(p)})
+    d["bin"] = pd.qcut(d["p"], n_bins, labels=False, duplicates="drop")
+    out = d.groupby("bin").agg(
+        n=("y", "size"), mean_predicted=("p", "mean"), observed_pd=("y", "mean")
+    )
+    return out.reset_index(drop=True)
 
 
 def loso_predictions(
