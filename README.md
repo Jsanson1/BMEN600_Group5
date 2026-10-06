@@ -54,7 +54,7 @@ python scripts/run_logreg.py             # logistic regression under the shared 
 python scripts/make_figure2.py           # Figure 2, the evaluation design drawn from the participant counts -> figures/
 ```
 
-Each script accepts `--data <folder>` if the data live elsewhere. Together they take a few minutes on a laptop. Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte.
+`python scripts/run_all.py` runs all of them in order (about five minutes) and regenerates every committed output; a run on a fresh checkout changes nothing but the PDFs' creation dates. Each script accepts `--data <folder>` if the data live elsewhere. Together they take a few minutes on a laptop. Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte.
 
 ## Results so far
 
