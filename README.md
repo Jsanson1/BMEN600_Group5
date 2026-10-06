@@ -44,6 +44,7 @@ Platform: plain Python scripts run from a terminal (no notebook or MATLAB), Pyth
 ```
 python -m pip install -r requirements.txt
 # download and unpack the PhysioNet ZIP into data/raw/gaitpdb/ (see data/raw/README.md), then:
+python scripts/verify_data.py            # every file against PhysioNet's SHA256SUMS.txt
 python scripts/make_table1.py            # Table 1 -> results/table1_participants.{csv,md}, results/table1_notes.txt
 python scripts/make_figure1.py           # Figure 1 -> figures/, plus results/features_usual_walk*.csv and results/figure1_summary.txt
 python scripts/check_event_detection.py  # contact-threshold and stride-rule sensitivity -> results/event_detection_checks.{csv,txt}
