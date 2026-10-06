@@ -73,7 +73,7 @@ _Updated 2026-10-06 12:40 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-027 · Unit tests for the shared code
-_Updated 2026-10-06 12:58 by Claude (cloud session) for Jamie · branch `jamie/T-027-unit-tests` at `3d481a8` · pull request #5 open (stacked on #4)_
+_Updated 2026-10-06 12:46 by Claude (cloud session) for Jamie · branch `jamie/T-027-unit-tests` at `3d481a8` · pull request #5 open (stacked on #4)_
 
 - **Now:** twelve tests in `tests/` on synthetic signals (events, stride rules, loaders, demographics layout, grouped splits); `python -m pytest` passes in about two seconds; pytest added to `requirements-dev.txt`.
 - **Validated:** all tests pass locally; ruff clean. **Not verified:** GitHub Actions does not run pytest (shared workflow file; needs the group's OK to add one line).
