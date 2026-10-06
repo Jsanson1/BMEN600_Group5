@@ -86,3 +86,9 @@ Entry format:
 - **CRediT roles:** Methodology, Software, Formal analysis, Writing – original draft.
 - **AI use:** Claude (cloud session) designed and wrote the harness and the script, ran them and wrote the paragraph, after Jamie said to keep working and get the project done; Jamie has not yet reviewed the design (feature set, folds, metrics) or the text.
 - **Verified:** determinism (two runs identical); the guard against several rows per participant; the numbers against the published participant-level results in S14; ruff and repo checks. Not verified: calibration of the predicted probabilities; teammate review.
+
+### 2026-10-06 · Doc · Group-section drafts and the §4 note on the evaluation code
+- **Did:** In the Doc: told §4 that the evaluation now exists as code and listed the software; drafted the Data and Code Availability paragraph and Jamie's parts of AI-Assisted Work and Author Contributions (from this log), marked as drafts for the others to add to.
+- **CRediT roles:** Writing – original draft.
+- **AI use:** Claude (cloud session) drafted them from the repository's own records; Jamie to confirm what he verified himself (a bracketed prompt is left in the AI-Assisted Work draft).
+- **Verified:** the facts in the drafts (licences, Synapse ID, checksum match, clean-environment reproduction) against sources.md and this log. Not verified: Jamie's own review.
