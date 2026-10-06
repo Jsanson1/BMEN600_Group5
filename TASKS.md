@@ -106,4 +106,4 @@ owner: jamie | status: review | branch: jamie/T-026-data-quality | due: 2026-10-
 owner: jamie | status: review | branch: jamie/T-027-unit-tests | due: 2026-10-09 | updated: 2026-10-06
 
 ### T-028 · Assembly helper for the midterm PDF: renumber the S-citations into IEEE order of first citation and emit the reference list from sources.md (part of T-015; after T-009)
-owner: jamie | status: doing | branch: jamie/T-028-assembly-helper | due: 2026-10-14 | updated: 2026-10-06
+owner: jamie | status: review | branch: jamie/T-028-assembly-helper | due: 2026-10-14 | updated: 2026-10-06

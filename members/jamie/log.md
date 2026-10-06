@@ -116,3 +116,9 @@ Entry format:
 - **CRediT roles:** Visualization.
 - **AI use:** Claude (cloud session) designed and drew it; Jamie has not yet reviewed.
 - **Verified:** counts in the figure come from `build_manifest` on the checksum-verified data; the WearGait-PD counts from `sources.md` S9. Not verified: whether Anna wants it in §4.
+
+### 2026-10-06 · T-028 · Citation renumbering helper
+- **Did:** Claimed T-028 and wrote `scripts/renumber_citations.py` with a note in `report/midterm/README.md` (`5808fe0`, pull request #6, stacked on #3).
+- **CRediT roles:** Software, Project administration.
+- **AI use:** Claude (cloud session) wrote and tested it; Jamie has not yet reviewed.
+- **Verified:** run on the two drafted sections. Not verified: the Google Doc's plain-text export.

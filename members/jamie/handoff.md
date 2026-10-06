@@ -82,3 +82,13 @@ _Updated 2026-10-06 13:05 by Claude (cloud session) for Jamie · branch `jamie/T
 - **For teammates:** @anna @yassien: when T-017 or T-018 changes a rule in `events.py` or `features.py`, change the matching test on purpose in the same pull request.
 - **Not pushed:** nothing.
 
+## T-028 · Citation renumbering helper (for T-015)
+_Updated 2026-10-06 13:15 by Claude (cloud session) for Jamie · branch `jamie/T-028-assembly-helper` at `5808fe0` · pull request #6 open (stacked on #3)_
+
+- **Now:** `scripts/renumber_citations.py` turns [S#] citations into IEEE numbers in order of first citation and emits the reference list from `sources.md`; `report/midterm/README.md` says how to use it at assembly (export the Doc as plain text, run, paste back).
+- **Validated:** on §5 followed by §2 (13 references, correct order, warnings for the uncited ledger rows). **Not verified:** the Doc's plain-text export.
+- **Next:** merge after #3; use on 14 to 16 October when the sections are final.
+- **Blocked / needs a decision:** none.
+- **For teammates:** @anna @yassien: keep citing with S-numbers from `sources.md`; the renumbering is automatic at the end.
+- **Not pushed:** nothing.
+
