@@ -17,3 +17,5 @@ Rules that keep the sections consistent:
 - Cite with the S-numbers from `sources.md`. Add a source to that table, with how you checked it, before citing it anywhere.
 - Figures and tables come from code in this repo; name the script that produced each one in the caption.
 - Plain prose, IEEE citations, no bullet lists inside the sections.
+
+Assembling the PDF (T-015): export the Google Doc as plain text, run `python scripts/renumber_citations.py midterm.txt -o midterm_numbered.txt`, and paste the renumbered text and reference list back. The script turns the S-numbers into IEEE numbers in order of first citation, builds the reference list from `sources.md`, and warns about any citation that is not in the ledger or any ledger entry that is never cited.
