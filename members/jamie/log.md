@@ -122,3 +122,9 @@ Entry format:
 - **CRediT roles:** Software, Project administration.
 - **AI use:** Claude (cloud session) wrote and tested it; Jamie has not yet reviewed.
 - **Verified:** run on the two drafted sections. Not verified: the Google Doc's plain-text export.
+
+### 2026-10-06 · T-010, T-021 · One-command reproduction and a cross-platform checksum check
+- **Did:** `scripts/verify_data.py` (checksums on any platform; the data README now points at it) on the T-010 line (`e05c111`); `scripts/run_all.py` on the T-021 line (`1a3ef5b`), which runs the eight scripts in order. A full run on the committed data changed nothing but the PDFs' creation dates.
+- **CRediT roles:** Software, Validation.
+- **AI use:** Claude (cloud session); Jamie has not yet reviewed.
+- **Verified:** the full run and `git status` afterwards (only the two PDFs differ, by metadata). Not verified: the run on Windows or macOS.
