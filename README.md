@@ -51,7 +51,7 @@ python scripts/check_data_quality.py     # data-quality report -> results/data_q
 python scripts/check_dual_task.py        # does the pipeline reproduce the published dual-task effect? -> results/dual_task_check.txt
 ```
 
-Each script accepts `--data <folder>` if the data live elsewhere. Together they take a few minutes on a laptop. Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte.
+Each script accepts `--data <folder>` if the data live elsewhere. `python -m pip install -r requirements-dev.txt && python -m pytest` runs the unit tests in `tests/` (synthetic signals, no dataset needed). Together they take a few minutes on a laptop. Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte.
 
 ## Results so far
 
