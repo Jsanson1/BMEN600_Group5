@@ -69,6 +69,11 @@ def load_feature_table(path: str) -> pd.DataFrame:
         print(
             f"note: {dropped} participants dropped for a missing feature or covariate"
         )
+    if complete["participant"].duplicated().any():
+        raise ValueError(
+            "more than one row per participant: the inner tuning in the model scripts "
+            "uses a plain stratified split and would leak; group it by participant first"
+        )
     return complete.reset_index(drop=True)
 
 
