@@ -101,3 +101,6 @@ owner: - | status: todo | branch: - | due: - | updated: 2026-10-05
 
 ### T-026 · Data-quality report on the PhysioNet records for §3: missing demographics, recording lengths, pauses and gaps in the force signals, class and study balance (Jamie's reviewer part of T-012 per the Project Timeline sheet; after T-010)
 owner: jamie | status: review | branch: jamie/T-026-data-quality | due: 2026-10-08 | updated: 2026-10-06
+
+### T-027 · Unit tests for the shared code (event detection, stride rules, demographics parsing, participant-grouped splits) so later changes by any member cannot silently break the pipeline (after T-010, T-021)
+owner: jamie | status: doing | branch: jamie/T-027-unit-tests | due: 2026-10-09 | updated: 2026-10-06
