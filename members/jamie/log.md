@@ -128,3 +128,9 @@ Entry format:
 - **CRediT roles:** Software, Validation.
 - **AI use:** Claude (cloud session); Jamie has not yet reviewed.
 - **Verified:** the full run and `git status` afterwards (only the two PDFs differ, by metadata). Not verified: the run on Windows or macOS.
+
+### 2026-10-06 · T-025 · WearGait-PD: access, contents and external-test plan documented
+- **Did:** Claimed T-025 for the preparation (the test waits for T-022). Read the WearGait-PD data descriptor in full and wrote the second dataset's section of `data/raw/README.md` (access via Synapse, CC BY 4.0, participants and sites, task codes, file layout, how the SelfPace files will go through our event detection with the walkway contacts as a check, the authors' caveats on insole-to-walkway alignment, NaN padding and partial data loss) and a sentence in the README plan (`d5118c5`, pull request #7). Added the dataset facts under §3 and the test design under §4 of the Google Doc.
+- **CRediT roles:** Data curation, Writing (original draft).
+- **AI use:** Claude (cloud session) read the article in the built-in browser, drafted the text and the Doc notes; Jamie has not yet reviewed.
+- **Verified:** each statement against the article's text and citation metadata on the day. Not verified: the data files (no Synapse account yet; the registration must be done by a person), the column definitions in the supplement, and the stride-count estimate for the 16 ft walkway passes.

@@ -97,7 +97,7 @@ owner: jamie | status: todo | branch: - | due: - | updated: 2026-10-05
 owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
 
 ### T-025 · Project: WearGait-PD external test: Synapse account and data-use terms, loader for its insole or walkway timings, run the final models on it (owner to be agreed; after T-022)
-owner: jamie | status: doing | branch: jamie/T-025-weargait-access | due: 2026-10-14 | updated: 2026-10-06
+owner: jamie | status: blocked | branch: jamie/T-025-weargait-access | due: 2026-10-14 | updated: 2026-10-06
 
 ### T-026 · Data-quality report on the PhysioNet records for §3: missing demographics, recording lengths, pauses and gaps in the force signals, class and study balance (Jamie's reviewer part of T-012 per the Project Timeline sheet; after T-010)
 owner: jamie | status: review | branch: jamie/T-026-data-quality | due: 2026-10-08 | updated: 2026-10-06

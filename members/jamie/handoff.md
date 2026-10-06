@@ -92,3 +92,12 @@ _Updated 2026-10-06 13:10 by Claude (cloud session) for Jamie · branch `jamie/T
 - **For teammates:** @anna @yassien: keep citing with S-numbers from `sources.md`; the renumbering is automatic at the end.
 - **Not pushed:** nothing.
 
+## T-025 · WearGait-PD external test (preparation only)
+_Updated 2026-10-06 13:35 by Claude (cloud session) for Jamie · branch `jamie/T-025-weargait-access` at `d5118c5` · pull request #7 open_
+
+- **Now:** Claimed for the parts that do not wait on T-022. The Scientific Data article describing WearGait-PD was read in full and turned into a section of `data/raw/README.md` (source, licence, how access works, participants, sites, the ten task codes, file layout, how we plan to use it, the authors' caveats) plus one sentence in the README plan; pull request #7 (https://github.com/Jsanson1/BMEN600_Group5/pull/7, stacked on #4). The same facts are in the Google Doc as notes under §3 (dataset facts and responsible use, for Yassien) and §4 (external test design, for Anna).
+- **Validated:** every fact against the article text (doi 10.1038/s41597-026-06806-2) and its citation metadata on 2026-10-06. **Not verified:** the files themselves (nobody has a Synapse account yet), the column names and units (the article's Supplementary Table S5, not read), and my stride-count estimate for the short walkway passes.
+- **Next:** a person registers at https://www.synapse.org (name, e-mail, the Synapse terms and the Synapse Pledge) and follows the "Data Access" tab of project syn52540892; downloads the "CSV files" folder and the clinical spreadsheets into `data/raw/weargait_pd/`; then a loader for the SelfPace (SP) files can be written against the real columns, cross-checked against the walkway's foot contacts, and the test runs once T-022 has the three models. A teammate reads #7.
+- **Blocked / needs a decision:** the Synapse registration (a person, in their own name; Jamie or whoever the group agrees on Friday); the test itself waits for T-019, T-020 and T-022. The task was unowned ("owner to be agreed"); Jamie took the preparation so the midterm plan can describe the test concretely, and can hand the rest over at Friday's meeting.
+- **For teammates:** @yassien: the WearGait-PD paragraph for §3 is under §3 in the Doc (ethics approvals, consent and licence are stated in the article, unlike PhysioNet). @anna: the external test design for §4 is under §4 in the Doc; the main limitation to state is that the controls there are older than the patients, the reverse of PhysioNet.
+- **Not pushed:** nothing.
