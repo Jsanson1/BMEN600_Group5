@@ -392,7 +392,7 @@ def summarise(folds: pd.DataFrame) -> pd.DataFrame:
 def rank_auc(y_true: np.ndarray, p: np.ndarray) -> float:
     """AUC as the Mann-Whitney statistic, ties counting one half.
 
-    The same number as sklearn's roc_auc_score (tests/test_evaluation.py checks
+    The same number as sklearn's roc_auc_score (tests/test_comparison.py checks
     this) at a fraction of the cost, which matters inside the bootstrap loops.
     """
     y = np.asarray(y_true) == 1

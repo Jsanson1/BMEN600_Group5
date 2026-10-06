@@ -27,10 +27,10 @@ Data are never committed. Download steps, checksums and the known quirks of the 
 
 | Path | What it holds |
 |---|---|
-| `src/gaitpdb/` | The shared Python package: `io.py` reads the record files and `demographics.txt`; `events.py` finds heel strikes and toe offs from the per-foot total force and flags which strides to keep; `features.py` turns one recording into stride, swing and stance timing, their variability, cadence and left-right asymmetry; `evaluation.py` fixes the model inputs, the participant-grouped and leave-one-study-out splits and the metrics that all three models share. |
+| `src/gaitpdb/` | The shared Python package: `io.py` reads the record files and `demographics.txt`; `events.py` finds heel strikes and toe offs from the per-foot total force and flags which strides to keep; `features.py` turns one recording into stride, swing and stance timing, their variability, cadence and left-right asymmetry; `evaluation.py` fixes the model inputs, the participant-grouped and leave-one-study-out splits, the metrics and their intervals for all three models, and saves each model's results in the form the comparison reads. |
 | `scripts/` | One script per output (see "How to run"). |
-| `results/` | Tables and numbers produced by the scripts: `table1_participants.md`, `features_usual_walk.csv` (one row per usual-walk recording), `features_usual_walk_by_group.csv`, `figure1_summary.txt`, `event_detection_checks.txt`, `data_quality.txt`, `dual_task_check.txt`. |
-| `figures/` | Figure 1 (events and the two headline features) and Figure 2 (the evaluation design), PNG and PDF. |
+| `results/` | Tables and numbers produced by the scripts: `table1_participants.md`, `features_usual_walk.csv` (one row per usual-walk recording), `features_usual_walk_by_group.csv`, `figure1_summary.txt`, `event_detection_checks.txt`, `data_quality.txt`, `dual_task_check.txt`; for each model script a `*_summary.txt` and its fold metrics and predictions (`*_folds.csv`, `*_cv_predictions.csv`, `*_loso_predictions.csv`); and `model_comparison.txt` (also `.md` and `.csv`), every model side by side. |
+| `figures/` | Figure 1 (events and the two headline features), Figure 2 (the evaluation design) and Figure 3 (the model comparison), PNG and PDF. |
 | `report/midterm/` | Markdown snapshots of the midterm sections that go with the code, and `sources.md`, the table of every reference with how it was verified and what it supports. |
 | `data/raw/README.md` | How to obtain the data. |
 | `members/`, `TASKS.md`, `DECISIONS.md` | Who did what, the task board, and the group's decisions (the paper's Author Contributions and AI-Assisted Work sections are written from `members/*/log.md`). |
@@ -50,11 +50,13 @@ python scripts/make_figure1.py           # Figure 1 -> figures/, plus results/fe
 python scripts/check_event_detection.py  # contact-threshold and stride-rule sensitivity -> results/event_detection_checks.{csv,txt}
 python scripts/check_data_quality.py     # data-quality report -> results/data_quality.{txt,csv}
 python scripts/check_dual_task.py        # does the pipeline reproduce the published dual-task effect? -> results/dual_task_check.txt
-python scripts/run_logreg.py             # logistic regression under the shared evaluation -> results/logreg_*.{txt,csv}
 python scripts/make_figure2.py           # Figure 2, the evaluation design drawn from the participant counts -> figures/
+python scripts/run_logreg.py             # logistic regression under the shared evaluation -> results/logreg_*.{txt,csv}
+python scripts/run_baselines.py          # chance and one-feature-at-a-time baselines on the same splits -> results/baselines_*.{txt,csv}
+python scripts/compare_models.py         # every model side by side with paired tests, and Figure 3 -> results/model_comparison*, figures/
 ```
 
-`python scripts/run_all.py` runs all of them in order (about five minutes) and regenerates every committed output; a run on a fresh checkout changes nothing but the PDFs' creation dates. Each script accepts `--data <folder>` if the data live elsewhere. `python -m pip install -r requirements-dev.txt && python -m pytest` runs the unit tests in `tests/` (synthetic signals, no dataset needed).
+`python scripts/run_all.py` runs all of them in this order and regenerates every committed output in about five minutes on a laptop; a run on a fresh checkout changes nothing but the creation dates inside the Figure 1 and Figure 2 PDFs. The scripts that read the record files accept `--data <folder>` if the data live elsewhere; the last three read only `results/features_usual_walk.csv` and the files the model scripts write. Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte. `python -m pip install -r requirements-dev.txt && python -m pytest` runs the unit tests in `tests/` (synthetic signals, no dataset needed).
 
 ## Results so far
 
@@ -62,7 +64,9 @@ Table 1 (`results/table1_participants.md`) describes the participants and record
 
 ![Figure 1: force trace with detected events; stride-time variability and swing-time asymmetry by group](figures/figure1_events_and_variability.png)
 
-On the usual walk, the swing-time asymmetry between the legs separates PD from controls far better (AUC 0.76) than stride-time variability (AUC 0.60), and the latter weakens once the age difference between the groups is taken into account; the numbers are in `results/figure1_summary.txt`. The controls are younger than the patients (63.7 vs 66.3 years), which the PhysioNet description does not mention, and 54 of the 165 participants contribute more than one recording, which is why every evaluation splits by participant. A first logistic regression on six timing features, under the shared evaluation in `src/gaitpdb/evaluation.py`, reaches an AUC of 0.81 within protocol and 0.73 when each sub-study is held out (`results/logreg_summary.txt`, from `scripts/run_logreg.py`); age and sex alone give 0.58.
+On the usual walk, the swing-time asymmetry between the legs separates PD from controls far better (AUC 0.76) than stride-time variability (AUC 0.60), and the latter weakens once the age difference between the groups is taken into account; the numbers are in `results/figure1_summary.txt`. The controls are younger than the patients (63.7 vs 66.3 years), which the PhysioNet description does not mention, and 54 of the 165 participants contribute more than one recording, which is why every evaluation splits by participant. A first logistic regression on six timing features, under the shared evaluation in `src/gaitpdb/evaluation.py`, reaches an AUC of 0.81 (95% CI 0.75 to 0.88) within protocol and 0.76 (0.68 to 0.83) when each sub-study is held out (`results/logreg_summary.txt`, from `scripts/run_logreg.py`); age and sex alone give 0.58 and add nothing to the gait features. Swing-time asymmetry on its own, with only the direction of its effect learned from the training participants, gives 0.76 within protocol and 0.75 across protocols, so the six-feature model's gain within a protocol (0.057, 95% CI 0.002 to 0.113) all but disappears across protocols (0.005, −0.049 to 0.065). Figure 3 shows every model run so far (`results/model_comparison.txt`, from `scripts/compare_models.py`):
+
+![Figure 3: AUC of each model and baseline within protocol and across protocols](figures/figure3_model_comparison.png)
 
 ## Plan
 
