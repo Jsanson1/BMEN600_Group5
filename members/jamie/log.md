@@ -92,3 +92,9 @@ Entry format:
 - **CRediT roles:** Writing – original draft.
 - **AI use:** Claude (cloud session) drafted them from the repository's own records; Jamie to confirm what he verified himself (a bracketed prompt is left in the AI-Assisted Work draft).
 - **Verified:** the facts in the drafts (licences, Synapse ID, checksum match, clean-environment reproduction) against sources.md and this log. Not verified: Jamie's own review.
+
+### 2026-10-06 · T-009, T-010, T-021 · Page-budget trims, dual-task validation, rubric status
+- **Did:** Read the assignment rubric again and put a status line against its eight criteria at the top of the Doc (to be deleted before submission). Trimmed §2 to about 1.1 pages (draft 4, `cb62fba`) and §5 to about 650 words plus the table and figure (draft 2, `02c6bc2`, `ade87b8`), in the markdown and the Doc, without removing any cited claim or number. Wrote `scripts/check_dual_task.py` (`4384dab`): in the 21 Ga patients recorded with and without the counting task, stride-time variability and swing-time asymmetry rise under the dual task (p = 0.006 each), as the source study reported, which validates the event detection against a published finding; only 6 control dual-task walks exist in the database, so the control side is untestable. One sentence on it in §5. Added the platform line to the README.
+- **CRediT roles:** Writing – review & editing, Validation, Software.
+- **AI use:** Claude (cloud session) did the trims, the script and the status line; Jamie has not yet reviewed. The trims keep Jamie's register from draft 3 and every verified number.
+- **Verified:** the Doc's §2 and §5 compared paragraph by paragraph with the markdown by script (identical); the dual-task numbers come from the script on the checksum-verified data. Not verified: the page count in the assembled PDF (estimated from characters); Jamie's and Anna's reading.
