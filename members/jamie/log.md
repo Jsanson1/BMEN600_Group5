@@ -110,3 +110,9 @@ Entry format:
 - **CRediT roles:** Formal analysis, Methodology, Software.
 - **AI use:** Claude (cloud session) ran the check, chose the transform and wrote the text; Jamie has not yet reviewed. The transform was adopted because a stated assumption check failed, not because it raised the score.
 - **Verified:** the check passes after the transform; the numbers in §5 match `results/logreg_summary.txt`. Not verified: teammate review.
+
+### 2026-10-06 · T-021 · Figure 2, the evaluation design
+- **Did:** `scripts/make_figure2.py` draws the three levels of evaluation (within protocol, across protocols, across cohorts) from the participant counts in the data (`53fe00d`); placed in the Doc under §4 with a caption as an option for Anna's section, since the assignment recommends figures that explain decisions.
+- **CRediT roles:** Visualization.
+- **AI use:** Claude (cloud session) designed and drew it; Jamie has not yet reviewed.
+- **Verified:** counts in the figure come from `build_manifest` on the checksum-verified data; the WearGait-PD counts from `sources.md` S9. Not verified: whether Anna wants it in §4.
