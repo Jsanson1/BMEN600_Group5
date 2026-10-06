@@ -9,7 +9,8 @@ exactly the same participants, splits, features and metrics.
 * ``MODEL_FEATURES`` are the gait features a model may use, one row per
   participant (the usual walk). ``COVARIATES`` are age and sex, which the
   groups differ on. Study is never a feature, because the cross-protocol
-  evaluation holds a study out.
+  evaluation holds a study out. ``LOG_TRANSFORMED`` lists the inputs that
+  enter as log(1 + x), applied by the ``log_transform`` pipeline step.
 * ``repeated_grouped_cv`` yields stratified k-fold splits of participants,
   repeated with different shuffles; a participant is never in both halves.
   ``N_SPLITS``, ``N_REPEATS`` and ``SEED`` fix the splits for every model.
@@ -57,6 +58,7 @@ from scipy import stats
 from sklearn.base import BaseEstimator
 from sklearn.metrics import balanced_accuracy_score, brier_score_loss, roc_auc_score
 from sklearn.model_selection import StratifiedGroupKFold
+from sklearn.preprocessing import FunctionTransformer
 
 MODEL_FEATURES = [
     "stride_time_mean_s",
@@ -70,6 +72,11 @@ MODEL_FEATURES = [
 because they are functions of the others (cadence is 60 / stride time; swing and
 stance sum to the stride), which would add nothing but collinearity."""
 
+LOG_TRANSFORMED = ["swing_time_asymmetry_pct"]
+"""Inputs that enter the models as log(1 + x). Swing-time asymmetry is skewed and
+bounded at zero, and on the raw value the logistic regression's linearity check
+fails (results/logreg_summary.txt); trees are unaffected by the transform."""
+
 COVARIATES = ["Age", "sex_male"]
 STUDIES = ("Ga", "Ju", "Si")
 POSITIVE = "PD"
@@ -78,6 +85,22 @@ METRICS = ["auc", "brier", "balanced_accuracy", "sensitivity", "specificity"]
 N_SPLITS, N_REPEATS, SEED = 5, 20, 0
 """The splits every model uses: 5 folds, 20 repeats, shuffles seeded 0 to 19."""
 Factory = Callable[[], BaseEstimator]
+
+
+def log_transform(columns: list[str]) -> FunctionTransformer:
+    """A pipeline step applying log(1 + x) to the LOG_TRANSFORMED inputs among ``columns``.
+
+    ``columns`` are the model's input columns in order, the same list passed to
+    ``evaluate_model``; inputs not in LOG_TRANSFORMED pass through unchanged.
+    """
+    idx = [i for i, c in enumerate(columns) if c in LOG_TRANSFORMED]
+
+    def f(A):
+        A = np.array(A, dtype=float, copy=True)
+        A[:, idx] = np.log1p(A[:, idx])
+        return A
+
+    return FunctionTransformer(f)
 
 
 def load_feature_table(path: str) -> pd.DataFrame:

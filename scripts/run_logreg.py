@@ -37,11 +37,12 @@ from scipy.stats import chi2
 from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
 from sklearn.model_selection import StratifiedKFold
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import FunctionTransformer, StandardScaler
+from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gaitpdb.evaluation import (  # noqa: E402
     COVARIATES,
+    LOG_TRANSFORMED,
     MODEL_FEATURES,
     N_REPEATS,
     N_SPLITS,
@@ -51,6 +52,7 @@ from gaitpdb.evaluation import (  # noqa: E402
     cv_predictions,
     evaluate_model,
     load_feature_table,
+    log_transform,
     summarise,
     write_model_outputs,
 )
@@ -61,21 +63,6 @@ INPUT_SETS = {
     "gait only": MODEL_FEATURES,
     "gait + covariates": MODEL_FEATURES + COVARIATES,
 }
-
-
-LOG_TRANSFORMED = ["swing_time_asymmetry_pct"]
-
-
-def log_transform(columns: list[str]):
-    """A transformer applying log(1 + x) to the LOG_TRANSFORMED inputs present in columns."""
-    idx = [i for i, c in enumerate(columns) if c in LOG_TRANSFORMED]
-
-    def f(A):
-        A = np.array(A, dtype=float, copy=True)
-        A[:, idx] = np.log1p(A[:, idx])
-        return A
-
-    return FunctionTransformer(f)
 
 
 def make_factory(columns: list[str]):
