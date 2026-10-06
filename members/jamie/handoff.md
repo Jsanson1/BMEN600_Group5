@@ -33,7 +33,7 @@ _Updated 2026-10-05 16:05 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-010 · Midterm §5 Preliminary Results (with T-007)
-_Updated 2026-10-06 12:55 by Claude (cloud session) for Jamie · branch `jamie/T-010-preliminary-results` at `ef109e8` · pull request #2 open_
+_Updated 2026-10-06 12:22 by Claude (cloud session) for Jamie · branch `jamie/T-010-preliminary-results` at `ef109e8` · pull request #2 open_
 
 - **Now:** Pull request #2 now carries four tasks on one line of commits (T-007, T-008, T-010, T-026; head `ef109e8`), so the team has one code review to do before Friday. §5 draft 1 (about 760 words, Table 1, Figure 1; says that the proposal's named uncertainty, finding gait events from the force data alone, is resolved) is in the Google Doc and in `report/midterm/05_preliminary_results.md`; `results/` and `figures/` on the branch are the full-data run; pull request #2 (https://github.com/Jsanson1/BMEN600_Group5/pull/2) also carries the T-007 structure (`src/gaitpdb`, `scripts/`, `requirements.txt`, `data/raw/README.md`). Headline: swing-time asymmetry separates PD from controls (AUC 0.76, p 1.5e-8) far better than stride-time variability (AUC 0.60, p 0.026, and 0.58 within the 60 to 80 year band); controls are 2.6 years younger than patients although the PhysioNet page says 66.3 years for both.
 - **Validated:** all 311 files match PhysioNet's SHA256SUMS; loader run on the real `demographics.txt` (166 rows); Figure 1 trace inspected; every number in §5 traced to `results/figure1_summary.txt`, `results/event_detection_checks.txt` or `results/table1_participants.md`; Doc table cells checked against the CSV by script; a fresh virtual environment (Python 3.13, Linux, `pip install -r requirements.txt`) reproduces every committed results file and the PNG byte for byte (`tabulate` was missing from `requirements.txt` and is now in). **Not verified:** the event detection against a reference system (none in the database); a fresh install on Windows or macOS; Jamie's and Anna's reading of the text.
@@ -43,7 +43,7 @@ _Updated 2026-10-06 12:55 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-026 · Data-quality report for §3 (Jamie's reviewer part of T-012)
-_Updated 2026-10-06 12:55 by Claude (cloud session) for Jamie · branch `jamie/T-026-data-quality` at `d920207`, folded into pull request #2_
+_Updated 2026-10-06 12:22 by Claude (cloud session) for Jamie · branch `jamie/T-026-data-quality` at `d920207`, folded into pull request #2_
 
 - **Now:** done; `scripts/check_data_quality.py` and `results/data_quality.{txt,csv}` are in pull request #2, and the findings are under §3 in the Doc for Yassien.
 - **Validated:** ran on the full, checksum-verified data; flagged recordings inspected stride by stride. **Not verified:** ethics and consent statements of the three source papers (abstracts only); Yassien's reading of the note.
@@ -53,7 +53,7 @@ _Updated 2026-10-06 12:55 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-008 · README front page
-_Updated 2026-10-06 12:55 by Claude (cloud session) for Jamie · branch `jamie/T-008-readme-front-page` at `ef109e8`, folded into pull request #2_
+_Updated 2026-10-06 12:22 by Claude (cloud session) for Jamie · branch `jamie/T-008-readme-front-page` at `ef109e8`, folded into pull request #2_
 
 - **Now:** done; the README now has the research question, why it matters, both datasets with the correct PhysioNet link, the file map, how to run, results so far, the plan and verified references. The proposal-stage text (two candidate projects) is replaced; the alternative project is mentioned in one sentence with D-004.
 - **Validated:** every factual sentence traced to `report/midterm/sources.md` or to a results file; the Figure 1 image renders from the repository path. **Not verified:** how it renders on GitHub after the merge (the image path assumes `figures/` is on `main`, which #2 provides); the team's view of the wording.
@@ -63,7 +63,7 @@ _Updated 2026-10-06 12:55 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-021 · Logistic regression (with the shared evaluation for T-022)
-_Updated 2026-10-06 14:20 by Claude (cloud session) for Jamie · branch `jamie/T-021-logistic-regression` at `65b1eaf` · pull request #4 open (stacked on #2)_
+_Updated 2026-10-06 12:29 by Claude (cloud session) for Jamie · branch `jamie/T-021-logistic-regression` at `65b1eaf` · pull request #4 open (stacked on #2)_
 
 - **Now:** `src/gaitpdb/evaluation.py` fixes the feature set, covariates, participant-grouped repeated cross-validation, leave-one-study-out and metrics for all three models; `scripts/run_logreg.py` is the logistic regression under it. Result on the usual walk: gait features alone AUC 0.81 (0.78 to 0.82) under 5x20 grouped CV, 0.72 (0.64 to 0.80) with each sub-study held out; age and sex alone 0.58. One paragraph on this is in §5 (markdown and Doc). T-022 stays `doing` for the comparison itself, which waits for T-019 and T-020.
 - **Validated:** deterministic (two runs identical); inner tuning sees training participants only; odds ratios and VIFs sensible; in line with the published participant-level numbers (S14). **Not verified:** calibration; cued and dual-task walks unused; no teammate review yet.
