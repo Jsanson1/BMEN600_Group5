@@ -418,7 +418,7 @@ def figure(table: pd.DataFrame, path_png: Path, path_pdf: Path) -> None:
             label=STUDY_LABEL[st],
         )
     ax_b.set_title(
-        "B  Across protocols: trained on two sub-studies,\ntested on the third",
+        "B  Across protocols: train on two\nsub-studies, test on the third",
         fontsize=7.5,
         loc="left",
         color=INK,
