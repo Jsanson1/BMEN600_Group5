@@ -7,20 +7,25 @@ Three input sets are run so the value of the gait features is visible:
 * gait + covariates: the model the plan calls for.
 
 Each is a Pipeline of standardisation and an L2-penalised logistic regression
-whose penalty strength is chosen by an inner participant-grouped
-cross-validation on the training participants of each outer fold. Swing-time
-asymmetry enters as log(1 + x): on the raw value the linearity-in-the-logit
-check fails (reported at the end of the summary) and on the transformed value
-it passes. Evaluated under repeated participant-grouped cross-validation
-(5 folds x 20 repeats) and leave-one-study-out, with the splits fixed in
-gaitpdb.evaluation.
+whose penalty strength C is chosen by an inner 5-fold cross-validation on the
+training participants of each outer fold (one row per participant, so the
+inner folds are participant-grouped too). C is chosen by log-loss, not by AUC:
+AUC ignores the scale of the coefficients, so tuning by it let C wander across
+the whole grid and gave the three leave-one-study-out models predictions on
+very different scales, which pulls down any AUC computed on their pooled
+predictions. Swing-time asymmetry enters as log(1 + x): on the raw value the
+linearity-in-the-logit check fails (reported at the end of the summary) and on
+the transformed value it passes. Evaluated under repeated participant-grouped
+cross-validation (5 folds x 20 repeats) and leave-one-study-out, with the
+splits fixed in gaitpdb.evaluation.
 
 Reads results/features_usual_walk.csv (made by scripts/make_figure1.py) and
 writes results/logreg_summary.txt; results/logreg_folds.csv (every fold),
 results/logreg_cv_predictions.csv and results/logreg_loso_predictions.csv (one
 row per participant and input set; scripts/compare_models.py reads all three);
 and results/logreg_coefficients.csv (odds ratios per SD with bootstrap
-intervals, model fitted on all participants).
+intervals, for the gait-only and the gait + covariates model fitted on all
+participants).
 
     python scripts/run_logreg.py [--features results/features_usual_walk.csv]
 """
@@ -34,8 +39,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.stats import chi2
-from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
-from sklearn.model_selection import StratifiedKFold
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
@@ -51,6 +56,7 @@ from gaitpdb.evaluation import (  # noqa: E402
     calibration_table,
     cv_predictions,
     evaluate_model,
+    leave_one_study_out,
     load_feature_table,
     log_transform,
     summarise,
@@ -67,7 +73,8 @@ INPUT_SETS = {
 
 def make_factory(columns: list[str]):
     """Return a zero-argument factory for a fresh, unfitted model on these inputs:
-    log transform where applicable, standardise, logistic regression with C tuned inside."""
+    log transform where applicable, standardise, logistic regression with C tuned
+    inside the training participants by log-loss."""
 
     def factory():
         return Pipeline(
@@ -76,17 +83,22 @@ def make_factory(columns: list[str]):
                 ("scale", StandardScaler()),
                 (
                     "logreg",
-                    LogisticRegressionCV(
-                        Cs=C_GRID,
+                    GridSearchCV(
+                        LogisticRegression(max_iter=5000),
+                        {"C": C_GRID},
+                        scoring="neg_log_loss",
                         cv=StratifiedKFold(n_splits=5, shuffle=True, random_state=SEED),
-                        scoring="roc_auc",
-                        max_iter=5000,
                     ),
                 ),
             ]
         )
 
     return factory
+
+
+def chosen_c(model: Pipeline) -> float:
+    """The penalty strength the inner cross-validation picked for a fitted model."""
+    return float(model.named_steps["logreg"].best_params_["C"])
 
 
 def transformed(df: pd.DataFrame, columns: list[str]) -> np.ndarray:
@@ -114,8 +126,8 @@ def odds_ratios(
     X = transformed(df, columns)
     y = df["y"].to_numpy()
     full = make_factory(columns)().fit(df[columns].to_numpy(dtype=float), y)
-    C = float(full.named_steps["logreg"].C_[0])
-    coef = full.named_steps["logreg"].coef_[0]
+    C = chosen_c(full)
+    coef = full.named_steps["logreg"].best_estimator_.coef_[0]
     rng = np.random.default_rng(seed)
     boots = []
     for _ in range(n_boot):
@@ -181,7 +193,7 @@ def main() -> None:
     df = load_feature_table(args.features)
 
     lines = [
-        f"Logistic regression (L2, C tuned by inner cross-validation over {len(C_GRID)} values; "
+        f"Logistic regression (L2, C tuned by inner cross-validation on log-loss over {len(C_GRID)} values; "
         f"{', '.join(LOG_TRANSFORMED)} entered as log(1 + x)) on "
         f"{len(df)} participants ({int(df['y'].sum())} PD, {int((1 - df['y']).sum())} controls), "
         "one usual-walk recording each.",
@@ -231,23 +243,37 @@ def main() -> None:
         lines.append(
             f"    all out-of-study predictions pooled: {point:.3f} ({lo:.3f} to {hi:.3f})"
         )
+        X = df[cols].to_numpy(dtype=float)
+        picked = []
+        for study, tr, _ in leave_one_study_out(df):
+            fitted = factory().fit(X[tr], df["y"].to_numpy()[tr])
+            picked.append(f"{study} held out {chosen_c(fitted):g}")
+        lines.append(f"    C chosen by the inner cross-validation: {', '.join(picked)}")
         lines.append("")
     write_model_outputs(outputs, out, "logreg")
 
-    coefs, C = odds_ratios(df, MODEL_FEATURES + COVARIATES)
-    coefs.to_csv(out / "logreg_coefficients.csv", index=False)
-    lines.append(
-        f"Gait + covariates model fitted on all participants (C = {C:g}): odds ratio of PD per "
-        "1 SD increase, with a 95% participant-bootstrap interval, and the variance inflation "
-        "factor of each input (collinearity check; above 5 is a concern):"
-    )
-    for r in coefs.itertuples():
+    tables = []
+    for name in ("gait only", "gait + covariates"):
+        coefs, C = odds_ratios(df, INPUT_SETS[name])
+        coefs.insert(0, "model", f"logreg: {name}")
+        coefs.insert(1, "C", C)
+        tables.append(coefs)
         lines.append(
-            f"    {r.input}: OR {r.odds_ratio_per_sd:.2f} ({r.ci_low:.2f} to {r.ci_high:.2f}), VIF {r.vif:.1f}"
+            f"[{name}] model fitted on all participants (C = {C:g}): odds ratio of PD per "
+            "1 SD increase of each input as the model sees it, with a 95% participant-bootstrap "
+            "interval, and the variance inflation factor (collinearity check; above 5 is a "
+            "concern):"
         )
+        for r in coefs.itertuples():
+            lines.append(
+                f"    {r.input}: OR {r.odds_ratio_per_sd:.2f} ({r.ci_low:.2f} to {r.ci_high:.2f}), VIF {r.vif:.1f}"
+            )
+        lines.append("")
+    pd.concat(tables, ignore_index=True).to_csv(
+        out / "logreg_coefficients.csv", index=False
+    )
     cols = MODEL_FEATURES + COVARIATES
     y = df["y"].to_numpy()
-    lines.append("")
     lines.append(
         "Assumption check, linearity in the logit (unpenalised fit on all participants; "
         "likelihood-ratio test for a squared term, 1 df; p below 0.05 suggests a non-linear effect)."
