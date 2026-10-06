@@ -80,3 +80,9 @@ Entry format:
 - **CRediT roles:** Writing – original draft, Project administration.
 - **AI use:** Claude (cloud session) wrote the README from the verified ledger and the results files, after Jamie said to keep working and get the project done; Jamie has not yet reviewed the text.
 - **Verified:** each README claim against `sources.md` or a results file; the branch fast-forwards cleanly; GitHub checks on the pull request. Not verified: the README's rendering on GitHub before the merge; the team's view of the wording.
+
+### 2026-10-06 · T-021, T-022 · Shared evaluation harness and the logistic regression baseline
+- **Did:** Claimed T-021 and the shared-splits part of T-022. Wrote `src/gaitpdb/evaluation.py` (features, covariates, participant-grouped repeated CV, leave-one-study-out, metrics, intervals) and `scripts/run_logreg.py`; ran it on the usual walk of 165 participants (commits `162d951`, `57acb0a`, `65b1eaf`); opened pull request #4, stacked on #2. Added the baseline paragraph to §5 in the markdown and the Doc. Headline: gait-only AUC 0.81 within protocol, 0.72 across protocols; age and sex alone 0.58; swing-time asymmetry and swing fraction dominate.
+- **CRediT roles:** Methodology, Software, Formal analysis, Writing – original draft.
+- **AI use:** Claude (cloud session) designed and wrote the harness and the script, ran them and wrote the paragraph, after Jamie said to keep working and get the project done; Jamie has not yet reviewed the design (feature set, folds, metrics) or the text.
+- **Verified:** determinism (two runs identical); the guard against several rows per participant; the numbers against the published participant-level results in S14; ruff and repo checks. Not verified: calibration of the predicted probabilities; teammate review.

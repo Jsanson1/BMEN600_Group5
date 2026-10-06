@@ -61,3 +61,14 @@ _Updated 2026-10-06 12:55 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Blocked / needs a decision:** none.
 - **For teammates:** @anna: the research question in the README is the working version from the Doc; tell Jamie if §1 changes it. The old README cited Kim et al. 2018 for a PD-versus-control claim; the new one does not cite it (see `sources.md` S16).
 - **Not pushed:** nothing.
+
+## T-021 · Logistic regression (with the shared evaluation for T-022)
+_Updated 2026-10-06 14:20 by Claude (cloud session) for Jamie · branch `jamie/T-021-logistic-regression` at `65b1eaf` · pull request #4 open (stacked on #2)_
+
+- **Now:** `src/gaitpdb/evaluation.py` fixes the feature set, covariates, participant-grouped repeated cross-validation, leave-one-study-out and metrics for all three models; `scripts/run_logreg.py` is the logistic regression under it. Result on the usual walk: gait features alone AUC 0.81 (0.78 to 0.82) under 5x20 grouped CV, 0.72 (0.64 to 0.80) with each sub-study held out; age and sex alone 0.58. One paragraph on this is in §5 (markdown and Doc). T-022 stays `doing` for the comparison itself, which waits for T-019 and T-020.
+- **Validated:** deterministic (two runs identical); inner tuning sees training participants only; odds ratios and VIFs sensible; in line with the published participant-level numbers (S14). **Not verified:** calibration; cued and dual-task walks unused; no teammate review yet.
+- **Next:** teammate review of #4 (any of them); merge after #2; mark T-021 done. Anna (T-020) and Yassien (T-019) write their model scripts in the shape of `run_logreg.py` and call the same `evaluate` and `loso_predictions`; then T-022 compiles the comparison.
+- **Blocked / needs a decision:** none.
+- **For teammates:** @anna @yassien: the pull request description says how to plug your model in; do not change `evaluation.py` for one model, ask and we change it once for all three. The feature table is `results/features_usual_walk.csv` (one row per participant); if T-017 or T-018 changes the features, re-run `make_figure1.py` and then every model script.
+- **Not pushed:** nothing.
+
