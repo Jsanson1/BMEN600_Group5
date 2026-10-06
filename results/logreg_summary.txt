@@ -1,0 +1,45 @@
+Logistic regression (L2, C tuned by inner cross-validation over 11 values) on 165 participants (93 PD, 72 controls), one usual-walk recording each.
+Outer evaluation: 5-fold participant-grouped cross-validation repeated 20 times (interval = 2.5th to 97.5th percentile over repeats), and leave-one-study-out (interval = bootstrap over the held-out participants).
+
+[covariates only] repeated grouped CV:
+    auc: 0.580 (0.525 to 0.607)
+    balanced_accuracy: 0.501 (0.484 to 0.524)
+    sensitivity: 0.941 (0.873 to 1.000)
+    specificity: 0.060 (0.000 to 0.150)
+[covariates only] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.527 (0.355 to 0.708), n = 47 (29 PD)
+    held-out Ju: 0.591 (0.433 to 0.748), n = 54 (29 PD)
+    held-out Si: 0.607 (0.465 to 0.744), n = 64 (35 PD)
+    all out-of-study predictions pooled: 0.581 (0.493 to 0.667)
+
+[gait only] repeated grouped CV:
+    auc: 0.806 (0.780 to 0.821)
+    balanced_accuracy: 0.717 (0.663 to 0.754)
+    sensitivity: 0.802 (0.763 to 0.851)
+    specificity: 0.632 (0.493 to 0.728)
+[gait only] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.785 (0.633 to 0.909), n = 47 (29 PD)
+    held-out Ju: 0.712 (0.557 to 0.852), n = 54 (29 PD)
+    held-out Si: 0.705 (0.569 to 0.834), n = 64 (35 PD)
+    all out-of-study predictions pooled: 0.722 (0.642 to 0.796)
+
+[gait + covariates] repeated grouped CV:
+    auc: 0.786 (0.751 to 0.810)
+    balanced_accuracy: 0.672 (0.584 to 0.742)
+    sensitivity: 0.818 (0.770 to 0.886)
+    specificity: 0.526 (0.299 to 0.704)
+[gait + covariates] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.795 (0.650 to 0.913), n = 47 (29 PD)
+    held-out Ju: 0.727 (0.579 to 0.864), n = 54 (29 PD)
+    held-out Si: 0.716 (0.580 to 0.842), n = 64 (35 PD)
+    all out-of-study predictions pooled: 0.731 (0.652 to 0.808)
+
+Gait + covariates model fitted on all participants (C = 1): odds ratio of PD per 1 SD increase, with a 95% participant-bootstrap interval, and the variance inflation factor of each input (collinearity check; above 5 is a concern):
+    stride_time_mean_s: OR 0.80 (0.48 to 1.26), VIF 1.3
+    stride_time_cv_pct: OR 1.57 (1.06 to 2.60), VIF 1.7
+    swing_time_cv_pct: OR 1.02 (0.63 to 1.70), VIF 2.0
+    swing_pct_mean: OR 0.38 (0.19 to 0.61), VIF 1.8
+    stride_time_asymmetry_pct: OR 0.97 (0.64 to 1.44), VIF 1.2
+    swing_time_asymmetry_pct: OR 2.69 (1.40 to 6.93), VIF 1.3
+    Age: OR 1.37 (0.92 to 2.13), VIF 1.1
+    sex_male: OR 1.20 (0.85 to 1.80), VIF 1.1
