@@ -88,7 +88,7 @@ owner: anna | status: todo | branch: - | due: - | updated: 2026-10-05
 owner: jamie | status: review | branch: jamie/T-021-logistic-regression | due: 2026-10-23 | updated: 2026-10-06
 
 ### T-022 · Project: compare the three models: shared splits and metrics, comparison tables and figures, statistical comparison where appropriate (lead jamie, collaborators all; after T-019, T-020, T-021)
-owner: jamie | status: doing | branch: jamie/T-021-logistic-regression | due: 2026-11-06 | updated: 2026-10-06
+owner: jamie | status: doing | branch: jamie/T-022-model-comparison | due: 2026-11-06 | updated: 2026-10-06
 
 ### T-023 · Project: discussion: interpret the results against the research question and the background, limitations, ethics, future work (lead jamie, collaborators all; after T-022)
 owner: jamie | status: todo | branch: - | due: - | updated: 2026-10-05
