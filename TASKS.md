@@ -46,7 +46,7 @@ owner: group | status: decide | branch: - | due: 2026-10-05 | updated: 2026-10-0
 owner: jamie | status: review | branch: jamie/T-007-project-structure | due: 2026-10-09 | updated: 2026-10-05
 
 ### T-008 · README front page: research question, dataset access, file map, how to run (graded; after T-007)
-owner: jamie | status: doing | branch: jamie/T-008-readme-front-page | due: 2026-10-12 | updated: 2026-10-06
+owner: jamie | status: review | branch: jamie/T-008-readme-front-page | due: 2026-10-12 | updated: 2026-10-06
 
 ### T-009 · Midterm §2 Background and Research Gap: literature review, existing ML approaches and their limits, the gap (lead jamie, reviewer anna; mirrors the Project Timeline sheet)
 owner: jamie | status: review | branch: jamie/T-009-background-gap | due: 2026-10-09 | updated: 2026-10-05
@@ -100,4 +100,4 @@ owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
 owner: - | status: todo | branch: - | due: - | updated: 2026-10-05
 
 ### T-026 · Data-quality report on the PhysioNet records for §3: missing demographics, recording lengths, pauses and gaps in the force signals, class and study balance (Jamie's reviewer part of T-012 per the Project Timeline sheet; after T-010)
-owner: jamie | status: doing | branch: jamie/T-026-data-quality | due: 2026-10-08 | updated: 2026-10-05
+owner: jamie | status: review | branch: jamie/T-026-data-quality | due: 2026-10-08 | updated: 2026-10-06

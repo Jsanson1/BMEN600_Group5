@@ -74,3 +74,9 @@ Entry format:
 - **CRediT roles:** Data curation, Validation, Investigation.
 - **AI use:** Claude (cloud session) wrote and ran the script and wrote the notes; Jamie has not yet reviewed. The PhysioNet page and `format.txt` were read in full for the walk-number question.
 - **Verified:** every number in the §3 note comes from the script's output on the checksum-verified data; the flagged recordings were inspected stride by stride. Not verified: ethics and consent statements in the source papers (abstracts only); nothing has been run on Windows or macOS.
+
+### 2026-10-06 · T-008, T-026, T-010 · README front page; one pull request for the code line
+- **Did:** Claimed T-008 (unassigned, graded) and wrote the README front page (commit `ef109e8`): research question, why it matters (with the README's old misreading of Kim et al. 2018 removed), data access with the correct PhysioNet link, file map, how to run, results so far, plan, verified references. Folded the T-026 and T-008 branches into the T-010 line so pull request #2 is one review for the whole code side (T-007, T-008, T-010, T-026). Checked the Doc and the repository first: no teammate text or review since the Doc was created on 5 October.
+- **CRediT roles:** Writing – original draft, Project administration.
+- **AI use:** Claude (cloud session) wrote the README from the verified ledger and the results files, after Jamie said to keep working and get the project done; Jamie has not yet reviewed the text.
+- **Verified:** each README claim against `sources.md` or a results file; the branch fast-forwards cleanly; GitHub checks on the pull request. Not verified: the README's rendering on GitHub before the merge; the team's view of the wording.
