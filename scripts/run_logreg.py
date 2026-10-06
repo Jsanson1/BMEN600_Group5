@@ -38,6 +38,8 @@ from gaitpdb.evaluation import (  # noqa: E402
     COVARIATES,
     MODEL_FEATURES,
     bootstrap_auc,
+    calibration_table,
+    cv_predictions,
     evaluate,
     load_feature_table,
     loso_predictions,
@@ -149,10 +151,21 @@ def main() -> None:
         all_folds.append(folds)
         s = summarise(folds)
         lines.append(f"[{name}] repeated grouped CV:")
-        for m in ("auc", "balanced_accuracy", "sensitivity", "specificity"):
+        for m in ("auc", "brier", "balanced_accuracy", "sensitivity", "specificity"):
             lines.append(
                 f"    {m}: {s.loc[m, 'mean']:.3f} ({s.loc[m, 'ci_low']:.3f} to {s.loc[m, 'ci_high']:.3f})"
             )
+        if name == "gait only":
+            oof = cv_predictions(factory, df, cols, N_SPLITS, SEED)
+            cal = calibration_table(oof["y"], oof["p"])
+            lines.append(
+                "[gait only] calibration of the out-of-fold probabilities (one CV repeat), "
+                "quintiles of predicted probability: mean predicted vs observed PD fraction:"
+            )
+            for r in cal.itertuples():
+                lines.append(
+                    f"    n = {r.n}: predicted {r.mean_predicted:.2f}, observed {r.observed_pd:.2f}"
+                )
         pred = loso_predictions(factory, df, cols)
         if name == "gait + covariates":
             pred.to_csv(out / "logreg_loso_predictions.csv", index=False)

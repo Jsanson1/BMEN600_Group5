@@ -3,6 +3,7 @@ Outer evaluation: 5-fold participant-grouped cross-validation repeated 20 times 
 
 [covariates only] repeated grouped CV:
     auc: 0.580 (0.525 to 0.607)
+    brier: 0.246 (0.243 to 0.250)
     balanced_accuracy: 0.501 (0.484 to 0.524)
     sensitivity: 0.941 (0.873 to 1.000)
     specificity: 0.060 (0.000 to 0.150)
@@ -14,9 +15,16 @@ Outer evaluation: 5-fold participant-grouped cross-validation repeated 20 times 
 
 [gait only] repeated grouped CV:
     auc: 0.806 (0.780 to 0.821)
+    brier: 0.189 (0.180 to 0.204)
     balanced_accuracy: 0.717 (0.663 to 0.754)
     sensitivity: 0.802 (0.763 to 0.851)
     specificity: 0.632 (0.493 to 0.728)
+[gait only] calibration of the out-of-fold probabilities (one CV repeat), quintiles of predicted probability: mean predicted vs observed PD fraction:
+    n = 33: predicted 0.29, observed 0.21
+    n = 33: predicted 0.46, observed 0.39
+    n = 33: predicted 0.55, observed 0.55
+    n = 33: predicted 0.65, observed 0.76
+    n = 33: predicted 0.86, observed 0.91
 [gait only] leave-one-study-out AUC (train on the other two):
     held-out Ga: 0.785 (0.633 to 0.909), n = 47 (29 PD)
     held-out Ju: 0.712 (0.557 to 0.852), n = 54 (29 PD)
@@ -25,6 +33,7 @@ Outer evaluation: 5-fold participant-grouped cross-validation repeated 20 times 
 
 [gait + covariates] repeated grouped CV:
     auc: 0.786 (0.751 to 0.810)
+    brier: 0.200 (0.183 to 0.228)
     balanced_accuracy: 0.672 (0.584 to 0.742)
     sensitivity: 0.818 (0.770 to 0.886)
     specificity: 0.526 (0.299 to 0.704)
