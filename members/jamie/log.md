@@ -98,3 +98,9 @@ Entry format:
 - **CRediT roles:** Writing – review & editing, Validation, Software.
 - **AI use:** Claude (cloud session) did the trims, the script and the status line; Jamie has not yet reviewed. The trims keep Jamie's register from draft 3 and every verified number.
 - **Verified:** the Doc's §2 and §5 compared paragraph by paragraph with the markdown by script (identical); the dual-task numbers come from the script on the checksum-verified data. Not verified: the page count in the assembled PDF (estimated from characters); Jamie's and Anna's reading.
+
+### 2026-10-06 · T-027, T-021 · Unit tests; calibration of the baseline
+- **Did:** Added the Brier score to the shared metrics and a calibration table to the baseline script (`c5e9e8c` on the T-021 branch; the out-of-fold probabilities are reasonably calibrated). Claimed T-027 and wrote twelve unit tests on synthetic signals for the event detection, stride rules, loaders, demographics parsing and the grouped splits (`3d481a8`, pull request #5, stacked on #4); pytest added to `requirements-dev.txt`; README says how to run them.
+- **CRediT roles:** Software, Validation.
+- **AI use:** Claude (cloud session) wrote the tests and the calibration code; Jamie has not yet reviewed them.
+- **Verified:** the tests pass; the baseline re-run reproduces the earlier numbers exactly with the new metric added. Not verified: pytest in GitHub Actions (shared workflow; the group's call).

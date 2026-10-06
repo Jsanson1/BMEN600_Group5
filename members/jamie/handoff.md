@@ -72,3 +72,13 @@ _Updated 2026-10-06 12:40 by Claude (cloud session) for Jamie · branch `jamie/T
 - **For teammates:** @anna @yassien: the pull request description says how to plug your model in; do not change `evaluation.py` for one model, ask and we change it once for all three. The feature table is `results/features_usual_walk.csv` (one row per participant); if T-017 or T-018 changes the features, re-run `make_figure1.py` and then every model script.
 - **Not pushed:** nothing.
 
+## T-027 · Unit tests for the shared code
+_Updated 2026-10-06 12:58 by Claude (cloud session) for Jamie · branch `jamie/T-027-unit-tests` at `3d481a8` · pull request #5 open (stacked on #4)_
+
+- **Now:** twelve tests in `tests/` on synthetic signals (events, stride rules, loaders, demographics layout, grouped splits); `python -m pytest` passes in about two seconds; pytest added to `requirements-dev.txt`.
+- **Validated:** all tests pass locally; ruff clean. **Not verified:** GitHub Actions does not run pytest (shared workflow file; needs the group's OK to add one line).
+- **Next:** review and merge after #4; ask the group on Friday to add `python -m pytest` to `.github/workflows/checks.yml`.
+- **Blocked / needs a decision:** none.
+- **For teammates:** @anna @yassien: when T-017 or T-018 changes a rule in `events.py` or `features.py`, change the matching test on purpose in the same pull request.
+- **Not pushed:** nothing.
+
