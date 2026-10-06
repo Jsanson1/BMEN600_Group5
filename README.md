@@ -56,7 +56,7 @@ python scripts/run_baselines.py          # chance and one-feature-at-a-time base
 python scripts/compare_models.py         # every model side by side with paired tests, and Figure 3 -> results/model_comparison*, figures/
 ```
 
-`python scripts/run_all.py` runs all of them in this order and regenerates every committed output in about five minutes on a laptop; a run on a fresh checkout changes nothing but the creation dates inside the Figure 1 and Figure 2 PDFs. The scripts that read the record files accept `--data <folder>` if the data live elsewhere; the last three read only `results/features_usual_walk.csv` and the files the model scripts write. Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte.
+`python scripts/run_all.py` runs all of them in this order and regenerates every committed output in about five minutes on a laptop; a run on a fresh checkout changes nothing but the creation dates inside the Figure 1 and Figure 2 PDFs. The scripts that read the record files accept `--data <folder>` if the data live elsewhere; the last three read only `results/features_usual_walk.csv` and the files the model scripts write. Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte. `python -m pip install -r requirements-dev.txt && python -m pytest` runs the unit tests in `tests/` (synthetic signals, no dataset needed).
 
 ## Results so far
 
