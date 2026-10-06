@@ -104,3 +104,6 @@ owner: jamie | status: review | branch: jamie/T-026-data-quality | due: 2026-10-
 
 ### T-027 · Unit tests for the shared code (event detection, stride rules, demographics parsing, participant-grouped splits) so later changes by any member cannot silently break the pipeline (after T-010, T-021)
 owner: jamie | status: review | branch: jamie/T-027-unit-tests | due: 2026-10-09 | updated: 2026-10-06
+
+### T-028 · Assembly helper for the midterm PDF: renumber the S-citations into IEEE order of first citation and emit the reference list from sources.md (part of T-015; after T-009)
+owner: jamie | status: doing | branch: jamie/T-028-assembly-helper | due: 2026-10-14 | updated: 2026-10-06
