@@ -1,0 +1,8 @@
+# Packages needed to run the analysis (Python 3.11 or newer).
+#   python -m pip install -r requirements.txt
+numpy>=2,<3
+pandas>=2.2,<4
+scipy>=1.13,<2
+matplotlib>=3.8,<4
+scikit-learn>=1.5,<2
+tabulate>=0.9,<1

@@ -1,0 +1,18 @@
+Dual-task check on the Ga sub-study: usual walk (01) against the serial-7 counting walk (10), within participant (scripts/check_dual_task.py).
+Participants with both walks: PD 21, Control 6 (the source study had 30 PD and 28 controls; the database holds the rest of the control dual-task walks only as usual walks).
+
+stride_time_cv_pct, PD (n = 21): median 4.45 on the usual walk, 5.09 under the dual task, median within-participant change +0.73, Wilcoxon p = 0.00554
+stride_time_cv_pct, Control (n = 6): median 5.43 on the usual walk, 6.07 under the dual task, median within-participant change +0.70, Wilcoxon p = 0.156
+
+swing_time_cv_pct, PD (n = 21): median 9.57 on the usual walk, 10.10 under the dual task, median within-participant change +0.17, Wilcoxon p = 0.658
+swing_time_cv_pct, Control (n = 6): median 8.92 on the usual walk, 9.33 under the dual task, median within-participant change +0.95, Wilcoxon p = 0.0938
+
+swing_time_asymmetry_pct, PD (n = 21): median 5.12 on the usual walk, 7.47 under the dual task, median within-participant change +1.28, Wilcoxon p = 0.00554
+swing_time_asymmetry_pct, Control (n = 6): median 1.36 on the usual walk, 2.40 under the dual task, median within-participant change +1.26, Wilcoxon p = 0.312
+
+stride_time_mean_s, PD (n = 21): median 1.09 on the usual walk, 1.10 under the dual task, median within-participant change +0.04, Wilcoxon p = 0.00488
+stride_time_mean_s, Control (n = 6): median 1.07 on the usual walk, 1.09 under the dual task, median within-participant change +0.03, Wilcoxon p = 0.438
+
+cadence_strides_per_min, PD (n = 21): median 52.98 on the usual walk, 50.01 under the dual task, median within-participant change -2.48, Wilcoxon p = 0.0057
+cadence_strides_per_min, Control (n = 6): median 54.22 on the usual walk, 51.74 under the dual task, median within-participant change -1.49, Wilcoxon p = 0.188
+

@@ -1,0 +1,4 @@
+Participants in demographics.txt without a record file: ['JuCo10']
+Record files without a demographics row: none
+Total record files: 306; total participants with recordings: 165
+Ages missing: 0; Hoehn and Yahr missing among PD: 0

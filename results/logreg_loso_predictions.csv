@@ -1,0 +1,496 @@
+model,participant,study,y,p
+logreg: covariates only,GaCo01,Ga,0,0.5657082592822692
+logreg: covariates only,GaCo02,Ga,0,0.6036166864291981
+logreg: covariates only,GaCo03,Ga,0,0.5800394553288413
+logreg: covariates only,GaCo04,Ga,0,0.6581028333159449
+logreg: covariates only,GaCo05,Ga,0,0.5916971214527867
+logreg: covariates only,GaCo06,Ga,0,0.6403200103292698
+logreg: covariates only,GaCo07,Ga,0,0.6267220834237153
+logreg: covariates only,GaCo08,Ga,0,0.6057683610904944
+logreg: covariates only,GaCo09,Ga,0,0.6057683610904944
+logreg: covariates only,GaCo10,Ga,0,0.5800394553288413
+logreg: covariates only,GaCo11,Ga,0,0.5847879192318954
+logreg: covariates only,GaCo12,Ga,0,0.5438225278834914
+logreg: covariates only,GaCo13,Ga,0,0.5534919928018238
+logreg: covariates only,GaCo14,Ga,0,0.5583120535739508
+logreg: covariates only,GaCo15,Ga,0,0.5534919928018238
+logreg: covariates only,GaCo16,Ga,0,0.534119917246569
+logreg: covariates only,GaCo17,Ga,0,0.5704987780622912
+logreg: covariates only,GaCo22,Ga,0,0.5609054334156548
+logreg: covariates only,GaPt03,Ga,1,0.6242570273602103
+logreg: covariates only,GaPt04,Ga,1,0.5752761275625297
+logreg: covariates only,GaPt05,Ga,1,0.6242570273602103
+logreg: covariates only,GaPt06,Ga,1,0.5942369419571611
+logreg: covariates only,GaPt07,Ga,1,0.4853660568444339
+logreg: covariates only,GaPt08,Ga,1,0.5583120535739508
+logreg: covariates only,GaPt09,Ga,1,0.5800394553288413
+logreg: covariates only,GaPt12,Ga,1,0.5146443773474246
+logreg: covariates only,GaPt13,Ga,1,0.5847879192318954
+logreg: covariates only,GaPt14,Ga,1,0.5172724681415223
+logreg: covariates only,GaPt15,Ga,1,0.6358111164106722
+logreg: covariates only,GaPt16,Ga,1,0.6267220834237153
+logreg: covariates only,GaPt17,Ga,1,0.5895206880369926
+logreg: covariates only,GaPt18,Ga,1,0.596405488719116
+logreg: covariates only,GaPt19,Ga,1,0.596405488719116
+logreg: covariates only,GaPt20,Ga,1,0.6358111164106722
+logreg: covariates only,GaPt21,Ga,1,0.6312782477654015
+logreg: covariates only,GaPt22,Ga,1,0.6221433183374002
+logreg: covariates only,GaPt23,Ga,1,0.5727029653360146
+logreg: covariates only,GaPt24,Ga,1,0.5752761275625297
+logreg: covariates only,GaPt25,Ga,1,0.6358111164106722
+logreg: covariates only,GaPt26,Ga,1,0.6057683610904944
+logreg: covariates only,GaPt27,Ga,1,0.5942369419571611
+logreg: covariates only,GaPt28,Ga,1,0.5415886097707725
+logreg: covariates only,GaPt29,Ga,1,0.5752761275625297
+logreg: covariates only,GaPt30,Ga,1,0.5800394553288413
+logreg: covariates only,GaPt31,Ga,1,0.5704987780622912
+logreg: covariates only,GaPt32,Ga,1,0.5512663542709753
+logreg: covariates only,GaPt33,Ga,1,0.5512663542709753
+logreg: covariates only,JuCo01,Ju,0,0.6308558114886157
+logreg: covariates only,JuCo02,Ju,0,0.6083306682196202
+logreg: covariates only,JuCo03,Ju,0,0.5625863655872452
+logreg: covariates only,JuCo04,Ju,0,0.5692953121658446
+logreg: covariates only,JuCo05,Ju,0,0.5253416530135949
+logreg: covariates only,JuCo06,Ju,0,0.5892607876234823
+logreg: covariates only,JuCo07,Ju,0,0.549101957461209
+logreg: covariates only,JuCo08,Ju,0,0.5991385989273978
+logreg: covariates only,JuCo09,Ju,0,0.5886450548909476
+logreg: covariates only,JuCo11,Ju,0,0.6115794611452262
+logreg: covariates only,JuCo12,Ju,0,0.5826348377306914
+logreg: covariates only,JuCo13,Ju,0,0.5753576193140004
+logreg: covariates only,JuCo14,Ju,0,0.5552264336842487
+logreg: covariates only,JuCo15,Ju,0,0.5185270885495709
+logreg: covariates only,JuCo16,Ju,0,0.59194760611863
+logreg: covariates only,JuCo17,Ju,0,0.5592231278042612
+logreg: covariates only,JuCo18,Ju,0,0.5558544458096133
+logreg: covariates only,JuCo19,Ju,0,0.5389399922156969
+logreg: covariates only,JuCo20,Ju,0,0.5659438595475659
+logreg: covariates only,JuCo21,Ju,0,0.5720178761460541
+logreg: covariates only,JuCo22,Ju,0,0.549101957461209
+logreg: covariates only,JuCo23,Ju,0,0.5985275851729196
+logreg: covariates only,JuCo24,Ju,0,0.5853344985989358
+logreg: covariates only,JuCo25,Ju,0,0.5484721533254683
+logreg: covariates only,JuCo26,Ju,0,0.5720178761460541
+logreg: covariates only,JuPt01,Ju,1,0.6276700914772436
+logreg: covariates only,JuPt02,Ju,1,0.5826348377306914
+logreg: covariates only,JuPt03,Ju,1,0.5892607876234823
+logreg: covariates only,JuPt04,Ju,1,0.6050722491776993
+logreg: covariates only,JuPt05,Ju,1,0.6180471362390277
+logreg: covariates only,JuPt06,Ju,1,0.6308558114886157
+logreg: covariates only,JuPt07,Ju,1,0.5117056247137232
+logreg: covariates only,JuPt08,Ju,1,0.5219353913878377
+logreg: covariates only,JuPt09,Ju,1,0.5753576193140004
+logreg: covariates only,JuPt10,Ju,1,0.6018044663113079
+logreg: covariates only,JuPt11,Ju,1,0.6180471362390277
+logreg: covariates only,JuPt12,Ju,1,0.5355450406081502
+logreg: covariates only,JuPt13,Ju,1,0.6371929235895655
+logreg: covariates only,JuPt14,Ju,1,0.5659438595475659
+logreg: covariates only,JuPt15,Ju,1,0.5558544458096133
+logreg: covariates only,JuPt16,Ju,1,0.5558544458096133
+logreg: covariates only,JuPt17,Ju,1,0.5853344985989358
+logreg: covariates only,JuPt18,Ju,1,0.6434827267245488
+logreg: covariates only,JuPt19,Ju,1,0.5692953121658446
+logreg: covariates only,JuPt20,Ju,1,0.5853344985989358
+logreg: covariates only,JuPt21,Ju,1,0.6497234297213496
+logreg: covariates only,JuPt22,Ju,1,0.6018044663113079
+logreg: covariates only,JuPt23,Ju,1,0.5985275851729196
+logreg: covariates only,JuPt24,Ju,1,0.5985275851729196
+logreg: covariates only,JuPt25,Ju,1,0.5213007220811899
+logreg: covariates only,JuPt26,Ju,1,0.5625863655872452
+logreg: covariates only,JuPt27,Ju,1,0.5355450406081502
+logreg: covariates only,JuPt28,Ju,1,0.5321467917027666
+logreg: covariates only,JuPt29,Ju,1,0.5726404281168322
+logreg: covariates only,SiCo01,Si,0,0.5706505437442789
+logreg: covariates only,SiCo03,Si,0,0.5723089870980116
+logreg: covariates only,SiCo04,Si,0,0.5757545558305643
+logreg: covariates only,SiCo05,Si,0,0.5709270621959225
+logreg: covariates only,SiCo06,Si,0,0.5729995280640473
+logreg: covariates only,SiCo07,Si,0,0.5712035363776282
+logreg: covariates only,SiCo08,Si,0,0.5723089870980116
+logreg: covariates only,SiCo09,Si,0,0.5736855130387002
+logreg: covariates only,SiCo10,Si,0,0.5728571688556962
+logreg: covariates only,SiCo11,Si,0,0.5716181642821933
+logreg: covariates only,SiCo12,Si,0,0.5684368223015536
+logreg: covariates only,SiCo13,Si,0,0.5743754843689065
+logreg: covariates only,SiCo14,Si,0,0.5731333292259935
+logreg: covariates only,SiCo15,Si,0,0.570788808493499
+logreg: covariates only,SiCo16,Si,0,0.5742375131844641
+logreg: covariates only,SiCo17,Si,0,0.5721708450003543
+logreg: covariates only,SiCo18,Si,0,0.571756351269594
+logreg: covariates only,SiCo19,Si,0,0.5729952547290287
+logreg: covariates only,SiCo20,Si,0,0.5745134439715077
+logreg: covariates only,SiCo21,Si,0,0.5736855130387002
+logreg: covariates only,SiCo22,Si,0,0.5731333292259935
+logreg: covariates only,SiCo23,Si,0,0.5732713923260117
+logreg: covariates only,SiCo24,Si,0,0.573409444008511
+logreg: covariates only,SiCo25,Si,0,0.5738235303452811
+logreg: covariates only,SiCo26,Si,0,0.5742375131844641
+logreg: covariates only,SiCo27,Si,0,0.5752030675393578
+logreg: covariates only,SiCo28,Si,0,0.5743754843689065
+logreg: covariates only,SiCo29,Si,0,0.5732713923260117
+logreg: covariates only,SiCo30,Si,0,0.5746513919717595
+logreg: covariates only,SiPt02,Si,1,0.5739658070069302
+logreg: covariates only,SiPt04,Si,1,0.5760302293383602
+logreg: covariates only,SiPt05,Si,1,0.5736855130387002
+logreg: covariates only,SiPt07,Si,1,0.570788808493499
+logreg: covariates only,SiPt08,Si,1,0.5752030675393578
+logreg: covariates only,SiPt09,Si,1,0.5746513919717595
+logreg: covariates only,SiPt10,Si,1,0.5739658070069302
+logreg: covariates only,SiPt12,Si,1,0.5721708450003543
+logreg: covariates only,SiPt13,Si,1,0.5731333292259935
+logreg: covariates only,SiPt14,Si,1,0.5742375131844641
+logreg: covariates only,SiPt15,Si,1,0.5745134439715077
+logreg: covariates only,SiPt16,Si,1,0.5728571688556962
+logreg: covariates only,SiPt17,Si,1,0.574789328349161
+logreg: covariates only,SiPt18,Si,1,0.5738235303452811
+logreg: covariates only,SiPt19,Si,1,0.5732713923260117
+logreg: covariates only,SiPt20,Si,1,0.5740995304386963
+logreg: covariates only,SiPt21,Si,1,0.5739615361521254
+logreg: covariates only,SiPt22,Si,1,0.5757545558305643
+logreg: covariates only,SiPt23,Si,1,0.5702356834228395
+logreg: covariates only,SiPt24,Si,1,0.5682983729288856
+logreg: covariates only,SiPt25,Si,1,0.5746513919717595
+logreg: covariates only,SiPt27,Si,1,0.5728571688556962
+logreg: covariates only,SiPt28,Si,1,0.5729995280640473
+logreg: covariates only,SiPt29,Si,1,0.5732756649555796
+logreg: covariates only,SiPt30,Si,1,0.5742375131844641
+logreg: covariates only,SiPt31,Si,1,0.5710653048308599
+logreg: covariates only,SiPt32,Si,1,0.574789328349161
+logreg: covariates only,SiPt33,Si,1,0.5752030675393578
+logreg: covariates only,SiPt34,Si,1,0.5757545558305643
+logreg: covariates only,SiPt35,Si,1,0.5738235303452811
+logreg: covariates only,SiPt36,Si,1,0.5706505437442789
+logreg: covariates only,SiPt37,Si,1,0.5724471179216636
+logreg: covariates only,SiPt38,Si,1,0.5723089870980116
+logreg: covariates only,SiPt39,Si,1,0.5728614425424848
+logreg: covariates only,SiPt40,Si,1,0.5754788351763711
+logreg: gait only,GaCo01,Ga,0,0.30007903083805576
+logreg: gait only,GaCo02,Ga,0,0.2750399427720476
+logreg: gait only,GaCo03,Ga,0,0.8439413747753473
+logreg: gait only,GaCo04,Ga,0,0.6654876120762521
+logreg: gait only,GaCo05,Ga,0,0.45409677618376376
+logreg: gait only,GaCo06,Ga,0,0.39627446244122183
+logreg: gait only,GaCo07,Ga,0,0.5800656360481306
+logreg: gait only,GaCo08,Ga,0,0.6557819087926821
+logreg: gait only,GaCo09,Ga,0,0.24403574185469584
+logreg: gait only,GaCo10,Ga,0,0.38091724140947886
+logreg: gait only,GaCo11,Ga,0,0.6681442288036678
+logreg: gait only,GaCo12,Ga,0,0.3470248895704516
+logreg: gait only,GaCo13,Ga,0,0.4684875598143362
+logreg: gait only,GaCo14,Ga,0,0.4981432654126875
+logreg: gait only,GaCo15,Ga,0,0.4353890949501515
+logreg: gait only,GaCo16,Ga,0,0.6947352415996979
+logreg: gait only,GaCo17,Ga,0,0.32241365451050896
+logreg: gait only,GaCo22,Ga,0,0.5799725923264201
+logreg: gait only,GaPt03,Ga,1,0.9690965379759493
+logreg: gait only,GaPt04,Ga,1,0.9155874312850087
+logreg: gait only,GaPt05,Ga,1,0.8508828919683593
+logreg: gait only,GaPt06,Ga,1,0.8375284113383976
+logreg: gait only,GaPt07,Ga,1,0.9911350582365298
+logreg: gait only,GaPt08,Ga,1,0.7260908452247373
+logreg: gait only,GaPt09,Ga,1,0.5324057267500258
+logreg: gait only,GaPt12,Ga,1,0.5229715389864729
+logreg: gait only,GaPt13,Ga,1,0.8495057581665098
+logreg: gait only,GaPt14,Ga,1,0.6301251609261826
+logreg: gait only,GaPt15,Ga,1,0.6778596170710799
+logreg: gait only,GaPt16,Ga,1,0.3623765084250693
+logreg: gait only,GaPt17,Ga,1,0.9021249630562675
+logreg: gait only,GaPt18,Ga,1,0.8717520003877849
+logreg: gait only,GaPt19,Ga,1,0.382299584285181
+logreg: gait only,GaPt20,Ga,1,0.7159896022357526
+logreg: gait only,GaPt21,Ga,1,0.46299125291483795
+logreg: gait only,GaPt22,Ga,1,0.45739351839604653
+logreg: gait only,GaPt23,Ga,1,0.9935520705813398
+logreg: gait only,GaPt24,Ga,1,0.6509809318546873
+logreg: gait only,GaPt25,Ga,1,0.824439377368183
+logreg: gait only,GaPt26,Ga,1,0.5221755691067138
+logreg: gait only,GaPt27,Ga,1,0.6470067986125919
+logreg: gait only,GaPt28,Ga,1,0.770673905967003
+logreg: gait only,GaPt29,Ga,1,0.716415308668615
+logreg: gait only,GaPt30,Ga,1,0.5060178174200674
+logreg: gait only,GaPt31,Ga,1,0.7935065980984515
+logreg: gait only,GaPt32,Ga,1,0.5959760315128233
+logreg: gait only,GaPt33,Ga,1,0.7873573534806513
+logreg: gait only,JuCo01,Ju,0,0.5687462061912401
+logreg: gait only,JuCo02,Ju,0,0.49100405046794204
+logreg: gait only,JuCo03,Ju,0,0.5000597250138689
+logreg: gait only,JuCo04,Ju,0,0.5259273722478478
+logreg: gait only,JuCo05,Ju,0,0.4714652122767924
+logreg: gait only,JuCo06,Ju,0,0.5174879988770891
+logreg: gait only,JuCo07,Ju,0,0.5775557250627801
+logreg: gait only,JuCo08,Ju,0,0.5336067188835512
+logreg: gait only,JuCo09,Ju,0,0.5476528428016935
+logreg: gait only,JuCo11,Ju,0,0.49041137994582235
+logreg: gait only,JuCo12,Ju,0,0.5275051102229467
+logreg: gait only,JuCo13,Ju,0,0.5042667448988224
+logreg: gait only,JuCo14,Ju,0,0.5621453073864203
+logreg: gait only,JuCo15,Ju,0,0.5191814396786043
+logreg: gait only,JuCo16,Ju,0,0.5204895729932307
+logreg: gait only,JuCo17,Ju,0,0.5337086646243541
+logreg: gait only,JuCo18,Ju,0,0.5424830112364277
+logreg: gait only,JuCo19,Ju,0,0.5053218156758489
+logreg: gait only,JuCo20,Ju,0,0.6118153671596605
+logreg: gait only,JuCo21,Ju,0,0.5481226397020366
+logreg: gait only,JuCo22,Ju,0,0.5419148805963848
+logreg: gait only,JuCo23,Ju,0,0.6460122104536424
+logreg: gait only,JuCo24,Ju,0,0.5973070012403728
+logreg: gait only,JuCo25,Ju,0,0.6109404027673224
+logreg: gait only,JuCo26,Ju,0,0.5420755473166267
+logreg: gait only,JuPt01,Ju,1,0.5420755473166267
+logreg: gait only,JuPt02,Ju,1,0.6100670132660344
+logreg: gait only,JuPt03,Ju,1,0.5054264747012529
+logreg: gait only,JuPt04,Ju,1,0.7143045884917292
+logreg: gait only,JuPt05,Ju,1,0.4602080471073327
+logreg: gait only,JuPt06,Ju,1,0.6315389889167892
+logreg: gait only,JuPt07,Ju,1,0.5166785730508596
+logreg: gait only,JuPt08,Ju,1,0.545970778691899
+logreg: gait only,JuPt09,Ju,1,0.6091780600295306
+logreg: gait only,JuPt10,Ju,1,0.636137673230249
+logreg: gait only,JuPt11,Ju,1,0.5904607546406075
+logreg: gait only,JuPt12,Ju,1,0.5905819390787906
+logreg: gait only,JuPt13,Ju,1,0.7840772557780823
+logreg: gait only,JuPt14,Ju,1,0.6498414258839053
+logreg: gait only,JuPt15,Ju,1,0.48666344289290864
+logreg: gait only,JuPt16,Ju,1,0.6337912328493317
+logreg: gait only,JuPt17,Ju,1,0.635125337166823
+logreg: gait only,JuPt18,Ju,1,0.824015282429423
+logreg: gait only,JuPt19,Ju,1,0.6212196817131728
+logreg: gait only,JuPt20,Ju,1,0.5838693852823904
+logreg: gait only,JuPt21,Ju,1,0.7574009002617074
+logreg: gait only,JuPt22,Ju,1,0.5322147997023491
+logreg: gait only,JuPt23,Ju,1,0.5241641558913933
+logreg: gait only,JuPt24,Ju,1,0.5669289317024947
+logreg: gait only,JuPt25,Ju,1,0.7379455625585074
+logreg: gait only,JuPt26,Ju,1,0.6280340615319384
+logreg: gait only,JuPt27,Ju,1,0.5722271621874244
+logreg: gait only,JuPt28,Ju,1,0.6352039414365025
+logreg: gait only,JuPt29,Ju,1,0.5577235531930697
+logreg: gait only,SiCo01,Si,0,0.10454487369174938
+logreg: gait only,SiCo03,Si,0,0.10651205342080743
+logreg: gait only,SiCo04,Si,0,0.3945795372707086
+logreg: gait only,SiCo05,Si,0,0.8151722657714621
+logreg: gait only,SiCo06,Si,0,0.1971000307783429
+logreg: gait only,SiCo07,Si,0,0.10064384527614476
+logreg: gait only,SiCo08,Si,0,0.15162497497042635
+logreg: gait only,SiCo09,Si,0,0.1869102283578383
+logreg: gait only,SiCo10,Si,0,0.27471342967317175
+logreg: gait only,SiCo11,Si,0,0.44847893815999595
+logreg: gait only,SiCo12,Si,0,0.9905324900602679
+logreg: gait only,SiCo13,Si,0,0.28471878161277386
+logreg: gait only,SiCo14,Si,0,0.9989926416269946
+logreg: gait only,SiCo15,Si,0,0.5437770544596292
+logreg: gait only,SiCo16,Si,0,0.9230646690934662
+logreg: gait only,SiCo17,Si,0,0.568560953212171
+logreg: gait only,SiCo18,Si,0,0.17124514741582916
+logreg: gait only,SiCo19,Si,0,0.06194097992587478
+logreg: gait only,SiCo20,Si,0,0.3684037397823863
+logreg: gait only,SiCo21,Si,0,0.7056073699475423
+logreg: gait only,SiCo22,Si,0,0.6283498829183383
+logreg: gait only,SiCo23,Si,0,0.06970342251039327
+logreg: gait only,SiCo24,Si,0,0.5595746685216744
+logreg: gait only,SiCo25,Si,0,0.6657328974975899
+logreg: gait only,SiCo26,Si,0,0.30879429703970357
+logreg: gait only,SiCo27,Si,0,0.27363783495496974
+logreg: gait only,SiCo28,Si,0,0.3842009014815375
+logreg: gait only,SiCo29,Si,0,0.1758624037833921
+logreg: gait only,SiCo30,Si,0,0.42509119111568544
+logreg: gait only,SiPt02,Si,1,0.9212393574801181
+logreg: gait only,SiPt04,Si,1,0.0045571898581536945
+logreg: gait only,SiPt05,Si,1,0.16739256859291984
+logreg: gait only,SiPt07,Si,1,0.45325241688534756
+logreg: gait only,SiPt08,Si,1,0.5872505503124028
+logreg: gait only,SiPt09,Si,1,0.7278767745984336
+logreg: gait only,SiPt10,Si,1,0.2849283712669594
+logreg: gait only,SiPt12,Si,1,0.8350613599774566
+logreg: gait only,SiPt13,Si,1,0.8302051478722462
+logreg: gait only,SiPt14,Si,1,0.4775880297772504
+logreg: gait only,SiPt15,Si,1,0.9327602618782489
+logreg: gait only,SiPt16,Si,1,0.18511925664658793
+logreg: gait only,SiPt17,Si,1,0.22961626583565797
+logreg: gait only,SiPt18,Si,1,0.8072639340028129
+logreg: gait only,SiPt19,Si,1,0.6001975929756197
+logreg: gait only,SiPt20,Si,1,0.8485097690104253
+logreg: gait only,SiPt21,Si,1,0.9568329761588625
+logreg: gait only,SiPt22,Si,1,0.9239396321808299
+logreg: gait only,SiPt23,Si,1,0.6897027290760235
+logreg: gait only,SiPt24,Si,1,0.5776815462283542
+logreg: gait only,SiPt25,Si,1,0.5054441420704064
+logreg: gait only,SiPt27,Si,1,0.8856084024141628
+logreg: gait only,SiPt28,Si,1,0.9418662119542626
+logreg: gait only,SiPt29,Si,1,0.8225349354026436
+logreg: gait only,SiPt30,Si,1,0.686926935303289
+logreg: gait only,SiPt31,Si,1,0.9965006150303142
+logreg: gait only,SiPt32,Si,1,0.524783144625562
+logreg: gait only,SiPt33,Si,1,0.7481326684268871
+logreg: gait only,SiPt34,Si,1,0.35520030110185086
+logreg: gait only,SiPt35,Si,1,0.16615920023221895
+logreg: gait only,SiPt36,Si,1,0.9629630068929195
+logreg: gait only,SiPt37,Si,1,0.2690542749291357
+logreg: gait only,SiPt38,Si,1,0.42057688814594535
+logreg: gait only,SiPt39,Si,1,0.9849435181533165
+logreg: gait only,SiPt40,Si,1,0.8773330956717349
+logreg: gait + covariates,GaCo01,Ga,0,0.5344181626825408
+logreg: gait + covariates,GaCo02,Ga,0,0.5328771226802268
+logreg: gait + covariates,GaCo03,Ga,0,0.5621216772888563
+logreg: gait + covariates,GaCo04,Ga,0,0.5546756212224084
+logreg: gait + covariates,GaCo05,Ga,0,0.5444428313403539
+logreg: gait + covariates,GaCo06,Ga,0,0.5437001664445384
+logreg: gait + covariates,GaCo07,Ga,0,0.5490457159940051
+logreg: gait + covariates,GaCo08,Ga,0,0.5521087341930048
+logreg: gait + covariates,GaCo09,Ga,0,0.53104146858436
+logreg: gait + covariates,GaCo10,Ga,0,0.5352770825427265
+logreg: gait + covariates,GaCo11,Ga,0,0.5499625774388444
+logreg: gait + covariates,GaCo12,Ga,0,0.5297797974491701
+logreg: gait + covariates,GaCo13,Ga,0,0.5398310329813665
+logreg: gait + covariates,GaCo14,Ga,0,0.5393760971176946
+logreg: gait + covariates,GaCo15,Ga,0,0.5354540920466069
+logreg: gait + covariates,GaCo16,Ga,0,0.5483668585476031
+logreg: gait + covariates,GaCo17,Ga,0,0.5317038623948652
+logreg: gait + covariates,GaCo22,Ga,0,0.5466241577163838
+logreg: gait + covariates,GaPt03,Ga,1,0.5944997498191764
+logreg: gait + covariates,GaPt04,Ga,1,0.5706877503306013
+logreg: gait + covariates,GaPt05,Ga,1,0.5649967838095751
+logreg: gait + covariates,GaPt06,Ga,1,0.5620100457954303
+logreg: gait + covariates,GaPt07,Ga,1,0.5994382984352413
+logreg: gait + covariates,GaPt08,Ga,1,0.5525204721984376
+logreg: gait + covariates,GaPt09,Ga,1,0.5450786367978189
+logreg: gait + covariates,GaPt12,Ga,1,0.5393547577878401
+logreg: gait + covariates,GaPt13,Ga,1,0.5620983204363512
+logreg: gait + covariates,GaPt14,Ga,1,0.5424859059507176
+logreg: gait + covariates,GaPt15,Ga,1,0.5547632391378681
+logreg: gait + covariates,GaPt16,Ga,1,0.5364436158187607
+logreg: gait + covariates,GaPt17,Ga,1,0.5702577814638553
+logreg: gait + covariates,GaPt18,Ga,1,0.5679410906702882
+logreg: gait + covariates,GaPt19,Ga,1,0.539149731396677
+logreg: gait + covariates,GaPt20,Ga,1,0.5555758994635001
+logreg: gait + covariates,GaPt21,Ga,1,0.5433010785196503
+logreg: gait + covariates,GaPt22,Ga,1,0.5446447692830667
+logreg: gait + covariates,GaPt23,Ga,1,0.6045184087180558
+logreg: gait + covariates,GaPt24,Ga,1,0.5485540997770192
+logreg: gait + covariates,GaPt25,Ga,1,0.560927530346909
+logreg: gait + covariates,GaPt26,Ga,1,0.5484134513930519
+logreg: gait + covariates,GaPt27,Ga,1,0.5506527897174425
+logreg: gait + covariates,GaPt28,Ga,1,0.5562970255117041
+logreg: gait + covariates,GaPt29,Ga,1,0.551148154076041
+logreg: gait + covariates,GaPt30,Ga,1,0.5478395278310472
+logreg: gait + covariates,GaPt31,Ga,1,0.5581021986771375
+logreg: gait + covariates,GaPt32,Ga,1,0.543449814241456
+logreg: gait + covariates,GaPt33,Ga,1,0.5589766476889279
+logreg: gait + covariates,JuCo01,Ju,0,0.5784428082143339
+logreg: gait + covariates,JuCo02,Ju,0,0.5654468699247458
+logreg: gait + covariates,JuCo03,Ju,0,0.5632057107888575
+logreg: gait + covariates,JuCo04,Ju,0,0.5687238831616913
+logreg: gait + covariates,JuCo05,Ju,0,0.5585327425049266
+logreg: gait + covariates,JuCo06,Ju,0,0.5684475195317124
+logreg: gait + covariates,JuCo07,Ju,0,0.5733080122000616
+logreg: gait + covariates,JuCo08,Ju,0,0.5703582436393816
+logreg: gait + covariates,JuCo09,Ju,0,0.5713685567696233
+logreg: gait + covariates,JuCo11,Ju,0,0.56639830871512
+logreg: gait + covariates,JuCo12,Ju,0,0.5695110503960575
+logreg: gait + covariates,JuCo13,Ju,0,0.5658617746568414
+logreg: gait + covariates,JuCo14,Ju,0,0.5724230864443648
+logreg: gait + covariates,JuCo15,Ju,0,0.5643297076954267
+logreg: gait + covariates,JuCo16,Ju,0,0.569204420105243
+logreg: gait + covariates,JuCo17,Ju,0,0.5686666273694124
+logreg: gait + covariates,JuCo18,Ju,0,0.5695576839335065
+logreg: gait + covariates,JuCo19,Ju,0,0.5644122971442694
+logreg: gait + covariates,JuCo20,Ju,0,0.5806007874038034
+logreg: gait + covariates,JuCo21,Ju,0,0.5716681960661862
+logreg: gait + covariates,JuCo22,Ju,0,0.5702654836348295
+logreg: gait + covariates,JuCo23,Ju,0,0.588526623662053
+logreg: gait + covariates,JuCo24,Ju,0,0.5797529254476202
+logreg: gait + covariates,JuCo25,Ju,0,0.5803682279309444
+logreg: gait + covariates,JuCo26,Ju,0,0.570671132669182
+logreg: gait + covariates,JuPt01,Ju,1,0.5738301043054069
+logreg: gait + covariates,JuPt02,Ju,1,0.5814505519797826
+logreg: gait + covariates,JuPt03,Ju,1,0.566407941019563
+logreg: gait + covariates,JuPt04,Ju,1,0.5982636053994329
+logreg: gait + covariates,JuPt05,Ju,1,0.5617597846798599
+logreg: gait + covariates,JuPt06,Ju,1,0.586907540109084
+logreg: gait + covariates,JuPt07,Ju,1,0.5629082759192032
+logreg: gait + covariates,JuPt08,Ju,1,0.5677991487728022
+logreg: gait + covariates,JuPt09,Ju,1,0.5805804687996337
+logreg: gait + covariates,JuPt10,Ju,1,0.5860001713108122
+logreg: gait + covariates,JuPt11,Ju,1,0.5802776960917837
+logreg: gait + covariates,JuPt12,Ju,1,0.575436813911
+logreg: gait + covariates,JuPt13,Ju,1,0.6142630656006999
+logreg: gait + covariates,JuPt14,Ju,1,0.5861047266524723
+logreg: gait + covariates,JuPt15,Ju,1,0.5614140357453283
+logreg: gait + covariates,JuPt16,Ju,1,0.5831515935742215
+logreg: gait + covariates,JuPt17,Ju,1,0.5841909204044692
+logreg: gait + covariates,JuPt18,Ju,1,0.6242371745617877
+logreg: gait + covariates,JuPt19,Ju,1,0.5812441754476434
+logreg: gait + covariates,JuPt20,Ju,1,0.5776911024132374
+logreg: gait + covariates,JuPt21,Ju,1,0.6096952586541754
+logreg: gait + covariates,JuPt22,Ju,1,0.5705707795599163
+logreg: gait + covariates,JuPt23,Ju,1,0.5692135863808945
+logreg: gait + covariates,JuPt24,Ju,1,0.5755826422364667
+logreg: gait + covariates,JuPt25,Ju,1,0.5982946880143879
+logreg: gait + covariates,JuPt26,Ju,1,0.5830411556609727
+logreg: gait + covariates,JuPt27,Ju,1,0.5733282361410003
+logreg: gait + covariates,JuPt28,Ju,1,0.5816351222256175
+logreg: gait + covariates,JuPt29,Ju,1,0.572578594714762
+logreg: gait + covariates,SiCo01,Si,0,0.04299334027643334
+logreg: gait + covariates,SiCo03,Si,0,0.06603373187920542
+logreg: gait + covariates,SiCo04,Si,0,0.3792268404119784
+logreg: gait + covariates,SiCo05,Si,0,0.7377839154825275
+logreg: gait + covariates,SiCo06,Si,0,0.1869859861445324
+logreg: gait + covariates,SiCo07,Si,0,0.03833393841210879
+logreg: gait + covariates,SiCo08,Si,0,0.08565589079708369
+logreg: gait + covariates,SiCo09,Si,0,0.085071147539679
+logreg: gait + covariates,SiCo10,Si,0,0.15335341960665666
+logreg: gait + covariates,SiCo11,Si,0,0.38171572006899873
+logreg: gait + covariates,SiCo12,Si,0,0.9725753475780236
+logreg: gait + covariates,SiCo13,Si,0,0.1888408577603253
+logreg: gait + covariates,SiCo14,Si,0,0.9991217227577712
+logreg: gait + covariates,SiCo15,Si,0,0.4095750004484158
+logreg: gait + covariates,SiCo16,Si,0,0.8887953872980504
+logreg: gait + covariates,SiCo17,Si,0,0.533909365780289
+logreg: gait + covariates,SiCo18,Si,0,0.09883442815558428
+logreg: gait + covariates,SiCo19,Si,0,0.020524887824937863
+logreg: gait + covariates,SiCo20,Si,0,0.2641393800820073
+logreg: gait + covariates,SiCo21,Si,0,0.6085826206274173
+logreg: gait + covariates,SiCo22,Si,0,0.47874732104631
+logreg: gait + covariates,SiCo23,Si,0,0.01939138437390885
+logreg: gait + covariates,SiCo24,Si,0,0.4457147635359245
+logreg: gait + covariates,SiCo25,Si,0,0.5861286475802423
+logreg: gait + covariates,SiCo26,Si,0,0.19516061845836313
+logreg: gait + covariates,SiCo27,Si,0,0.24161661860683256
+logreg: gait + covariates,SiCo28,Si,0,0.2832137757745956
+logreg: gait + covariates,SiCo29,Si,0,0.07932627637801583
+logreg: gait + covariates,SiCo30,Si,0,0.36274757886779146
+logreg: gait + covariates,SiPt02,Si,1,0.9539571603356855
+logreg: gait + covariates,SiPt04,Si,1,0.002990960824909224
+logreg: gait + covariates,SiPt05,Si,1,0.08274505713477806
+logreg: gait + covariates,SiPt07,Si,1,0.2621412433587517
+logreg: gait + covariates,SiPt08,Si,1,0.537625475756136
+logreg: gait + covariates,SiPt09,Si,1,0.7143884301350202
+logreg: gait + covariates,SiPt10,Si,1,0.3360911993648295
+logreg: gait + covariates,SiPt12,Si,1,0.8256780196332936
+logreg: gait + covariates,SiPt13,Si,1,0.7440623883082845
+logreg: gait + covariates,SiPt14,Si,1,0.4489496909710191
+logreg: gait + covariates,SiPt15,Si,1,0.9473639658786304
+logreg: gait + covariates,SiPt16,Si,1,0.06287258093603466
+logreg: gait + covariates,SiPt17,Si,1,0.1367204763539155
+logreg: gait + covariates,SiPt18,Si,1,0.685931275810987
+logreg: gait + covariates,SiPt19,Si,1,0.30827862231188946
+logreg: gait + covariates,SiPt20,Si,1,0.817293870181752
+logreg: gait + covariates,SiPt21,Si,1,0.9544761008831724
+logreg: gait + covariates,SiPt22,Si,1,0.9495933855191855
+logreg: gait + covariates,SiPt23,Si,1,0.5035786215012054
+logreg: gait + covariates,SiPt24,Si,1,0.21022257592282656
+logreg: gait + covariates,SiPt25,Si,1,0.514801270027233
+logreg: gait + covariates,SiPt27,Si,1,0.8182765031758727
+logreg: gait + covariates,SiPt28,Si,1,0.9696046180557338
+logreg: gait + covariates,SiPt29,Si,1,0.8350379822086291
+logreg: gait + covariates,SiPt30,Si,1,0.6999909667716689
+logreg: gait + covariates,SiPt31,Si,1,0.9974259659296912
+logreg: gait + covariates,SiPt32,Si,1,0.486355456562655
+logreg: gait + covariates,SiPt33,Si,1,0.7831254369572526
+logreg: gait + covariates,SiPt34,Si,1,0.43108515774999834
+logreg: gait + covariates,SiPt35,Si,1,0.07991467553221956
+logreg: gait + covariates,SiPt36,Si,1,0.9456385769685252
+logreg: gait + covariates,SiPt37,Si,1,0.18481135558709672
+logreg: gait + covariates,SiPt38,Si,1,0.3452791508392484
+logreg: gait + covariates,SiPt39,Si,1,0.9908166628231089
+logreg: gait + covariates,SiPt40,Si,1,0.9231802404127866
