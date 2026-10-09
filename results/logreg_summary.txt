@@ -1,0 +1,85 @@
+Logistic regression (L2, C tuned by inner cross-validation on log-loss over 11 values; swing_time_asymmetry_pct entered as log(1 + x)) on 165 participants (93 PD, 72 controls), one usual-walk recording each.
+Outer evaluation: 5-fold participant-grouped cross-validation repeated 20 times, and leave-one-study-out. Cross-validation: mean over the 100 test folds, 95% interval corrected for the overlap between training sets (Nadeau and Bengio 2003), then in brackets the 2.5th to 97.5th percentile of the 20 repeat means, which shows the effect of the split alone. Leave-one-study-out: 95% interval from a bootstrap over the held-out participants.
+
+[covariates only] repeated grouped CV:
+    auc: 0.580 (0.491 to 0.669) [repeats 0.526 to 0.607]
+    brier: 0.248 (0.239 to 0.257) [repeats 0.244 to 0.256]
+    balanced_accuracy: 0.492 (0.460 to 0.524) [repeats 0.466 to 0.511]
+    sensitivity: 0.947 (0.844 to 1.000) [repeats 0.911 to 0.973]
+    specificity: 0.038 (0.000 to 0.119) [repeats 0.013 to 0.088]
+[covariates only] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.527 (0.355 to 0.708), n = 47 (29 PD)
+    held-out Ju: 0.591 (0.433 to 0.748), n = 54 (29 PD)
+    held-out Si: 0.607 (0.465 to 0.744), n = 64 (35 PD)
+    all out-of-study predictions pooled: 0.498 (0.410 to 0.587)
+    C chosen by the inner cross-validation: Ga held out 0.001, Ju held out 0.001, Si held out 0.001
+
+[gait only] repeated grouped CV:
+    auc: 0.815 (0.754 to 0.876) [repeats 0.791 to 0.827]
+    brier: 0.180 (0.157 to 0.203) [repeats 0.175 to 0.188]
+    balanced_accuracy: 0.750 (0.688 to 0.812) [repeats 0.716 to 0.779]
+    sensitivity: 0.810 (0.712 to 0.908) [repeats 0.767 to 0.856]
+    specificity: 0.691 (0.578 to 0.803) [repeats 0.666 to 0.716]
+[gait only] calibration of the out-of-fold probabilities (one CV repeat), quintiles of predicted probability: mean predicted vs observed PD fraction:
+    n = 33: predicted 0.26, observed 0.18
+    n = 33: predicted 0.43, observed 0.27
+    n = 33: predicted 0.56, observed 0.70
+    n = 33: predicted 0.70, observed 0.79
+    n = 33: predicted 0.87, observed 0.88
+[gait only] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.807 (0.658 to 0.921), n = 47 (29 PD)
+    held-out Ju: 0.777 (0.636 to 0.898), n = 54 (29 PD)
+    held-out Si: 0.720 (0.582 to 0.847), n = 64 (35 PD)
+    all out-of-study predictions pooled: 0.758 (0.680 to 0.829)
+    C chosen by the inner cross-validation: Ga held out 0.1, Ju held out 0.1, Si held out 1
+
+[gait + covariates] repeated grouped CV:
+    auc: 0.800 (0.737 to 0.863) [repeats 0.778 to 0.815]
+    brier: 0.184 (0.160 to 0.209) [repeats 0.177 to 0.193]
+    balanced_accuracy: 0.732 (0.665 to 0.799) [repeats 0.709 to 0.751]
+    sensitivity: 0.801 (0.699 to 0.902) [repeats 0.773 to 0.835]
+    specificity: 0.664 (0.543 to 0.784) [repeats 0.632 to 0.692]
+[gait + covariates] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.812 (0.669 to 0.925), n = 47 (29 PD)
+    held-out Ju: 0.770 (0.631 to 0.891), n = 54 (29 PD)
+    held-out Si: 0.728 (0.591 to 0.851), n = 64 (35 PD)
+    all out-of-study predictions pooled: 0.757 (0.682 to 0.830)
+    C chosen by the inner cross-validation: Ga held out 0.1, Ju held out 0.1, Si held out 1
+
+[gait only] model fitted on all participants (C = 0.316228): odds ratio of PD per 1 SD increase of each input as the model sees it, with a 95% participant-bootstrap interval, and the variance inflation factor (collinearity check; above 5 is a concern):
+    stride_time_mean_s: OR 0.88 (0.59 to 1.30), VIF 1.3
+    stride_time_cv_pct: OR 1.46 (1.04 to 2.10), VIF 1.7
+    swing_time_cv_pct: OR 1.15 (0.81 to 1.74), VIF 2.0
+    swing_pct_mean: OR 0.43 (0.27 to 0.65), VIF 1.7
+    stride_time_asymmetry_pct: OR 1.00 (0.71 to 1.44), VIF 1.2
+    log(1 + swing_time_asymmetry_pct): OR 2.27 (1.61 to 3.50), VIF 1.2
+
+[gait + covariates] model fitted on all participants (C = 0.316228): odds ratio of PD per 1 SD increase of each input as the model sees it, with a 95% participant-bootstrap interval, and the variance inflation factor (collinearity check; above 5 is a concern):
+    stride_time_mean_s: OR 0.85 (0.57 to 1.26), VIF 1.3
+    stride_time_cv_pct: OR 1.46 (1.04 to 2.16), VIF 1.7
+    swing_time_cv_pct: OR 1.09 (0.76 to 1.66), VIF 2.0
+    swing_pct_mean: OR 0.43 (0.27 to 0.64), VIF 1.7
+    stride_time_asymmetry_pct: OR 1.01 (0.70 to 1.45), VIF 1.2
+    log(1 + swing_time_asymmetry_pct): OR 2.34 (1.65 to 3.58), VIF 1.2
+    Age: OR 1.31 (0.91 to 1.92), VIF 1.1
+    sex_male: OR 1.12 (0.82 to 1.59), VIF 1.1
+
+Assumption check, linearity in the logit (unpenalised fit on all participants; likelihood-ratio test for a squared term, 1 df; p below 0.05 suggests a non-linear effect).
+  On the raw inputs:
+    stride_time_mean_s: LR 0.37, p = 0.545
+    stride_time_cv_pct: LR 0.54, p = 0.463
+    swing_time_cv_pct: LR 0.03, p = 0.866
+    swing_pct_mean: LR 0.02, p = 0.898
+    stride_time_asymmetry_pct: LR 0.04, p = 0.850
+    swing_time_asymmetry_pct: LR 8.22, p = 0.004
+    Age: LR 0.21, p = 0.650
+    sex_male: LR -0.00, p = 1.000
+  On the inputs as the model uses them:
+    stride_time_mean_s: LR 0.74, p = 0.390
+    stride_time_cv_pct: LR 0.26, p = 0.613
+    swing_time_cv_pct: LR 0.00, p = 0.998
+    swing_pct_mean: LR 0.07, p = 0.788
+    stride_time_asymmetry_pct: LR 0.00, p = 0.974
+    log(1 + swing_time_asymmetry_pct): LR 0.20, p = 0.655
+    Age: LR 0.01, p = 0.908
+    sex_male: LR 0.00, p = 0.997
