@@ -1,0 +1,54 @@
+Data-quality report on 306 recordings from 165 participants (scripts/check_data_quality.py).
+
+1. Inventory: recordings by study, group and walk number
+walk           1   2   3   4   5   6   7   10
+study group                                  
+Ga    Control  18  14   0   0   0   0   0   6
+      PD       29  25   0   0   0   0   0  21
+Ju    Control  25   0   0   0   0   0   0   0
+      PD       29  13  13  13  13  12  11   0
+Si    Control  29   0   0   0   0   0   0   0
+      PD       35   0   0   0   0   0   0   0
+format.txt documents walk 01 (usual walk) and walk 10 (dual task (serial-7 subtraction), Ga study) only. Walk numbers [2, 3, 4, 5, 6, 7] (114 recordings: 39 in Ga, 75 in Ju) have no documented condition; the Ju ones belong to the cueing protocol of its source paper and the Ga walk 02 is unexplained. The preliminary results use walk 01 only.
+
+2. Recording length (s) by study
+       count    min    50%    max
+study                            
+Ga     113.0   51.2  121.2  121.2
+Ju     129.0   40.3   88.8  263.6
+Si      64.0  121.2  121.2  121.2
+Recordings shorter than 60 s: 21 (GaCo16_10 51 s, JuCo01_01 53 s, JuCo02_01 40 s, JuCo03_01 41 s, JuPt01_02 53 s, JuPt01_03 54 s, JuPt01_04 50 s, JuPt01_05 48 s, JuPt01_06 49 s, JuPt02_01 55 s, JuPt03_01 54 s, JuPt03_02 47 s, JuPt03_03 47 s, JuPt03_04 48 s, JuPt03_05 48 s, JuPt03_06 48 s, JuPt03_07 48 s, JuPt05_01 44 s, JuPt06_04 59 s, JuPt07_01 46 s, JuPt08_01 44 s).
+
+3. Force signals
+Both feet unloaded (both totals at or below 20 N, i.e. a pause or a gap): median 0.00% of samples, maximum 2.32% (GaCo13_10); longest such run 1.01 s. Recordings with a run over 2 s: 0.
+Negative sensor values: 0 samples in 0 recordings. Sensors that never register force: 0 recordings. Largest difference between a per-foot total and the sum of its eight sensors: 0.000 N.
+Peak force per body weight (weight known for 162 participants): median 1.56, range 1.04 to 2.19; outside 0.8 to 2.0: 5 recordings (GaPt12_01, GaPt12_02, JuCo14_01, SiCo12_01, SiPt39_01).
+
+4. Strides under the default rules (20 N, 0.5 to 2.5 s, swing 10 to 70%, 0.7 to 1.3 x median)
+Kept per recording: median 197 (min 55, max 327); removed: median 2.0% of strides, maximum 22.6% (JuPt26_03). Recordings with fewer than 20 kept strides: 0 (none).
+Most strides removed: JuPt26_03 22.6% (30 of 133); JuPt26_04 21.1% (24 of 114); JuPt26_06 19.7% (23 of 117); JuPt26_07 19.3% (17 of 88); GaCo13_10 16.0% (16 of 100).
+
+5. Demographics
+Missing values by group (count of participants):
+         Height  Weight  HoehnYahr  UPDRS  UPDRSM  TUAG  Speed_01  participants
+group                                                                          
+Control       0       1         55     29      29    10         0            73
+PD            3       2          0      2       2     3         1            93
+Participants in demographics.txt without a recording: ['JuCo10'].
+Age by group from demographics.txt (PhysioNet page: 66.3 y for both groups):
+         count  mean  std  min  max
+group                              
+Control     73  63.7  8.6   37   86
+PD          93  66.3  9.5   36   84
+  PD: file mean 66.3 y vs page 66.3 y
+  Control: file mean 63.7 y vs page 66.3 y  <-- differs
+Sex by group: PD: 58 men, 35 women; Control: 40 men, 33 women.
+
+6. Balance and leakage
+Participants with recordings by study and group:
+group  Control  PD
+study             
+Ga          18  29
+Ju          25  29
+Si          29  35
+Recordings per participant: 111 participants have 1, 15 have 2, 26 have 3, 13 have more (max 7). 54 of 165 participants contribute more than one recording, so any split by recording puts the same person on both sides.

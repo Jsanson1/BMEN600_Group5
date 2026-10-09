@@ -1,0 +1,26 @@
+Usual-walk records: 165. Default setting: 20 N with the relative stride rule (0.7 to 1.3 x the record median). AUC = probability that a PD participant has the higher value; p from a two-sided Mann-Whitney test; |change| is per record, against the default.
+
+10 N, relative rule off: 276 strides removed
+    stride_time_mean_s: control 1.1, PD 1.11, AUC 0.55, p 0.25, median |change| 0.0073
+    stride_time_cv_pct: control 7.38, PD 7.84, AUC 0.51, p 0.81, median |change| 3.4
+    swing_time_asymmetry_pct: control 2.52, PD 5.56, AUC 0.67, p 0.00016, median |change| 1.51
+10 N, relative rule on : 663 strides removed
+    stride_time_mean_s: control 1.08, PD 1.1, AUC 0.56, p 0.19, median |change| 0.000562
+    stride_time_cv_pct: control 3.8, PD 4.22, AUC 0.61, p 0.014, median |change| 0.157
+    swing_time_asymmetry_pct: control 2.75, PD 5.62, AUC 0.67, p 0.00021, median |change| 1.78
+20 N, relative rule off: 154 strides removed
+    stride_time_mean_s: control 1.09, PD 1.11, AUC 0.56, p 0.18, median |change| 0.00688
+    stride_time_cv_pct: control 7.31, PD 7.64, AUC 0.56, p 0.18, median |change| 2.44
+    swing_time_asymmetry_pct: control 1.81, PD 5.31, AUC 0.75, p 5e-08, median |change| 0.132
+20 N, relative rule on : 523 strides removed
+    stride_time_mean_s: control 1.08, PD 1.11, AUC 0.56, p 0.2, median |change| 0
+    stride_time_cv_pct: control 4.07, PD 4.47, AUC 0.60, p 0.026, median |change| 0
+    swing_time_asymmetry_pct: control 1.73, PD 5.31, AUC 0.76, p 1.5e-08, median |change| 0
+50 N, relative rule off: 86 strides removed
+    stride_time_mean_s: control 1.08, PD 1.11, AUC 0.57, p 0.15, median |change| 0.00432
+    stride_time_cv_pct: control 5.48, PD 6.3, AUC 0.65, p 0.001, median |change| 1.71
+    swing_time_asymmetry_pct: control 1.42, PD 4.11, AUC 0.72, p 1.2e-06, median |change| 1.09
+50 N, relative rule on : 441 strides removed
+    stride_time_mean_s: control 1.08, PD 1.11, AUC 0.56, p 0.2, median |change| 0.000439
+    stride_time_cv_pct: control 4.24, PD 4.59, AUC 0.59, p 0.041, median |change| 0.129
+    swing_time_asymmetry_pct: control 1.41, PD 4.09, AUC 0.73, p 2.6e-07, median |change| 0.975
