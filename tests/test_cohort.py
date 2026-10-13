@@ -68,3 +68,4 @@ def test_cohort_manifest_and_flow(tmp_path):
         "Analysed: 1 (1 PD, 0 control), with 2 recordings, of which 1 usual walks"
         in flow
     )
+    assert "Analysed participants with more than one recording: 1." in flow

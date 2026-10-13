@@ -80,4 +80,6 @@ def cohort_flow(data_dir: str | Path) -> list[str]:
         + ".",
         f"Analysed: {by_group(kept)}, with {len(kept_records)} recordings, of which "
         f"{int((kept_records['walk'] == 1).sum())} usual walks.",
+        f"Analysed participants with more than one recording: "
+        f"{int((kept_records.groupby('participant').size() > 1).sum())}.",
     ]

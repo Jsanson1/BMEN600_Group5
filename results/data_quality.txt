@@ -58,3 +58,4 @@ Participants in demographics.txt: 166 (93 PD, 73 control).
 Without a record file: JuCo10. With at least one recording: 165 (93 PD, 72 control).
 Under 50 or age missing, left out (DECISIONS.md D-006): JuPt25 (PD, 45 y), SiCo12 (Control, 37 y), SiPt24 (PD, 36 y).
 Analysed: 162 (91 PD, 71 control), with 303 recordings, of which 162 usual walks.
+Analysed participants with more than one recording: 54.
