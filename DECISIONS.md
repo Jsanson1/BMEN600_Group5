@@ -41,3 +41,9 @@ Status: Proposed by Jamie. To be confirmed at the next meeting.
 - All midterm analyses use the PhysioNet "Gait in Parkinson's Disease" database v1.0.0 (open access, no account, downloaded). One independent case is one participant; participants contribute 1 to 7 recordings and are never split across training and test folds.
 - WearGait-PD (Synapse, account required) is named in the plan as an external test set "if time allows". Nobody starts on it before the midterm is submitted.
 - The README's "GaitPDB" link points at a Nature Health comment about PhysioNet, not at the dataset; it is corrected under T-008.
+
+### D-006 · 2026-10-13 · Participants under 50 are excluded from both datasets
+Status: Accepted (group decision, reported by Jamie on 13 October)
+- Every analysis uses only participants aged 50 or over, by the age in each dataset's demographic table, in the PhysioNet database and in WearGait-PD. The plan's intended use is screening people over 50 (Midterm Research Plan, section 1).
+- PhysioNet: this removes JuPt25, SiPt24 and SiCo12 (aged 45, 36 and 37). The analysed cohort is the 162 participants aged 50 or over who have a usual-walk recording: 91 with PD and 71 controls. WearGait-PD: the counts are checked once its participant table is downloaded.
+- The rule lives in one place in the shared code (T-029), so every model, table and figure uses the same participants.

@@ -43,16 +43,16 @@ owner: jamie | status: done | branch: - | due: 2026-10-05 | updated: 2026-10-05
 owner: group | status: decide | branch: - | due: 2026-10-05 | updated: 2026-10-02
 
 ### T-007 · Set up the project structure: folders, requirements.txt, data/raw/README.md with the download steps (after T-002)
-owner: jamie | status: review | branch: jamie/T-007-project-structure | due: 2026-10-09 | updated: 2026-10-05
+owner: jamie | status: done | branch: jamie/T-007-project-structure | due: 2026-10-09 | updated: 2026-10-13
 
 ### T-008 · README front page: research question, dataset access, file map, how to run (graded; after T-007)
-owner: jamie | status: review | branch: jamie/T-008-readme-front-page | due: 2026-10-12 | updated: 2026-10-06
+owner: jamie | status: done | branch: jamie/T-008-readme-front-page | due: 2026-10-12 | updated: 2026-10-13
 
 ### T-009 · Midterm §2 Background and Research Gap: literature review, existing ML approaches and their limits, the gap (lead jamie, reviewer anna; mirrors the Project Timeline sheet)
-owner: jamie | status: review | branch: jamie/T-009-background-gap | due: 2026-10-09 | updated: 2026-10-05
+owner: jamie | status: doing | branch: jamie/T-009-background-gap | due: 2026-10-15 | updated: 2026-10-13
 
 ### T-010 · Midterm §5 Preliminary Results: at least one team-made table or figure from the dataset, what it shows, what it changes (lead jamie, reviewer anna)
-owner: jamie | status: review | branch: jamie/T-010-preliminary-results | due: 2026-10-09 | updated: 2026-10-05
+owner: jamie | status: doing | branch: jamie/T-010-preliminary-results | due: 2026-10-15 | updated: 2026-10-13
 
 ### T-011 · Midterm §1 Introduction and Motivation: the research question and its rationale (lead anna, reviewer jamie)
 owner: anna | status: todo | branch: - | due: 2026-10-09 | updated: 2026-10-05
@@ -85,7 +85,7 @@ owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
 owner: anna | status: todo | branch: - | due: - | updated: 2026-10-05
 
 ### T-021 · Project: logistic regression: fit, check assumptions, report coefficients and performance (lead jamie)
-owner: jamie | status: review | branch: jamie/T-021-logistic-regression | due: 2026-10-23 | updated: 2026-10-06
+owner: jamie | status: done | branch: jamie/T-021-logistic-regression | due: 2026-10-23 | updated: 2026-10-13
 
 ### T-022 · Project: compare the three models: shared splits and metrics, comparison tables and figures, statistical comparison where appropriate (lead jamie, collaborators all; after T-019, T-020, T-021)
 owner: jamie | status: doing | branch: jamie/T-022-model-comparison | due: 2026-11-06 | updated: 2026-10-06
@@ -100,10 +100,13 @@ owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
 owner: jamie | status: blocked | branch: jamie/T-025-weargait-access | due: 2026-10-14 | updated: 2026-10-06
 
 ### T-026 · Data-quality report on the PhysioNet records for §3: missing demographics, recording lengths, pauses and gaps in the force signals, class and study balance (Jamie's reviewer part of T-012 per the Project Timeline sheet; after T-010)
-owner: jamie | status: review | branch: jamie/T-026-data-quality | due: 2026-10-08 | updated: 2026-10-06
+owner: jamie | status: done | branch: jamie/T-026-data-quality | due: 2026-10-08 | updated: 2026-10-13
 
 ### T-027 · Unit tests for the shared code (event detection, stride rules, demographics parsing, participant-grouped splits) so later changes by any member cannot silently break the pipeline (after T-010, T-021)
-owner: jamie | status: review | branch: jamie/T-027-unit-tests | due: 2026-10-09 | updated: 2026-10-06
+owner: jamie | status: done | branch: jamie/T-027-unit-tests | due: 2026-10-09 | updated: 2026-10-13
 
 ### T-028 · Assembly helper for the midterm PDF: renumber the S-citations into IEEE order of first citation and emit the reference list from sources.md (part of T-015; after T-009)
-owner: jamie | status: review | branch: jamie/T-028-assembly-helper | due: 2026-10-14 | updated: 2026-10-06
+owner: jamie | status: done | branch: jamie/T-028-assembly-helper | due: 2026-10-14 | updated: 2026-10-13
+
+### T-029 · Apply the group's age rule (D-006: participants under 50 excluded) once in the shared code, rerun every output, update the README and the §5 numbers
+owner: jamie | status: doing | branch: jamie/T-029-age-restriction | due: 2026-10-14 | updated: 2026-10-13
