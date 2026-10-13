@@ -7,7 +7,9 @@ participant, with a ``meets_age_rule`` column; the models read it through
 gaitpdb.evaluation.load_feature_table, which keeps the analysed participants),
 results/features_usual_walk_by_group.csv (median per group, AUC and Mann-Whitney
 p for every feature, analysed participants) and results/figure1_summary.txt with
-the numbers quoted in the text.
+the numbers quoted in the text. The figure is saved twice: three panels in a row
+(figures/figure1_events_and_variability.*, for the README) and stacked to fit one
+column of the two-column report (figures/figure1_column.*).
 
     python scripts/make_figure1.py [--data data/raw/gaitpdb] [--example GaCo01_01]
 """
@@ -48,7 +50,15 @@ COLORS = {"Control": "#3b6ea5", "PD": "#c8552d"}
 
 
 def panel_trace(
-    ax, df: pd.DataFrame, record: str, t0: float = 20.0, t1: float = 28.0
+    ax,
+    df: pd.DataFrame,
+    record: str,
+    t0: float = 20.0,
+    t1: float = 28.0,
+    title: str | None = None,
+    title_size: float = 10,
+    legend_size: float = 8,
+    ms: float = 5,
 ) -> None:
     sel = (df["time_s"] >= t0) & (df["time_s"] <= t1)
     t = df.loc[sel, "time_s"]
@@ -67,7 +77,7 @@ def panel_trace(
             np.full(len(hs), -40.0 if foot == "left" else -80.0),
             "^",
             color=color,
-            ms=5,
+            ms=ms,
         )
         ax.plot(
             to,
@@ -75,20 +85,28 @@ def panel_trace(
             "v",
             color=color,
             mfc="white",
-            ms=5,
+            ms=ms,
         )
     ax.set_xlabel("Time (s)")
     ax.set_ylabel("Vertical force (N)")
     ax.set_title(
-        f"A. Total force per foot, record {record}; ▲ heel strike, ▽ toe off",
+        title or f"A. Total force per foot, record {record}; ▲ heel strike, ▽ toe off",
         loc="left",
-        fontsize=10,
+        fontsize=title_size,
     )
-    ax.legend(loc="upper center", ncol=2, frameon=False, fontsize=8)
+    ax.legend(loc="upper center", ncol=2, frameon=False, fontsize=legend_size)
     ax.set_ylim(-110, 1450)
 
 
-def panel_strip(ax, feats: pd.DataFrame, column: str, ylabel: str, title: str) -> dict:
+def panel_strip(
+    ax,
+    feats: pd.DataFrame,
+    column: str,
+    ylabel: str,
+    title: str,
+    title_size: float = 10,
+    ms: float = 4,
+) -> dict:
     """One jittered point per participant, with the group median as a bar."""
     out = {}
     positions = {"Control": 0, "PD": 1}
@@ -96,14 +114,67 @@ def panel_strip(ax, feats: pd.DataFrame, column: str, ylabel: str, title: str) -
         y = feats.loc[feats["group"] == group, column].dropna()
         out[group] = y
         jitter = (np.random.default_rng(0).random(len(y)) - 0.5) * 0.25
-        ax.plot(x + jitter, y, "o", color=COLORS[group], alpha=0.55, ms=4)
+        ax.plot(x + jitter, y, "o", color=COLORS[group], alpha=0.55, ms=ms)
         ax.hlines(y.median(), x - 0.2, x + 0.2, color="black", lw=2)
     ax.set_xticks(
         [0, 1], [f"Control (n={len(out['Control'])})", f"PD (n={len(out['PD'])})"]
     )
     ax.set_ylabel(ylabel)
-    ax.set_title(title, loc="left", fontsize=10)
+    ax.set_title(title, loc="left", fontsize=title_size)
     return out
+
+
+COLUMN_STYLE = {
+    "font.size": 7,
+    "axes.labelsize": 7,
+    "xtick.labelsize": 6.5,
+    "ytick.labelsize": 6.5,
+    "axes.linewidth": 0.6,
+    "xtick.major.width": 0.6,
+    "ytick.major.width": 0.6,
+}
+
+
+def column_figure(ex: pd.DataFrame, record: str, feats: pd.DataFrame, fig_dir: Path):
+    """The same three panels stacked to fit one column (3.5 in) of a two-column paper."""
+    with plt.rc_context(COLUMN_STYLE):
+        fig = plt.figure(figsize=(3.5, 3.7))
+        grid = fig.add_gridspec(
+            2, 2, height_ratios=[1.0, 1.15], hspace=0.55, wspace=0.55
+        )
+        panel_trace(
+            fig.add_subplot(grid[0, :]),
+            ex,
+            record,
+            t0=20.0,
+            t1=26.0,
+            title="A",
+            title_size=7.5,
+            legend_size=6.5,
+            ms=3.5,
+        )
+        panel_strip(
+            fig.add_subplot(grid[1, 0]),
+            feats,
+            "stride_time_cv_pct",
+            "Stride-time CV (%)",
+            "B",
+            title_size=7.5,
+            ms=2.5,
+        )
+        panel_strip(
+            fig.add_subplot(grid[1, 1]),
+            feats,
+            "swing_time_asymmetry_pct",
+            "Swing-time asymmetry (%)",
+            "C",
+            title_size=7.5,
+            ms=2.5,
+        )
+        fig.subplots_adjust(left=0.15, right=0.98, top=0.94, bottom=0.08)
+        fig.savefig(fig_dir / "figure1_column.png", dpi=600)
+        fig.savefig(fig_dir / "figure1_column.pdf")
+    plt.close(fig)
 
 
 def compare_groups(feats: pd.DataFrame) -> pd.DataFrame:
@@ -235,6 +306,8 @@ def main() -> None:
     fig.tight_layout()
     fig.savefig(fig_dir / "figure1_events_and_variability.png", dpi=200)
     fig.savefig(fig_dir / "figure1_events_and_variability.pdf")
+    plt.close(fig)
+    column_figure(ex, parse_record_name(ex_path).record, feats, fig_dir)
 
     def row(col: str) -> pd.Series:
         return by_group.set_index("feature").loc[col]
