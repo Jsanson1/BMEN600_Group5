@@ -1,27 +1,28 @@
-Usual-walk records: 165 (93 PD, 72 control)
+Usual-walk records: 165 (93 PD, 72 control); analysed, aged 50 or over (DECISIONS.md D-006): 162 (91 PD, 71 control). Everything below is on the analysed participants.
+Age, years, mean (SD): control 64.1 (8.2), PD 66.9 (8.8); Mann-Whitney p = 0.028
 Records with fewer than 3 kept strides on a foot (features NaN): 0
-Strides removed as outliers, total: 523 of 32444
-Stride-time CV, median (IQR): control 4.07 (3.30–4.92) %, PD 4.47 (3.93–5.01) %; AUC 0.60, Mann-Whitney p = 0.026
-Swing-time asymmetry, median (IQR): control 1.73 (0.67–3.92) %, PD 5.31 (3.05–8.22) %; AUC 0.76, Mann-Whitney p = 1.5e-08
-Stride time, mean (SD): control 1.092 (0.086) s, PD 1.117 (0.122) s
-Swing %, mean (SD): control 35.6 (1.8), PD 33.5 (2.7)
-Cadence, strides/min, mean (SD): control 53.7 (4.2), PD 52.3 (5.1)
-Walking speed on this walk from demographics.txt (Speed_01), m/s, mean (SD): control 1.24 (0.16), PD 1.03 (0.21); n with a value: 164
+Strides removed as outliers, total: 512 of 31809
+Stride-time CV, median (IQR): control 4.07 (3.32–4.94) %, PD 4.47 (3.94–5.00) %; AUC 0.60, Mann-Whitney p = 0.037
+Swing-time asymmetry, median (IQR): control 1.72 (0.65–3.81) %, PD 5.28 (2.95–7.98) %; AUC 0.76, Mann-Whitney p = 1.1e-08
+Stride time, mean (SD): control 1.094 (0.084) s, PD 1.117 (0.123) s
+Swing %, mean (SD): control 35.6 (1.7), PD 33.5 (2.7)
+Cadence, strides/min, mean (SD): control 53.5 (4.0), PD 52.3 (5.1)
+Walking speed on this walk from demographics.txt (Speed_01), m/s, mean (SD): control 1.23 (0.16), PD 1.03 (0.21); n with a value: 161
 Example record in panel A: GaCo01_01
 
 Age checks (controls are younger on average), age band 60 to 80:
-  stride_time_cv_pct: rho with age Control +0.28 (p 0.019); rho with age PD +0.18 (p 0.082); within the band (n 50 control, 63 PD): AUC 0.58, p 0.15
-  swing_time_asymmetry_pct: rho with age Control -0.09 (p 0.48); rho with age PD -0.07 (p 0.5); within the band (n 50 control, 63 PD): AUC 0.75, p 6.7e-06
-  swing_pct_mean: rho with age Control +0.21 (p 0.071); rho with age PD -0.26 (p 0.013); within the band (n 50 control, 63 PD): AUC 0.23, p 8.2e-07
+  stride_time_cv_pct: rho with age Control +0.26 (p 0.026); rho with age PD +0.20 (p 0.057); within the band (n 50 control, 63 PD): AUC 0.58, p 0.15
+  swing_time_asymmetry_pct: rho with age Control -0.05 (p 0.7); rho with age PD -0.01 (p 0.89); within the band (n 50 control, 63 PD): AUC 0.75, p 6.7e-06
+  swing_pct_mean: rho with age Control +0.18 (p 0.13); rho with age PD -0.25 (p 0.019); within the band (n 50 control, 63 PD): AUC 0.23, p 8.2e-07
 
-All features, usual walk, one row per participant (AUC > 0.5 means higher in PD):
+All features, usual walk, one row per analysed participant (AUC > 0.5 means higher in PD):
                   feature  control_median  pd_median  auc_pd_higher  p_mann_whitney  n_control  n_pd
- swing_time_asymmetry_pct            1.73       5.31          0.757        1.53e-08         72    93
-           swing_pct_mean            35.6       33.9          0.255         7.5e-08         72    93
-        swing_time_cv_pct            7.45       9.04          0.672         0.00015         72    93
-       stance_time_mean_s           0.693      0.723          0.628         0.00497         72    93
-        swing_time_mean_s           0.387       0.37          0.386          0.0122         72    93
-       stride_time_cv_pct            4.07       4.47          0.601          0.0259         72    93
-  cadence_strides_per_min            53.9       52.6          0.428           0.114         72    93
-       stride_time_mean_s            1.08       1.11          0.559           0.197         72    93
-stride_time_asymmetry_pct           0.166       0.16          0.494           0.894         72    93
+ swing_time_asymmetry_pct            1.72       5.28          0.762        1.13e-08         71    91
+           swing_pct_mean            35.7       33.9          0.244        2.53e-08         71    91
+        swing_time_cv_pct             7.3       9.04          0.678        0.000107         71    91
+        swing_time_mean_s           0.387      0.369          0.373         0.00579         71    91
+       stance_time_mean_s           0.693      0.723          0.621         0.00817         71    91
+       stride_time_cv_pct            4.07       4.47          0.595          0.0374         71    91
+  cadence_strides_per_min            53.8         53          0.437           0.167         71    91
+       stride_time_mean_s            1.09        1.1          0.549           0.285         71    91
+stride_time_asymmetry_pct           0.171      0.158          0.485           0.748         71    91

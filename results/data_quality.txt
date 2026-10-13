@@ -52,3 +52,9 @@ Ga          18  29
 Ju          25  29
 Si          29  35
 Recordings per participant: 111 participants have 1, 15 have 2, 26 have 3, 13 have more (max 7). 54 of 165 participants contribute more than one recording, so any split by recording puts the same person on both sides.
+
+7. Age rule (DECISIONS.md D-006): who the analyses use
+Participants in demographics.txt: 166 (93 PD, 73 control).
+Without a record file: JuCo10. With at least one recording: 165 (93 PD, 72 control).
+Under 50 or age missing, left out (DECISIONS.md D-006): JuPt25 (PD, 45 y), SiCo12 (Control, 37 y), SiPt24 (PD, 36 y).
+Analysed: 162 (91 PD, 71 control), with 303 recordings, of which 162 usual walks.

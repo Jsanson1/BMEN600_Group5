@@ -1,9 +1,9 @@
-Study,Group,Participants (demographics),Participants with recordings,Recordings,Recordings per participant,"Recording length, s","Age, years","Women, n",Hoehn and Yahr,UPDRS motor
-Ga: dual task,PD,29,29,75,3 (1–3),121 (121–121),71.1 ± 8.1,9,2 (2–3),17.9 ± 8.4
-Ga: dual task,Control,18,18,38,2 (1–3),121 (51–121),71.6 ± 6.7,8,,
-Ju: auditory cueing,PD,29,29,104,1 (1–7),90 (44–264),67.2 ± 9.1,13,2.5 (2–3),15.8 ± 4.5
-Ju: auditory cueing,Control,26,25,25,1 (1–1),85 (40–115),64.6 ± 6.8,14,,
-Si: treadmill study,PD,35,35,35,1 (1–1),121 (121–121),61.6 ± 8.9,13,2 (2–2.5),23.7 ± 7.2
-Si: treadmill study,Control,29,29,29,1 (1–1),121 (121–121),57.9 ± 7.0,11,,
-All,PD,93,93,214,1 (1–7),121 (44–264),66.3 ± 9.5,35,2 (2–3),19.3 ± 7.7
-All,Control,73,72,92,1 (1–3),121 (40–121),63.7 ± 8.6,33,,
+Study,Group,Participants,Recordings,Recordings per participant,"Recording length, s","Age, years","Women, n",Hoehn and Yahr,UPDRS motor
+Ga: dual task,PD,29,75,3 (1–3),121 (121–121),71.1 ± 8.1,9,2 (2–3),17.9 ± 8.4
+Ga: dual task,Control,18,38,2 (1–3),121 (51–121),71.6 ± 6.7,8,,
+Ju: auditory cueing,PD,28,103,1.5 (1–7),90 (44–264),68.0 ± 8.2,13,2.5 (2–3),15.9 ± 4.6
+Ju: auditory cueing,Control,25,25,1 (1–1),85 (40–115),64.7 ± 7.0,13,,
+Si: treadmill study,PD,34,34,1 (1–1),121 (121–121),62.3 ± 7.8,12,2 (2–2.5),23.9 ± 7.2
+Si: treadmill study,Control,28,28,1 (1–1),121 (121–121),58.7 ± 5.8,10,,
+All,PD,91,212,1 (1–7),121 (44–264),66.9 ± 8.8,34,2 (2–3),19.4 ± 7.7
+All,Control,71,91,1 (1–3),121 (40–121),64.1 ± 8.2,31,,

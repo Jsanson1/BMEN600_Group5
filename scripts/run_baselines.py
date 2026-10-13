@@ -10,7 +10,9 @@
   people the fit has not seen. This shows which features carry the separation,
   and how much the multivariable models add to the best of them.
 
-Reads results/features_usual_walk.csv (made by scripts/make_figure1.py) and
+Reads results/features_usual_walk.csv (made by scripts/make_figure1.py) through
+gaitpdb.evaluation.load_feature_table, which keeps the participants aged 50 or
+over (DECISIONS.md D-006), and
 writes results/baselines_summary.txt and results/baselines_folds.csv,
 results/baselines_cv_predictions.csv and results/baselines_loso_predictions.csv
 (the files scripts/compare_models.py reads).
@@ -31,6 +33,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from gaitpdb.cohort import MIN_AGE_YEARS  # noqa: E402
 from gaitpdb.evaluation import (  # noqa: E402
     MODEL_FEATURES,
     N_REPEATS,
@@ -81,8 +84,8 @@ def main() -> None:
 
     outputs = []
     lines = [
-        f"Baselines on {len(df)} participants ({int(df['y'].sum())} PD, "
-        f"{int((1 - df['y']).sum())} controls), one usual-walk recording each, under the "
+        f"Baselines on {len(df)} participants aged {MIN_AGE_YEARS} or over ({int(df['y'].sum())} PD, "
+        f"{int((1 - df['y']).sum())} controls; DECISIONS.md D-006), one usual-walk recording each, under the "
         f"same splits as the models ({N_SPLITS}-fold participant-grouped cross-validation "
         f"repeated {N_REPEATS} times; leave-one-study-out).",
         "Cross-validation: mean over the test folds with the corrected 95% interval "

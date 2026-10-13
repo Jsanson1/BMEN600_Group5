@@ -1,10 +1,13 @@
 """Figure 1: detected gait events on one recording, then stride-time
-variability and swing-time asymmetry by group across all usual-walk recordings.
+variability and swing-time asymmetry by group across the usual walks of the
+analysed participants (aged 50 or over, DECISIONS.md D-006).
 
-Also writes results/features_usual_walk.csv (one row per usual-walk record),
-results/features_usual_walk_by_group.csv (median per group, AUC and
-Mann-Whitney p for every feature) and results/figure1_summary.txt with the
-numbers quoted in the text.
+Also writes results/features_usual_walk.csv (one row per usual-walk record, every
+participant, with a ``meets_age_rule`` column; the models read it through
+gaitpdb.evaluation.load_feature_table, which keeps the analysed participants),
+results/features_usual_walk_by_group.csv (median per group, AUC and Mann-Whitney
+p for every feature, analysed participants) and results/figure1_summary.txt with
+the numbers quoted in the text.
 
     python scripts/make_figure1.py [--data data/raw/gaitpdb] [--example GaCo01_01]
 """
@@ -30,10 +33,12 @@ from scipy import stats  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gaitpdb import (  # noqa: E402
     FEATURE_COLUMNS,
+    MIN_AGE_YEARS,
     build_manifest,
     find_data_dir,
     load_demographics,
     load_record,
+    meets_age_rule,
     parse_record_name,
     record_features,
     stride_table,
@@ -172,16 +177,14 @@ def main() -> None:
 
     manifest = build_manifest(data_dir)
     usual = manifest[manifest["walk"] == 1].copy()
-    demo_path = data_dir / "demographics.txt"
-    if demo_path.exists():
-        demo = load_demographics(data_dir)[
-            ["ID", "Age", "sex", "HoehnYahr", "UPDRSM", "Speed_01"]
-        ]
-    else:
-        print("warning: demographics.txt not found; no age, sex or severity columns")
-        demo = pd.DataFrame(
-            columns=["ID", "Age", "sex", "HoehnYahr", "UPDRSM", "Speed_01"]
+    if not (data_dir / "demographics.txt").exists():
+        raise SystemExit(
+            "demographics.txt not found: the age rule (DECISIONS.md D-006) needs "
+            "every participant's age"
         )
+    demo = load_demographics(data_dir)[
+        ["ID", "Age", "sex", "HoehnYahr", "UPDRSM", "Speed_01"]
+    ]
 
     rows = []
     for _, r in usual.iterrows():
@@ -194,12 +197,15 @@ def main() -> None:
             group=r["group"],
         )
         rows.append(ft)
-    feats = (
+    every = (
         pd.DataFrame(rows)
         .merge(demo, left_on="participant", right_on="ID", how="left")
         .drop(columns="ID")
     )
-    feats.to_csv(out / "features_usual_walk.csv", index=False)
+    every["meets_age_rule"] = meets_age_rule(every["Age"])
+    every.to_csv(out / "features_usual_walk.csv", index=False)
+    # Everything below describes the analysed participants only.
+    feats = every[every["meets_age_rule"]].reset_index(drop=True)
     by_group = compare_groups(feats)
     by_group.to_csv(out / "features_usual_walk_by_group.csv", index=False)
 
@@ -237,7 +243,12 @@ def main() -> None:
     co, pd_ = cv["Control"], cv["PD"]
     aco, apd = asym["Control"], asym["PD"]
     lines = [
-        f"Usual-walk records: {len(feats)} ({(feats['group'] == 'PD').sum()} PD, {(feats['group'] == 'Control').sum()} control)",
+        f"Usual-walk records: {len(every)} ({(every['group'] == 'PD').sum()} PD, {(every['group'] == 'Control').sum()} control); "
+        f"analysed, aged {MIN_AGE_YEARS} or over (DECISIONS.md D-006): {len(feats)} ({(feats['group'] == 'PD').sum()} PD, "
+        f"{(feats['group'] == 'Control').sum()} control). Everything below is on the analysed participants.",
+        f"Age, years, mean (SD): control {feats.loc[feats.group == 'Control', 'Age'].mean():.1f} ({feats.loc[feats.group == 'Control', 'Age'].std():.1f}), "
+        f"PD {feats.loc[feats.group == 'PD', 'Age'].mean():.1f} ({feats.loc[feats.group == 'PD', 'Age'].std():.1f}); "
+        f"Mann-Whitney p = {stats.mannwhitneyu(feats.loc[feats.group == 'PD', 'Age'], feats.loc[feats.group == 'Control', 'Age'], alternative='two-sided').pvalue:.2g}",
         f"Records with fewer than 3 kept strides on a foot (features NaN): {int(feats['stride_time_cv_pct'].isna().sum())}",
         f"Strides removed as outliers, total: {int(feats['n_strides_removed'].sum())} of {int((feats['n_strides_left'] + feats['n_strides_right'] + feats['n_strides_removed']).sum())}",
         f"Stride-time CV, median (IQR): control {co.median():.2f} ({co.quantile(0.25):.2f}–{co.quantile(0.75):.2f}) %, PD {pd_.median():.2f} ({pd_.quantile(0.25):.2f}–{pd_.quantile(0.75):.2f}) %; AUC {cv_row['auc_pd_higher']:.2f}, Mann-Whitney p = {cv_row['p_mann_whitney']:.2g}",
@@ -250,7 +261,7 @@ def main() -> None:
         "",
         *age_checks(feats),
         "",
-        "All features, usual walk, one row per participant (AUC > 0.5 means higher in PD):",
+        "All features, usual walk, one row per analysed participant (AUC > 0.5 means higher in PD):",
         by_group.to_string(index=False, float_format=lambda v: f"{v:.3g}"),
     ]
     (out / "figure1_summary.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")

@@ -47,6 +47,7 @@ import pandas as pd  # noqa: E402
 from sklearn.metrics import roc_auc_score  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from gaitpdb.cohort import MIN_AGE_YEARS  # noqa: E402
 from gaitpdb.evaluation import (  # noqa: E402
     METRICS,
     STUDIES,
@@ -264,8 +265,9 @@ def p_text(p: float) -> str:
 
 def write_text(table, pairs_table, n, n_pd, reference, path: Path) -> str:
     lines = [
-        f"Model comparison on the usual walk: {n} participants ({n_pd} PD, {n - n_pd} controls), "
-        "one recording each, identical splits for every model (checked fold by fold).",
+        f"Model comparison on the usual walk: {n} participants aged {MIN_AGE_YEARS} or over ({n_pd} PD, "
+        f"{n - n_pd} controls; DECISIONS.md D-006), one recording each, identical splits for "
+        "every model (checked fold by fold).",
         "Within protocol: 5-fold participant-grouped cross-validation repeated 20 times; mean "
         "over the 100 test folds, 95% interval corrected for the overlap between training sets "
         "(Nadeau and Bengio 2003). Across protocols: each sub-study held out in turn, the model "
