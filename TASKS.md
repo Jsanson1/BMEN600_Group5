@@ -49,10 +49,10 @@ owner: jamie | status: done | branch: jamie/T-007-project-structure | due: 2026-
 owner: jamie | status: done | branch: jamie/T-008-readme-front-page | due: 2026-10-12 | updated: 2026-10-13
 
 ### T-009 · Midterm §2 Background and Research Gap: literature review, existing ML approaches and their limits, the gap (lead jamie, reviewer anna; mirrors the Project Timeline sheet)
-owner: jamie | status: doing | branch: jamie/T-009-background-gap | due: 2026-10-15 | updated: 2026-10-13
+owner: jamie | status: doing | branch: jamie/T-029-age-restriction | due: 2026-10-15 | updated: 2026-10-14
 
 ### T-010 · Midterm §5 Preliminary Results: at least one team-made table or figure from the dataset, what it shows, what it changes (lead jamie, reviewer anna)
-owner: jamie | status: doing | branch: jamie/T-010-preliminary-results | due: 2026-10-15 | updated: 2026-10-13
+owner: jamie | status: doing | branch: jamie/T-029-age-restriction | due: 2026-10-15 | updated: 2026-10-14
 
 ### T-011 · Midterm §1 Introduction and Motivation: the research question and its rationale (lead anna, reviewer jamie)
 owner: anna | status: todo | branch: - | due: 2026-10-09 | updated: 2026-10-05
@@ -109,4 +109,7 @@ owner: jamie | status: done | branch: jamie/T-027-unit-tests | due: 2026-10-09 |
 owner: jamie | status: done | branch: jamie/T-028-assembly-helper | due: 2026-10-14 | updated: 2026-10-13
 
 ### T-029 · Apply the group's age rule (D-006: participants under 50 excluded) once in the shared code, rerun every output, update the README and the §5 numbers
-owner: jamie | status: doing | branch: jamie/T-029-age-restriction | due: 2026-10-14 | updated: 2026-10-13
+owner: jamie | status: review | branch: jamie/T-029-age-restriction | due: 2026-10-15 | updated: 2026-10-14
+
+### T-030 · Decide the evaluation design and record it (supersedes D-005): the two datasets combined in participant-grouped cross-validation, plus training on one dataset and testing on the other, plus the dataset-of-origin check; §2, §4 and §5 of the midterm assume it
+owner: group | status: decide | branch: - | due: 2026-10-15 | updated: 2026-10-14
