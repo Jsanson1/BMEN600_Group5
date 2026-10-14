@@ -1,4 +1,9 @@
-Participants in demographics.txt without a record file: ['JuCo10']
+Participants in demographics.txt: 166 (93 PD, 73 control).
+Without a record file: JuCo10. With at least one recording: 165 (93 PD, 72 control).
+Under 50 or age missing, left out (DECISIONS.md D-006): JuPt25 (PD, 45 y), SiCo12 (Control, 37 y), SiPt24 (PD, 36 y).
+Analysed: 162 (91 PD, 71 control), with 303 recordings, of which 162 usual walks.
+Analysed participants with more than one recording: 54.
 Record files without a demographics row: none
-Total record files: 306; total participants with recordings: 165
-Ages missing: 0; Hoehn and Yahr missing among PD: 0
+Whole database: 306 record files from 165 participants.
+Ages missing: 0; Hoehn and Yahr missing among the analysed PD participants: 0
+UPDRS motor missing among the analysed PD participants: SiPt02, SiPt07

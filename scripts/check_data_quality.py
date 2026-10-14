@@ -13,7 +13,11 @@ What it checks, record by record and for the demographics file:
 * demographics: missing values by column and group, participants without a
   recording, and the mean ages against the PhysioNet description;
 * balance: participants and recordings per group and study, recordings per
-  participant (the leakage risk for any split by recording).
+  participant (the leakage risk for any split by recording);
+* the age rule: who is left out of the analyses (DECISIONS.md D-006) and how
+  many participants remain.
+
+Everything except the last item describes the whole database, every file.
 
 Writes results/data_quality.txt (the report) and results/data_quality_records.csv
 (one row per recording).
@@ -34,6 +38,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gaitpdb import (  # noqa: E402
     DEFAULT_THRESHOLD_N,
     build_manifest,
+    cohort_flow,
     find_data_dir,
     load_demographics,
     load_record,
@@ -241,6 +246,9 @@ def main() -> None:
         f"{int((rpp > 1).sum())} of {len(rpp)} participants contribute more than one recording, so any split by "
         "recording puts the same person on both sides."
     )
+    L.append("")
+    L.append("7. Age rule (DECISIONS.md D-006): who the analyses use")
+    L.extend(cohort_flow(data_dir))
     text = "\n".join(L) + "\n"
     (out / "data_quality.txt").write_text(text, encoding="utf-8")
     print(text)

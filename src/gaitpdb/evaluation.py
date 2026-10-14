@@ -6,6 +6,9 @@ has never seen. This module fixes that evaluation once so the three models
 (logistic regression, support vector machine, random forest) are compared on
 exactly the same participants, splits, features and metrics.
 
+* ``load_feature_table`` reads the feature table and keeps the participants
+  aged 50 or over (``gaitpdb.cohort``, DECISIONS.md D-006), so every model sees
+  the same people.
 * ``MODEL_FEATURES`` are the gait features a model may use, one row per
   participant (the usual walk). ``COVARIATES`` are age and sex, which the
   groups differ on. Study is never a feature, because the cross-protocol
@@ -60,6 +63,8 @@ from sklearn.metrics import balanced_accuracy_score, brier_score_loss, roc_auc_s
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.preprocessing import FunctionTransformer
 
+from .cohort import MIN_AGE_YEARS, meets_age_rule
+
 MODEL_FEATURES = [
     "stride_time_mean_s",
     "stride_time_cv_pct",
@@ -106,10 +111,18 @@ def log_transform(columns: list[str]) -> FunctionTransformer:
 def load_feature_table(path: str) -> pd.DataFrame:
     """Read results/features_usual_walk.csv (one usual-walk record per participant).
 
-    Adds ``sex_male`` (1 = male) and ``y`` (1 = PD) and drops participants with a
-    missing feature or covariate, reporting how many.
+    Keeps the participants who meet the age rule (``gaitpdb.cohort``, DECISIONS.md
+    D-006), adds ``sex_male`` (1 = male) and ``y`` (1 = PD) and drops participants
+    with a missing feature or covariate, reporting how many each step removes.
     """
     df = pd.read_csv(path)
+    old_enough = meets_age_rule(df["Age"])
+    if not old_enough.all():
+        print(
+            f"note: {int((~old_enough).sum())} participants under {MIN_AGE_YEARS} "
+            "left out (DECISIONS.md D-006)"
+        )
+    df = df[old_enough].copy()
     df["sex_male"] = (df["sex"] == "M").astype(int)
     df["y"] = (df["group"] == POSITIVE).astype(int)
     needed = MODEL_FEATURES + COVARIATES

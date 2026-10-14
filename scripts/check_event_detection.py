@@ -1,6 +1,7 @@
 """Robustness checks on the gait-event detection, quoted in the Preliminary Results.
 
-For every usual-walk record, the features are recomputed with contact thresholds
+For the usual walk of every analysed participant (aged 50 or over,
+gaitpdb.cohort, DECISIONS.md D-006), the features are recomputed with contact thresholds
 of 10, 20 (default) and 50 N, each with and without the relative stride rule
 (strides outside 0.7 to 1.3 times the record's median stride are dropped). For
 each setting the script reports, per group, the median stride-time CV and
@@ -25,7 +26,8 @@ from scipy import stats
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gaitpdb import (  # noqa: E402
     DEFAULT_THRESHOLD_N,
-    build_manifest,
+    MIN_AGE_YEARS,
+    cohort_manifest,
     find_data_dir,
     load_record,
     record_features,
@@ -53,7 +55,7 @@ def main() -> None:
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
 
-    manifest = build_manifest(data_dir)
+    manifest = cohort_manifest(data_dir)
     usual = manifest[manifest["walk"] == 1]
     settings = [(t, rule) for t in THRESHOLDS_N for rule in (False, True)]
     frames: dict[tuple[float, bool], list[dict]] = {s: [] for s in settings}
@@ -90,7 +92,8 @@ def main() -> None:
     table.to_csv(out / "event_detection_checks.csv", index=False)
 
     lines = [
-        f"Usual-walk records: {len(base)}. Default setting: {DEFAULT_THRESHOLD_N:g} N with "
+        f"Usual-walk records of the analysed participants (aged {MIN_AGE_YEARS} or over, "
+        f"DECISIONS.md D-006): {len(base)}. Default setting: {DEFAULT_THRESHOLD_N:g} N with "
         f"the relative stride rule ({STRIDE_RATIO_LIMITS[0]:g} to {STRIDE_RATIO_LIMITS[1]:g} x "
         "the record median). AUC = probability that a PD participant has the higher value; "
         "p from a two-sided Mann-Whitney test; |change| is per record, against the default.",

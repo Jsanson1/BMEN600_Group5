@@ -7,7 +7,8 @@ Three input sets are run so the value of the gait features is visible:
 * gait + covariates: the model the plan calls for.
 
 Each is a Pipeline of standardisation and an L2-penalised logistic regression
-whose penalty strength C is chosen by an inner 5-fold cross-validation on the
+whose penalty strength C (17 values from 1e-4 to 1e4) is chosen by an inner
+5-fold cross-validation on the
 training participants of each outer fold (one row per participant, so the
 inner folds are participant-grouped too). C is chosen by log-loss, not by AUC:
 AUC ignores the scale of the coefficients, so tuning by it let C wander across
@@ -19,7 +20,9 @@ the transformed value it passes. Evaluated under repeated participant-grouped
 cross-validation (5 folds x 20 repeats) and leave-one-study-out, with the
 splits fixed in gaitpdb.evaluation.
 
-Reads results/features_usual_walk.csv (made by scripts/make_figure1.py) and
+Reads results/features_usual_walk.csv (made by scripts/make_figure1.py) through
+gaitpdb.evaluation.load_feature_table, which keeps the participants aged 50 or
+over (DECISIONS.md D-006), and
 writes results/logreg_summary.txt; results/logreg_folds.csv (every fold),
 results/logreg_cv_predictions.csv and results/logreg_loso_predictions.csv (one
 row per participant and input set; scripts/compare_models.py reads all three);
@@ -45,6 +48,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from gaitpdb.cohort import MIN_AGE_YEARS  # noqa: E402
 from gaitpdb.evaluation import (  # noqa: E402
     COVARIATES,
     LOG_TRANSFORMED,
@@ -63,7 +67,12 @@ from gaitpdb.evaluation import (  # noqa: E402
     write_model_outputs,
 )
 
-C_GRID = np.logspace(-3, 2, 11)
+C_GRID = np.logspace(-4, 4, 17)
+"""Half-decade steps from 1e-4 to 1e4, the range the Midterm Research Plan gives
+for the logistic regression and the SVM. The gait models settle well inside it
+(C of 0.1 to 1). The covariates-only model sometimes takes the smallest value:
+age and sex carry almost no signal, so the inner cross-validation prefers
+coefficients near zero, and a smaller C would change nothing that matters."""
 INPUT_SETS = {
     "covariates only": COVARIATES,
     "gait only": MODEL_FEATURES,
@@ -193,10 +202,10 @@ def main() -> None:
     df = load_feature_table(args.features)
 
     lines = [
-        f"Logistic regression (L2, C tuned by inner cross-validation on log-loss over {len(C_GRID)} values; "
-        f"{', '.join(LOG_TRANSFORMED)} entered as log(1 + x)) on "
-        f"{len(df)} participants ({int(df['y'].sum())} PD, {int((1 - df['y']).sum())} controls), "
-        "one usual-walk recording each.",
+        f"Logistic regression (L2, C tuned by inner cross-validation on log-loss over {len(C_GRID)} values "
+        f"from {C_GRID[0]:g} to {C_GRID[-1]:g}; {', '.join(LOG_TRANSFORMED)} entered as log(1 + x)) on "
+        f"{len(df)} participants aged {MIN_AGE_YEARS} or over ({int(df['y'].sum())} PD, "
+        f"{int((1 - df['y']).sum())} controls; DECISIONS.md D-006), one usual-walk recording each.",
         f"Outer evaluation: {N_SPLITS}-fold participant-grouped cross-validation repeated "
         f"{N_REPEATS} times, and leave-one-study-out. Cross-validation: mean over the "
         f"{N_SPLITS * N_REPEATS} test folds, 95% interval corrected for the overlap between "

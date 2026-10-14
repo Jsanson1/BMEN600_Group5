@@ -1,4 +1,4 @@
-Dual-task check on the Ga sub-study: usual walk (01) against the serial-7 counting walk (10), within participant (scripts/check_dual_task.py).
+Dual-task check on the Ga sub-study: usual walk (01) against the serial-7 counting walk (10), within participant, analysed participants (aged 50 or over) (scripts/check_dual_task.py).
 Participants with both walks: PD 21, Control 6 (the source study had 30 PD and 28 controls; the database holds the rest of the control dual-task walks only as usual walks).
 
 stride_time_cv_pct, PD (n = 21): median 4.45 on the usual walk, 5.09 under the dual task, median within-participant change +0.73, Wilcoxon p = 0.00554

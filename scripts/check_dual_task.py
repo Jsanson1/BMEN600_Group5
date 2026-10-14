@@ -5,7 +5,9 @@ backwards by sevens (walk 10). Its source paper reported that stride-to-stride
 variability rose under the dual task in the PD group (sources.md, S4). This
 script recomputes our features on both walks for every participant who has
 both and compares them within participant (Wilcoxon signed-rank test), per
-group. Agreement with the published finding is evidence that the event
+group, among the analysed participants (aged 50 or over, gaitpdb.cohort,
+DECISIONS.md D-006; no Ga participant is younger). Agreement with the published
+finding is evidence that the event
 detection and features behave; the database holds only a few of the control
 dual-task walks, so the control comparison is weak.
 
@@ -26,7 +28,8 @@ from scipy import stats
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gaitpdb import (  # noqa: E402
-    build_manifest,
+    MIN_AGE_YEARS,
+    cohort_manifest,
     find_data_dir,
     load_record,
     record_features,
@@ -50,7 +53,7 @@ def main() -> None:
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
 
-    manifest = build_manifest(data_dir)
+    manifest = cohort_manifest(data_dir)
     ga = manifest[(manifest["study"] == "Ga") & (manifest["walk"].isin([1, 10]))]
     rows = []
     for _, r in ga.iterrows():
@@ -64,7 +67,8 @@ def main() -> None:
     wide = wide.dropna()
     lines = [
         "Dual-task check on the Ga sub-study: usual walk (01) against the serial-7 "
-        "counting walk (10), within participant (scripts/check_dual_task.py).",
+        "counting walk (10), within participant, analysed participants (aged "
+        f"{MIN_AGE_YEARS} or over) (scripts/check_dual_task.py).",
         "Participants with both walks: "
         + ", ".join(
             f"{g} {int((wide.index.get_level_values('group') == g).sum())}"

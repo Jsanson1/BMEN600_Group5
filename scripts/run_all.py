@@ -4,8 +4,10 @@
 
 Runs verify_data, make_table1, make_figure1, check_event_detection,
 check_data_quality, check_dual_task, make_figure2, then the models
-(run_logreg, run_baselines) and compare_models, as separate processes, and
-stops at the first failure. About five minutes on a laptop.
+(run_logreg, run_baselines) and compare_models, and last
+check_weargait_participants (which reads data/raw/weargait_pd and skips itself
+if the WearGait-PD sheets are not there), as separate processes, and stops at
+the first failure. About five minutes on a laptop.
 """
 
 from __future__ import annotations
@@ -30,7 +32,10 @@ READS_RESULTS = [  # these read what the steps above wrote to results/
     "run_baselines.py",
     "compare_models.py",
 ]
-STEPS = READS_RECORDS + READS_RESULTS
+READS_WEARGAIT = [  # reads data/raw/weargait_pd; skips itself without the sheets
+    "check_weargait_participants.py",
+]
+STEPS = READS_RECORDS + READS_RESULTS + READS_WEARGAIT
 
 
 def main() -> None:

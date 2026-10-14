@@ -2,8 +2,11 @@
 
 A schematic for the methods section: how participants are split within a
 protocol (repeated participant-grouped cross-validation), across protocols
-(leave-one-study-out) and across cohorts (external test). The counts come from
-demographics.txt and the record files, so the figure cannot drift from the data.
+(leave-one-study-out) and across cohorts (external test). The counts are the
+analysed participants (aged 50 or over, gaitpdb.cohort, DECISIONS.md D-006) and
+come from demographics.txt and the record files, so the figure cannot drift from
+the data. The WearGait-PD counts are the article's, before the age rule, until
+that dataset is downloaded.
 
     python scripts/make_figure2.py [--data data/raw/gaitpdb]
 """
@@ -23,7 +26,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.patches import FancyBboxPatch, Rectangle  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gaitpdb import build_manifest, find_data_dir  # noqa: E402
+from gaitpdb import MIN_AGE_YEARS, cohort_manifest, find_data_dir  # noqa: E402
 from gaitpdb.evaluation import MODEL_FEATURES  # noqa: E402
 
 COLORS = {"Control": "#3b6ea5", "PD": "#c8552d"}
@@ -32,11 +35,11 @@ STUDY_LABEL = {
     "Ju": "Ju (cueing)",
     "Si": "Si (treadmill study)",
 }
-WEARGAIT = {"PD": 100, "Control": 85}  # sources.md S9
+WEARGAIT = {"PD": 100, "Control": 85}  # sources.md S9, before the age rule
 
 
 def counts(data_dir: Path) -> dict[str, dict[str, int]]:
-    m = build_manifest(data_dir)
+    m = cohort_manifest(data_dir)
     usual = m[m["walk"] == 1]
     out = {}
     for study in ("Ga", "Ju", "Si"):
@@ -106,13 +109,18 @@ def main() -> None:
 
     # Row 0: the data and the model
     ax.text(
-        0, 98, "Participants with a usual walk", fontsize=8, weight="bold", va="center"
+        0,
+        98,
+        f"Participants aged {MIN_AGE_YEARS} or over with a usual walk",
+        fontsize=8,
+        weight="bold",
+        va="center",
     )
     bar(ax, 0, 90.5, 58, 5.5, n_pd, n_co, "PhysioNet, three sub-studies")
     ax.add_patch(
         FancyBboxPatch(
             (63, 88.5),
-            37,
+            36,
             9.5,
             boxstyle="round,pad=0.4",
             fc="#f2f2f2",
@@ -121,7 +129,7 @@ def main() -> None:
         )
     )
     ax.text(
-        81.5,
+        81,
         93.25,
         f"{len(MODEL_FEATURES)} timing features per participant\n(+ age and sex as covariates)\n"
         "logistic regression, SVM, random forest;\ntuning inside the training fold only",
@@ -152,7 +160,8 @@ def main() -> None:
         70,
         "Each fold holds about a fifth of the participants, stratified by group; a participant's "
         "recordings are never split between train and test. Reshuffled 20 times;\n"
-        "the mean AUC over repeats is reported with its 2.5th to 97.5th percentile.",
+        "the mean over the 100 test folds is reported with a 95% interval corrected for the "
+        "overlap between training sets.",
     )
 
     # Row B: leave-one-study-out
@@ -211,7 +220,8 @@ def main() -> None:
         ax,
         14.5,
         "A different research group and hardware; the same stride and swing timings from its "
-        "pressure insoles or walkway. Run once, after the models are frozen.",
+        "pressure insoles or walkway. Run once, after the models are frozen.\n"
+        "WearGait-PD counts are from its article, before participants under 50 are removed.",
     )
 
     # legend

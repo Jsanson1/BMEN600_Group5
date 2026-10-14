@@ -1,0 +1,18 @@
+WearGait-PD participants (Synapse syn52540892, folder 'Version 1 (Cross-sectional)')
+
+PD - Demographic+Clinical - datasetV1.csv: MD5 0a1d1e8931f61c39d318837bc70f232f (the version recorded in data/raw/README.md)
+CONTROLS - Demographic+Clinical - datasetV1.csv: MD5 a8cda6bee6c414bc1c6cfb0ab7c69962 (the version recorded in data/raw/README.md)
+
+Participants in the two sheets: 185 (100 PD, 85 control).
+Under 50 or age missing, left out (DECISIONS.md D-006): WHC003 (Control, 49 y), WHC005 (Control, 47 y), NLS158 (PD, 45 y), NLS159 (PD, 48 y).
+Analysed: 181 (98 PD, 83 control).
+
+All participants:
+  PD: 100, age 67.0 ± 8.3 y, 35 women, 65 men
+  Control: 85, age 74.1 ± 9.2 y, 47 women, 38 men
+Analysed:
+  PD: 98, age 67.5 ± 7.8 y, 35 women, 63 men
+  Control: 83, age 74.8 ± 8.4 y, 46 women, 37 men
+
+Analysed, by site (ID prefix): Control HC 51; Control NLS 3; Control WHC 29; PD NLS 70; PD WPD 28
+Release version of the sheet rows, all participants: Release 1.0 70, Release 1.1 56, Release 1.2 59
