@@ -29,7 +29,7 @@ Data are never committed. Download steps, checksums and the known quirks of the 
 |---|---|
 | `src/gaitpdb/` | The shared Python package: `io.py` reads the record files and `demographics.txt`; `cohort.py` holds the group's age rule (D-006), which every analysis applies through it; `events.py` finds heel strikes and toe offs from the per-foot total force and flags which strides to keep; `features.py` turns one recording into stride, swing and stance timing, their variability, cadence and left-right asymmetry; `evaluation.py` fixes the model inputs, the participant-grouped and leave-one-study-out splits, the metrics and their intervals for all three models, and saves each model's results in the form the comparison reads. |
 | `scripts/` | One script per output (see "How to run"). |
-| `results/` | Tables and numbers produced by the scripts: `table1_participants.md`, `features_usual_walk.csv` (one row per usual-walk recording), `features_usual_walk_by_group.csv`, `figure1_summary.txt`, `event_detection_checks.txt`, `data_quality.txt`, `dual_task_check.txt`; for each model script a `*_summary.txt` and its fold metrics and predictions (`*_folds.csv`, `*_cv_predictions.csv`, `*_loso_predictions.csv`); and `model_comparison.txt` (also `.md` and `.csv`), every model side by side. |
+| `results/` | Tables and numbers produced by the scripts: `table1_participants.md`, `features_usual_walk.csv` (one row per usual-walk recording), `features_usual_walk_by_group.csv`, `figure1_summary.txt`, `event_detection_checks.txt`, `data_quality.txt`, `dual_task_check.txt`; for each model script a `*_summary.txt` and its fold metrics and predictions (`*_folds.csv`, `*_cv_predictions.csv`, `*_loso_predictions.csv`); `model_comparison.txt` (also `.md` and `.csv`), every model side by side; and `weargait_participants.txt`, WearGait-PD's participants before and after the age rule. |
 | `figures/` | Figure 1 (events and the two headline features), Figure 2 (the evaluation design) and Figure 3 (the model comparison), PNG and PDF. |
 | `report/midterm/` | Markdown snapshots of the midterm sections that go with the code, and `sources.md`, the table of every reference with how it was verified and what it supports. |
 | `data/raw/README.md` | How to obtain the data. |
@@ -54,9 +54,11 @@ python scripts/make_figure2.py           # Figure 2, the evaluation design drawn
 python scripts/run_logreg.py             # logistic regression under the shared evaluation -> results/logreg_*.{txt,csv}
 python scripts/run_baselines.py          # chance and one-feature-at-a-time baselines on the same splits -> results/baselines_*.{txt,csv}
 python scripts/compare_models.py         # every model side by side with paired tests, and Figure 3 -> results/model_comparison*, figures/
+# with WearGait-PD's two participant sheets in data/raw/weargait_pd/ (see data/raw/README.md):
+python scripts/check_weargait_participants.py  # WearGait-PD participants before and after the age rule -> results/weargait_participants.txt
 ```
 
-`python scripts/run_all.py` runs all of them in order (about five minutes) and regenerates every committed output; a run on a fresh checkout changes nothing but the PDFs' creation dates. Each script accepts `--data <folder>` if the data live elsewhere. `python -m pip install -r requirements-dev.txt && python -m pytest` runs the unit tests in `tests/` (synthetic signals, no dataset needed). Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte.
+`python scripts/run_all.py` runs all of them in order (about five minutes) and regenerates every committed output (without the WearGait-PD sheets, its last step says so and leaves `results/weargait_participants.txt` as it is); a run on a fresh checkout changes nothing but the PDFs' creation dates. Each script accepts `--data <folder>` if the data live elsewhere. `python -m pip install -r requirements-dev.txt && python -m pytest` runs the unit tests in `tests/` (synthetic signals, no dataset needed). Every number, table and figure in the reports is produced by one of these scripts; a fresh environment reproduces the committed files in `results/` and the Figure 1 PNG byte for byte.
 
 ## Results so far
 
