@@ -123,6 +123,13 @@ def main() -> None:
         f"{every_record['participant'].nunique()} participants.",
         f"Ages missing: {int(everyone['Age'].isna().sum())}; Hoehn and Yahr missing among the "
         f"analysed PD participants: {int(demo.loc[demo['group'] == 'PD', 'HoehnYahr'].isna().sum())}",
+        "UPDRS motor missing among the analysed PD participants: "
+        + (
+            ", ".join(
+                sorted(demo.loc[(demo["group"] == "PD") & demo["UPDRSM"].isna(), "ID"])
+            )
+            or "none"
+        ),
     ]
     (out / "table1_notes.txt").write_text("\n".join(notes) + "\n", encoding="utf-8")
     print(table.to_string(index=False))

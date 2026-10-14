@@ -315,6 +315,7 @@ def main() -> None:
     cv_row, asym_row = row("stride_time_cv_pct"), row("swing_time_asymmetry_pct")
     co, pd_ = cv["Control"], cv["PD"]
     aco, apd = asym["Control"], asym["PD"]
+    stride_m = feats["Speed_01"] * feats["stride_time_mean_s"]
     lines = [
         f"Usual-walk records: {len(every)} ({(every['group'] == 'PD').sum()} PD, {(every['group'] == 'Control').sum()} control); "
         f"analysed, aged {MIN_AGE_YEARS} or over (DECISIONS.md D-006): {len(feats)} ({(feats['group'] == 'PD').sum()} PD, "
@@ -330,6 +331,7 @@ def main() -> None:
         f"Swing %, mean (SD): control {feats.loc[feats.group == 'Control', 'swing_pct_mean'].mean():.1f} ({feats.loc[feats.group == 'Control', 'swing_pct_mean'].std():.1f}), PD {feats.loc[feats.group == 'PD', 'swing_pct_mean'].mean():.1f} ({feats.loc[feats.group == 'PD', 'swing_pct_mean'].std():.1f})",
         f"Cadence, strides/min, mean (SD): control {feats.loc[feats.group == 'Control', 'cadence_strides_per_min'].mean():.1f} ({feats.loc[feats.group == 'Control', 'cadence_strides_per_min'].std():.1f}), PD {feats.loc[feats.group == 'PD', 'cadence_strides_per_min'].mean():.1f} ({feats.loc[feats.group == 'PD', 'cadence_strides_per_min'].std():.1f})",
         f"Walking speed on this walk from demographics.txt (Speed_01), m/s, mean (SD): control {feats.loc[feats.group == 'Control', 'Speed_01'].mean():.2f} ({feats.loc[feats.group == 'Control', 'Speed_01'].std():.2f}), PD {feats.loc[feats.group == 'PD', 'Speed_01'].mean():.2f} ({feats.loc[feats.group == 'PD', 'Speed_01'].std():.2f}); n with a value: {int(feats['Speed_01'].notna().sum())}",
+        f"Stride length implied by that speed times the mean stride time (Speed_01 x stride_time_mean_s, per participant), m, mean (SD): control {stride_m[feats.group == 'Control'].mean():.2f} ({stride_m[feats.group == 'Control'].std():.2f}), PD {stride_m[feats.group == 'PD'].mean():.2f} ({stride_m[feats.group == 'PD'].std():.2f}); the insoles give timing only, so this is the one estimate of stride length",
         f"Example record in panel A: {parse_record_name(ex_path).record}",
         "",
         *age_checks(feats),

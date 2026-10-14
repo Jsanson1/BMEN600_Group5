@@ -8,6 +8,7 @@ Stride time, mean (SD): control 1.094 (0.084) s, PD 1.117 (0.123) s
 Swing %, mean (SD): control 35.6 (1.7), PD 33.5 (2.7)
 Cadence, strides/min, mean (SD): control 53.5 (4.0), PD 52.3 (5.1)
 Walking speed on this walk from demographics.txt (Speed_01), m/s, mean (SD): control 1.23 (0.16), PD 1.03 (0.21); n with a value: 161
+Stride length implied by that speed times the mean stride time (Speed_01 x stride_time_mean_s, per participant), m, mean (SD): control 1.34 (0.15), PD 1.13 (0.21); the insoles give timing only, so this is the one estimate of stride length
 Example record in panel A: GaCo01_01
 
 Age checks (controls are younger on average), age band 60 to 80:

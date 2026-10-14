@@ -6,3 +6,4 @@ Analysed participants with more than one recording: 54.
 Record files without a demographics row: none
 Whole database: 306 record files from 165 participants.
 Ages missing: 0; Hoehn and Yahr missing among the analysed PD participants: 0
+UPDRS motor missing among the analysed PD participants: SiPt02, SiPt07
