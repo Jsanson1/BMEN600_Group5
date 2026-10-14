@@ -22,16 +22,6 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 - **Not pushed:** nothing. (Anything listed here exists on one machine only.)
 -->
 
-## T-029 · Age rule (D-006) in the shared code, every output rerun
-_Updated 2026-10-14 15:25 by Claude (cloud session) for Jamie · branch `jamie/T-029-age-restriction` at `1be6033` · pull request #10 open_
-
-- **Now:** `src/gaitpdb/cohort.py` holds the rule (under 50 left out, both datasets); `load_feature_table`, Table 1, Figures 1 and 2, the event-detection and dual-task checks go through it, so every model and figure uses the same 162 PhysioNet participants (91 PD, 71 controls). The logistic regression's C grid is now 1e-4 to 1e4 (17 values), as the Methods section states. Headline: gait-only AUC 0.82 (0.75 to 0.90) within, 0.77 (0.70 to 0.84) across protocols; asymmetry alone 0.76 both; gain within +0.061 (+0.012 to +0.110), across +0.016 (-0.043 to +0.074). New on 14 October: `src/gaitpdb/weargait.py` and `scripts/check_weargait_participants.py` apply the same rule to WearGait-PD's two participant sheets (`results/weargait_participants.txt`: 185 to 181, 98 PD and 83 controls). Pull request #10 also carries the midterm snapshots, the one-column Figure 1, `scripts/renumber_docx_citations.py` and `scripts/check_submission.py`; its description was updated on 14 October (https://github.com/Jsanson1/BMEN600_Group5/pull/10).
-- **Validated:** 26 tests pass, ruff clean; two clean reruns (one by an independent review agent in a fresh virtual environment) reproduced every PhysioNet results file and PNG byte for byte before the WearGait addition; who the rule removes was checked against the raw PhysioNet demographics independently of the new code, and the WearGait-PD count was computed by hand from the sheets before the script was written and matches it. **Not verified:** Figure 2 still shows the article's WearGait-PD counts (labelled as before the rule).
-- **Next:** Jamie merges #10 on Thursday 15 October in the evening unless Anna or Yassien asks to look first (D-003 is still a proposal; the group message tells them), so `main` matches the submitted text; then mark T-029 done and delete the branch in the GitHub UI.
-- **Blocked / needs a decision:** none.
-- **For teammates:** @anna @yassien: read the feature table through `gaitpdb.evaluation.load_feature_table` and your models get the age rule with no change; `results/features_usual_walk.csv` keeps all 165 usual walks with a `meets_age_rule` column.
-- **Not pushed:** nothing.
-
 ## T-009, T-010 · Midterm Background and Preliminary Results (and the three end statements) in the group's Word file
 _Updated 2026-10-14 16:04 by Claude (cloud session) for Jamie · text in the group's Word file (Anna's SharePoint); snapshots on `jamie/T-029-age-restriction` at `39bb841` (pull request #10)_
 
