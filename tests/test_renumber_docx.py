@@ -60,6 +60,50 @@ def test_numbers_follow_first_citation_and_entries_are_reordered():
     ]
 
 
+def split_p(*pieces: str, style: str = "BodyText") -> str:
+    """One paragraph whose text Word has split into runs at spell-check marks."""
+    mark = '<w:proofErr w:type="spellStart"/>'
+    runs = mark.join(f"<w:r><w:t>{t}</w:t></w:r>" for t in pieces)
+    return f'<w:p><w:pPr><w:pStyle w:val="{style}"/></w:pPr>{runs}</w:p>'
+
+
+def test_labels_split_over_several_runs():
+    xml = document(
+        split_p(
+            "using pandas [", "pandasPaper", ", ", "pandasZenodo", "], and [SciPy]."
+        ),
+        split_p("Nested cross-validation [", "nestedCV", "]. Then [S1] and [", "S2]."),
+        p("References", style="Heading5"),
+        p("[pandasPaper] McKinney.", style="references"),
+        p("[pandasZenodo] The pandas team.", style="references"),
+        p("[SciPy] Virtanen.", style="references"),
+        split_p("[", "nestedCV", "] Cawley and Talbot.", style="references"),
+        p("[S1] One.", style="references"),
+        p("[S2] Two.", style="references"),
+    )
+    out, report = renumber_docx.renumber(xml)
+    assert report["order"] == [
+        "pandasPaper",
+        "pandasZenodo",
+        "SciPy",
+        "nestedCV",
+        "S1",
+        "S2",
+    ]
+    t = texts(out)
+    assert t[0] == "using pandas [1], [2], and [3]."
+    assert t[1] == "Nested cross-validation [4]. Then [5] and [6]."
+    assert t[3:] == [
+        "McKinney.",
+        "The pandas team.",
+        "Virtanen.",
+        "Cawley and Talbot.",
+        "One.",
+        "Two.",
+    ]
+    assert out.count("<w:proofErr") == xml.count("<w:proofErr")  # runs kept
+
+
 def test_ranges_and_unknown_labels():
     assert renumber_docx.render([5, 3, 4]) == "[3]–[5]"
     assert renumber_docx.render([1, 2, 4]) == "[1], [2], [4]"

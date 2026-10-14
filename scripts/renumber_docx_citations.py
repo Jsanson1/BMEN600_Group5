@@ -31,10 +31,48 @@ TOKEN_RE = re.compile(
 )
 GROUP_RE = re.compile(r"\[([^\[\]]+)\]")
 LABEL_START_RE = re.compile(r"\s*\[([^\]]+)\]\s")
+WT_RE = re.compile(r"(<w:t(?: [^>]*)?>)([^<]*)(</w:t>)")
+PARA_RE = re.compile(r"<w:p[ >].*?</w:p>", re.S)
 
 
 def text_of(xml: str) -> str:
-    return "".join(re.findall(r"<w:t[^>]*>([^<]*)</w:t>", xml))
+    return "".join(m.group(2) for m in WT_RE.finditer(xml))
+
+
+def edit_text(xml: str, edits: list[tuple[int, int, str]]) -> str:
+    """Apply (start, end, new text) edits given as offsets in text_of(xml).
+
+    Word often splits one citation over several runs, for example "[", "pandasPaper",
+    ", ", "pandasZenodo", "]" around its spell-check marks. The new text goes into the
+    run where the edited span starts, and the rest of the span is removed from the runs
+    it covers, so the runs and their formatting stay as they are.
+    """
+    pieces = list(WT_RE.finditer(xml))
+    texts = [m.group(2) for m in pieces]
+    starts, ends, pos = [], [], 0
+    for t in texts:
+        starts.append(pos)
+        pos += len(t)
+        ends.append(pos)
+
+    def piece_at(offset: int) -> int:  # in the original text, before any edit
+        return next(k for k in range(len(texts)) if starts[k] <= offset < ends[k])
+
+    for s, e, new in sorted(edits, reverse=True):  # last first: earlier offsets hold
+        i, j = piece_at(s), piece_at(e - 1)
+        a, b = s - starts[i], e - starts[j]
+        if i == j:
+            texts[i] = texts[i][:a] + new + texts[i][b:]
+        else:
+            texts[i] = texts[i][:a] + new
+            for k in range(i + 1, j):
+                texts[k] = ""
+            texts[j] = texts[j][b:]
+    out, pos = [], 0
+    for m, t in zip(pieces, texts):
+        out.append(xml[pos : m.start()] + m.group(1) + t + m.group(3))
+        pos = m.end()
+    return "".join(out) + xml[pos:]
 
 
 def render(numbers: list[int]) -> str:
@@ -87,32 +125,34 @@ def renumber(document_xml: str) -> tuple[str, dict]:
 
     order, unknown = [], set()
     for x in items[:ref_head]:
-        for g in GROUP_RE.findall(text_of(x)):
-            toks = [t.strip() for t in g.split(",")]
-            if all(t in labels for t in toks):
-                order.extend(t for t in toks if t not in order)
-            elif any(t in labels for t in toks) or re.fullmatch(r"(AK|S)\d+", toks[0]):
-                unknown.add(g)
+        for para in PARA_RE.findall(x):  # a table's cells one by one
+            for g in GROUP_RE.findall(text_of(para)):
+                toks = [t.strip() for t in g.split(",")]
+                if all(t in labels for t in toks):
+                    order.extend(t for t in toks if t not in order)
+                elif any(t in labels for t in toks) or re.fullmatch(
+                    r"(AK|S)\d+", toks[0]
+                ):
+                    unknown.add(g)
     num = {lab: n for n, lab in enumerate(order, start=1)}
 
-    def sub_group(g: re.Match) -> str:
-        toks = [t.strip() for t in g.group(1).split(",")]
-        if all(t in num for t in toks):
-            return render([num[t] for t in toks])
-        return g.group(0)
-
-    def sub_text(m: re.Match) -> str:
-        return m.group(1) + GROUP_RE.sub(sub_group, m.group(2)) + m.group(3)
+    def number_paragraph(m: re.Match) -> str:
+        para = m.group(0)
+        edits = []
+        for g in GROUP_RE.finditer(text_of(para)):
+            toks = [t.strip() for t in g.group(1).split(",")]
+            if all(t in num for t in toks):
+                edits.append((g.start(), g.end(), render([num[t] for t in toks])))
+        return edit_text(para, edits) if edits else para
 
     for i in range(ref_head):
-        items[i] = re.sub(r"(<w:t[^>]*>)([^<]*)(</w:t>)", sub_text, items[i])
+        items[i] = PARA_RE.sub(number_paragraph, items[i])
 
-    entries = {
-        lab: re.sub(
-            r"(<w:t[^>]*>)\s*\[" + re.escape(lab) + r"\]\s+", r"\1", items[i], count=1
-        )
-        for lab, i in labels.items()
-    }
+    def drop_label(entry: str, lab: str) -> str:
+        m = re.match(r"\s*\[" + re.escape(lab) + r"\]\s+", text_of(entry))
+        return edit_text(entry, [(m.start(), m.end(), "")])
+
+    entries = {lab: drop_label(items[i], lab) for lab, i in labels.items()}
     first, last = min(ref_idx), max(ref_idx)
     others = [
         x for k, x in enumerate(items[first : last + 1], first) if k not in ref_idx
