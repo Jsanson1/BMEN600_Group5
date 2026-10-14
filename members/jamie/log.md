@@ -164,3 +164,9 @@ Entry format:
 - **CRediT roles:** Software, Project administration, Writing – review & editing.
 - **AI use:** Claude (cloud session); Jamie asked for work to continue while he was away and has not reviewed these.
 - **Verified:** the check run on the current preview flags the expected items (Yassien's empty sections, highlighted placeholders, the 26 comments, the missing commit ID) and finds the references on page 4; the Google Doc notes read back correctly. Not verified: the content of Anna's references.
+
+### 2026-10-14 · T-009, T-010 · Group message for the group chat; review comments name the sections
+- **Did:** Rewrote the message to Anna and Yassien as one group-chat post that names the sections instead of numbering them (Jamie: the teammates do not use the numerals, and both read the same chat). Reworded the 11 review comments that referred to sections by number, and pointed the 162-participant comment at pull request #10, since `results/table1_notes.txt` on `main` still predates the age rule. Rebuilt the review copy as v4. Explained to Jamie why the SharePoint file cannot be edited from this session: no connector here writes to SharePoint (the Microsoft 365 connector's tools only search and read), the file is not in his connected folders, and uploading an edited copy over it would replace the teammates' later edits.
+- **CRediT roles:** Writing – review & editing, Project administration.
+- **AI use:** Claude (cloud session) drafted the message and the comment wording; Jamie decides what to send.
+- **Verified:** `word/document.xml` in v4 is byte-identical to v3 (only the four comment parts differ, 11 comments reworded), the file validates, and the rendered preview's text is unchanged; no section numerals remain in the comments. Not verified: how the comments read in Anna's version of Word.
