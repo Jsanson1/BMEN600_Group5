@@ -1,6 +1,6 @@
 # Midterm Research Plan drafts
 
-The live document is the shared Google Doc "BMEN 600 Group 5 – Midterm Research Plan (draft)" (link in DECISIONS.md D-004 and in the group chat). This folder keeps what belongs with the code: `sources.md`, the table of verified references everyone cites from, and a Markdown snapshot of each section at the time its figures or tables were produced, so a reader of the repository can see the text that goes with the scripts.
+Since 13 October the group writes the submission in one Word file on the IEEE conference template, kept in Anna's SharePoint; the earlier drafts are in the shared Google Doc "BMEN 600 Group 5 – Midterm Research Plan (draft)" (DECISIONS.md D-004). This folder keeps what belongs with the code: `sources.md`, the table of verified references everyone cites from, and a Markdown snapshot of each section at the time its figures or tables were produced, so a reader of the repository can see the text that goes with the scripts.
 
 | File | Section | Lead | Reviewer |
 |---|---|---|---|
@@ -10,6 +10,7 @@ The live document is the shared Google Doc "BMEN 600 Group 5 – Midterm Researc
 | `04_methods_and_evaluation.md` | §4 Proposed Methods and Evaluation | Anna | all |
 | `05_preliminary_results.md` | §5 Preliminary Results | Jamie | Anna |
 | `06_teamwork_and_plan.md` | §6 Teamwork and Project Plan | Yassien | all |
+| `07_statements.md` | Data and Code Availability, AI-Assisted Work, Author Contributions | all (drafted by Jamie) | all |
 | `sources.md` | References, verified | everyone adds | |
 
 Rules that keep the sections consistent:
@@ -18,4 +19,4 @@ Rules that keep the sections consistent:
 - Figures and tables come from code in this repo; name the script that produced each one in the caption.
 - Plain prose, IEEE citations, no bullet lists inside the sections.
 
-Assembling the PDF (T-015): export the Google Doc as plain text, run `python scripts/renumber_citations.py midterm.txt -o midterm_numbered.txt`, and paste the renumbered text and reference list back. The script turns the S-numbers into IEEE numbers in order of first citation, builds the reference list from `sources.md`, and warns about any citation that is not in the ledger or any ledger entry that is never cited.
+Assembling the PDF from the Word file (T-015): download it, then `python scripts/renumber_docx_citations.py midterm.docx -o midterm_numbered.docx`. In the Word file, citations are labels ([AK1], [S12], [SciPy], ...) and each reference entry starts with its label; the script numbers the labels in order of first citation, reorders and cleans the reference list, drops entries that are never cited, and lists any label that has no entry. Check its report, then export the numbered copy to PDF. For text kept as plain text instead (the Google Doc): export it, run `python scripts/renumber_citations.py midterm.txt -o midterm_numbered.txt`, and paste the renumbered text and reference list back. The script turns the S-numbers into IEEE numbers in order of first citation, builds the reference list from `sources.md`, and warns about any citation that is not in the ledger or any ledger entry that is never cited.
