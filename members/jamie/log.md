@@ -203,3 +203,9 @@ Entry format:
 
 ### 2026-10-14 · T-010 · Correction to the entry above (group message sent)
 - **Did:** correction to its AI-use line: the message's opening lines were not written by Jamie himself. They are Claude's rewording of Jamie's own draft opening, which Jamie then used as written. The rest of that entry stands.
+
+### 2026-10-15 · T-009, T-010 · Shared file reviewed after Yassien's sections; renumbering verified; pre-submission check extended
+- **Did:** With Jamie's approval, opened the shared file in Word and saved a copy (`BMEN600_shared_doc_2026-10-15_1305.docx`); no edits to the shared file. Compared it with the 14 October copy: Yassien's two sections and Tables I and III are in, Jamie's table became Table II, and all citations were renumbered by hand with two references added. Checked the renumbering and Yassien's facts (see the handoff) and drafted the fixes for Jamie to send. Extended `scripts/check_submission.py` to check numbered citations and [DATE]-style placeholders, with tests (`71b7561`, pull request #12). Drafted Jamie's reply to Anna on the cross-validation repeats, the evaluation design, the pre-processing paragraph and who submits; Jamie sent his own version, which quotes Claude's design suggestion as Claude's.
+- **CRediT roles:** Validation, Software, Writing – review & editing.
+- **AI use:** Claude (cloud session), with computer use limited to Word (saving a copy) and web lookups (nature.com, PhysioNet, Europe PMC, DataCite). Jamie approved the Word access and decided what to send.
+- **Verified:** the label-to-number mapping by script over all unchanged paragraphs; the first-citation order 1 to 28; each new fact against the article, the sheets, the PhysioNet page or the DOI records; 32 tests pass. Not verified: WearGait-PD's supplementary tables; how Word lays out the final pages after Thursday's edits.
