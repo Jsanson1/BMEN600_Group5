@@ -200,3 +200,6 @@ Entry format:
 - **CRediT roles:** Project administration, Writing – review & editing.
 - **AI use:** Claude (cloud session) drafted the message and checked it against the shared file and GitHub; Jamie wrote the opening lines himself (they say that Claude drafted the comments and the update) and sent it.
 - **Verified:** every factual statement in the message was checked against the Word file saved at about 16:40, GitHub (pull requests #10 and #11 merged) and the repo. Not verified: that nothing in the shared file changed between 16:40 and the time it was sent.
+
+### 2026-10-14 · T-010 · Correction to the entry above (group message sent)
+- **Did:** correction to its AI-use line: the message's opening lines were not written by Jamie himself. They are Claude's rewording of Jamie's own draft opening, which Jamie then used as written. The rest of that entry stands.
