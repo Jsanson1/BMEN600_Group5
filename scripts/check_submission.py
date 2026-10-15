@@ -3,9 +3,10 @@
     python scripts/check_submission.py final_numbered.docx [--pdf final_numbered.pdf]
 
 Reports, in order: template placeholders and teammates' to-do markers left in the text,
-highlighted text, citation labels that were never turned into numbers, comments and
-tracked changes still in the file, figure and table references against the captions,
-the repository link and commit ID, and (with --pdf) the page on which References starts.
+highlighted text, citation labels that were never turned into numbers, numbered citations
+that break IEEE order or point past the reference list, comments and tracked changes still
+in the file, figure and table references against the captions, the repository link and
+commit ID, and (with --pdf) the page on which References starts.
 Exit code 1 if anything blocks submission.
 """
 
@@ -25,10 +26,16 @@ PLACEHOLDERS = [
     r"\{RANGE\}",
     r"\[CITE\]",
     r"\[VERSION\]",
+    r"\[DATE\]",
+    r"\[TBD\]",
+    r"\[TODO[^\]]*\]",
+    r"\[INSERT[^\]]*\]",
     r"FIGURE X",
     r"\bFig\. X\b",
     r"\[contributions[^\]]*\]",
 ]
+PLACEHOLDER_WORDS = re.compile(r"DATE|TBD|TODO.*|INSERT.*|CITE|VERSION", re.I)
+CITE_RE = re.compile(r"\[(\d+)\](?:\s*[–-]\s*\[(\d+)\])?")
 
 
 def paragraphs(xml: str) -> list[str]:
@@ -36,6 +43,58 @@ def paragraphs(xml: str) -> list[str]:
     for p in re.findall(r"<w:p[ >].*?</w:p>", xml, flags=re.S):
         out.append("".join(re.findall(r"<w:t[^>]*>([^<]*)</w:t>", p)))
     return out
+
+
+def reference_entries(xml: str) -> list[str]:
+    """Text of the numbered entries after the References heading (empty lines left out)."""
+    ps = re.findall(r"<w:p[ >].*?</w:p>", xml, flags=re.S)
+    texts = ["".join(re.findall(r"<w:t[^>]*>([^<]*)</w:t>", p)) for p in ps]
+    k = next((i for i, t in enumerate(texts) if t.strip() == "References"), None)
+    if k is None:
+        return []
+    return [
+        t
+        for p, t in zip(ps[k + 1 :], texts[k + 1 :])
+        if 'w:val="references"' in p and t.strip()
+    ]
+
+
+def cited_numbers(text: str) -> list[int]:
+    """Numbers cited in text, in order of appearance, with [3]–[5] expanded to 3, 4, 5."""
+    out = []
+    for m in CITE_RE.finditer(text):
+        first = int(m.group(1))
+        last = int(m.group(2)) if m.group(2) else first
+        out.extend(range(first, last + 1))
+    return out
+
+
+def numbering_problems(body: list[str], n_entries: int) -> list[str]:
+    """IEEE numbering: first citations run 1, 2, 3, ...; each number has an entry; each entry is cited."""
+    order = []
+    for t in body:
+        for n in cited_numbers(t):
+            if n not in order:
+                order.append(n)
+    if not order:
+        return []
+    problems = []
+    for k, n in enumerate(order, start=1):
+        if n != k:
+            problems.append(
+                f"citations are not numbered in order of first citation: the number cited "
+                f"{k}th for the first time is [{n}], expected [{k}]"
+            )
+            break
+    beyond = sorted(n for n in order if n > n_entries)
+    if beyond:
+        problems.append(
+            f"cited numbers with no reference entry: {beyond} (the list has {n_entries} entries)"
+        )
+    uncited = [n for n in range(1, n_entries + 1) if n not in order]
+    if uncited:
+        problems.append(f"reference entries never cited: {uncited}")
+    return problems
 
 
 def main() -> None:
@@ -69,6 +128,8 @@ def main() -> None:
 
     for i, t in enumerate(body):
         for g in re.findall(r"\[([^\[\]]+)\]", t):
+            if PLACEHOLDER_WORDS.fullmatch(g.strip()):
+                continue  # reported above as a placeholder
             if (
                 re.fullmatch(
                     r"(AK\d+|S\d+|[A-Za-z][A-Za-z-]+)(\s*,\s*(AK\d+|S\d+|[A-Za-z][A-Za-z-]+))*",
@@ -80,6 +141,16 @@ def main() -> None:
                     blocking.append(
                         f"citation label not numbered in paragraph {i}: [{g}]"
                     )
+
+    entries = reference_entries(xml)
+    for k, e in enumerate(entries, start=1):
+        if re.match(r"\s*\[[^\]]+\]\s", e):
+            blocking.append(
+                f"reference entry {k} still starts with a label: {e[:50]!r}"
+            )
+    if not any("citation label not numbered" in b for b in blocking):
+        blocking += numbering_problems(body, len(entries))
+    notes.append(f"reference entries: {len(entries)}")
 
     n_comments = len(re.findall(r"<w:commentReference ", xml))
     if n_comments:
