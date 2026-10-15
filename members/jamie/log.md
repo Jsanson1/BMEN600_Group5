@@ -194,3 +194,9 @@ Entry format:
 - **CRediT roles:** Validation, Software, Writing – review & editing.
 - **AI use:** Claude (cloud session), with web reading for the references, Claude in Chrome on Jamie's computer, and computer use limited to Word with his approval. The table-note sentence was Claude's answer to Jamie's question; Jamie has not yet read it in the file.
 - **Verified:** a copy saved after the Word edits, compared paragraph by paragraph with the 15:00 snapshot, shows only the intended changes and no edits by others; Word's page count (5) and where References start were read in Word; the new test fails on the previous script, all 27 tests pass, and GitHub's checks passed on `main` and on #11. Not verified: the pandas entries' DOI pages (rate-limited); the primary studies [AK5] cites for these points (Carpinella 2007, Zanardi 2021, Del Din 2019) were not read.
+
+### 2026-10-14 · T-009, T-010 · Group message sent
+- **Did:** Jamie sent the midterm update to the group chat at 18:43 with the review copy v6 attached (26 comments on the Introduction and Methods). It reports what is in the shared Word file, the template cleanup, the reference and WearGait-PD checks and the page budget, and asks Anna, Yassien and the group for their parts by Thursday night and for a decision on the evaluation design (T-030).
+- **CRediT roles:** Project administration, Writing – review & editing.
+- **AI use:** Claude (cloud session) drafted the message and checked it against the shared file and GitHub; Jamie wrote the opening lines himself (they say that Claude drafted the comments and the update) and sent it.
+- **Verified:** every factual statement in the message was checked against the Word file saved at about 16:40, GitHub (pull requests #10 and #11 merged) and the repo. Not verified: that nothing in the shared file changed between 16:40 and the time it was sent.
