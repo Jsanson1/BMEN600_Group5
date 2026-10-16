@@ -233,3 +233,9 @@ Entry format:
 - **CRediT roles:** Writing – review & editing.
 - **AI use:** Claude (cloud session) chose and made the edits and checked the PDF; Jamie asked for them and has not yet read the changed passages.
 - **Verified:** each search string occurred once before the edit; the saved file matches the intended text paragraph by paragraph; the journal names kept their italics; [5]'s article number against the Burtscher PDF read on 14 October, [22]'s proceedings details (9th Python in Science Conference, pp. 56–61, doi 10.25080/Majora-92bf1922-00a) from the existing entry; the exported PDF has 7 pages with References starting on page 6, the commit ID, no placeholder, no comment. Not verified: reference [3] for the early-onset sentence; the Synapse terms for the Kaggle copies.
+
+### 2026-10-16 · T-009, T-010 · Final PDF for submission
+- **Did:** After Anna added her verification sentence to AI-Assisted Work, exported the final PDF from Word for the web and saved a copy as `BMEN600_Group5_Midterm_Research_Plan.pdf` in Jamie's `Coursework\BMEN 600` folder for submission.
+- **CRediT roles:** Validation.
+- **AI use:** Claude (cloud session) exported and checked the PDF; submission on D2L is left to the team.
+- **Verified:** the saved file differs from the previous check only in Anna's sentence; the PDF has 7 pages with References starting on page 6, the commit ID, the repository link, Anna's sentence, and no placeholder or comment; the copy in the Coursework folder is byte-identical to the exported file.
