@@ -58,13 +58,13 @@ owner: jamie | status: doing | branch: jamie/T-010-preliminary-results | due: 20
 owner: anna | status: todo | branch: - | due: 2026-10-09 | updated: 2026-10-05
 
 ### T-012 · Midterm §3 Dataset and Responsible Use: source, size, participants, recording type, licence, consent, privacy, bias (lead yassien, reviewer jamie)
-owner: yassien | status: todo | branch: - | due: 2026-10-09 | updated: 2026-10-05
+owner: yassien | status: doing | branch: - | due: 2026-10-09 | updated: 2026-10-16
 
 ### T-013 · Midterm §4 Proposed Methods and Evaluation: pipeline, metrics, participant-level splits and cross-validation, choice of models (lead anna, reviewers all)
 owner: anna | status: todo | branch: - | due: 2026-10-09 | updated: 2026-10-05
 
 ### T-014 · Midterm §6 Teamwork and Project Plan: milestones, owners, check-in cadence, version control practices (lead yassien, reviewers all)
-owner: yassien | status: todo | branch: - | due: 2026-10-09 | updated: 2026-10-05
+owner: yassien | status: doing | branch: - | due: 2026-10-09 | updated: 2026-10-16
 
 ### T-015 · Midterm: review and revise all sections, assemble the PDF (max 6 pages + references), add the repo link, submit on D2L (all)
 owner: group | status: todo | branch: - | due: 2026-10-16 | updated: 2026-10-05
