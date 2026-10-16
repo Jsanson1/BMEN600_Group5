@@ -115,4 +115,4 @@ owner: jamie | status: done | branch: jamie/T-029-age-restriction | due: 2026-10
 owner: group | status: done | branch: - | due: 2026-10-15 | updated: 2026-10-16
 
 ### T-031 · Sync the midterm snapshots in report/midterm/ with the submitted PDF (the AI-Assisted Work paragraph changed after commit 50a86e9; keep the submitted PDF's wording as the record)
-owner: jamie | status: doing | branch: jamie/T-031-midterm-snapshots | due: 2026-10-23 | updated: 2026-10-16
+owner: jamie | status: review | branch: jamie/T-031-midterm-snapshots | due: 2026-10-23 | updated: 2026-10-16

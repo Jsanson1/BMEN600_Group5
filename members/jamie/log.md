@@ -245,3 +245,9 @@ Entry format:
 - **CRediT roles:** Project administration.
 - **AI use:** Claude (cloud session) updated the board, handoff and log; the submission was Jamie's.
 - **Verified:** Jamie reported the D2L submission; not independently checked from this session.
+
+### 2026-10-16 · T-031 · Repository matched to the submitted plan
+- **Did:** Claimed T-031 and opened pull request #14: the submitted end statements in `report/midterm/07_statements.md`, a corrected `report/midterm/README.md` (only existing files listed) and `README.md` pointing to commit `50a86e9` and describing D-007. Checked the repository against the rubric's repository criterion: public, link and cited commit resolve, README has the research question, data access, file map and how to run, automatic checks green.
+- **CRediT roles:** Writing – review & editing, Project administration.
+- **AI use:** Claude (cloud session) made the checks and the changes; Jamie has not yet reviewed pull request #14.
+- **Verified:** statements text against the Word file by hash; Sections II and V against the snapshots (formatting differences only); repository visibility, default branch and commit `50a86e9` through the GitHub API.

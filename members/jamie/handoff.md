@@ -22,6 +22,16 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 - **Not pushed:** nothing. (Anything listed here exists on one machine only.)
 -->
 
+## T-031 · Sync the midterm snapshots and README with the submitted plan
+_Updated 2026-10-16 14:10 by Claude (cloud session) for Jamie · branch `jamie/T-031-midterm-snapshots`; pull request #14 open_
+
+- **Now:** pull request #14 (https://github.com/Jsanson1/BMEN600_Group5/pull/14) puts the end statements as submitted into `report/midterm/07_statements.md`, fixes `report/midterm/README.md` (its table named four section files that never existed) and updates `README.md` (commit `50a86e9` as the version the plan reports; WearGait-PD's two roles under D-007).
+- **Validated:** the statements match the Word file after Anna's last edit, paragraph by paragraph (hash); Sections II and V of the submitted text match `02_` and `05_` apart from formatting. **Not verified:** nothing else; no code or result changes.
+- **Next:** Jamie merges pull request #14 (docs only, self-merge allowed by D-003) once its checks are green, then set T-031 to done, delete this section and delete the branch. Optional tidy-up on GitHub: delete the eleven `jamie/...` branches that are already merged (Branches page, trash icons).
+- **Blocked / needs a decision:** none.
+- **For teammates:** none.
+- **Not pushed:** nothing.
+
 ## T-022 · Model comparison (scaffolding and baselines merged; the three-model comparison waits for T-019 and T-020)
 _Updated 2026-10-16 10:00 by Claude (cloud session) for Jamie (D-007 noted; otherwise as of 2026-10-14 10:10) · branch `jamie/T-022-model-comparison` (merged into `main` on 9 October)_
 
