@@ -1,17 +1,15 @@
-# Midterm Research Plan drafts
+# Midterm Research Plan
 
-Since 13 October the group writes the submission in one Word file on the IEEE conference template, kept in Anna's SharePoint; the earlier drafts are in the shared Google Doc "BMEN 600 Group 5 – Midterm Research Plan (draft)" (DECISIONS.md D-004). This folder keeps what belongs with the code: `sources.md`, the table of verified references everyone cites from, and a Markdown snapshot of each section at the time its figures or tables were produced, so a reader of the repository can see the text that goes with the scripts.
+The Midterm Research Plan was submitted on 16 October 2026. It was written in one Word file on the IEEE conference template, kept in Anna's SharePoint (earlier drafts are in the shared Google Doc "BMEN 600 Group 5 – Midterm Research Plan (draft)", DECISIONS.md D-004), and the code and results it reports are at commit `50a86e9`. This folder keeps what belongs with the code: the sections whose numbers, table and figure come from this repository, the end statements, and `sources.md`, the table of verified references those sections cite. Sections I, III, IV and VI (Introduction, Dataset and Responsible Use, Methods, Teamwork and Project Plan) were written directly in the Word file and are not kept here.
 
-| File | Section | Lead | Reviewer |
+| File | What it holds | Lead | Reviewer |
 |---|---|---|---|
-| `01_introduction.md` | §1 Introduction and Motivation | Anna | Jamie |
-| `02_background_and_research_gap.md` | §2 Background and Research Gap | Jamie | Anna |
-| `03_dataset_and_responsible_use.md` | §3 Dataset and Responsible Use | Yassien | Jamie |
-| `04_methods_and_evaluation.md` | §4 Proposed Methods and Evaluation | Anna | all |
-| `05_preliminary_results.md` | §5 Preliminary Results | Jamie | Anna |
-| `06_teamwork_and_plan.md` | §6 Teamwork and Project Plan | Yassien | all |
-| `07_statements.md` | Data and Code Availability, AI-Assisted Work, Author Contributions | all (drafted by Jamie) | all |
-| `sources.md` | References, verified | everyone adds | |
+| `02_background_and_research_gap.md` | Section II, Background and Research Gap, as submitted | Jamie | Anna |
+| `05_preliminary_results.md` | Section V, Preliminary Results, as submitted, with Table II and Fig. 1 and the script behind each number | Jamie | Anna |
+| `07_statements.md` | Data and Code Availability, AI-Assisted Work and Author Contributions, as submitted | all (drafted by Jamie) | all |
+| `sources.md` | The verified references cited in Sections II and V, with how each was checked and what it supports | Jamie | |
+
+The snapshots cite with the S-numbers of `sources.md`; the submitted PDF numbers its references in IEEE order, and each snapshot's header gives the mapping where it matters.
 
 Rules that keep the sections consistent:
 
