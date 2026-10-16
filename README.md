@@ -47,7 +47,7 @@ python -m pip install -r requirements.txt
 python scripts/verify_data.py            # every file against PhysioNet's SHA256SUMS.txt
 python scripts/make_table1.py            # Table 1 -> results/table1_participants.{csv,md}, results/table1_notes.txt
 python scripts/make_figure1.py           # Figure 1 -> figures/, plus results/features_usual_walk*.csv and results/figure1_summary.txt
-python scripts/check_event_detection.py  # contact-threshold and stride-rule sensitivity -> results/event_detection_checks.{csv,txt}
+python scripts/check_event_detection.py  # contact threshold (fixed, share of body weight, share of the recording's force) and stride-rule sensitivity -> results/event_detection_checks.{csv,txt}
 python scripts/check_data_quality.py     # data-quality report -> results/data_quality.{txt,csv}
 python scripts/check_dual_task.py        # does the pipeline reproduce the published dual-task effect? -> results/dual_task_check.txt
 python scripts/make_figure2.py           # Figure 2, the evaluation design drawn from the participant counts -> figures/

@@ -24,3 +24,27 @@ Usual-walk records of the analysed participants (aged 50 or over, DECISIONS.md D
     stride_time_mean_s: control 1.09, PD 1.11, AUC 0.55, p 0.29, median |change| 0.000435
     stride_time_cv_pct: control 4.25, PD 4.59, AUC 0.59, p 0.052, median |change| 0.128
     swing_time_asymmetry_pct: control 1.39, PD 4.09, AUC 0.74, p 2.1e-07, median |change| 0.942
+2.5% of body weight, relative rule on : 524 strides removed (159 records; threshold median 18 N, range 12 to 26 N)
+    stride_time_mean_s: control 1.08, PD 1.1, AUC 0.54, p 0.38, median |change| 4.81e-05
+    stride_time_cv_pct: control 4.01, PD 4.45, AUC 0.59, p 0.043, median |change| 0.0301
+    swing_time_asymmetry_pct: control 1.83, PD 5.16, AUC 0.76, p 3e-08, median |change| 0.337
+5% of body weight, relative rule on : 433 strides removed (159 records; threshold median 35 N, range 23 to 52 N)
+    stride_time_mean_s: control 1.08, PD 1.1, AUC 0.54, p 0.4, median |change| 0.000169
+    stride_time_cv_pct: control 4.18, PD 4.64, AUC 0.59, p 0.048, median |change| 0.08
+    swing_time_asymmetry_pct: control 1.43, PD 4.33, AUC 0.76, p 1.8e-08, median |change| 0.829
+20 N, participants with a recorded weight only, relative rule on : 507 strides removed (159 records)
+    stride_time_mean_s: control 1.08, PD 1.1, AUC 0.54, p 0.39, median |change| 0
+    stride_time_cv_pct: control 4.07, PD 4.46, AUC 0.59, p 0.056, median |change| 0
+    swing_time_asymmetry_pct: control 1.73, PD 5.19, AUC 0.76, p 3.5e-08, median |change| 0
+2.5% of the recording's force level, relative rule on : 479 strides removed (162 records; threshold median 24 N, range 16 to 42 N)
+    stride_time_mean_s: control 1.09, PD 1.1, AUC 0.55, p 0.29, median |change| 5.53e-05
+    stride_time_cv_pct: control 4.22, PD 4.6, AUC 0.58, p 0.074, median |change| 0.0306
+    swing_time_asymmetry_pct: control 1.56, PD 5.01, AUC 0.80, p 9e-11, median |change| 0.394
+5% of the recording's force level, relative rule on : 432 strides removed (162 records; threshold median 48 N, range 31 to 84 N)
+    stride_time_mean_s: control 1.09, PD 1.11, AUC 0.55, p 0.29, median |change| 0.000372
+    stride_time_cv_pct: control 4.26, PD 4.62, AUC 0.59, p 0.047, median |change| 0.108
+    swing_time_asymmetry_pct: control 1.4, PD 4.05, AUC 0.75, p 6.1e-08, median |change| 0.897
+
+Participants with a recorded weight: 159 of 162.
+20 N as a share of body weight: median 2.8%, range 1.9 to 4.3%.
+Force level (95th percentile of each foot's total force, mean of the two feet) as a multiple of body weight: median 1.36, interquartile range 1.25 to 1.45, range 0.91 to 1.98.
