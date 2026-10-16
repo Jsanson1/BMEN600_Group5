@@ -49,10 +49,10 @@ owner: jamie | status: done | branch: jamie/T-007-project-structure | due: 2026-
 owner: jamie | status: done | branch: jamie/T-008-readme-front-page | due: 2026-10-12 | updated: 2026-10-13
 
 ### T-009 · Midterm §2 Background and Research Gap: literature review, existing ML approaches and their limits, the gap (lead jamie, reviewer anna; mirrors the Project Timeline sheet)
-owner: jamie | status: doing | branch: jamie/T-010-preliminary-results | due: 2026-10-15 | updated: 2026-10-14
+owner: jamie | status: done | branch: jamie/T-010-preliminary-results | due: 2026-10-15 | updated: 2026-10-16
 
 ### T-010 · Midterm §5 Preliminary Results: at least one team-made table or figure from the dataset, what it shows, what it changes (lead jamie, reviewer anna)
-owner: jamie | status: doing | branch: jamie/T-010-preliminary-results | due: 2026-10-15 | updated: 2026-10-14
+owner: jamie | status: done | branch: jamie/T-010-preliminary-results | due: 2026-10-15 | updated: 2026-10-16
 
 ### T-011 · Midterm §1 Introduction and Motivation: the research question and its rationale (lead anna, reviewer jamie)
 owner: anna | status: todo | branch: - | due: 2026-10-09 | updated: 2026-10-05
@@ -113,3 +113,6 @@ owner: jamie | status: done | branch: jamie/T-029-age-restriction | due: 2026-10
 
 ### T-030 · Decide the evaluation design and record it (supersedes D-005): the two datasets combined in participant-grouped cross-validation, plus training on one dataset and testing on the other, plus the dataset-of-origin check; §2, §4 and §5 of the midterm assume it
 owner: group | status: done | branch: - | due: 2026-10-15 | updated: 2026-10-16
+
+### T-031 · Sync the midterm snapshots in report/midterm/ with the submitted PDF (the AI-Assisted Work paragraph changed after commit 50a86e9; keep the submitted PDF's wording as the record)
+owner: jamie | status: todo | branch: - | due: 2026-10-23 | updated: 2026-10-16

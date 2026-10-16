@@ -239,3 +239,9 @@ Entry format:
 - **CRediT roles:** Validation.
 - **AI use:** Claude (cloud session) exported and checked the PDF; submission on D2L is left to the team.
 - **Verified:** the saved file differs from the previous check only in Anna's sentence; the PDF has 7 pages with References starting on page 6, the commit ID, the repository link, Anna's sentence, and no placeholder or comment; the copy in the Coursework folder is byte-identical to the exported file.
+
+### 2026-10-16 · T-009, T-010 · Midterm Research Plan submitted
+- **Did:** Jamie submitted the Midterm Research Plan PDF (`BMEN600_Group5_Midterm_Research_Plan.pdf`, citing commit `50a86e9`) on D2L at about 14:05. T-009 and T-010 are done; T-031 added for syncing the `report/midterm/` snapshots with the submitted wording.
+- **CRediT roles:** Project administration.
+- **AI use:** Claude (cloud session) updated the board, handoff and log; the submission was Jamie's.
+- **Verified:** Jamie reported the D2L submission; not independently checked from this session.
