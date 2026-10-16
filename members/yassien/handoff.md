@@ -23,7 +23,8 @@ _Updated 2026-10-02 15:40 by Claude Code for Yassien · branch `yassien/T-007-sh
 -->
 
 ## T-012, T-014 · Midterm Dataset and Responsible Use (§3) and Teamwork and Project Plan (§6), in the group's Word file
-_Updated 2026-10-16 01:40 by Claude (Cowork) for Yassien · text in the group's Word file (Anna's SharePoint); no branch, nothing in the repo for these tasks_
+
+Updated 2026-10-16 01:40 by Claude (Cowork) for Yassien · text in the group's Word file (Anna's SharePoint); no branch, nothing in the repo for these tasks
 
 - **Now:** both sections are in the shared file (§3 with Table I, §6 with Table III). Jamie's ten comments are handled: nine applied in a copy and sent as a find-and-replace list for the live file; the sentence on turns kept (Fig. 4A, Jamie agreed). Feedback on Anna's Methods posted in the group chat on 16 October (see log).
 - **Validated:** references [20] and [21] against Crossref and DataCite; a text comparison of each edited copy (only Yassien's sections and the citation numbers changed). **Not verified:** that every fix, and the two consistency fixes ("age and sex" as §3's demographic inputs; "Synapse access" removed from Table III), is in the live file; a line-by-line check of Table I by Yassien.

@@ -17,8 +17,8 @@ PD affects at least 1% of people over 60 and is the fastest-growing neurodegener
 ## Data
 
 | Dataset | Role | Access | Licence |
-|---|---|---|---|
-| PhysioNet "Gait in Parkinson's Disease" v1.0.0 [7], [8] | Development and primary evaluation. 93 PD and 73 controls, 306 recordings of about 2 min of self-paced walking with 8 force sensors under each foot at 100 Hz, three sub-studies (Ga, Ju, Si), Hoehn and Yahr and UPDRS scores. The analyses use the 162 participants aged 50 or over who have a recording: 91 PD, 71 controls ([DECISIONS.md](DECISIONS.md), D-006). | Open, no account: https://physionet.org/content/gaitpdb/1.0.0/ (DOI 10.13026/C24H3N) | ODC-By 1.0 |
+| --- | --- | --- | --- |
+| PhysioNet "Gait in Parkinson's Disease" v1.0.0 [7], [8] | Development and primary evaluation. 93 PD and 73 controls, 306 recordings of about 2 min of self-paced walking with 8 force sensors under each foot at 100 Hz, three sub-studies (Ga, Ju, Si), Hoehn and Yahr and UPDRS scores. The analyses use the 162 participants aged 50 or over who have a recording: 91 PD, 71 controls ([DECISIONS.md](DECISIONS.md), D-006). | Open, no account: <https://physionet.org/content/gaitpdb/1.0.0/> (DOI 10.13026/C24H3N) | ODC-By 1.0 |
 | WearGait-PD [9] | External test set. 100 PD and 85 controls before the age rule, recorded by a different group with inertial sensors, pressure insoles and an instrumented walkway. | Synapse (syn52540892), free account and acceptance of the data-use terms required | CC BY 4.0 |
 
 Data are never committed. Download steps, checksums and the known quirks of the files are in [data/raw/README.md](data/raw/README.md); the PhysioNet ZIP unpacks into `data/raw/gaitpdb/`, which git ignores.
@@ -26,7 +26,7 @@ Data are never committed. Download steps, checksums and the known quirks of the 
 ## What is in the repository
 
 | Path | What it holds |
-|---|---|
+| --- | --- |
 | `src/gaitpdb/` | The shared Python package: `io.py` reads the record files and `demographics.txt`; `cohort.py` holds the group's age rule (D-006), which every analysis applies through it; `events.py` finds heel strikes and toe offs from the per-foot total force and flags which strides to keep; `features.py` turns one recording into stride, swing and stance timing, their variability, cadence and left-right asymmetry; `evaluation.py` fixes the model inputs, the participant-grouped and leave-one-study-out splits, the metrics and their intervals for all three models, and saves each model's results in the form the comparison reads. |
 | `scripts/` | One script per output (see "How to run"). |
 | `results/` | Tables and numbers produced by the scripts: `table1_participants.md`, `features_usual_walk.csv` (one row per usual-walk recording), `features_usual_walk_by_group.csv`, `figure1_summary.txt`, `event_detection_checks.txt`, `data_quality.txt`, `dual_task_check.txt`; for each model script a `*_summary.txt` and its fold metrics and predictions (`*_folds.csv`, `*_cv_predictions.csv`, `*_loso_predictions.csv`); `model_comparison.txt` (also `.md` and `.csv`), every model side by side; and `weargait_participants.txt`, WearGait-PD's participants before and after the age rule. |
@@ -41,7 +41,7 @@ Data are never committed. Download steps, checksums and the known quirks of the 
 
 Platform: plain Python scripts run from a terminal (no notebook or MATLAB), Python 3.11 or newer, packages numpy, pandas, scipy, scikit-learn, matplotlib and tabulate (`requirements.txt`). Tested on Linux; nothing in the code is platform-specific.
 
-```
+```bash
 python -m pip install -r requirements.txt
 # download and unpack the PhysioNet ZIP into data/raw/gaitpdb/ (see data/raw/README.md), then:
 python scripts/verify_data.py            # every file against PhysioNet's SHA256SUMS.txt
@@ -76,7 +76,7 @@ Section leads for the midterm plan and owners for the project phase are in the t
 
 ## References
 
-[1] S. Zafar, F. Lui, and S. S. Yaddanapudi, "Parkinson disease," in *StatPearls* [Internet]. Treasure Island, FL, USA: StatPearls Publishing, updated Sep. 15, 2025. [Online]. Available: https://www.ncbi.nlm.nih.gov/books/NBK470193/ (accessed Oct. 5, 2026).
+[1] S. Zafar, F. Lui, and S. S. Yaddanapudi, "Parkinson disease," in *StatPearls* [Internet]. Treasure Island, FL, USA: StatPearls Publishing, updated Sep. 15, 2025. [Online]. Available: <https://www.ncbi.nlm.nih.gov/books/NBK470193/> (accessed Oct. 5, 2026).
 
 [2] G. Rizzo, M. Copetti, S. Arcuti, D. Martino, A. Fontana, and G. Logroscino, "Accuracy of clinical diagnosis of Parkinson disease: A systematic review and meta-analysis," *Neurology*, vol. 86, no. 6, pp. 566–576, Feb. 2016, doi: 10.1212/WNL.0000000000002350.
 
@@ -88,7 +88,7 @@ Section leads for the midterm plan and owners for the project phase are in the t
 
 [6] R. Mittal et al., "Machine learning approach to gait analysis for Parkinson's disease detection and severity classification," *Front. Robot. AI*, vol. 12, Art. no. 1623529, Dec. 2025, doi: 10.3389/frobt.2025.1623529.
 
-[7] J. M. Hausdorff, "Gait in Parkinson's Disease (version 1.0.0)," PhysioNet, Feb. 2008, doi: 10.13026/C24H3N. [Online]. Available: https://physionet.org/content/gaitpdb/1.0.0/
+[7] J. M. Hausdorff, "Gait in Parkinson's Disease (version 1.0.0)," PhysioNet, Feb. 2008, doi: 10.13026/C24H3N. [Online]. Available: <https://physionet.org/content/gaitpdb/1.0.0/>
 
 [8] T. Pollard et al., "PhysioNet as a global platform for biomedical research," *Nature Health*, vol. 1, pp. 792–795, 2026, doi: 10.1038/s44360-026-00096-z.
 
