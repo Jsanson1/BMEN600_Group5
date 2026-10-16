@@ -34,7 +34,7 @@ owner: group | status: done | branch: - | due: 2026-10-05 | updated: 2026-10-05
 owner: anna | status: todo | branch: - | due: 2026-10-05 | updated: 2026-10-02
 
 ### T-004 · One-time repo setup and a first `/start` (CONTRIBUTING.md), then mark this done
-owner: yassien | status: todo | branch: - | due: 2026-10-05 | updated: 2026-10-02
+owner: yassien | status: done | branch: - | due: 2026-10-05 | updated: 2026-10-16
 
 ### T-005 · Re-clone the repo outside OneDrive (CONTRIBUTING.md step 1; the old clone has no uncommitted work) and do the one-time setup
 owner: jamie | status: done | branch: - | due: 2026-10-05 | updated: 2026-10-05

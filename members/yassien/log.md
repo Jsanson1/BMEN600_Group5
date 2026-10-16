@@ -55,3 +55,10 @@ Entry format:
 - **CRediT roles:** none.
 - **AI use:** Claude (Cowork); Yassien reviews the entries before they are pushed.
 - **Verified:** dates and details against the session history and the group-chat messages Yassien shared. Not verified: anything done outside this session.
+
+
+### 2026-10-16 · T-004, T-012, T-014 · End statements filled; pre-commit hook on
+- **Did:** Compared the shared file downloaded on 16 October with the 15 October copy: Jamie's fixes and the two consistency fixes are in the live file. Filled Yassien's three placeholders in a copy of it: his AI uses in AI-Assisted Work; a sentence pointing to this log and saying how Section III was checked (J. Sanson's review against the WearGait-PD article, the participant sheets and the PhysioNet page; Yassien's own check of Fig. 4A); and his Author Contributions line. Split the shared "[Anna, Yassien: your logs.]" placeholder so that Anna's part stays as "[Anna: your log.]". Switched on the pre-commit hook in this clone (`git config core.hooksPath .githooks`) and set T-004 to done.
+- **CRediT roles:** Writing – review & editing, Project administration.
+- **AI use:** Claude (Cowork) wrote the three statements from this log and made the edits in a copy; Yassien asked for his remaining items to be done and puts the text into the live file.
+- **Verified:** text comparison (only the two end-statement paragraphs changed); the file passes the OOXML schema check; in a LibreOffice render the body ends on page 6 and the references start there. Not verified: Word's layout after the paste; ruff on the machine where the commits are made (the hook skips it when missing, and GitHub runs it).
