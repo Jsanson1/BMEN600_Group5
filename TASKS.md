@@ -112,4 +112,4 @@ owner: jamie | status: done | branch: jamie/T-028-assembly-helper | due: 2026-10
 owner: jamie | status: done | branch: jamie/T-029-age-restriction | due: 2026-10-15 | updated: 2026-10-14
 
 ### T-030 · Decide the evaluation design and record it (supersedes D-005): the two datasets combined in participant-grouped cross-validation, plus training on one dataset and testing on the other, plus the dataset-of-origin check; §2, §4 and §5 of the midterm assume it
-owner: group | status: decide | branch: - | due: 2026-10-15 | updated: 2026-10-14
+owner: group | status: done | branch: - | due: 2026-10-15 | updated: 2026-10-16

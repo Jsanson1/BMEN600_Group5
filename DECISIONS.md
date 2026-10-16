@@ -37,7 +37,7 @@ Status: Accepted (group decision at the Friday 2 October meeting, reported by Ja
 - The writing happens in the shared Google Doc "BMEN 600 Group 5 – Midterm Research Plan (draft)"; the repository holds code, results, figures and the verified-sources ledger (`report/midterm/sources.md`).
 
 ### D-005 · 2026-10-05 · Which dataset the midterm analyses use
-Status: Proposed by Jamie. To be confirmed at the next meeting.
+Status: Superseded by D-007
 - All midterm analyses use the PhysioNet "Gait in Parkinson's Disease" database v1.0.0 (open access, no account, downloaded). One independent case is one participant; participants contribute 1 to 7 recordings and are never split across training and test folds.
 - WearGait-PD (Synapse, account required) is named in the plan as an external test set "if time allows". Nobody starts on it before the midterm is submitted.
 - The README's "GaitPDB" link points at a Nature Health comment about PhysioNet, not at the dataset; it is corrected under T-008.
@@ -47,3 +47,11 @@ Status: Accepted (group decision, reported by Jamie on 13 October)
 - Every analysis uses only participants aged 50 or over, by the age in each dataset's demographic table, in the PhysioNet database and in WearGait-PD. The plan's intended use is screening people over 50 (Midterm Research Plan, section 1).
 - PhysioNet: this removes JuPt25, SiPt24 and SiCo12 (aged 45, 36 and 37). The analysed cohort is the 162 participants aged 50 or over who have a usual-walk recording: 91 with PD and 71 controls. WearGait-PD: the counts are checked once its participant table is downloaded.
 - The rule lives in one place in the shared code (T-029), so every model, table and figure uses the same participants.
+
+### D-007 · 2026-10-16 · Evaluation design: the two datasets combined, plus a cross-cohort test (supersedes D-005)
+Status: Accepted (proposed by Jamie in the group chat on 15 October, agreed by Yassien on 16 October; recorded by Jamie on 16 October)
+- Main analysis: the PhysioNet "Gait in Parkinson's Disease" database v1.0.0 and WearGait-PD combined, with the models compared under the shared participant-grouped, stratified cross-validation (`src/gaitpdb/evaluation.py`).
+- Cross-cohort test: models trained on PhysioNet and tested on WearGait-PD. The plan's title and research gap rest on this test.
+- Also in the plan (Midterm Research Plan, Table III): within PhysioNet, each of its three sub-studies held out in turn, and a check of whether a model can tell which dataset a recording came from.
+- Kept from D-005: one independent case is one participant, and a participant's recordings are never split between training and test folds.
+- Supersedes D-005, under which WearGait-PD was an optional external test set and every midterm analysis used PhysioNet only. The midterm's preliminary results still use PhysioNet only.
