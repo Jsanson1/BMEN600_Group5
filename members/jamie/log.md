@@ -221,3 +221,9 @@ Entry format:
 - **CRediT roles:** Writing – review & editing, Validation.
 - **AI use:** Claude (cloud session) reviewed the file, chose and made the edits, and wrote the snapshot and the pull request. Jamie asked for the edits to be made ("get it done") and approved the download; he has not yet read the edited paragraphs, and Anna and Yassien had not yet been told of the edits at the time of this entry.
 - **Verified:** each search string occurred once before and not at all after; exactly the 11 expected paragraphs changed, matching the intended text by hash in the saved file; the two equations; reference [5] against the Burtscher full text read on 14 October. Not verified: reference [3] for the early-onset sentence; the Synapse terms for the team's Kaggle copies; Word's page layout.
+
+### 2026-10-16 · T-009, T-010 · Commit ID in the Word file; pull request #13 merged
+- **Did:** Jamie did the three checks his verification sentence states (reported at 13:21) and merged pull request #13 (merge commit `50a86e9`, checks green). Claude put "commit 50a86e9" into Data and Code Availability in the agreed Word file, removed the placeholder's yellow highlight, and deleted the first of Anna's two comments (both answered in the group chat at Jamie's request); deleting the second was refused by the session's safety check and is left to Jamie or Anna.
+- **CRediT roles:** Validation, Writing – review & editing.
+- **AI use:** Claude (cloud session) made the edits in Word for the web and verified them; Jamie did the three source checks himself and merged the pull request.
+- **Verified:** the saved file read back paragraph by paragraph matches the expected text exactly (250 paragraphs), with no highlight, tracked change or placeholder left; in Word's own layout the References start near the bottom of page 6. Not verified yet: the exported PDF.
