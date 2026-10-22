@@ -31,7 +31,7 @@ owner: jamie | status: done | branch: bootstrap commit on main | due: 2026-10-02
 owner: group | status: done | branch: - | due: 2026-10-05 | updated: 2026-10-05
 
 ### T-003 · One-time repo setup and a first `/start` (CONTRIBUTING.md), then mark this done
-owner: anna | status: todo | branch: - | due: 2026-10-05 | updated: 2026-10-02
+owner: anna | status: done | branch: - | due: 2026-10-05 | updated: 2026-10-22
 
 ### T-004 · One-time repo setup and a first `/start` (CONTRIBUTING.md), then mark this done
 owner: yassien | status: done | branch: - | due: 2026-10-05 | updated: 2026-10-16
