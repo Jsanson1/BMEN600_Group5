@@ -73,3 +73,33 @@ Entry format:
   `data/raw/README.md`; cohort counts reproduce the team's (162 gaitpdb, 181 WearGait-PD); the flat PD force
   is in the raw 100 Hz sensor data. **Not verified:** the exploratory numbers and figures come from scratch
   scripts not yet in the repo, and cover six participants only; the paper's values were typed in by Anna.
+
+### 2026-10-23 · T-017 · Turn removal: filters, simulation, turn timing
+- **Did:** committed the exploration as a reproducible script, `scripts/explore_stride_rules.py`
+  (figures in `figures/explore_stride_rules/`, numbers in `results/explore_stride_rules.txt`), and a report
+  skeleton, `report/T-017_stride_rule_exploration.md`, whose interpretation sections Anna will write.
+  Checked the turn-removal idea three ways. (1) Simulated walks built from the real participants' turn
+  shapes and PD slow wander, 100 random seeds, reporting per-stride sensitivity and specificity for three
+  removal rules (band-pass peaks, hysteresis, hysteresis capped at 3 strides; all with one stride removed
+  either side): an amplitude threshold cannot separate modest turns from PD slow wander. (2) The same rules
+  on the six example walks. (3) Turn timing: expected interval = path length / speed (25 m Ga and Ju, 35 m
+  Si, from the sub-studies' papers), against each walk's slow stride rhythm (Lomb-Scargle) on all 162
+  analysed walks: within 20% for 67%; Si fits a 35 m hallway. Most "stops" and "artefacts" in the six
+  examples fall at predicted turn times. Decided with Anna: remove only turns and other non-walking strides
+  (each turn's time window from both feet, plus one stride either side) and leave the stride series
+  unfiltered, because slow fluctuation and asymmetry may characterise PD.
+- **CRediT roles:** Investigation, Formal analysis, Methodology, Software, Validation.
+- **AI use:** Claude Code (Claude Opus 5.5) wrote the exploration script and the scratch simulation and
+  timing scripts, ran them and drafted the report skeleton and handoff. Anna directed the work: chose to
+  share findings as a script and markdown report rather than a notebook (to raise notebooks with the team),
+  chose mean removal before filtering, asked for a test on a simulated turn (Claude proposed the harder,
+  data-matched version and the capped extension; Anna agreed), asked for sensitivity and specificity and
+  for removing the stride before and after each turn, rejected high-passing the series because slow wander may be a
+  PD signal, required that removal across both feet must not distort gait asymmetry, and supplied the
+  walking paths of the Ga, Ju and Si protocols from their papers. Anna had the script walked through
+  section by section before it was committed.
+- **Verified:** the script reproduces the earlier scratch numbers; ruff passes; mean vs median removal
+  before filtering gives identical output (checked numerically). **Not verified:** the simulation and
+  timing results come from scratch scripts not yet in the repo; turn locations are not checked beyond six
+  walks; the protocol papers' path lengths were typed in by Anna and the references are not yet in
+  `report/midterm/sources.md`.
