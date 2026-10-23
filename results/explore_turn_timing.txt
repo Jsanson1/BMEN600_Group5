@@ -1,0 +1,52 @@
+T-017 turn timing (scripts/explore_turn_timing.py); exploratory, src/ unchanged
+Paths {'Ga': 25.0, 'Ju': 25.0, 'Si': 35.0} m [UNVERIFIED]; rhythm search (0.7, 1.5) x expected; turn stride >= 1.1 x median; window +/- 2.0 s; plus 1 stride each side
+
+No usable Speed_01, skipped: GaPt03_01
+1. Walks analysed: 161
+                n  turns_found  turns_possible  removed_pct  cv_team  cv_turns_removed  both_feet_pct
+study group                                                                                          
+Ga    Control  18          6.0             6.0        32.60     4.92              2.18           96.0
+      PD       28          3.5             4.0        19.08     4.67              3.18           93.0
+Ju    Control  25          3.0             3.0        22.16     4.63              2.61           95.0
+      PD       28          3.0             3.0        19.67     4.77              3.12           96.0
+Si    Control  28          3.0             4.0        17.60     3.59              2.47           92.0
+      PD       34          3.0             3.0        17.03     4.22              2.57           96.0
+  (medians per walk; both_feet_pct = share of turns where the other foot is also disturbed)
+
+2. % strides removed, PD vs control: median 17.7 vs 21.4, Mann-Whitney p = 0.005
+   Walks with no turn found: 2 (PD 1, control 1)
+
+3. Known answer: complete Ju walks (>= 90% of 100 m / Speed_01): 41 of 53
+turns_found  1  2   3  4  6
+group                      
+Control      2  2  15  2  0
+PD           0  2  16  1  1
+   Exactly 3 turns found: 31 of 41
+
+4. Removal split: turns vs the fixed limits (median % of strides per walk)
+               turn_pct  limits_only_pct  removed_pct
+study group                                          
+Ga    Control      32.6              0.0         32.6
+      PD           19.1              0.0         19.1
+Ju    Control      22.2              0.0         22.2
+      PD           19.7              0.0         19.7
+Si    Control      17.4              0.0         17.6
+      PD           17.0              0.0         17.0
+   Missed heel strikes (one foot ~2x, other foot undisturbed) removed beyond turns and limits: 0 strides in 0 walks
+   Walks whose CV rises by > 1 point vs the team rules: 2
+     SiCo16_01: 2.99 -> 7.34
+     SiCo20_01: 3.30 -> 6.54
+
+5. Could length alone identify PD? AUC = P(a PD walk has the higher value)
+   walking time (s): median PD 120.0 vs control 119.8; AUC 0.57, p = 0.114
+   strides kept, team rules: median PD 205.5 vs control 201.0; AUC 0.52, p = 0.685
+   strides kept, turns + limits: median PD 168.0 vs control 154.0; AUC 0.60, p = 0.0247
+   % strides removed, turns + limits: median PD 17.7 vs control 21.4; AUC 0.37, p = 0.00462
+
+6. The six example walks
+   Control GaCo08_01: expected 25.6 s, used 21.0 s (rhythm), turns 5 of 5 possible (5 on both feet), removed 30%, CV 5.57 -> 2.14
+   PD GaPt23_01: expected 69.4 s, used 69.4 s (expected), turns 1 of 1 possible (1 on both feet), removed 6%, CV 6.37 -> 6.13
+   Control JuCo02_01: expected 18.8 s, used 18.8 s (expected), turns 1 of 2 possible (1 on both feet), removed 17%, CV 3.08 -> 2.22
+   PD JuPt19_01: expected 21.1 s, used 23.8 s (rhythm), turns 3 of 3 possible (2 on both feet), removed 21%, CV 3.42 -> 2.15
+   Control SiCo03_01: expected 25.5 s, used 27.3 s (rhythm), turns 1 of 4 possible (1 on both feet), removed 6%, CV 3.08 -> 2.45
+   PD SiPt33_01: expected 32.4 s, used 35.6 s (rhythm), turns 3 of 3 possible (2 on both feet), removed 18%, CV 4.47 -> 3.34
