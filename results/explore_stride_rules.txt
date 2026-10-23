@@ -1,0 +1,95 @@
+T-017 exploration of the stride rules (scripts/explore_stride_rules.py)
+Exploratory: six participants for the figures; nothing in src/ changed.
+
+1. Strides removed by the current rules (analysed usual walks)
+Rules: 0.5-2.5 s, swing 10-70% of the stride, 0.7-1.3 x the foot's median stride in the record (gaitpdb.events).
+               count  50%  75%  max
+study group                        
+Ga    Control   18.0  2.6  4.0  6.2
+      PD        29.0  2.1  2.8  5.5
+Ju    Control   25.0  1.4  2.5  3.6
+      PD        28.0  2.4  2.8  4.8
+Si    Control   28.0  0.0  1.4  2.9
+      PD        34.0  1.0  2.1  5.4
+All studies, median % removed: PD 1.72, control 1.30; Mann-Whitney p = 0.069
+
+Example pairs (closest to their group's median removal, per sub-study):
+  Ga: control GaCo08_01, PD GaPt23_01
+  Ju: control JuCo02_01, PD JuPt19_01
+  Si: control SiCo03_01, PD SiPt33_01
+
+2. Raw left-foot sensors of GaPt23_01, one stance phase (every 5th sample, N)
+Sensors L1 heel ... L8 toes (positions in the PhysioNet format.txt).
+ time_s     L1     L2     L3    L4     L5     L6     L7     L8  L_total
+  30.68  24.75   0.00   0.00  0.00   0.00   0.00   0.00   0.00    24.75
+  30.73 116.38  54.56  39.27  4.18   0.00   0.00   0.00   0.00   214.39
+  30.78 170.06 106.15  59.51 14.63   8.58   0.00   0.00   0.00   358.93
+  30.83 210.65 141.02  75.13 20.90  10.78   0.00   4.51   0.00   462.99
+  30.88 240.90 171.60  84.04 29.26  12.98   0.00   6.71   0.00   545.49
+  30.93 255.09 171.60  97.46 29.26  23.87   0.00   9.02   4.51   590.81
+  30.98 257.07 173.69 104.06 33.44  39.05   6.27  15.73   6.71   636.02
+  31.03 257.07 188.21 101.86 41.80  43.34   6.27  20.24   9.02   667.81
+  31.08 267.19 200.64 106.37 45.98  52.03   8.47  27.06  11.22   718.96
+  31.13 275.22 204.71 117.48 48.07  67.21  12.65  45.10  13.53   783.97
+  31.18 285.23 200.64 126.28 43.89  84.37  14.74  60.94  15.73   831.82
+  31.23 294.91 188.21 139.48 33.44  90.86  12.65  72.82  13.53   845.90
+  31.28 298.87 167.53 150.48 20.90  90.86  10.56  79.86  13.53   832.59
+  31.33 296.89 158.62 154.88 16.72  95.15   8.47  87.01  13.53   831.27
+  31.38 285.23 156.42 150.48 20.90  97.24  10.56  94.05  15.73   830.61
+  31.43 271.26 147.62 146.08 22.99 103.73  14.74 105.93  18.04   830.39
+  31.48 257.07 138.82 146.08 27.17 114.51  16.94 122.10  20.24   842.93
+  31.53 238.92 132.22 141.68 33.44 123.20  23.21 135.74  24.75   853.16
+  31.58 186.34 116.82 117.48 54.34 127.60  38.06 151.58  27.06   819.28
+  31.63 116.38  86.35  75.13 81.95 125.40  57.42 167.53  33.77   743.93
+  31.68  28.93  30.14  27.50 90.42 125.40  71.50 181.50  36.08   591.47
+  31.73   8.25   0.00   3.85 69.19  97.24  83.27 197.78  29.26   488.84
+  31.78   0.00   0.00   0.00 27.17  54.23 102.08 237.16  29.26   449.90
+  31.83   0.00   0.00   0.00  6.27  17.27  99.66 250.91  36.08   410.19
+  31.88   0.00   0.00   0.00  4.18  10.78  50.82 183.81  78.21   327.80
+  31.93   0.00   0.00   0.00  0.00   6.49  12.65  60.94 135.96   216.04
+  31.98   0.00   0.00   0.00  0.00   0.00   0.00  11.22  33.77    44.99
+
+3. Stride-to-stride differences (consecutive strides only), RMS in s
+  Control GaCo08_01 L: 97 differences, RMS 0.095
+  Control GaCo08_01 R: 97 differences, RMS 0.167
+  PD GaPt23_01 L: 72 differences, RMS 0.352
+  PD GaPt23_01 R: 68 differences, RMS 1.103
+
+4. Power spectra of the stride series (artefacts set to the median first)
+  Control GaCo08_01 L: strongest peaks at 0.061 (every 16.3 strides), 0.122 (every 8.2 strides), 0.051 (every 19.6 strides)
+  Control GaCo08_01 R: strongest peaks at 0.061 (every 16.3 strides), 0.122 (every 8.2 strides), 0.112 (every 8.9 strides)
+  PD GaPt23_01 L: strongest peaks at 0.014 (every 73.0 strides), 0.041 (every 24.3 strides), 0.247 (every 4.1 strides)
+  PD GaPt23_01 R: strongest peaks at 0.014 (every 69.0 strides), 0.043 (every 23.0 strides), 0.391 (every 2.6 strides)
+
+5. Filter gain after filtfilt (|H|^2), order 2
+  band-pass 0.03-0.18: 0.03:0.50  0.06:1.00  0.12:0.96  0.15:0.78  0.18:0.50  0.20:0.33  0.25:0.10  0.30:0.03  0.40:0.00  0.50:0.00
+  high-pass 0.18: 0.03:0.00  0.06:0.01  0.12:0.13  0.15:0.29  0.18:0.50  0.20:0.63  0.25:0.86  0.30:0.96  0.40:1.00  0.50:1.00
+
+6. High-pass on the stride series, by sub-study
+  Ga: stride-time CV, current rules vs high-pass (% of mean stride)
+    Control GaCo08_01 L: artefacts 0; current CV 5.38; high-pass 4.02
+    Control GaCo08_01 R: artefacts 1; current CV 5.77; high-pass 3.91
+    Control GaCo08_01: team feature stride_time_cv_pct = 5.57
+    PD GaPt23_01 L: artefacts 1; current CV 5.91; high-pass 3.19
+    PD GaPt23_01 R: artefacts 1; current CV 6.84; high-pass 4.69
+    PD GaPt23_01: team feature stride_time_cv_pct = 6.37
+  Ju: stride-time CV, current rules vs high-pass (% of mean stride)
+    Control JuCo02_01 L: artefacts 0; current CV 3.03; high-pass 2.01
+    Control JuCo02_01 R: artefacts 1; current CV 3.13; high-pass 1.25
+    Control JuCo02_01: team feature stride_time_cv_pct = 3.08
+    PD JuPt19_01 L: artefacts 0; current CV 4.04; high-pass 5.76
+    PD JuPt19_01 R: artefacts 3; current CV 2.80; high-pass 1.35
+    PD JuPt19_01: team feature stride_time_cv_pct = 3.42
+  Si: stride-time CV, current rules vs high-pass (% of mean stride)
+    Control SiCo03_01 L: artefacts 0; current CV 3.05; high-pass 1.43
+    Control SiCo03_01 R: artefacts 0; current CV 3.10; high-pass 1.54
+    Control SiCo03_01: team feature stride_time_cv_pct = 3.08
+    PD SiPt33_01 L: artefacts 1; current CV 4.31; high-pass 2.19
+    PD SiPt33_01 R: artefacts 1; current CV 4.63; high-pass 3.64
+    PD SiPt33_01: team feature stride_time_cv_pct = 4.47
+
+7. Si walk 01 vs the Si study's conditions (all Si recordings, no age rule)
+Paper values [UNVERIFIED reference], typed from the paper.
+  PD: ours n = 35, speed 1.11 (SD 0.14) m/s, stride CV 4.30% | paper n = 36, speed unassisted 1.12, walker 1.05, treadmill 1.05 m/s; CV unassisted 2.24%
+  Control: ours n = 29, speed 1.25 (SD 0.17) m/s, stride CV 3.57% | paper n = 30, speed unassisted 1.24, walker 1.21, treadmill 1.21 m/s; CV unassisted 1.94%
+
