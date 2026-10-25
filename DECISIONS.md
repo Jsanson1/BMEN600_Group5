@@ -55,3 +55,9 @@ Status: Accepted (proposed by Jamie in the group chat on 15 October, agreed by Y
 - Also in the plan (Midterm Research Plan, Table III): within PhysioNet, each of its three sub-studies held out in turn, and a check of whether a model can tell which dataset a recording came from.
 - Kept from D-005: one independent case is one participant, and a participant's recordings are never split between training and test folds.
 - Supersedes D-005, under which WearGait-PD was an optional external test set and every midterm analysis used PhysioNet only. The midterm's preliminary results still use PhysioNet only.
+
+### D-008 · 2026-10-25 · Turns in gaitpdb are found from walking-path timing
+Status: Accepted (group decision, reported by Anna on 25 October)
+- After comparing several algorithms (i.e. a frequency-based, a derivative-based, and a timing-based approach) to detect turns, timing-based was selected to avoid filtering out jitters in stride duration that may be characteristic of PD gait, and to avoid misclassifying a more variable stride duration as a turn.
+- Thus, each sub-study of gaitpdb will estimate the expected turn location based on the distance of the walkway within its corresponding methodology, as well as the participant's average velocity.
+- The strides immediately preceding and following a turn will also be removed.
