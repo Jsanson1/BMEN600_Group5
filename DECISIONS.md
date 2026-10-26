@@ -61,3 +61,13 @@ Status: Accepted (group decision, reported by Anna on 25 October)
 - After comparing several algorithms (i.e. a frequency-based, a derivative-based, and a timing-based approach) to detect turns, timing-based was selected to avoid filtering out jitters in stride duration that may be characteristic of PD gait, and to avoid misclassifying a more variable stride duration as a turn.
 - Thus, each sub-study of gaitpdb will estimate the expected turn location based on the distance of the walkway within its corresponding methodology, as well as the participant's average velocity.
 - The strides immediately preceding and following a turn will also be removed.
+
+### D-009 · 2026-10-23 · Si walk 01 is analysed as overground walking
+Status: Accepted (group decision at the full-team discussion on 23 October, reported by Anna on 25 October)
+- The Si sub-study's usual walk (walk 01) is treated as unassisted overground walking, so the methods' exclusion of treadmill walking does not remove the Si participants.
+- Basis: walking speed matches the Si paper's unassisted condition in both groups, PhysioNet defines walk 01 as "a usual, normal walk", and the stride series show a turn rhythm matching a 35 m hallway (`members/anna/log.md`, 23 October). The dataset does not state the condition explicitly, so this is an assumption, and the methods say so.
+
+### D-010 · 2026-10-23 · The team uses Jupyter notebooks alongside scripts
+Status: Accepted (group decision at the full-team discussion on 23 October, reported by Anna on 25 October)
+- The team will use Jupyter notebooks alongside the scripts, so that results and figures can be shared more easily within the team.
+- This changes the README's statement that the project uses plain Python scripts and no notebooks.
