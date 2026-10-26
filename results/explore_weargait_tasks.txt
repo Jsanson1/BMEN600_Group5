@@ -1,0 +1,25 @@
+T-017 WearGait-PD straight-walking tasks pooled (scripts/explore_weargait_tasks.py)
+Exploratory; insole stride timing provisional (20 N). Per-foot counts of clean strides.
+
+Participants aged >= 50: 181; with insole data in all three tasks: 167
+
+1. Participants reaching N clean strides (counts / participants with insole data)
+   SelfPace only, weaker foot: Control: median 9, >= 20: 3/75, >= 30: 0/75 | PD: median 8, >= 20: 5/94, >= 30: 1/94
+   3 tasks pooled, weaker foot: Control: median 10, >= 20: 17/75, >= 30: 4/75 | PD: median 9, >= 20: 15/94, >= 30: 5/94
+   3 tasks pooled, no +/-1 turn margin, weaker foot: Control: median 26, >= 20: 64/75, >= 30: 26/75 | PD: median 25, >= 20: 77/94, >= 30: 23/94
+   3 tasks pooled, both feet together: Control: median 24, >= 20: 47/75, >= 30: 27/75 | PD: median 21, >= 20: 55/94, >= 30: 26/94
+
+2. Drift across tasks, every participant with all three tasks (median of per-participant values)
+   swing_baseline: SelfPace 3.00 N
+      SelfPace_mat: 3.50 N; change vs SelfPace median +0.00 (IQR -0.25 to +1.00), Wilcoxon p = 0.169
+      SelfPace_matTURN: 3.00 N; change vs SelfPace median +0.00 (IQR -1.75 to +1.00), Wilcoxon p = 0.107
+   peak: SelfPace 1096.00 N
+      SelfPace_mat: 1064.50 N; change vs SelfPace median -19.00 (IQR -48.50 to +4.00), Wilcoxon p = 1.23e-09
+      SelfPace_matTURN: 1066.50 N; change vs SelfPace median -21.00 (IQR -51.50 to +3.75), Wilcoxon p = 3.29e-10
+   median_stride: SelfPace 1.19 s
+      SelfPace_mat: 1.17 s; change vs SelfPace median -0.02 (IQR -0.05 to +0.03), Wilcoxon p = 0.00131
+      SelfPace_matTURN: 1.16 s; change vs SelfPace median -0.03 (IQR -0.07 to +0.01), Wilcoxon p = 1.17e-08
+
+3. Example Control WHC015: clean strides per task (L/R) SelfPace 10/9; SelfPace_mat 0/2; SelfPace_matTURN 0/0; pooled weaker foot 10
+3. Example PD NLS190: clean strides per task (L/R) SelfPace 8/9; SelfPace_mat 1/0; SelfPace_matTURN 1/0; pooled weaker foot 9
+   (PD example chosen by rule: all three tasks, median stride 0.8-1.8 s in each, pooled count closest to the PD median)

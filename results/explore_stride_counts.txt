@@ -1,0 +1,202 @@
+T-017 clean strides per foot, both datasets (scripts/explore_stride_counts.py)
+Exploratory; WearGait-PD stride timing provisional (20 N on insoles). N = 30.
+
+Not countable: 13
+  gaitpdb GaPt03 (PD): no Speed_01: turns cannot be located
+  WearGait-PD NLS179 (PD): no insole data
+  WearGait-PD NLS144 (PD): no insole data
+  WearGait-PD NLS147 (PD): no insole data
+  WearGait-PD NLS162 (PD): no insole data
+  WearGait-PD NLS145 (Control): no SelfPace file
+  WearGait-PD NLS193 (Control): no SelfPace file
+  WearGait-PD NLS207 (Control): no SelfPace file
+  WearGait-PD HC138 (Control): no insole data
+  WearGait-PD HC140 (Control): no insole data
+  WearGait-PD HC154 (Control): no insole data
+  WearGait-PD HC100 (Control): no insole data
+  WearGait-PD HC106 (Control): no insole data
+
+Clean strides on the participant's weaker foot
+                     count   min   10%   50%    max  below_N
+dataset     group                                           
+WearGait-PD Control   75.0   0.0   5.0   9.0   26.0       75
+            PD        94.0   0.0   4.0   8.0   33.0       93
+gaitpdb     Control   71.0  25.0  50.0  74.0  113.0        2
+            PD        90.0  26.0  63.0  82.0  151.0        1
+
+Lowest overall: NLS056 (WearGait-PD, PD), 0 strides on the weaker foot
+Lowest in WearGait-PD: NLS056 (PD), 0
+Lowest in gaitpdb: JuCo03 (Control), 25
+
+Below N = 30: 171 of 330
+  WearGait-PD NLS056 (PD, NLS): 0
+  WearGait-PD NLS185 (PD, NLS): 0
+  WearGait-PD NLS172 (PD, NLS): 0
+  WearGait-PD HC121 (Control, HC): 0
+  WearGait-PD WPD011 (PD, WPD): 1
+  WearGait-PD NLS140 (PD, NLS): 2
+  WearGait-PD NLS170 (PD, NLS): 2
+  WearGait-PD HC109 (Control, HC): 2
+  WearGait-PD NLS197 (PD, NLS): 3
+  WearGait-PD HC105 (Control, HC): 3
+  WearGait-PD HC113 (Control, HC): 3
+  WearGait-PD NLS121 (PD, NLS): 4
+  WearGait-PD NLS141 (PD, NLS): 4
+  WearGait-PD NLS160 (PD, NLS): 4
+  WearGait-PD NLS169 (PD, NLS): 4
+  WearGait-PD WHC018 (Control, WHC): 4
+  WearGait-PD NLS195 (PD, NLS): 5
+  WearGait-PD NLS209 (PD, NLS): 5
+  WearGait-PD WPD012 (PD, WPD): 5
+  WearGait-PD WPD005 (PD, WPD): 5
+  WearGait-PD NLS002 (PD, NLS): 5
+  WearGait-PD NLS135 (PD, NLS): 5
+  WearGait-PD NLS148 (PD, NLS): 5
+  WearGait-PD NLS155 (PD, NLS): 5
+  WearGait-PD WHC026 (Control, WHC): 5
+  WearGait-PD WHC033 (Control, WHC): 5
+  WearGait-PD WHC014 (Control, WHC): 5
+  WearGait-PD HC104 (Control, HC): 5
+  WearGait-PD HC103 (Control, HC): 5
+  WearGait-PD HC108 (Control, HC): 5
+  WearGait-PD HC114 (Control, HC): 5
+  WearGait-PD WHC001 (Control, WHC): 5
+  WearGait-PD WHC004 (Control, WHC): 5
+  WearGait-PD NLS194 (PD, NLS): 6
+  WearGait-PD NLS187 (PD, NLS): 6
+  WearGait-PD NLS102 (PD, NLS): 6
+  WearGait-PD NLS142 (PD, NLS): 6
+  WearGait-PD NLS152 (PD, NLS): 6
+  WearGait-PD NLS164 (PD, NLS): 6
+  WearGait-PD NLS175 (PD, NLS): 6
+  WearGait-PD NLS176 (PD, NLS): 6
+  WearGait-PD WHC019 (Control, WHC): 6
+  WearGait-PD HC124 (Control, HC): 6
+  WearGait-PD HC135 (Control, HC): 6
+  WearGait-PD WHC011 (Control, WHC): 6
+  WearGait-PD HC110 (Control, HC): 6
+  WearGait-PD HC120 (Control, HC): 6
+  WearGait-PD NLS211 (PD, NLS): 7
+  WearGait-PD WPD014 (PD, WPD): 7
+  WearGait-PD WPD015 (PD, WPD): 7
+  WearGait-PD WPD017 (PD, WPD): 7
+  WearGait-PD WPD021 (PD, WPD): 7
+  WearGait-PD WPD022 (PD, WPD): 7
+  WearGait-PD WPD023 (PD, WPD): 7
+  WearGait-PD WPD024 (PD, WPD): 7
+  WearGait-PD WPD026 (PD, WPD): 7
+  WearGait-PD NLS177 (PD, NLS): 7
+  WearGait-PD NLS182 (PD, NLS): 7
+  WearGait-PD NLS183 (PD, NLS): 7
+  WearGait-PD NLS184 (PD, NLS): 7
+  WearGait-PD WPD008 (PD, WPD): 7
+  WearGait-PD NLS130 (PD, NLS): 7
+  WearGait-PD NLS150 (PD, NLS): 7
+  WearGait-PD WPD001 (PD, WPD): 7
+  WearGait-PD WHC020 (Control, WHC): 7
+  WearGait-PD WHC030 (Control, WHC): 7
+  WearGait-PD HC126 (Control, HC): 7
+  WearGait-PD HC132 (Control, HC): 7
+  WearGait-PD WHC009 (Control, WHC): 7
+  WearGait-PD HC116 (Control, HC): 7
+  WearGait-PD HC122 (Control, HC): 7
+  WearGait-PD NLS190 (PD, NLS): 8
+  WearGait-PD WPD020 (PD, WPD): 8
+  WearGait-PD WPD027 (PD, WPD): 8
+  WearGait-PD NLS186 (PD, NLS): 8
+  WearGait-PD WPD002 (PD, WPD): 8
+  WearGait-PD WPD010 (PD, WPD): 8
+  WearGait-PD NLS036 (PD, NLS): 8
+  WearGait-PD NLS149 (PD, NLS): 8
+  WearGait-PD NLS153 (PD, NLS): 8
+  WearGait-PD NLS163 (PD, NLS): 8
+  WearGait-PD NLS166 (PD, NLS): 8
+  WearGait-PD NLS173 (PD, NLS): 8
+  WearGait-PD NLS174 (PD, NLS): 8
+  WearGait-PD HC123 (Control, HC): 8
+  WearGait-PD WHC006 (Control, WHC): 8
+  WearGait-PD NLS139 (PD, NLS): 9
+  WearGait-PD NLS035 (PD, NLS): 9
+  WearGait-PD NLS189 (PD, NLS): 9
+  WearGait-PD NLS210 (PD, NLS): 9
+  WearGait-PD WPD018 (PD, WPD): 9
+  WearGait-PD NLS127 (PD, NLS): 9
+  WearGait-PD WPD003 (PD, WPD): 9
+  WearGait-PD WPD007 (PD, WPD): 9
+  WearGait-PD NLS022 (PD, NLS): 9
+  WearGait-PD NLS154 (PD, NLS): 9
+  WearGait-PD NLS165 (PD, NLS): 9
+  WearGait-PD WHC015 (Control, WHC): 9
+  WearGait-PD WHC017 (Control, WHC): 9
+  WearGait-PD WHC021 (Control, WHC): 9
+  WearGait-PD WHC025 (Control, WHC): 9
+  WearGait-PD WHC027 (Control, WHC): 9
+  WearGait-PD WHC031 (Control, WHC): 9
+  WearGait-PD WHC032 (Control, WHC): 9
+  WearGait-PD HC137 (Control, HC): 9
+  WearGait-PD WHC007 (Control, WHC): 9
+  WearGait-PD WHC010 (Control, WHC): 9
+  WearGait-PD WHC012 (Control, WHC): 9
+  WearGait-PD HC101 (Control, HC): 9
+  WearGait-PD WHC002 (Control, WHC): 9
+  WearGait-PD NLS208 (PD, NLS): 10
+  WearGait-PD WPD004 (PD, WPD): 10
+  WearGait-PD WHC016 (Control, WHC): 10
+  WearGait-PD WHC029 (Control, WHC): 10
+  WearGait-PD HC128 (Control, HC): 10
+  WearGait-PD HC148 (Control, HC): 10
+  WearGait-PD WHC013 (Control, WHC): 10
+  WearGait-PD HC112 (Control, HC): 10
+  WearGait-PD HC117 (Control, HC): 10
+  WearGait-PD HC118 (Control, HC): 10
+  WearGait-PD WPD016 (PD, WPD): 11
+  WearGait-PD WPD006 (PD, WPD): 11
+  WearGait-PD NLS005 (PD, NLS): 11
+  WearGait-PD HC139 (Control, HC): 11
+  WearGait-PD HC142 (Control, HC): 11
+  WearGait-PD HC111 (Control, HC): 11
+  WearGait-PD HC115 (Control, HC): 11
+  WearGait-PD NLS192 (PD, NLS): 12
+  WearGait-PD NLS101 (PD, NLS): 12
+  WearGait-PD WPD019 (PD, WPD): 12
+  WearGait-PD NLS161 (PD, NLS): 12
+  WearGait-PD WHC022 (Control, WHC): 12
+  WearGait-PD WHC024 (Control, WHC): 12
+  WearGait-PD WHC008 (Control, WHC): 12
+  WearGait-PD NLS196 (PD, NLS): 13
+  WearGait-PD HC134 (Control, HC): 13
+  WearGait-PD HC153 (Control, HC): 13
+  WearGait-PD WPD013 (PD, WPD): 14
+  WearGait-PD NLS188 (PD, NLS): 14
+  WearGait-PD NLS146 (PD, NLS): 14
+  WearGait-PD NLS157 (PD, NLS): 14
+  WearGait-PD HC130 (Control, HC): 14
+  WearGait-PD HC151 (Control, HC): 14
+  WearGait-PD HC107 (Control, HC): 14
+  WearGait-PD NLS167 (PD, NLS): 15
+  WearGait-PD HC127 (Control, HC): 15
+  WearGait-PD HC129 (Control, HC): 15
+  WearGait-PD HC149 (Control, HC): 15
+  WearGait-PD NLS069 (PD, NLS): 16
+  WearGait-PD NLS191 (PD, NLS): 16
+  WearGait-PD NLS198 (PD, NLS): 16
+  WearGait-PD HC125 (Control, HC): 16
+  WearGait-PD HC141 (Control, HC): 16
+  WearGait-PD HC144 (Control, HC): 16
+  WearGait-PD WPD029 (PD, WPD): 17
+  WearGait-PD HC143 (Control, HC): 17
+  WearGait-PD HC145 (Control, HC): 17
+  WearGait-PD NLS151 (PD, NLS): 18
+  WearGait-PD NLS143 (PD, NLS): 19
+  WearGait-PD HC147 (Control, HC): 19
+  WearGait-PD HC102 (Control, HC): 19
+  WearGait-PD HC150 (Control, HC): 20
+  WearGait-PD NLS201 (PD, NLS): 23
+  WearGait-PD WPD009 (PD, WPD): 23
+  WearGait-PD NLS124 (PD, NLS): 24
+  WearGait-PD HC133 (Control, HC): 24
+  WearGait-PD WPD025 (PD, WPD): 26
+  WearGait-PD HC136 (Control, HC): 26
+  gaitpdb JuCo03 (Control, Ju): 25
+  gaitpdb JuPt05 (PD, Ju): 26
+  gaitpdb JuCo02 (Control, Ju): 27
