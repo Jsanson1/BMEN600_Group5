@@ -73,7 +73,7 @@ owner: group | status: done | branch: - | due: 2026-10-16 | updated: 2026-10-23
 owner: jamie | status: done | branch: jamie/T-016-cowork-onboarding | due: 2026-10-06 | updated: 2026-10-05
 
 ### T-017 · Project: pre-processing pipeline for the gait records: cleaning rules, missing values, outlier strides, documentation of every step (lead anna, collaborators yassien, jamie; mirrors the Project Timeline sheet; builds on src/gaitpdb/events.py from T-010)
-owner: anna | status: doing | branch: anna/T-017-preprocessing | due: - | updated: 2026-10-22
+owner: anna | status: doing | branch: anna/T-017-preprocessing | due: - | updated: 2026-10-25
 
 ### T-018 · Project: spatiotemporal feature extraction: define the feature set, implement it, produce the feature table and a feature dictionary (lead yassien, collaborators anna, jamie; builds on src/gaitpdb/features.py from T-010)
 owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05

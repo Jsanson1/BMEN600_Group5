@@ -103,3 +103,29 @@ Entry format:
   timing results come from scratch scripts not yet in the repo; turn locations are not checked beyond six
   walks; the protocol papers' path lengths were typed in by Anna and the references are not yet in
   `report/midterm/sources.md`.
+
+### 2026-10-25 · T-017 · D-008 recorded; clean-stride counts; WearGait-PD task pooling and drift
+- **Did:** recorded the group's decision as D-008 (turns in gaitpdb found from walking-path timing).
+  Counted clean strides per foot in both datasets (`scripts/explore_stride_counts.py`): gaitpdb with the
+  timing-based turn removal plus the first and last stride trimmed; WearGait-PD SelfPace with its video
+  labels for turns. Downloaded WearGait-PD's SelfPace_mat and SelfPace_matTURN tasks (Version 1) and tested
+  pooling the three straight-walking tasks, with a sensor drift check (`scripts/explore_weargait_tasks.py`).
+  Findings: gaitpdb meets N = 20 for all 161 countable walks and N = 30 for all but three truncated Ju
+  files; WearGait-PD's short walkway passes give a median of 8-10 clean strides even when pooled, or 25-26
+  without the one-stride turn margin; no sign of insole drift in the swing-phase force; gaitpdb's 20 N
+  threshold fails for some insoles.
+- **CRediT roles:** Data curation, Formal analysis, Investigation, Methodology, Software.
+- **AI use:** Claude Code (Claude Opus 5.5) wrote and ran both scripts, built the figures, drafted the
+  D-008 entry from Anna's wording (suggesting two typo fixes, "turns" and "sub-study", which Anna
+  confirmed) designed the sensor-level
+  drift checks (swing-phase force, peak stance force) and drafted the handoff. Anna brought the group's decision and its wording, proposed checking
+  N = 30 (suggested by Jamie) and then N = 20, chose to use WearGait-PD's labels and to keep everything
+  exploratory until unit tests exist, set the purpose of the first/last-stride trim (technical start and
+  stop effects, not gait initiation), asked for the extra tasks and the drift figure, ran the Synapse
+  download herself, and raised a different N per dataset with the dataset-of-origin check.
+- **Verified:** all 368 downloaded files match Synapse's sizes (download list); both scripts ran to
+  completion and pass ruff (`explore_weargait_tasks.py` was not rerun after its final formatting and
+  warning change); the zero-stride case (NLS056) was traced to the insole force never dropping
+  below 20 N. **Not verified:** WearGait-PD stride timing (20 N threshold not validated for the insoles);
+  whether the 2% lower peak force in the walkway tasks is sensor or gait; the WearGait-PD counts are
+  provisional.
