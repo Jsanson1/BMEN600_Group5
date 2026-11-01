@@ -12,6 +12,7 @@ from gaitpdb.clean_data import (
     clean_gaitpdb,
     clean_weargait,
     expected_turn_interval,
+    fill_short_gaps,
     meets_minimum,
 )
 from gaitpdb.io import SAMPLE_RATE_HZ
@@ -209,16 +210,82 @@ def test_every_removed_stride_has_one_reason():
     assert (out.loc[~out["clean"], "reason"] != "").all()
 
 
-def test_tied_candidates_go_to_the_one_with_both_feet_disturbed():
-    # Two left strides with exactly the same ratio; only one turn fits in this walk
-    # (expected interval 30 s, about 44 s of walking). Only the later one has the
-    # right foot slowed at the same time, so it is the turn.
-    left, right = straight(40), straight(40)
-    left[10] = left[30] = 1.5
-    right[30] = 1.4
-    out, info = clean_gaitpdb(record(left, right), "Ga", CORRIDOR_M["Ga"] / 30.0)
+def test_tied_candidates_go_to_the_one_with_the_other_foot_more_disturbed():
+    # A 2 min walk with one turn interval of 60 s. Two left strides about 8 s apart
+    # have exactly the same ratio and both disturb the right foot, so both are
+    # candidates, but only one can be a turn. The later one disturbs the right foot
+    # more, so it wins (the earlier-stride rule alone would pick the first).
+    left, right = straight(110), straight(110)
+    left[45] = left[52] = 1.5
+    right[45], right[52] = 1.2, 1.4
+    out, info = clean_gaitpdb(record(left, right), "Ga", CORRIDOR_M["Ga"] / 60.0)
     assert len(info["turn_centres_s"]) == 1
     f = out[out["foot"] == "L"].reset_index(drop=True)
     mid = (f["hs_s"] + f["next_hs_s"]) / 2
-    assert abs(info["turn_centres_s"][0] - mid[30]) < 0.01
-    assert f.loc[30, "reason"] == "turn" and f.loc[10, "reason"] != "turn"
+    assert abs(info["turn_centres_s"][0] - mid[52]) < 0.01
+
+
+def test_phase_check_finds_the_turn_a_count_cap_would_drop():
+    # Turns every ~22 s from about 20 s in; the walk ends just after the 5th turn,
+    # so walk length / interval is a little under 5 and a cap of floor(...) would
+    # allow only 4 turns. The phase check finds all 5.
+    strides, peaks = walk_with_turns(n_turns=5)
+    strides = strides[:-10]  # stop soon after the last turn
+    speed = CORRIDOR_M["Ga"] / turn_period(strides)
+    _, info = clean_gaitpdb(record(strides), "Ga", speed)
+    assert len(info["turn_centres_s"]) == 5
+    for p in peaks:
+        assert min(abs(c - p) for c in info["turn_centres_s"]) < 1.6
+
+
+def test_slow_start_of_a_walk_is_not_a_turn():
+    # Gait initiation: the first strides are slow on both feet, then turns follow
+    # every ~22 s. The slow start must not be called a turn.
+    strides, peaks = walk_with_turns(n_turns=4)
+    strides[:3] = [1.6, 1.45, 1.3]
+    speed = CORRIDOR_M["Ga"] / turn_period(strides[3:])
+    _, info = clean_gaitpdb(record(strides), "Ga", speed)
+    assert min(info["turn_centres_s"]) > 10
+    assert len(info["turn_centres_s"]) == len(peaks)
+
+
+def test_slowing_to_a_stop_is_a_turn_only_where_walks_do_not_end_at_a_corridor_end():
+    # Three turns, then a full length of straight walking, then slowing to a stop
+    # about one interval after the last turn, where a fourth turn is predicted.
+    # Ju walks end at a corridor end (fixed 100 m): that slowing is the stop, not
+    # a turn. Ga recordings stop after 2 min wherever the walker is, so there the
+    # same pattern is taken as a turn.
+    strides, peaks = walk_with_turns(n_turns=3)
+    strides = strides + [1.25, 1.4, 1.6]
+    period = turn_period(strides)
+    _, ju = clean_gaitpdb(record(strides), "Ju", CORRIDOR_M["Ju"] / period)
+    _, ga = clean_gaitpdb(record(strides), "Ga", CORRIDOR_M["Ga"] / period)
+    assert len(ju["turn_centres_s"]) == len(peaks) == 3
+    assert len(ga["turn_centres_s"]) == 4
+    assert max(ga["turn_centres_s"]) > max(peaks) + 10
+
+
+def test_pivot_turn_with_the_other_foot_quicker_counts():
+    # A pivot: one foot's stride gets much longer while the other foot's strides
+    # get shorter. The other foot is disturbed (faster), so it is a turn.
+    left, right = straight(110), straight(110)
+    left[50] = 1.8
+    right[49], right[50] = 0.95, 0.95
+    _, info = clean_gaitpdb(record(left, right), "Ga", CORRIDOR_M["Ga"] / 60.0)
+    assert len(info["turn_centres_s"]) == 1
+
+
+def test_short_gaps_are_filled_and_long_gaps_remove_strides():
+    task = weargait_task(straight(30), (15.0, 17.0))
+    task.loc[700, "LTotalForce"] = np.nan  # one sample, inside a left stride
+    task.loc[1000:1019, "LTotalForce"] = np.nan  # 20 samples
+    task.loc[:30, ["LTotalForce", "RTotalForce"]] = np.nan  # padding at the start
+    out = clean_weargait(task)
+    f = out[out["foot"] == "L"]
+    one = (f["next_hs_s"] > 7.0) & (f["hs_s"] <= 7.0)
+    assert one.any() and f.loc[one, "clean"].all()  # filled, kept
+    long_ = (f["next_hs_s"] > 10.0) & (f["hs_s"] < 10.2)
+    assert (f.loc[long_, "reason"] == "missing_data").all() and long_.any()
+    filled = fill_short_gaps(task["LTotalForce"].to_numpy(float))
+    assert not np.isnan(filled[700])
+    assert np.isnan(filled[1000:1020]).all() and np.isnan(filled[:31]).all()
