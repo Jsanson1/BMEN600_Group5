@@ -39,7 +39,8 @@ from .events import DEFAULT_THRESHOLD_N, STRIDE_LIMITS_S, stride_table
 from .io import SAMPLE_RATE_HZ
 
 CORRIDOR_M = {"Ga": 25.0, "Ju": 25.0, "Si": 35.0}
-"""Corridor length per gaitpdb sub-study, from the sub-studies' papers."""
+"""Corridor length per gaitpdb sub-study, from the sub-studies' papers: Ga S4, Ju S6,
+Si S19 in report/midterm/sources.md (full text checked by Anna)."""
 
 RHYTHM_SEARCH = (0.7, 1.5)  # x the expected interval
 MIN_TURNS_FOR_RHYTHM = 2.5  # fewer expected turns: use the expected interval

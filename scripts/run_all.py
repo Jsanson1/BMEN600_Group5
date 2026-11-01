@@ -3,7 +3,8 @@
     python scripts/run_all.py [--data data/raw/gaitpdb]
 
 Runs verify_data, make_table1, make_figure1, check_event_detection,
-check_data_quality, check_dual_task, make_figure2, then the models
+check_data_quality, check_dual_task, make_figure2, make_clean_strides
+(derived stride tables in data/interim/), then the models
 (run_logreg, run_baselines) and compare_models, and last
 check_weargait_participants (which reads data/raw/weargait_pd and skips itself
 if the WearGait-PD sheets are not there), as separate processes, and stops at
@@ -26,6 +27,7 @@ READS_RECORDS = [  # these take --data: they read the PhysioNet record files
     "check_data_quality.py",
     "check_dual_task.py",
     "make_figure2.py",
+    "make_clean_strides.py",  # also reads data/raw/weargait_pd if present
 ]
 READS_RESULTS = [  # these read what the steps above wrote to results/
     "run_logreg.py",
