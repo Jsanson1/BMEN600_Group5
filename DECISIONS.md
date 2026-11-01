@@ -71,3 +71,10 @@ Status: Accepted (group decision at the full-team discussion on 23 October, repo
 Status: Accepted (group decision at the full-team discussion on 23 October, reported by Anna on 25 October)
 - The team will use Jupyter notebooks alongside the scripts, so that results and figures can be shared more easily within the team.
 - This changes the README's statement that the project uses plain Python scripts and no notebooks.
+
+### D-011 · 2026-10-26 · Minimum clean strides per foot: 40 in gaitpdb, 10 in WearGait-PD
+Status: Accepted (group decision, reported by Anna on 26 October)
+- Each dataset has its own minimum number of clean strides per foot, counted after turn removal and after trimming the first and last stride: N = 40 for gaitpdb, N = 10 for WearGait-PD. A participant with fewer on either foot is excluded from analyses that use stride features, and the number excluded is reported.
+- N is a minimum, not a truncation: the features use all of a participant's clean strides.
+- WearGait-PD: the three straight-walking tasks (SelfPace, SelfPace_mat and SelfPace_matTURN, Version 1) are pooled, and turns are removed using the video labels without the extra stride either side. D-008's one-stride margin applies to gaitpdb, where turn locations are estimated.
+- Because N differs between the datasets, the dataset-of-origin check (D-007) is read with that in mind.
