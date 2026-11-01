@@ -129,3 +129,31 @@ Entry format:
   below 20 N. **Not verified:** WearGait-PD stride timing (20 N threshold not validated for the insoles);
   whether the 2% lower peak force in the walkway tasks is sensor or gait; the WearGait-PD counts are
   provisional.
+
+### 2026-11-01 · T-017 · Shared cleaning module, derived stride tables, phase check, insole gaps
+- **Did:** moved the cleaning from the exploratory scripts into `src/gaitpdb/clean_data.py` with unit tests
+  (`tests/test_clean_data.py`): `clean_gaitpdb` (timing-based turns, D-008), `clean_weargait` (labelled
+  turns, three tasks, D-011) and `meets_minimum` (D-011), with a removal reason for every stride. Ties
+  between equal turn candidates go to the one whose other foot is more disturbed. Added
+  `scripts/make_clean_strides.py` (in `run_all.py`): per-stride tables in `data/interim/` with a provenance
+  file, and a committed summary. Added the corridor lengths and the Si walking conditions to
+  `report/midterm/sources.md` (S4, S6, S19). Replaced the cap on the number of turns with a phase check
+  (anchor, predict every interval, confirm within +/-30%), with candidates required to disturb both feet
+  (slower or faster) and no turns near a walk's start, nor near its end for Ju. Found that WearGait-PD's
+  missing samples are 98% padding and otherwise single-sample bursts, and filled gaps of up to 5 samples.
+  Results: Ju known answer 34 of 41 (was 31); D-011 inclusion gaitpdb 155 of 161, WearGait-PD 164 of 170;
+  strides removed for missing data 17.6% -> 0%.
+- **CRediT roles:** Software, Methodology, Validation, Data curation, Formal analysis.
+- **AI use:** Claude Code (Claude Opus 5.5) wrote the module, the tests, the scripts and the ledger
+  wording, ran all checks, and drafted the handoff. Anna chose the module name, the both-feet tie-break,
+  to do the phase check next and then its design (+/-30%), interpolation up to 5 samples with long gaps
+  removing only the strides they touch, and to postpone the notebook; she read the three sub-study papers
+  herself to verify the corridor lengths, removed the code's [UNVERIFIED] note on that basis, and chose the
+  corrected S19 wording (the 35 m hallway is described for familiarisation). After the tests and the Ju
+  check exposed problems, Claude added four refinements (both feet required, the either-direction test,
+  the start zone, the Ju-only end zone) and showed Anna the results before she approved the commit.
+- **Verified:** 49 tests pass; each new test was shown to fail when its behaviour is switched off; the
+  module reproduced the exploratory counts (WearGait-PD exactly) before the phase check; the Ju known-
+  answer check; a rerun of `make_clean_strides.py` reproduces its outputs exactly. **Not verified:**
+  WearGait-PD insole stride timing (20 N threshold, T-025); about 4 real gaitpdb turns missed by the
+  phase check (GaPt04, GaPt27, SiPt09, SiPt16).
