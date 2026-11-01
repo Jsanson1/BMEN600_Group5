@@ -1,21 +1,22 @@
-"""Exploration for T-017: how many clean strides each participant keeps, in both datasets.
+"""Exploration for T-017: who meets the minimum clean strides per foot (DECISIONS.md D-011).
 
-Exploratory, not part of the analysis pipeline: nothing in src/ is changed. The
-count is per foot, after cleaning, and each participant is summarised by the
-foot with fewer strides (a per-foot feature needs that many). The question is
-whether a common number of strides per foot, N (N = 30 proposed), is reachable.
+Exploratory, not part of the analysis pipeline: nothing in src/ is changed. Counts
+are per foot, after cleaning; a participant is included if both feet reach the
+dataset's minimum N (D-011: 40 for gaitpdb, 10 for WearGait-PD). N is an
+inclusion minimum: included participants keep all their clean strides.
 
 gaitpdb (analysed usual walks): the timing-based turn removal of
-scripts/explore_turn_timing.py (DECISIONS.md D-008), then the first and last
-stride of each foot are trimmed.
+scripts/explore_turn_timing.py (D-008), then the first and last stride of each
+foot are trimmed.
 
-WearGait-PD (analysed participants, SelfPace task): strides from each insole's
-total force with gaitpdb's 20 N threshold [provisional: not yet validated for
-these insoles, task T-025]; a stride is kept only if every sample is labelled
-"Walk" in the video annotation (GeneralEvent); strides touching a "Turn" label
-are removed with one stride either side; strides over missing data, outside
-0.5-2.5 s or with a swing phase outside 10-70% are removed; the first and last
-stride of each foot are trimmed.
+WearGait-PD (analysed participants): SelfPace, SelfPace_mat and SelfPace_matTURN
+pooled, cleaned by task_strides() in scripts/explore_weargait_tasks.py with no
+extra stride removed either side of a labelled turn (D-011): strides from each
+insole's total force with gaitpdb's 20 N threshold [provisional: not yet
+validated for these insoles, task T-025]; a stride is kept only if every sample
+is labelled "Walk", it does not touch a "Turn" label, has no missing samples,
+lasts 0.5-2.5 s with a swing phase of 10-70%, and is not the first or last
+stride of the foot in that recording.
 
     python scripts/explore_stride_counts.py
 
@@ -40,13 +41,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from explore_stride_rules import removal_table  # noqa: E402
-from explore_turn_timing import SWING_PCT, analyse  # noqa: E402
+from explore_turn_timing import analyse  # noqa: E402
+from explore_weargait_tasks import TASKS, task_strides  # noqa: E402
 
 from gaitpdb import find_data_dir, meets_age_rule  # noqa: E402
-from gaitpdb.events import STRIDE_LIMITS_S, stride_table  # noqa: E402
 from gaitpdb.weargait import load_participants  # noqa: E402
 
-N = 30  # proposed common number of strides per foot (Jamie, 2026-10-23)
+N = {"gaitpdb": 40, "WearGait-PD": 10}  # minimum clean strides per foot (D-011)
 WG_DIR = ROOT / "data" / "raw" / "weargait_pd"
 OUT_TXT = ROOT / "results" / "explore_stride_counts.txt"
 OUT_CSV = ROOT / "results" / "explore_stride_counts.csv"
@@ -87,26 +88,6 @@ def gaitpdb_counts() -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def weargait_strides(force: np.ndarray, label: np.ndarray) -> tuple[int, int]:
-    """(clean strides, all strides) for one foot of one SelfPace recording."""
-    missing = np.isnan(force)
-    st = stride_table(np.nan_to_num(force, nan=0.0), ratio_limits=None)
-    if st.empty:
-        return 0, 0
-    lo, hi = STRIDE_LIMITS_S
-    a = np.round(st["hs_s"].to_numpy() * 100).astype(int)
-    b = np.round(st["next_hs_s"].to_numpy() * 100).astype(int)
-    all_walk = np.array([(label[i:j] == "Walk").all() for i, j in zip(a, b)])
-    turn = np.array([(label[i:j] == "Turn").any() for i, j in zip(a, b)])
-    gap = np.array([missing[i:j].any() for i, j in zip(a, b)])
-    near_turn = turn.copy()
-    near_turn[1:] |= turn[:-1]
-    near_turn[:-1] |= turn[1:]
-    plausible = st["stride_s"].between(lo, hi) & st["swing_pct"].between(*SWING_PCT)
-    kept = all_walk & ~near_turn & ~gap & plausible.to_numpy()
-    return int(trim_ends(kept).sum()), len(st)
-
-
 def weargait_counts() -> pd.DataFrame:
     people = load_participants(WG_DIR)
     people = people[meets_age_rule(people["age"])]
@@ -118,37 +99,33 @@ def weargait_counts() -> pd.DataFrame:
             study=p.site,
             group=p.group,
         )
-        path = WG_DIR / "csv" / f"{p.participant}_SelfPace.csv"
-        if not path.exists():
-            rows.append({**row, "note": "no SelfPace file"})
+        n = {"L": 0, "R": 0}
+        used = []
+        for task in TASKS:
+            st = task_strides(p.participant, task, margin=0)
+            if st is None:
+                continue
+            used.append(task)
+            for foot in n:
+                n[foot] += int(st[(st["foot"] == foot) & st["clean"]].shape[0])
+        if not used:
+            rows.append({**row, "note": "no insole data in any of the three tasks"})
             continue
-        cols = pd.read_csv(path, nrows=0).columns
-        if not {"LTotalForce", "RTotalForce"} <= set(cols):
-            rows.append({**row, "note": "no insole data"})
-            continue
-        df = pd.read_csv(
-            path,
-            usecols=["GeneralEvent", "LTotalForce", "RTotalForce"],
-            low_memory=False,
-        )
-        label = df["GeneralEvent"].astype(str).to_numpy()
-        for foot in ("L", "R"):
-            n, n_raw = weargait_strides(df[f"{foot}TotalForce"].to_numpy(float), label)
-            row[f"n_{foot}"], row[f"n_raw_{foot}"] = n, n_raw
-        rows.append(row)
+        rows.append({**row, "n_L": n["L"], "n_R": n["R"], "tasks": len(used)})
     return pd.DataFrame(rows)
 
 
 def main() -> None:
     d = pd.concat([gaitpdb_counts(), weargait_counts()], ignore_index=True)
     d["n_min_foot"] = d[["n_L", "n_R"]].min(axis=1)
+    d["N"] = d["dataset"].map(N)
+    d["included"] = d["n_min_foot"] >= d["N"]
     d.to_csv(OUT_CSV, index=False)
 
+    say("T-017 who meets D-011 (scripts/explore_stride_counts.py)")
     say(
-        "T-017 clean strides per foot, both datasets (scripts/explore_stride_counts.py)"
-    )
-    say(
-        f"Exploratory; WearGait-PD stride timing provisional (20 N on insoles). N = {N}."
+        f"Minimum clean strides per foot: {N}. Exploratory; WearGait-PD stride "
+        "timing provisional (20 N on insoles)."
     )
     say()
     skipped = d[d["n_min_foot"].isna()]
@@ -159,26 +136,20 @@ def main() -> None:
     c = d.dropna(subset=["n_min_foot"])
     say("Clean strides on the participant's weaker foot")
     t = c.groupby(["dataset", "group"])["n_min_foot"].describe(percentiles=[0.1, 0.5])
-    t["below_N"] = c.groupby(["dataset", "group"])["n_min_foot"].apply(
-        lambda x: int((x < N).sum())
-    )
-    say(t[["count", "min", "10%", "50%", "max", "below_N"]].round(0).to_string())
+    t["included"] = c.groupby(["dataset", "group"])["included"].sum().astype(int)
+    say(t[["count", "min", "10%", "50%", "max", "included"]].round(0).to_string())
     say()
-    lowest = c.nsmallest(1, "n_min_foot").iloc[0]
-    say(
-        f"Lowest overall: {lowest.participant} ({lowest.dataset}, {lowest.group}), "
-        f"{int(lowest.n_min_foot)} strides on the weaker foot"
-    )
-    for ds, g in c.groupby("dataset"):
-        lo = g.nsmallest(1, "n_min_foot").iloc[0]
-        say(f"Lowest in {ds}: {lo.participant} ({lo.group}), {int(lo.n_min_foot)}")
-    say()
-    below = c[c["n_min_foot"] < N].sort_values(["dataset", "n_min_foot"])
-    say(f"Below N = {N}: {len(below)} of {len(c)}")
-    for x in below.itertuples(index=False):
+    for ds, g in c.groupby("dataset", sort=False):
+        all_ds = d[d["dataset"] == ds]
         say(
-            f"  {x.dataset} {x.participant} ({x.group}, {x.study}): {int(x.n_min_foot)}"
+            f"{ds} (N = {N[ds]}): included {int(g['included'].sum())} of {len(g)} "
+            f"countable ({len(all_ds)} analysed participants)"
         )
+        for x in g[~g["included"]].sort_values("n_min_foot").itertuples(index=False):
+            say(
+                f"  excluded {x.participant} ({x.group}, {x.study}): {int(x.n_min_foot)}"
+            )
+    say()
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 4.5))
     for ax, (ds, g) in zip(axes, c.groupby("dataset", sort=False)):
@@ -191,7 +162,7 @@ def main() -> None:
                 color=col,
                 label=f"{group} (n={int((g.group == group).sum())})",
             )
-        ax.axvline(N, color="tab:red", ls="--", label=f"N = {N}")
+        ax.axvline(N[ds], color="tab:red", ls="--", label=f"N = {N[ds]} (D-011)")
         ax.set(
             title=f"{ds}: clean strides on the weaker foot",
             xlabel="strides per foot after cleaning",
