@@ -186,6 +186,27 @@ def _roc_point(
     return float(tpr[i]), float(1.0 - fpr[i]), float(thr[i])
 
 
+def bootstrap_sensitivity_at_specificity(
+    y_true: np.ndarray,
+    p: np.ndarray,
+    target: float = TARGET_SPECIFICITY,
+    n_boot: int = 2000,
+    seed: int = SEED,
+) -> tuple[float, float, float]:
+    """ROC-read sensitivity at ``target`` specificity with a percentile bootstrap
+    interval over participants (resamples holding one group only are skipped)."""
+    y = np.asarray(y_true)
+    p = np.asarray(p, dtype=float)
+    point = sensitivity_at_specificity(y, p, target)[0]
+    rng = np.random.default_rng(seed)
+    vals = []
+    for _ in range(n_boot):
+        idx = rng.integers(0, len(y), len(y))
+        if 0 < y[idx].sum() < len(idx):
+            vals.append(_roc_point(y[idx], p[idx], target)[0])
+    return point, float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))
+
+
 def predictive_values(
     sensitivity: float, specificity: float, prevalence: float
 ) -> tuple[float, float]:

@@ -9,6 +9,7 @@ from sklearn.preprocessing import StandardScaler
 
 from gaitpdb.crosscohort import (
     TARGET_SPECIFICITY,
+    bootstrap_sensitivity_at_specificity,
     cross_cohort,
     dataset_of_origin,
     pooled_splits,
@@ -199,3 +200,12 @@ def test_stride_matched_tables_keep_all_when_counts_exceed_and_reproduce():
         pd.testing.assert_frame_equal(x, y)
     with pytest.raises(ValueError):
         next(stride_matched_tables(strides, np.array([10, 7]), 1))
+
+
+def test_bootstrap_sensitivity_interval_brackets_the_point():
+    rng = np.random.default_rng(2)
+    y = np.r_[np.zeros(60), np.ones(60)].astype(int)
+    p = rng.normal(size=120) + 1.5 * y
+    point, lo, hi = bootstrap_sensitivity_at_specificity(y, p, 0.9, n_boot=300, seed=0)
+    assert point == sensitivity_at_specificity(y, p, 0.9)[0]
+    assert 0 <= lo <= point <= hi <= 1 and hi - lo > 0.05
