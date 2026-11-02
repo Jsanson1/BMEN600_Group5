@@ -7,6 +7,7 @@ from conftest import synthetic_force
 
 from gaitpdb.io import SAMPLE_RATE_HZ
 from gaitpdb.walkway import (
+    CONTACT_COLUMNS,
     agreement,
     compare_task,
     force_level,
@@ -45,8 +46,12 @@ def synthetic_task(swing_offset_n: float = 0.0, lag: int = 3) -> pd.DataFrame:
         {
             "LTotalForce": left,
             "RTotalForce": right,
-            "LFootContact": contact_from_force(left - swing_offset_n, lag, window),
-            "RFootContact": contact_from_force(right - swing_offset_n, lag, window),
+            CONTACT_COLUMNS["L"]: contact_from_force(
+                left - swing_offset_n, lag, window
+            ),
+            CONTACT_COLUMNS["R"]: contact_from_force(
+                right - swing_offset_n, lag, window
+            ),
         }
     )
     return task
@@ -102,7 +107,7 @@ def test_raised_swing_baseline_merges_footfalls_at_20_n_only():
 def test_missed_contact_is_unmatched():
     task = synthetic_task()
     f = task["LTotalForce"].to_numpy().copy()
-    c = task["LFootContact"].to_numpy()
+    c = task[CONTACT_COLUMNS["L"]].to_numpy()
     walk = walkway_footfalls(c)
     a, b = walk["on"].iloc[2], walk["off"].iloc[2]
     f[a - 10 : b + 10] = 0.0  # the insole sees nothing for this footfall
@@ -136,6 +141,9 @@ def test_agreement_limits_on_known_differences():
     assert a["stance_median_diff_s"] == pytest.approx(0.01)
     assert a["stance_loa_low_s"] == pytest.approx(d.mean() - 1.96 * d.std(ddof=1))
     assert a["n_stride"] == 0 and np.isnan(a["stride_median_diff_s"])
+    assert a["agree_pct"] == 100.0  # every difference is within 30 ms, 0.03 included
+    m.loc[1, "d_stance_s"] = 0.05
+    assert agreement(m)["agree_pct"] == 75.0
 
 
 def test_pairwise_merged_contacts_are_not_one_to_one():
@@ -147,7 +155,7 @@ def test_pairwise_merged_contacts_are_not_one_to_one():
     for k in range(1, N, 2):
         swing = (t >= k * STRIDE + (STRIDE - SWING)) & (t < (k + 1) * STRIDE)
         f[swing] += 30.0
-    walk = walkway_footfalls(task["LFootContact"].to_numpy())
+    walk = walkway_footfalls(task[CONTACT_COLUMNS["L"]].to_numpy())
     m = match_footfalls(walk, insole_contacts(f, 20.0))
     assert m["matched"].all()
     assert agreement(m)["one_to_one_pct"] < 20.0
@@ -180,7 +188,7 @@ def test_threshold_script_on_synthetic_files(tmp_path):
     assert notes == ["SelfPace_matTURN: no insole data"]
     assert set(ff["task"]) == {"SelfPace", "SelfPace_mat"}
     overall = script.summary_rows(ff, None)
-    assert set(overall["threshold"]) == {
+    assert {
         "10 N",
         "20 N",
         "50 N",
@@ -188,7 +196,8 @@ def test_threshold_script_on_synthetic_files(tmp_path):
         "5% of body weight",
         "2.5% of force level",
         "5% of force level",
-    }
+    } <= set(overall["threshold"])
+    assert len(overall) == 14
     by_task = script.summary_rows(ff, "task").set_index(["threshold", "task"])
     assert by_task.loc[("20 N", "SelfPace"), "one_to_one_pct"] == 100.0
     assert by_task.loc[("20 N", "SelfPace_mat"), "one_to_one_pct"] == 0.0
@@ -196,3 +205,17 @@ def test_threshold_script_on_synthetic_files(tmp_path):
     assert script.recommend(overall) != "20 N"
     _, why = script.check_participant(tmp_path, "P002")
     assert why == [f"{t}: no file" for t in script.TASKS]
+
+
+def test_walk_only_keeps_walk_footfalls_but_matches_against_all():
+    task = synthetic_task()
+    walk = walkway_footfalls(task[CONTACT_COLUMNS["L"]].to_numpy())
+    labels = np.full(len(task), "Walk", dtype=object)
+    a, b = walk["on"].iloc[3], walk["off"].iloc[3]
+    labels[a:b] = "Turn"  # one left footfall falls in a turn
+    task["GeneralEvent"] = labels
+    every = compare_task(task, {"20 N": 20.0}, walk_only=False)
+    walk_rows = compare_task(task, {"20 N": 20.0})
+    left = walk_rows[walk_rows["foot"] == "L"]
+    assert len(left) == len(walk) - 1 and a not in set(left["on"])
+    assert len(every[every["foot"] == "L"]) == len(walk)

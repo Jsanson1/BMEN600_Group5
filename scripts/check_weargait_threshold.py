@@ -105,9 +105,15 @@ def summary_rows(footfalls: pd.DataFrame, by: str | None) -> pd.DataFrame:
 
 
 def recommend(overall: pd.DataFrame) -> str:
-    """Highest one-to-one share, then the smallest median absolute stance difference."""
+    """Highest share of footfalls matched one to one with stance within 30 ms
+    (``agree_pct``), then the smallest median absolute stance difference.
+
+    One-to-one detection alone keeps rising with the threshold while every stance
+    gets shorter, so it would pick the most biased threshold; agree_pct weighs
+    both. Classification results play no part (Midterm Research Plan, Section IV).
+    """
     ranked = overall.sort_values(
-        ["one_to_one_pct", "stance_median_abs_diff_s"], ascending=[False, True]
+        ["agree_pct", "stance_median_abs_diff_s"], ascending=[False, True]
     )
     return str(ranked["threshold"].iloc[0])
 
@@ -167,7 +173,8 @@ def main() -> None:
     ]
     for r in overall.itertuples(index=False):
         lines.append(
-            f"  {r.threshold}: one to one {r.one_to_one_pct:.1f}% of {r.n_footfalls} "
+            f"  {r.threshold}: within 30 ms {r.agree_pct:.1f}%, one to one "
+            f"{r.one_to_one_pct:.1f}% of {r.n_footfalls} "
             f"footfalls (unmatched {r.unmatched_pct:.1f}%); stance "
             f"{r.stance_median_diff_s:+.3f} (abs {r.stance_median_abs_diff_s:.3f}; limits "
             f"{r.stance_loa_low_s:+.3f} to {r.stance_loa_high_s:+.3f}); stride "
@@ -176,7 +183,7 @@ def main() -> None:
         )
     lines += [
         "",
-        f"Recommended threshold (agreement with the walkway only): {best}",
+        f"Recommended threshold (most footfalls matched one to one with stance within 30 ms of the walkway; walkway agreement only, no classification results): {best}",
         "",
     ]
     for sub in ("group", "site"):
@@ -186,7 +193,7 @@ def main() -> None:
         part = table[table["subgroup"] == sub]
         for t in overall["threshold"]:
             cells = [
-                f"{r[sub]} {r.one_to_one_pct:.0f}% / {r.stance_median_abs_diff_s:.3f}"
+                f"{getattr(r, sub)} {r.one_to_one_pct:.0f}% / {r.stance_median_abs_diff_s:.3f}"
                 for r in part[part["threshold"] == t].itertuples(index=False)
             ]
             lines.append(f"  {t}: " + "; ".join(cells))

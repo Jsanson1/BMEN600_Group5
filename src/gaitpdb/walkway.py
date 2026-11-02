@@ -8,7 +8,8 @@ never used to find strides in the analysis.
 What the dataset provides (Synapse syn52540892, wiki "Data description" and
 "Things to know"), at 100 Hz on the walkway's clock:
 
-* ``LFootContact``, ``RFootContact``: 1 while that foot is in contact with the
+* ``L Foot Contact``, ``R Foot Contact`` (the CSV files' names; the wiki and the
+  MAT files call them LFootContact and RFootContact): 1 while that foot is in contact with the
   walkway (ProtoKinetics Zeno, 16 ft), 0 otherwise. Partial footfalls at the
   walkway's edges are excluded, so they read 0. For the tasks done entirely on
   the walkway (``_mat``), the walkway software writes one erroneous 0 frame at
@@ -44,12 +45,15 @@ import pandas as pd
 from .events import contact_events
 from .io import SAMPLE_RATE_HZ
 
-FIXED_THRESHOLDS_N = (10.0, 20.0, 50.0)
-BODY_WEIGHT_SHARES = (0.025, 0.05)
-FORCE_LEVEL_SHARES = (0.025, 0.05)
+FIXED_THRESHOLDS_N = (10.0, 20.0, 30.0, 50.0, 75.0, 100.0)
+BODY_WEIGHT_SHARES = (0.025, 0.05, 0.075, 0.10)
+FORCE_LEVEL_SHARES = (0.025, 0.05, 0.075, 0.10)
+"""The midterm's candidates (10, 20, 50 N; 2.5% and 5%) and a few more on either
+side, so that the best agreement does not sit at the edge of the grid."""
 FORCE_LEVEL_PERCENTILE = 95
 G = 9.81  # m/s^2, kg to N
-CONTACT_COLUMNS = {"L": "LFootContact", "R": "RFootContact"}
+AGREE_WITHIN_S = 0.03  # three samples at 100 Hz
+CONTACT_COLUMNS = {"L": "L Foot Contact", "R": "R Foot Contact"}  # as in the CSV files
 FORCE_COLUMNS = {"L": "LTotalForce", "R": "RTotalForce"}
 
 
@@ -172,16 +176,21 @@ def agreement(matched: pd.DataFrame) -> dict:
     """Summary of matched footfalls: detection, then bias and spread of durations.
 
     ``one_to_one_pct`` is the share of walkway footfalls the insole contact
-    matches one to one. For each duration (stance, stride, swing): the number of
+    matches one to one; ``agree_pct`` the share matched one to one with a stance
+    time within AGREE_WITHIN_S of the walkway's, which rewards finding each
+    footfall and timing it well (a high threshold finds more footfalls but
+    shortens every stance; a low one times them well but merges more). For each duration (stance, stride, swing): the number of
     pairs, the median difference (insole minus walkway, s), the median absolute
     difference, and the Bland-Altman limits of agreement (mean difference +/-
     1.96 SD).
     """
     n = len(matched)
+    close = matched["d_stance_s"].abs() <= AGREE_WITHIN_S + 1e-9
     out = {
         "n_footfalls": int(n),
         "one_to_one_pct": float(100 * matched["one_to_one"].mean()) if n else np.nan,
         "unmatched_pct": float(100 * (~matched["matched"]).mean()) if n else np.nan,
+        "agree_pct": float(100 * close.mean()) if n else np.nan,
     }
     for name in ("stance", "stride", "swing"):
         d = matched[f"d_{name}_s"].dropna().to_numpy()
@@ -233,19 +242,37 @@ def threshold_candidates(
     return out
 
 
-def compare_task(task: pd.DataFrame, thresholds: dict[str, float]) -> pd.DataFrame:
+def compare_task(
+    task: pd.DataFrame, thresholds: dict[str, float], walk_only: bool = True
+) -> pd.DataFrame:
     """Matched footfalls of both feet of one recording, for every threshold.
 
     ``task`` needs the walkway contact and insole force columns of both feet.
+    With ``walk_only`` and a ``GeneralEvent`` column, only footfalls whose every
+    sample is labelled "Walk" are returned, the straight walking the analysis
+    uses (turns and standing on the walkway produce shuffling contacts the
+    analysis never keeps); matching is still done against all footfalls, so an
+    insole contact that also covers a turn footfall is not counted one to one.
     Returns the rows of ``match_footfalls`` with ``foot`` and ``threshold``
     (the label) added.
     """
+    labels = (
+        task["GeneralEvent"].astype(str).to_numpy()
+        if walk_only and "GeneralEvent" in task
+        else None
+    )
     frames = []
     for foot in ("L", "R"):
         walk = walkway_footfalls(task[CONTACT_COLUMNS[foot]].to_numpy())
+        if labels is not None and len(walk):
+            keep = np.array(
+                [(labels[a:b] == "Walk").all() for a, b in zip(walk["on"], walk["off"])]
+            )
+        else:
+            keep = np.ones(len(walk), bool)
         force = task[FORCE_COLUMNS[foot]].to_numpy(dtype=float)
         for label, t in thresholds.items():
-            m = match_footfalls(walk, insole_contacts(force, t))
+            m = match_footfalls(walk, insole_contacts(force, t))[keep]
             m.insert(0, "threshold", label)
             m.insert(0, "foot", foot)
             frames.append(m)
