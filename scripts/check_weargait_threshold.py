@@ -47,7 +47,7 @@ from gaitpdb.walkway import (  # noqa: E402
     compare_task,
     threshold_candidates,
 )
-from gaitpdb.weargait import load_participants  # noqa: E402
+from gaitpdb.weargait import SHEETS, load_participants  # noqa: E402
 
 TASKS = ("SelfPace", "SelfPace_mat", "SelfPace_matTURN")
 COLUMNS = list(CONTACT_COLUMNS.values()) + list(FORCE_COLUMNS.values())
@@ -131,6 +131,14 @@ def main() -> None:
     ap.add_argument("--out", default=str(ROOT / "results"))
     args = ap.parse_args()
     data, out = Path(args.data), Path(args.out)
+    missing = [n for n, _ in SHEETS.values() if not (data / n).exists()]
+    if missing or not (data / "csv").is_dir():
+        print(
+            f"WearGait-PD sheets or task files not found in {data}; the committed "
+            "results/weargait_threshold_* files are left as they are (download steps "
+            "in data/raw/README.md)."
+        )
+        return
     people = load_participants(data)
     people = people[meets_age_rule(people["age"])].reset_index(drop=True)
     mass = body_mass(people)
