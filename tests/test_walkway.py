@@ -151,3 +151,48 @@ def test_pairwise_merged_contacts_are_not_one_to_one():
     m = match_footfalls(walk, insole_contacts(f, 20.0))
     assert m["matched"].all()
     assert agreement(m)["one_to_one_pct"] < 20.0
+
+
+def load_threshold_script():
+    import importlib.util
+    from pathlib import Path
+
+    path = (
+        Path(__file__).resolve().parents[1] / "scripts" / "check_weargait_threshold.py"
+    )
+    spec = importlib.util.spec_from_file_location("check_weargait_threshold", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_threshold_script_on_synthetic_files(tmp_path):
+    script = load_threshold_script()
+    (tmp_path / "csv").mkdir()
+    synthetic_task().to_csv(tmp_path / "csv" / "P001_SelfPace.csv", index=False)
+    synthetic_task(swing_offset_n=30.0).to_csv(
+        tmp_path / "csv" / "P001_SelfPace_mat.csv", index=False
+    )
+    synthetic_task().drop(columns=["LTotalForce", "RTotalForce"]).to_csv(
+        tmp_path / "csv" / "P001_SelfPace_matTURN.csv", index=False
+    )
+    ff, notes = script.check_participant(tmp_path, "P001", body_mass_kg=70.0)
+    assert notes == ["SelfPace_matTURN: no insole data"]
+    assert set(ff["task"]) == {"SelfPace", "SelfPace_mat"}
+    overall = script.summary_rows(ff, None)
+    assert set(overall["threshold"]) == {
+        "10 N",
+        "20 N",
+        "50 N",
+        "2.5% of body weight",
+        "5% of body weight",
+        "2.5% of force level",
+        "5% of force level",
+    }
+    by_task = script.summary_rows(ff, "task").set_index(["threshold", "task"])
+    assert by_task.loc[("20 N", "SelfPace"), "one_to_one_pct"] == 100.0
+    assert by_task.loc[("20 N", "SelfPace_mat"), "one_to_one_pct"] == 0.0
+    # 20 N fails on the raised-baseline recording; the recommendation avoids it
+    assert script.recommend(overall) != "20 N"
+    _, why = script.check_participant(tmp_path, "P002")
+    assert why == [f"{t}: no file" for t in script.TASKS]
