@@ -91,7 +91,7 @@ owner: jamie | status: done | branch: jamie/T-021-logistic-regression | due: 202
 owner: jamie | status: doing | branch: jamie/T-022-model-comparison | due: 2026-11-06 | updated: 2026-11-02
 
 ### T-023 · Project: discussion: interpret the results against the research question and the background, limitations, ethics, future work (lead jamie, collaborators all; after T-022)
-owner: jamie | status: todo | branch: - | due: - | updated: 2026-10-05
+owner: jamie | status: doing | branch: jamie/T-023-discussion | due: 2026-11-23 | updated: 2026-11-02
 
 ### T-024 · Project: conclusion: key findings, direct answer to the research question, next steps (lead yassien, collaborators all; after T-023)
 owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
