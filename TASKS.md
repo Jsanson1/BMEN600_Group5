@@ -79,7 +79,7 @@ owner: anna | status: doing | branch: anna/T-017-preprocessing | due: - | update
 owner: jamie | status: doing | branch: jamie/T-018-feature-extraction | due: 2026-11-06 | updated: 2026-11-02
 
 ### T-019 · Project: random forest model: train, tune, report performance and feature importances under the agreed evaluation (lead yassien)
-owner: jamie | status: doing | branch: jamie/T-019-random-forest | due: 2026-11-13 | updated: 2026-11-02
+owner: jamie | status: review | branch: jamie/T-019-random-forest | due: 2026-11-13 | updated: 2026-11-02
 
 ### T-020 · Project: support vector machine: scaling, kernel and regularisation choice, train, evaluate, report (lead anna)
 owner: anna | status: todo | branch: - | due: - | updated: 2026-10-05
