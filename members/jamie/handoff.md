@@ -22,32 +22,22 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 - **Not pushed:** nothing. (Anything listed here exists on one machine only.)
 -->
 
-## T-031 · Sync the midterm snapshots and README with the submitted plan
-_Updated 2026-10-16 14:10 by Claude (cloud session) for Jamie · branch `jamie/T-031-midterm-snapshots`; pull request #14 open_
+## T-022 · Model comparison (cross-dataset evaluation built; waits for both datasets' features, T-018, and the random forest and SVM, T-019 and T-020)
+_Updated 2026-11-02 14:05 by Claude (cloud session) for Jamie · branch `jamie/T-022-model-comparison` at `a9b14b7`_
 
-- **Now:** pull request #14 (https://github.com/Jsanson1/BMEN600_Group5/pull/14) puts the end statements as submitted into `report/midterm/07_statements.md`, fixes `report/midterm/README.md` (its table named four section files that never existed) and updates `README.md` (commit `50a86e9` as the version the plan reports; WearGait-PD's two roles under D-007).
-- **Validated:** the statements match the Word file after Anna's last edit, paragraph by paragraph (hash); Sections II and V of the submitted text match `02_` and `05_` apart from formatting. **Not verified:** nothing else; no code or result changes.
-- **Next:** Jamie merges pull request #14 (docs only, self-merge allowed by D-003) once its checks are green, then set T-031 to done, delete this section and delete the branch. Optional tidy-up on GitHub: delete the eleven `jamie/...` branches that are already merged (Branches page, trash icons).
+- **Now:** `src/gaitpdb/crosscohort.py` (D-007): pooled cross-validation stratified by diagnosis and dataset, with each dataset's AUC per fold; the cross-cohort test (fit once on gaitpdb, applied once to WearGait-PD; the 90%-specificity threshold carried over from gaitpdb's out-of-fold predictions); the dataset-of-origin check; sensitivity at 90% specificity with participant-bootstrap intervals; PPV and NPV at 1% prevalence; `stride_matched_tables` for the stride-count sensitivity analysis (D-011). `scripts/compare_models.py` now reports sensitivity at 90% specificity and the predictive values (logistic regression on gait features: 0.52, 95% CI 0.30 to 0.69, within protocol; PPV 0.058 at 1%).
+- **Validated:** 12 unit tests, each checked to fail when its behaviour is broken; full suite passes; the compare_models rerun adds the new columns and leaves every existing number identical. **Not verified:** nothing has run on WearGait-PD yet (no features).
+- **Next:** once T-018 writes feature tables for both datasets, add `scripts/run_cross_cohort.py` (pooled, cross-cohort, Seattle only, dataset of origin, stride-matched reference) for the logistic regression, then the RF and SVM through the same functions; open the pull request (reviewer Anna or Yassien).
+- **Blocked / needs a decision:** features for both datasets (T-018); whether stride-time asymmetry stays in the feature set (raised with the group on 2 November, see the log).
+- **For teammates:** @anna @yassien: the RF and SVM join the cross-dataset comparison through the same model factory you pass to `evaluate_model`; nothing else is needed.
+- **Not pushed:** nothing.
+
+## T-025 · WearGait-PD external test (walkway threshold check built; sensor files being downloaded)
+_Updated 2026-11-02 14:05 by Claude (cloud session) for Jamie · branch `jamie/T-025-weargait-access` at `0a694b9`_
+
+- **Now:** `src/gaitpdb/walkway.py` and `scripts/check_weargait_threshold.py`: the insole contacts at each candidate threshold (10, 20 and 50 N; 2.5% and 5% of the recording's force level; 2.5% and 5% of body weight) matched to the walkway's complete footfalls, with stance, stride and swing differences and limits of agreement, overall, by group and by site; the threshold is recommended on walkway agreement only (Midterm Research Plan, Section IV). Column names, units and the `_mat` tasks' erroneous last frame are from the dataset's Synapse wiki ("Data description", "Things to know"), read on 2 November.
+- **Validated:** 9 unit tests on synthetic signals (including the NLS056-type raised swing baseline and pairwise merged contacts), each checked to fail when its behaviour is broken. **Not verified:** anything on real WearGait-PD files; the body-weight thresholds need the weight column of the participant sheets, which `weargait.load_participants` does not read yet.
+- **Next:** download the sensor files (SelfPace, SelfPace_mat, SelfPace_matTURN, Version 1) and the participant sheets; run `scripts/check_weargait_threshold.py`; take the recommended threshold to the group; the site-by-diagnosis table with the D-011 inclusion (after T-017 merges); README file map.
 - **Blocked / needs a decision:** none.
-- **For teammates:** none.
-- **Not pushed:** nothing.
-
-## T-022 · Model comparison (scaffolding and baselines merged; the three-model comparison waits for T-019 and T-020)
-_Updated 2026-10-16 10:00 by Claude (cloud session) for Jamie (D-007 noted; otherwise as of 2026-10-14 10:10) · branch `jamie/T-022-model-comparison` (merged into `main` on 9 October)_
-
-- **Now:** `scripts/run_baselines.py` and `scripts/compare_models.py` are on `main`; pull request #10 (merged 14 October) reran them on the 162 analysed participants. Pull requests #4 to #8 were merged locally into `main` on 9 October and are now closed on GitHub with a note.
-- **Validated:** see the T-029 entries in `log.md` (13 and 14 October). **Not verified:** the SVM and random forest (not written).
-- **Next:** when T-019 and T-020 write their result files through `write_model_outputs`, run `compare_models.py`. Under D-007 (T-030), the comparison also needs the pooled and cross-cohort schemes (new code in `evaluation.py`, once for all three models) and sensitivity at 90% specificity (§4 asks for it; the code reports metrics at 0.5 only).
-- **Blocked / needs a decision:** T-019 (Yassien), T-020 (Anna).
-- **For teammates:** @anna @yassien: your model appears in the comparison as soon as your script writes `results/<svm|rf>_{folds,cv_predictions,loso_predictions}.csv` through `write_model_outputs`.
-- **Not pushed:** nothing.
-
-## T-025 · WearGait-PD external test (participant sheets in hand; sensor files not yet)
-_Updated 2026-10-16 10:00 by Claude (cloud session) for Jamie (D-007 noted; otherwise as of 2026-10-14 15:25) · participant check on `main` (pull request #10, merged 14 October)_
-
-- **Now:** Jamie has a Synapse account (14 October). The two participant sheets of the "Version 1 (Cross-sectional)" folder (`PD - Demographic+Clinical - datasetV1.csv`, syn55105530 version 3; `CONTROLS - Demographic+Clinical - datasetV1.csv`, syn55105521 version 4) are in `data/raw/weargait_pd/` of Jamie's local clone (ignored by git; also still in his Downloads folder). `src/gaitpdb/weargait.py` reads them and `scripts/check_weargait_participants.py` gives 185 participants, four under 50 (NLS158, NLS159 with PD; WHC003, WHC005 controls), 181 analysed (98 PD, 83 controls). `data/raw/README.md` records the versions, MD5s and download date. The project also has a "Version 2 (Longitudinal)" folder (syn74686228) that the article does not describe.
-- **Validated:** both files' MD5s match the checksums Synapse lists; counts, ages (PD 67.0 ± 8.3, controls 74.1 ± 9.2) and the patients' sexes match the article. **Not verified:** the controls sheet lists 47 women and 38 men where the article reports 48 and 37 (cause unknown); the sensor files, their columns and units (supplementary Table S5 not read); what Version 2 contains.
-- **Next:** after the midterm: download the SelfPace sensor CSVs (ask Jamie first: name, source and size), write the loader for the insole total force, check the 20 N threshold against the walkway's foot contacts before any cross-cohort run. The board's due date (14 October) has passed; the milestone list in the Google Doc suggests Friday 23 October for the loader, which is Jamie's call.
-- **Blocked / needs a decision:** none; D-007 (16 October) uses WearGait-PD both in the combined analysis and as the cross-cohort test set.
-- **For teammates:** whoever already has the WearGait-PD files: no need to send the participant sheets now; the sensor files can come later if that is quicker than downloading them.
+- **For teammates:** @anna (T-017 review, first pass): 49 tests and ruff pass and `make_clean_strides.py` reproduces your committed gaitpdb summary exactly. (1) The missed-heel-strike check runs on gaitpdb only, but WearGait-PD's insoles are where 20 N is known to fail; a partly merged stride (1.75 to 2.25 times the median) passes the 0.5 to 2.5 s limits and stays clean, so it may be worth applying `_missed_heel_strikes` there too. (2) The dataset wiki shows freezing and stagger are labelled in `ClinicalEvent`, not `GeneralEvent`, so the "Walk" filter keeps them in both datasets alike; worth one line in the docstring. @yassien (T-018): feature note in the group chat of 2 November (stride-time asymmetry, MAD variability).
 - **Not pushed:** nothing.

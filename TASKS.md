@@ -88,7 +88,7 @@ owner: anna | status: todo | branch: - | due: - | updated: 2026-10-05
 owner: jamie | status: done | branch: jamie/T-021-logistic-regression | due: 2026-10-23 | updated: 2026-10-13
 
 ### T-022 · Project: compare the three models: shared splits and metrics, comparison tables and figures, statistical comparison where appropriate (lead jamie, collaborators all; after T-019, T-020, T-021)
-owner: jamie | status: doing | branch: jamie/T-022-model-comparison | due: 2026-11-06 | updated: 2026-10-06
+owner: jamie | status: doing | branch: jamie/T-022-model-comparison | due: 2026-11-06 | updated: 2026-11-02
 
 ### T-023 · Project: discussion: interpret the results against the research question and the background, limitations, ethics, future work (lead jamie, collaborators all; after T-022)
 owner: jamie | status: todo | branch: - | due: - | updated: 2026-10-05
@@ -97,7 +97,7 @@ owner: jamie | status: todo | branch: - | due: - | updated: 2026-10-05
 owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
 
 ### T-025 · Project: WearGait-PD external test: Synapse account and data-use terms, loader for its insole or walkway timings, run the final models on it (owner to be agreed; after T-022)
-owner: jamie | status: doing | branch: jamie/T-025-weargait-access | due: 2026-10-14 | updated: 2026-10-14
+owner: jamie | status: doing | branch: jamie/T-025-weargait-access | due: 2026-11-06 | updated: 2026-11-02
 
 ### T-026 · Data-quality report on the PhysioNet records for §3: missing demographics, recording lengths, pauses and gaps in the force signals, class and study balance (Jamie's reviewer part of T-012 per the Project Timeline sheet; after T-010)
 owner: jamie | status: done | branch: jamie/T-026-data-quality | due: 2026-10-08 | updated: 2026-10-13
@@ -115,4 +115,4 @@ owner: jamie | status: done | branch: jamie/T-029-age-restriction | due: 2026-10
 owner: group | status: done | branch: - | due: 2026-10-15 | updated: 2026-10-16
 
 ### T-031 · Sync the midterm snapshots in report/midterm/ with the submitted PDF (the AI-Assisted Work paragraph changed after commit 50a86e9; keep the submitted PDF's wording as the record)
-owner: jamie | status: review | branch: jamie/T-031-midterm-snapshots | due: 2026-10-23 | updated: 2026-10-16
+owner: jamie | status: done | branch: jamie/T-031-midterm-snapshots | due: 2026-10-23 | updated: 2026-11-02
