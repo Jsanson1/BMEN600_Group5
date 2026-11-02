@@ -26,7 +26,9 @@ clean strides of scripts/make_clean_strides.py (task T-017) and reports:
 5. Each feature's AUC for PD against controls in gaitpdb, the training dataset
    (already analysed for the midterm). WearGait-PD is not split by group.
 
-Writes results/feature_checks.txt.
+Writes results/feature_checks.txt and Figure 4 (figures/figure4_feature_checks.png
+and .pdf): A, each feature's median and interquartile range in both datasets,
+relative to gaitpdb's median; B, stride time by position in a straight bout.
 
     python scripts/check_features.py
 """
@@ -37,9 +39,15 @@ import argparse
 import sys
 from pathlib import Path
 
+import matplotlib
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
+
+matplotlib.use("Agg")
+matplotlib.rcParams["font.family"] = "DejaVu Sans"
+matplotlib.rcParams["text.hinting"] = "default"
+import matplotlib.pyplot as plt  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -54,6 +62,23 @@ MIN_STRIDES = {"gaitpdb": 40, "weargait": 10}  # D-011
 ASYMMETRY_COUNTS = (10, 20, 30, 40)
 N_DRAWS = 20
 SEED = 0
+INK, MUTED, GRID = "#1f1f1f", "#6e6e6e", "#d9d9d9"
+COLORS = {"gaitpdb": "#6250d6", "weargait": "#1baf7a"}
+"""Violet and aqua: distinct from Figure 1's group colours, checked for colour-vision
+deficiency (the dataviz validator: deutan Delta E 27); marker shape repeats the
+identity, and the aqua's low contrast is relieved by the legend."""
+MARKERS = {"gaitpdb": "o", "weargait": "s"}
+NAMES = {"gaitpdb": "gaitpdb (PhysioNet)", "weargait": "WearGait-PD"}
+FIGURE_FEATURES = {
+    "stride_time_mean_s": "Mean stride time",
+    "swing_pct_mean": "Swing fraction of the stride",
+    "stride_time_cv_pct": "Stride-time variability (CV)",
+    "stride_time_madcv_pct": "Stride-time variability (robust)",
+    "swing_time_cv_pct": "Swing-time variability (CV)",
+    "swing_time_madcv_pct": "Swing-time variability (robust)",
+    "swing_time_asymmetry_pct": "Swing-time asymmetry",
+    "stride_time_asymmetry_pct": "Stride-time asymmetry",
+}
 
 lines: list[str] = []
 
@@ -239,12 +264,120 @@ def single_feature_auc(table: pd.DataFrame, columns: list[str]) -> pd.Series:
     return pd.Series({c: roc_auc_score(y, table[c]) for c in columns}, name="auc")
 
 
+def _style(ax) -> None:
+    ax.tick_params(labelsize=7, length=2.5, color=MUTED)
+    for side in ("top", "right"):
+        ax.spines[side].set_visible(False)
+    for side in ("left", "bottom"):
+        ax.spines[side].set_color(MUTED)
+        ax.spines[side].set_linewidth(0.6)
+
+
+def figure(
+    shift: pd.DataFrame,
+    positions: dict[str, pd.DataFrame],
+    path_png: Path,
+    path_pdf: Path,
+) -> None:
+    """Figure 4: A, each feature in both datasets relative to gaitpdb's median;
+    B, stride time by position in a straight bout (mean and 95% interval)."""
+    fig, (ax_a, ax_b) = plt.subplots(
+        1,
+        2,
+        figsize=(7.2, 3.4),
+        gridspec_kw={"wspace": 0.45, "width_ratios": [1.35, 1]},
+    )
+    rows = shift.set_index("feature").loc[list(FIGURE_FEATURES)]
+    y = np.arange(len(rows))[::-1].astype(float)
+    ref = rows["gaitpdb_median"].to_numpy()
+    for k, ds in enumerate(("gaitpdb", "weargait")):
+        off = 0.14 if k == 0 else -0.14
+        lo = rows[f"{ds}_q1"].to_numpy() / ref
+        hi = rows[f"{ds}_q3"].to_numpy() / ref
+        mid = rows[f"{ds}_median"].to_numpy() / ref
+        ax_a.hlines(y + off, lo, hi, color=COLORS[ds], lw=1.2, zorder=2)
+        ax_a.plot(
+            mid,
+            y + off,
+            MARKERS[ds],
+            color=COLORS[ds],
+            ms=5,
+            zorder=3,
+            mec="white",
+            mew=0.6,
+            label=NAMES[ds],
+        )
+    ax_a.axvline(1.0, color=MUTED, lw=0.8, ls=(0, (3, 3)), zorder=1)
+    ax_a.set_xscale("log")
+    ax_a.set_xticks([0.25, 0.5, 1, 2, 4, 8, 16])
+    ax_a.set_xticklabels(["0.25", "0.5", "1", "2", "4", "8", "16"])
+    ax_a.minorticks_off()
+    ax_a.grid(axis="x", color=GRID, lw=0.5, zorder=0)
+    ax_a.set_yticks(y)
+    ax_a.set_yticklabels(list(FIGURE_FEATURES.values()), fontsize=7, color=INK)
+    ax_a.set_xlabel("Relative to gaitpdb's median (log scale)", fontsize=7.5, color=INK)
+    ax_a.set_title(
+        "A  Median and interquartile range,\nall participants, no diagnosis labels",
+        fontsize=7.5,
+        loc="left",
+        color=INK,
+    )
+    _style(ax_a)
+    order = ["first", "second", "middle", "second to last", "last"]
+    x = np.arange(len(order))
+    for k, ds in enumerate(("gaitpdb", "weargait")):
+        t = positions[ds].set_index("position").loc[order]
+        half = 1.96 * t["sd"] / np.sqrt(t["n"])
+        ax_b.errorbar(
+            x + (-0.08 if k == 0 else 0.08),
+            t["mean"],
+            yerr=half,
+            color=COLORS[ds],
+            marker=MARKERS[ds],
+            ms=5,
+            mec="white",
+            mew=0.6,
+            lw=1.2,
+            capsize=0,
+            label=NAMES[ds],
+        )
+    ax_b.axhline(1.0, color=MUTED, lw=0.8, ls=(0, (3, 3)), zorder=1)
+    ax_b.set_xticks(x)
+    ax_b.set_xticklabels(["First", "Second", "Middle", "Second\nto last", "Last"])
+    ax_b.set_ylabel("Stride time / participant's median", fontsize=7.5, color=INK)
+    ax_b.grid(axis="y", color=GRID, lw=0.5, zorder=0)
+    ax_b.set_title(
+        "B  Stride time by position in a\nstraight bout of 5 or more strides",
+        fontsize=7.5,
+        loc="left",
+        color=INK,
+    )
+    _style(ax_b)
+    handles, labels = ax_b.get_legend_handles_labels()
+    fig.legend(
+        handles,
+        labels,
+        loc="lower center",
+        ncol=2,
+        frameon=False,
+        fontsize=7,
+        bbox_to_anchor=(0.5, 0.0),
+    )
+    fig.subplots_adjust(left=0.27, right=0.985, top=0.86, bottom=0.25)
+    path_png.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(path_png, dpi=200)
+    fig.savefig(path_pdf, metadata={"CreationDate": None})
+    plt.close(fig)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--results", default=str(ROOT / "results"))
     ap.add_argument("--interim", default=str(ROOT / "data" / "interim"))
+    ap.add_argument("--figures", default=str(ROOT / "figures"))
     args = ap.parse_args()
     results, interim = Path(args.results), Path(args.interim)
+    figures = Path(args.figures)
     tables, strides = {}, {}
     for ds in ("gaitpdb", "weargait"):
         f, s = results / f"features_{ds}.csv", interim / f"clean_strides_{ds}.csv"
@@ -285,18 +418,23 @@ def main() -> None:
     say()
 
     say("3. Straight bouts (runs of consecutive clean strides of one foot)")
+    positions = {}
     for ds, keys in BOUT_KEYS.items():
         b = bout_positions(strides[ds], keys)
         n_bouts = b.groupby([*keys, "bout"]).ngroups
         lengths = b.drop_duplicates([*keys, "bout"])["bout_len"]
+        per_foot = (
+            b.drop_duplicates([*keys, "bout"]).groupby(["participant", "foot"]).size()
+        )
         ends = ((b["k0"] == 0) | (b["k1"] == 0)).mean()
         say(
             f"  {ds}: {len(b)} clean strides in {n_bouts} bouts, bout length median "
-            f"{lengths.median():.0f} strides; {100 * ends:.1f}% of clean strides open or "
-            "close a bout"
+            f"{lengths.median():.0f} strides, median {per_foot.median():.0f} bouts per "
+            f"participant and foot; {100 * ends:.1f}% of clean strides open or close a bout"
         )
         say("    stride time / participant's median, in bouts of 5 or more strides:")
-        for r in position_ratios(b).itertuples(index=False):
+        positions[ds] = position_ratios(b)
+        for r in positions[ds].itertuples(index=False):
             say(f"      {r.position}: mean {r.mean:.3f} (SD {r.sd:.3f}, {r.n} strides)")
         for trim in (0, 1):
             t = trimmed_cv(b, trim)
@@ -328,6 +466,13 @@ def main() -> None:
     )
     say(f"  (WearGait-PD weaker foot: median {wg_n:.0f} clean strides)")
     say()
+
+    figure(
+        shift,
+        positions,
+        figures / "figure4_feature_checks.png",
+        figures / "figure4_feature_checks.pdf",
+    )
 
     say("5. AUC of each feature alone, PD against controls, gaitpdb only")
     for c, a in single_feature_auc(tables["gaitpdb"], FEATURES).items():

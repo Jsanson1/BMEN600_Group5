@@ -149,3 +149,23 @@ def test_main_skips_without_both_datasets(tmp_path, monkeypatch):
     check.main()
     text = (tmp_path / "feature_checks.txt").read_text()
     assert "Skipped" in text
+
+
+def test_figure_is_written_from_the_shift_and_position_tables(tmp_path):
+    feats = list(check.FIGURE_FEATURES)
+    tables = {
+        "gaitpdb": pd.DataFrame({c: [1.0, 2.0, 3.0] for c in feats}),
+        "weargait": pd.DataFrame({c: [2.0, 4.0, 6.0] for c in feats}),
+    }
+    shift = check.dataset_shift(tables, feats)
+    pos = pd.DataFrame(
+        {
+            "position": ["first", "second", "middle", "second to last", "last"],
+            "mean": [1.06, 1.01, 1.0, 1.01, 1.04],
+            "sd": [0.1] * 5,
+            "n": [100] * 5,
+        }
+    )
+    png, pdf = tmp_path / "f.png", tmp_path / "f.pdf"
+    check.figure(shift, {"gaitpdb": pos, "weargait": pos}, png, pdf)
+    assert png.stat().st_size > 10_000 and pdf.stat().st_size > 5_000
