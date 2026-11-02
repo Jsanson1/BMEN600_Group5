@@ -39,6 +39,7 @@ READS_RESULTS = [  # these read what the steps above wrote to results/
     "run_logreg.py",
     "run_baselines.py",
     "compare_models.py",
+    "run_cross_cohort.py",  # needs both feature tables and the clean strides
 ]
 READS_WEARGAIT = [  # reads data/raw/weargait_pd; skips itself without the sheets
     "check_weargait_participants.py",
