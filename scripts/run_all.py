@@ -12,7 +12,8 @@ the first failure. About five minutes on a laptop.
 
 make_features and check_features run right after the record steps: they read
 the clean-stride tables in data/interim/ and skip a dataset whose table is
-missing.
+missing. Last, the 20 N sensitivity analysis of D-012 reruns the cleaning, the
+features and the cross-cohort test at a fixed 20 N into results/fixed_20N/.
 """
 
 from __future__ import annotations
@@ -47,6 +48,27 @@ READS_RESULTS = [  # these read what the steps above wrote to results/
 READS_WEARGAIT = [  # reads data/raw/weargait_pd; skips itself without the sheets
     "check_weargait_participants.py",
 ]
+SENSITIVITY_20N = [  # D-012's sensitivity analysis at a fixed 20 N, in its own folders
+    (
+        "make_clean_strides.py",
+        ["--fixed-threshold", "20", "--out", "data/interim/fixed_20N"]
+        + ["--summary", "results/fixed_20N/clean_strides_summary.txt"],
+    ),
+    (
+        "make_features.py",
+        ["--interim", "data/interim/fixed_20N", "--out", "results/fixed_20N"],
+    ),
+    (
+        "check_features.py",
+        ["--interim", "data/interim/fixed_20N", "--results", "results/fixed_20N"]
+        + ["--figures", "figures/fixed_20N"],
+    ),
+    (
+        "run_cross_cohort.py",
+        ["--interim", "data/interim/fixed_20N", "--results", "results/fixed_20N"]
+        + ["--cross-cohort-only"],
+    ),
+]
 STEPS = READS_RECORDS + READS_CLEAN_STRIDES + READS_RESULTS + READS_WEARGAIT
 TAKE_DATA = {*READS_RECORDS, "make_features.py"}
 
@@ -56,11 +78,13 @@ def main() -> None:
     ap.add_argument("--data", default="data/raw/gaitpdb")
     args = ap.parse_args()
     here = Path(__file__).resolve().parent
-    for step in STEPS:
+    runs = [(step, []) for step in STEPS] + SENSITIVITY_20N
+    for step, extra in runs:
         cmd = [sys.executable, str(here / step)]
         if step in TAKE_DATA:
             cmd += ["--data", args.data]
-        print(f"== {step}", flush=True)
+        cmd += extra
+        print(f"== {step} {' '.join(extra)}".rstrip(), flush=True)
         t0 = time.time()
         result = subprocess.run(cmd, cwd=here.parent)
         if result.returncode != 0:

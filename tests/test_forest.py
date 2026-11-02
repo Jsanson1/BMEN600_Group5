@@ -75,7 +75,7 @@ def test_needs_both_classes():
 
 
 def test_permutation_importance_finds_the_informative_input(monkeypatch):
-    X, y = data(n=150, signal=2.5, seed=6)
+    X, y = data(n=150, signal=2.5, seed=6, p=len(MODEL_FEATURES))
     df = pd.DataFrame(X, columns=MODEL_FEATURES)
     df["participant"] = [f"P{i:03d}" for i in range(len(y))]
     df["y"] = y

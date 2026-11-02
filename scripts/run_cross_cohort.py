@@ -55,6 +55,14 @@ per model, input set and analysis), results/crosscohort_pooled_folds.csv and
 results/crosscohort_predictions.csv (every WearGait-PD prediction).
 
     python scripts/run_cross_cohort.py [--models logreg rf svm] [--shuffle-labels]
+
+``--cross-cohort-only`` runs analyses 2 to 5 and skips the pooled
+cross-validation, the dataset-of-origin check and the stride-matched reference;
+the 20 N sensitivity analysis (D-012) uses it, on the tables of
+scripts/make_clean_strides.py --fixed-threshold 20 (run_all.py has the commands):
+
+    python scripts/run_cross_cohort.py --results results/fixed_20N \
+        --interim data/interim/fixed_20N --cross-cohort-only
 """
 
 from __future__ import annotations
@@ -338,6 +346,7 @@ def main() -> None:
     ap.add_argument("--interim", default=str(ROOT / "data" / "interim"))
     ap.add_argument("--models", nargs="+", default=list(MODEL_SCRIPTS))
     ap.add_argument("--shuffle-labels", action="store_true")
+    ap.add_argument("--cross-cohort-only", action="store_true")
     args = ap.parse_args()
     results, interim = Path(args.results), Path(args.interim)
     prefix = "crosscohort_shuffled" if args.shuffle_labels else "crosscohort"
@@ -363,7 +372,8 @@ def main() -> None:
         ),
         f"Training dataset gaitpdb: {len(g)} participants ({int(g['y'].sum())} PD); test "
         f"dataset WearGait-PD: {len(wg_table)} participants ({int(wg_table['y'].sum())} PD).",
-        f"Main inputs: {', '.join(MODEL_FEATURES)}.",
+        f"Main inputs: {', '.join(MODEL_FEATURES)}."
+        + (" Cross-cohort test only." if args.cross_cohort_only else ""),
         "Intervals: cross-cohort, 95% participant bootstrap; pooled and dataset of origin, "
         f"the corrected interval over {N_SPLITS} folds x {REPEATS} repeats.",
         "",
@@ -380,7 +390,7 @@ def main() -> None:
             r, p = cross_cohort_rows(factory, df, cols, name, inputs)
             rows += r
             preds.append(p)
-            if inputs in POOLED_SETS:
+            if inputs in POOLED_SETS and not args.cross_cohort_only:
                 folds, _ = run_pooled(factory, df, cols, n_repeats=REPEATS)
                 pooled_folds.append(folds.assign(model=name, inputs=inputs))
                 for col, label in (
@@ -411,6 +421,8 @@ def main() -> None:
             )
             rows += r
             preds.append(p)
+            if args.cross_cohort_only:
+                continue
             origin = summarise(
                 dataset_of_origin(factory, df, cols, n_repeats=REPEATS)
             ).loc["auc"]

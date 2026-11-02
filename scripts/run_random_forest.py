@@ -30,14 +30,14 @@ chosen setting is regrown with 1000 trees, and the two out-of-bag log-losses and
 AUCs are compared.
 
 Reads the feature table through gaitpdb.evaluation.load_feature_table (by default
-results/features_usual_walk.csv, the table the logistic regression reads, so the
+results/features_gaitpdb.csv, the table the logistic regression reads, so the
 two models are compared on the same inputs), which keeps the participants aged
 50 or over (DECISIONS.md D-006), and writes results/rf_summary.txt;
 results/rf_folds.csv, results/rf_cv_predictions.csv and
 results/rf_loso_predictions.csv (scripts/compare_models.py reads all three); and
 results/rf_importances.csv.
 
-    python scripts/run_random_forest.py [--features results/features_usual_walk.csv]
+    python scripts/run_random_forest.py [--features results/features_gaitpdb.csv]
 """
 
 from __future__ import annotations
@@ -140,14 +140,14 @@ def tree_count_check(model: OOBTunedForest, X: np.ndarray, y: np.ndarray) -> dic
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--features", default="results/features_usual_walk.csv")
+    ap.add_argument("--features", default="results/features_gaitpdb.csv")
     ap.add_argument("--out", default="results")
     args = ap.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     if not Path(args.features).exists():
         raise SystemExit(
-            f"{args.features} not found: run scripts/make_figure1.py first"
+            f"{args.features} not found: run scripts/make_features.py first"
         )
     df = load_feature_table(args.features)
     depths = ", ".join("full" if d is None else str(d) for d in MAX_DEPTHS)
