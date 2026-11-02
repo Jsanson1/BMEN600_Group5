@@ -2,18 +2,15 @@
 
     python scripts/run_all.py [--data data/raw/gaitpdb]
 
-Runs verify_data, make_table1, make_figure1, check_event_detection,
-check_data_quality, check_dual_task, make_figure2, make_clean_strides
-(derived stride tables in data/interim/), then the models
-(run_logreg, run_baselines) and compare_models, and last
-check_weargait_participants (which reads data/raw/weargait_pd and skips itself
-if the WearGait-PD sheets are not there), as separate processes, and stops at
-the first failure. About five minutes on a laptop.
-
-make_features and check_features run right after the record steps: they read
-the clean-stride tables in data/interim/ and skip a dataset whose table is
-missing. Last, the 20 N sensitivity analysis of D-012 reruns the cleaning, the
-features and the cross-cohort test at a fixed 20 N into results/fixed_20N/.
+Runs, each as a separate process and stopping at the first failure:
+verify_data, make_table1, make_figure1, check_event_detection,
+check_data_quality, check_dual_task, make_figure2 and make_clean_strides (the
+stride tables in data/interim/); make_features and check_features; the models
+(run_logreg, run_random_forest, run_baselines), compare_models and
+run_cross_cohort; check_weargait_participants and check_weargait_threshold
+(which read data/raw/weargait_pd and skip themselves without its files); and
+last the 20 N sensitivity analysis of D-012 (the cleaning, the features, their
+checks and the cross-cohort test at a fixed 20 N, into results/fixed_20N/).
 """
 
 from __future__ import annotations
@@ -45,8 +42,9 @@ READS_RESULTS = [  # these read what the steps above wrote to results/
     "compare_models.py",
     "run_cross_cohort.py",  # needs both feature tables and the clean strides
 ]
-READS_WEARGAIT = [  # reads data/raw/weargait_pd; skips itself without the sheets
+READS_WEARGAIT = [  # read data/raw/weargait_pd; skip themselves without its files
     "check_weargait_participants.py",
+    "check_weargait_threshold.py",
 ]
 SENSITIVITY_20N = [  # D-012's sensitivity analysis at a fixed 20 N, in its own folders
     (

@@ -62,3 +62,26 @@ def test_repeated_id_and_missing_sheet(tmp_path):
     (tmp_path / SHEETS["PD"][0]).unlink()
     with pytest.raises(FileNotFoundError):
         load_participants(tmp_path)
+
+
+def test_weight_and_assistive_device_when_present(tmp_path):
+    header = (
+        "-,-,-,-,-,-,-\n"
+        "Subject ID,Release version,Age (years),Sex,Weight (kg),"
+        "Assistive Device used during testing?,Race\n"
+    )
+    control = (
+        "\ufeff,,,,,,\n"
+        "Subject ID,Release version,Age,Sex,Weight (kg),"
+        "Assistive Device used during testing?,Race\n"
+    )
+    (tmp_path / "PD - Demographic+Clinical - datasetV1.csv").write_text(
+        header + "NLS001,1.0,70,Male,81.6,Cane,White\n", encoding="utf-8"
+    )
+    (tmp_path / "CONTROLS - Demographic+Clinical - datasetV1.csv").write_text(
+        control + "HC100,1.0,72,Female,,No,White\n", encoding="utf-8"
+    )
+    people = load_participants(tmp_path).set_index("participant")
+    assert people.loc["NLS001", "weight_kg"] == 81.6
+    assert people.loc["NLS001", "assistive_device"] == "Cane"
+    assert people.loc["HC100", "weight_kg"] != people.loc["HC100", "weight_kg"]  # NaN
