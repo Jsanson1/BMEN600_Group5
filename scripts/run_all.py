@@ -37,6 +37,7 @@ READS_CLEAN_STRIDES = [  # read data/interim/ (make_clean_strides.py, T-017)
 ]
 READS_RESULTS = [  # these read what the steps above wrote to results/
     "run_logreg.py",
+    "run_random_forest.py",
     "run_baselines.py",
     "compare_models.py",
     "run_cross_cohort.py",  # needs both feature tables and the clean strides

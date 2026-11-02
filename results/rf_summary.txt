@@ -1,0 +1,54 @@
+Random forest (300 trees; depth (2, 3, 5, full) and inputs per split (1, the square root of the number of inputs, all) chosen inside each outer training set by out-of-bag log-loss; gaitpdb.forest) on 162 participants aged 50 or over (91 PD, 71 controls; DECISIONS.md D-006), one row each, from results/features_usual_walk.csv.
+Inputs: stride_time_mean_s, stride_time_cv_pct, swing_time_cv_pct, swing_pct_mean, stride_time_asymmetry_pct, swing_time_asymmetry_pct; with covariates also Age, sex_male.
+Outer evaluation: 5-fold participant-grouped cross-validation repeated 20 times, and leave-one-study-out. Cross-validation: mean over the 100 test folds, 95% interval corrected for the overlap between training sets (Nadeau and Bengio 2003), then in brackets the 2.5th to 97.5th percentile of the 20 repeat means. Leave-one-study-out: 95% interval from a bootstrap over the held-out participants.
+
+[gait only] repeated grouped CV:
+    auc: 0.785 (0.704 to 0.865) [repeats 0.757 to 0.805]
+    brier: 0.194 (0.159 to 0.229) [repeats 0.184 to 0.206]
+    balanced_accuracy: 0.698 (0.615 to 0.781) [repeats 0.667 to 0.724]
+    sensitivity: 0.753 (0.652 to 0.854) [repeats 0.703 to 0.797]
+    specificity: 0.644 (0.497 to 0.790) [repeats 0.569 to 0.704]
+[gait only] calibration of the out-of-fold probabilities (one CV repeat), quintiles of predicted probability: mean predicted vs observed PD fraction:
+    n = 33: predicted 0.26, observed 0.27
+    n = 32: predicted 0.39, observed 0.38
+    n = 32: predicted 0.54, observed 0.53
+    n = 32: predicted 0.71, observed 0.75
+    n = 33: predicted 0.86, observed 0.88
+[gait only] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.812 (0.659 to 0.935), n = 47 (29 PD)
+    held-out Ju: 0.745 (0.607 to 0.868), n = 53 (28 PD)
+    held-out Si: 0.737 (0.607 to 0.856), n = 62 (34 PD)
+    all out-of-study predictions pooled: 0.766 (0.688 to 0.836)
+    setting chosen by out-of-bag log-loss: Ga held out: depth 5, 2 per split; Ju held out: depth 3, 2 per split; Si held out: depth 2, 6 per split
+[gait only] importance: test-fold AUC drop when the input is shuffled (mean (SD) over the 5 folds of repeat 0, 10 shuffles each); impurity importance of the forest fitted on all participants (depth 3, 2 per split):
+    swing_pct_mean: AUC drop 0.125 (0.034); impurity 0.308
+    swing_time_asymmetry_pct: AUC drop 0.101 (0.028); impurity 0.288
+    swing_time_cv_pct: AUC drop 0.004 (0.010); impurity 0.137
+    stride_time_cv_pct: AUC drop 0.001 (0.010); impurity 0.119
+    stride_time_mean_s: AUC drop -0.004 (0.012); impurity 0.063
+    stride_time_asymmetry_pct: AUC drop -0.006 (0.025); impurity 0.085
+    number of trees, out-of-bag log-loss and AUC on all participants at that setting: 300 trees 0.566 and 0.777; 1000 trees 0.566 and 0.777
+
+[gait + covariates] repeated grouped CV:
+    auc: 0.780 (0.697 to 0.862) [repeats 0.754 to 0.802]
+    brier: 0.194 (0.160 to 0.229) [repeats 0.185 to 0.206]
+    balanced_accuracy: 0.695 (0.615 to 0.774) [repeats 0.652 to 0.731]
+    sensitivity: 0.748 (0.649 to 0.846) [repeats 0.681 to 0.791]
+    specificity: 0.642 (0.506 to 0.778) [repeats 0.569 to 0.688]
+[gait + covariates] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.807 (0.659 to 0.928), n = 47 (29 PD)
+    held-out Ju: 0.754 (0.615 to 0.873), n = 53 (28 PD)
+    held-out Si: 0.737 (0.608 to 0.856), n = 62 (34 PD)
+    all out-of-study predictions pooled: 0.770 (0.695 to 0.839)
+    setting chosen by out-of-bag log-loss: Ga held out: depth 5, 3 per split; Ju held out: depth 3, 3 per split; Si held out: depth 2, 8 per split
+[gait + covariates] importance: test-fold AUC drop when the input is shuffled (mean (SD) over the 5 folds of repeat 0, 10 shuffles each); impurity importance of the forest fitted on all participants (depth 3, 3 per split):
+    swing_pct_mean: AUC drop 0.123 (0.034); impurity 0.278
+    swing_time_asymmetry_pct: AUC drop 0.119 (0.043); impurity 0.304
+    swing_time_cv_pct: AUC drop 0.011 (0.008); impurity 0.136
+    Age: AUC drop 0.006 (0.015); impurity 0.054
+    sex_male: AUC drop 0.000 (0.003); impurity 0.005
+    stride_time_cv_pct: AUC drop -0.001 (0.009); impurity 0.093
+    stride_time_mean_s: AUC drop -0.003 (0.007); impurity 0.061
+    stride_time_asymmetry_pct: AUC drop -0.010 (0.026); impurity 0.067
+    number of trees, out-of-bag log-loss and AUC on all participants at that setting: 300 trees 0.566 and 0.773; 1000 trees 0.568 and 0.774
+
