@@ -1,0 +1,42 @@
+T-017 who meets D-011 (scripts/explore_stride_counts.py)
+Minimum clean strides per foot: {'gaitpdb': 40, 'WearGait-PD': 10}. Exploratory; WearGait-PD stride timing provisional (20 N on insoles).
+
+Not countable: 12
+  gaitpdb GaPt03 (PD): no Speed_01: turns cannot be located
+  WearGait-PD NLS179 (PD): no insole data in any of the three tasks
+  WearGait-PD NLS144 (PD): no insole data in any of the three tasks
+  WearGait-PD NLS147 (PD): no insole data in any of the three tasks
+  WearGait-PD NLS145 (Control): no insole data in any of the three tasks
+  WearGait-PD NLS193 (Control): no insole data in any of the three tasks
+  WearGait-PD NLS207 (Control): no insole data in any of the three tasks
+  WearGait-PD HC138 (Control): no insole data in any of the three tasks
+  WearGait-PD HC140 (Control): no insole data in any of the three tasks
+  WearGait-PD HC154 (Control): no insole data in any of the three tasks
+  WearGait-PD HC100 (Control): no insole data in any of the three tasks
+  WearGait-PD HC106 (Control): no insole data in any of the three tasks
+
+Clean strides on the participant's weaker foot
+                     count   min   10%   50%    max  included
+dataset     group                                            
+WearGait-PD Control   75.0   8.0  18.0  26.0   57.0        73
+            PD        95.0   0.0  15.0  25.0   72.0        90
+gaitpdb     Control   71.0  25.0  50.0  74.0  113.0        68
+            PD        90.0  26.0  63.0  82.0  151.0        86
+
+gaitpdb (N = 40): included 154 of 161 countable (162 analysed participants)
+  excluded JuCo03 (Control, Ju): 25
+  excluded JuPt05 (PD, Ju): 26
+  excluded JuCo02 (Control, Ju): 27
+  excluded JuPt08 (PD, Ju): 32
+  excluded JuPt03 (PD, Ju): 34
+  excluded JuCo01 (Control, Ju): 34
+  excluded JuPt07 (PD, Ju): 37
+WearGait-PD (N = 10): included 163 of 170 countable (181 analysed participants)
+  excluded NLS185 (PD, NLS): 0
+  excluded NLS162 (PD, NLS): 0
+  excluded NLS172 (PD, NLS): 5
+  excluded NLS056 (PD, NLS): 7
+  excluded HC109 (Control, HC): 8
+  excluded WPD011 (PD, WPD): 9
+  excluded HC121 (Control, HC): 9
+
