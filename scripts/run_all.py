@@ -9,8 +9,9 @@ stride tables in data/interim/); make_features and check_features; the models
 (run_logreg, run_random_forest, run_baselines), compare_models,
 run_cross_cohort and the post hoc check_weargait_signal;
 check_weargait_participants and check_weargait_threshold; and last the 20 N
-sensitivity analysis of D-012 (the cleaning, the features, their checks and the
-cross-cohort test at a fixed 20 N, into results/fixed_20N/).
+sensitivity analysis of D-012 (the cleaning, the features, the logistic
+regression within gaitpdb, the feature checks and the cross-cohort test at a
+fixed 20 N, into results/fixed_20N/).
 
 WearGait-PD needs a free Synapse account (data/raw/README.md). Without its two
 participant sheets and its task files in data/raw/weargait_pd/, only the steps
@@ -71,6 +72,11 @@ SENSITIVITY_20N = [  # D-012's sensitivity analysis at a fixed 20 N, in its own 
     (
         "make_features.py",
         ["--interim", "data/interim/fixed_20N", "--out", "results/fixed_20N"],
+    ),
+    (
+        "run_logreg.py",
+        ["--features", "results/fixed_20N/features_gaitpdb.csv"]
+        + ["--out", "results/fixed_20N"],
     ),
     (
         "check_features.py",
