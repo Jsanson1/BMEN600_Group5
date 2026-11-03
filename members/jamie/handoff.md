@@ -33,34 +33,34 @@ _Updated 2026-11-02 18:20 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-019 · Random forest (finished: pull request #18 waits for a review)
-_Updated 2026-11-02 18:20 by Claude (cloud session) for Jamie · branch `jamie/T-019-random-forest` at `5076598`; pull request #18 open, no review yet_
+_Updated 2026-11-02 20:15 by Claude (cloud session) for Jamie · branch `jamie/T-019-random-forest` at `131c31b`; pull request #18 open, no review yet_
 
-- **Now:** final run on D-013's five inputs (run branch, `1a68375`): AUC 0.75 (0.65 to 0.85) within protocol, 0.70 (0.62 to 0.78) across protocols (`results/model_comparison.txt`); trained on gaitpdb and tested on WearGait-PD 0.573 (0.486 to 0.659) (`results/crosscohort_summary.txt`).
-- **Validated:** 6 tests (4 mutations caught); 300 and 1000 trees give the same out-of-bag log-loss on the midterm features. **Not verified:** no teammate has reviewed the code.
-- **Next:** Yassien reviews #18 (https://github.com/Jsanson1/BMEN600_Group5/pull/18), then merge, mark done, delete the branch. #16 and #18 both regenerate `results/model_comparison.*` and Figure 3: whichever merges second needs `main` merged in and `compare_models.py` rerun (the run branch already holds the final versions).
+- **Now:** final run on D-013's five inputs (run branch): AUC 0.75 (0.65 to 0.85) within protocol, 0.70 (0.62 to 0.78) across protocols, 0.573 (0.486 to 0.659) across cohorts. New on #18 (`131c31b`): the fitted forest predicts in one thread. In parallel threads scikit-learn added the trees' votes in a varying order, so the last digit of some probabilities changed between runs (found by a rerun from a clean checkout; once it moved a 20 N AUC by one patient-control pair, 0.477177 to 0.477252).
+- **Validated:** 7 tests, the new one failing without the fix in 5 of 5 runs; 39 pass on the branch. **Not verified:** no teammate has reviewed the code.
+- **Next:** Yassien reviews #18 (https://github.com/Jsanson1/BMEN600_Group5/pull/18), then merge, mark done, delete the branch. #16 and #18 both regenerate `results/model_comparison.*` and Figure 3: whichever merges second needs `main` merged in and `compare_models.py` rerun (the run branch holds the final versions).
 - **Blocked / needs a decision:** a reviewer.
-- **For teammates:** @anna (T-020): the SVM joins through a `scripts/run_svm.py` with `make_factory(columns)` and outputs written by `evaluation.write_model_outputs(..., "svm")`; `run_cross_cohort.py` picks it up by that file name; add it to `READS_RESULTS` in `scripts/run_all.py`.
+- **For teammates:** @anna (T-020): the SVM joins through a `scripts/run_svm.py` with `make_factory(columns)` and outputs written by `evaluation.write_model_outputs(..., "svm")`; `run_cross_cohort.py` and `compare_models.py` pick it up by that file name (`MODEL_FILES` already lists `svm`); add it to `READS_RESULTS` in `scripts/run_all.py`.
 - **Not pushed:** nothing.
 
-## T-022 · Model comparison and cross-dataset analyses (final results on the run branch; its pull request waits for #15 to #18 and T-017)
-_Updated 2026-11-02 18:20 by Claude (cloud session) for Jamie · branches `jamie/T-022-model-comparison` at `c203bb7` (pull request #16 open, no review yet) and `jamie/T-022-cross-cohort-run` at `47ebeca` (merges #15 to #18 and #19)_
+## T-022 · Model comparison and cross-dataset analyses (final results and reproduction fixes on the run branch; a clean rerun is checking them)
+_Updated 2026-11-02 20:15 by Claude (cloud session) for Jamie · branches `jamie/T-022-model-comparison` at `c203bb7` (pull request #16 open, no review yet) and `jamie/T-022-cross-cohort-run` at `085c0cf` (merges #15 to #18 and #19)_
 
-- **Now:** the final run is committed on the run branch (16:34 to 17:53). Trained on gaitpdb, the models do not transfer to WearGait-PD: AUC 0.532 (0.449 to 0.621) for the logistic regression and 0.573 (0.486 to 0.659) for the random forest. Not explained by stride count (cost at most 0.008), standardisation (0.535, 0.538) or leaving out variability (0.521, 0.576); the datasets are separable (0.94); age-matched pairs 0.646 and 0.670; the same at 20 N (0.534, 0.540). Post hoc, exploratory (`scripts/check_weargait_signal.py`): inside WearGait-PD the features barely separate the groups (logistic regression 0.595, 0.500 to 0.690). README Results rewritten (`47ebeca`); `run_all.py` now works without WearGait-PD's files (`be68f1c`).
-- **Validated:** 108 tests; every README number re-read from its output file; the analysis (`bd4c61f`, 15:50) and inputs (`4921862`, 16:32) were committed before the first run on the real labels (16:34). Reruns from a clean checkout are under way (PhysioNet only, then full), with all 311 PhysioNet files now downloaded and checked against `SHA256SUMS.txt`. **Not verified:** a second member reproducing the numbers (midterm plan, Section VI); the reruns' outcome.
-- **Next:** (1) when the reruns finish, confirm or correct the README's reproduction sentence; (2) once #15 to #18 and T-017 are on `main`, merge `main` into the run branch, rerun `compare_models.py` if needed, open its pull request; (3) a teammate reproduces the main numbers; (4) add the SVM when T-020 lands.
-- **Blocked / needs a decision:** reviews of #15 to #18; T-017 on `main` (Anna: merge #19 into her branch, then open her pull request).
-- **For teammates:** @anna @yassien: the results are in the run branch's README for Friday's discussion: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-022-cross-cohort-run/README.md#results
+- **Now:** final results in the run branch's README: no transfer to WearGait-PD (0.532 and 0.573); D-007's combined analysis 0.628 and 0.666, its gain from age and sex a recruitment effect; within gaitpdb 0.831 at 20 N against 0.789 at D-012 (not tested). Exploratory: the models' PD score rises with age among WearGait-PD's controls (ρ 0.641 and 0.556), and 49 of the 56 age-matched pairs cross sites. Reruns from clean checkouts found and fixed: `compare_models.py` stopping on any fresh checkout (now reads the model files by name); `run_all.py` with PhysioNet alone overwriting three summaries and crashing (now runs the PhysioNet steps only); the forest's parallel predictions (T-019); a stale Figure 2 (now redrawn for the final design from the feature tables); creation dates in two figures' PDFs.
+- **Validated:** 112 tests; all 311 PhysioNet files against `SHA256SUMS.txt`; the PhysioNet-only rerun ran every step; the regeneration changed only the forest's rows (1e-16, one 20 N value 7.5e-5) and no summary. **Not verified:** the full clean rerun of `085c0cf` (running; it should differ only in the commit line of the two `features_summary.txt` files); a second member reproducing the numbers.
+- **Next:** (1) when the rerun ends, check it and correct the README's reproduction sentence (it still says "nothing but the PDFs' creation dates"; the expected difference is that commit line); (2) once #15 to #18 and T-017 are on `main`, merge `main` into the run branch and open its pull request; (3) a teammate reproduces the main numbers; (4) the SVM when T-020 lands.
+- **Blocked / needs a decision:** reviews of #15 to #18; T-017 on `main` (Anna: merge #19, then her pull request).
+- **For teammates:** @anna @yassien: the results for Friday are in the run branch's README: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-022-cross-cohort-run/README.md#results
 - **Not pushed:** nothing.
 
-## T-023 · Discussion (outline ready; drafting from the final results)
-_Updated 2026-11-02 18:20 by Claude (cloud session) for Jamie · branch `jamie/T-023-discussion` not created yet_
+## T-023 · Discussion (draft 2 on its branch, for the group's comments)
+_Updated 2026-11-02 20:15 by Claude (cloud session) for Jamie · branch `jamie/T-023-discussion` at `21d935a`_
 
-- **Now:** outline written: the answer to the question; prior work; each alternative explanation for the failed transfer with its evidence (protocol and bout ends, stride count, hardware and threshold, population and site, dataset of origin); screening meaning; limitations; ethics; next step. New reference checked for the bout-end argument: D. Kroneberg et al., Front. Aging Neurosci., vol. 10, art. 435, 2019, doi:10.3389/fnagi.2018.00435.
-- **Validated:** the reference's DOI, authors, title, year and venue, and that it reports longer strides after turns (more so in PD) and edge strides inflating variability. **Not verified:** the draft (not written yet).
-- **Next:** create the branch, draft `report/final/discussion.md` from the run branch's results, push.
-- **Blocked / needs a decision:** none (the SVM result goes in when T-020 lands).
-- **For teammates:** none.
-- **Not pushed:** the outline (in this session's scratch space; committed with the first draft).
+- **Now:** `report/final/discussion.md`, draft 2 (about 2,100 words, slightly above the brief's 1.5 to 2 pages): the answer, prior work, five explanations for the failed transfer weighed against the evidence, what the study shows and does not, screening meaning, six limitations, next step (WearGait-PD's FreeWalk task, its controls' motor scores, turns). `report/final/sources.md`: S21 (Kroneberg et al. 2019) and further checks of S7, S9, S11 and S13.
+- **Validated:** an independent review of draft 1 by a separate agent (29 findings; those taken in are listed at the end of the draft); every number checked by script against the run branch's outputs; S21 against its repository record and full text; S9's new details in the article's preprint. **Not verified:** S9's new details against the published article (the page could not be opened from the session); the group has not read the draft.
+- **Next:** the group's comments; cut to two pages once the Results section carries the bout statistics; add the SVM when T-020 lands; then paste into the shared Word file and open the pull request.
+- **Blocked / needs a decision:** none.
+- **For teammates:** @anna @yassien: comments welcome: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-023-discussion/report/final/discussion.md
+- **Not pushed:** nothing.
 
 ## T-025 · WearGait-PD external test (finished: pull request #15 waits for a review; the test itself ran in T-022)
 _Updated 2026-11-02 18:20 by Claude (cloud session) for Jamie · branch `jamie/T-025-weargait-access` at `a0402fc`; pull request #15 open (checks green), no review yet_
