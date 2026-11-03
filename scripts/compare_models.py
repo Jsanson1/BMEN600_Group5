@@ -1,10 +1,10 @@
 """Compare every model run under the shared evaluation (T-022).
 
-Reads every results/*_folds.csv, *_cv_predictions.csv and *_loso_predictions.csv
-written by gaitpdb.evaluation.write_model_outputs (today the logistic regression
-and the baselines; the support vector machine and the random forest join as
-soon as their scripts write the same files), checks that all models were tested
-on identical folds and participants, and writes:
+Reads the <prefix>_folds.csv, _cv_predictions.csv and _loso_predictions.csv files
+that gaitpdb.evaluation.write_model_outputs writes for each prefix in MODEL_FILES
+(the logistic regression, the support vector machine, the random forest and the
+baselines; a model whose files are not there yet is left out), checks that all
+models were tested on identical folds and participants, and writes:
 
 * results/model_comparison.csv, .md and .txt: for each model, the AUC, balanced
   accuracy, sensitivity, specificity and Brier score within protocol (mean over
@@ -66,6 +66,10 @@ from gaitpdb.evaluation import (  # noqa: E402
     summarise,
 )
 
+MODEL_FILES = ("baselines", "logreg", "rf", "svm")
+"""Prefixes of the files each model script writes to results/, in the order they
+are read. Other files there (the cross-dataset analyses' among them) are never
+read, whatever their names."""
 NOT_MODELS = ("baseline", "single")  # families that are reference points, not models
 SCREENING_PREVALENCE = 0.01
 """Prevalence for the predictive values: PD affects at least 1% of people over 60
@@ -109,7 +113,8 @@ def label(model: str) -> str:
 
 
 def read_all(results: Path, kind: str) -> pd.DataFrame:
-    paths = sorted(results.glob(f"*_{kind}.csv"))
+    paths = [results / f"{prefix}_{kind}.csv" for prefix in MODEL_FILES]
+    paths = [p for p in paths if p.exists()]
     if not paths:
         raise SystemExit(
             f"no results/*_{kind}.csv found: run scripts/run_logreg.py and scripts/run_baselines.py first"

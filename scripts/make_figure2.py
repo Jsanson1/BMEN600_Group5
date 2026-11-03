@@ -236,7 +236,9 @@ def main() -> None:
     fig_dir.mkdir(parents=True, exist_ok=True)
     fig.tight_layout()
     fig.savefig(fig_dir / "figure2_evaluation_design.png", dpi=200)
-    fig.savefig(fig_dir / "figure2_evaluation_design.pdf")
+    fig.savefig(
+        fig_dir / "figure2_evaluation_design.pdf", metadata={"CreationDate": None}
+    )
     print("counts used:", c, "| totals", n_pd, "PD,", n_co, "control")
 
 
