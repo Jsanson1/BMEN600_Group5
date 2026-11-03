@@ -76,7 +76,7 @@ owner: jamie | status: done | branch: jamie/T-016-cowork-onboarding | due: 2026-
 owner: anna | status: doing | branch: anna/T-017-preprocessing | due: - | updated: 2026-11-01
 
 ### T-018 · Project: spatiotemporal feature extraction: define the feature set, implement it, produce the feature table and a feature dictionary (lead yassien, collaborators anna, jamie; builds on src/gaitpdb/features.py from T-010)
-owner: jamie | status: doing | branch: jamie/T-018-feature-extraction | due: 2026-11-06 | updated: 2026-11-02
+owner: jamie | status: review | branch: jamie/T-018-feature-extraction | due: 2026-11-06 | updated: 2026-11-02
 
 ### T-019 · Project: random forest model: train, tune, report performance and feature importances under the agreed evaluation (lead yassien)
 owner: jamie | status: review | branch: jamie/T-019-random-forest | due: 2026-11-13 | updated: 2026-11-02
@@ -97,7 +97,7 @@ owner: jamie | status: doing | branch: jamie/T-023-discussion | due: 2026-11-23 
 owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
 
 ### T-025 · Project: WearGait-PD external test: Synapse account and data-use terms, loader for its insole or walkway timings, run the final models on it (owner to be agreed; after T-022)
-owner: jamie | status: doing | branch: jamie/T-025-weargait-access | due: 2026-11-06 | updated: 2026-11-02
+owner: jamie | status: review | branch: jamie/T-025-weargait-access | due: 2026-11-06 | updated: 2026-11-02
 
 ### T-026 · Data-quality report on the PhysioNet records for §3: missing demographics, recording lengths, pauses and gaps in the force signals, class and study balance (Jamie's reviewer part of T-012 per the Project Timeline sheet; after T-010)
 owner: jamie | status: done | branch: jamie/T-026-data-quality | due: 2026-10-08 | updated: 2026-10-13
