@@ -29,3 +29,10 @@ WearGait-PD, VA Puget Sound only: 57 participants (28 PD, 29 controls); median a
     swing_pct_mean: 0.429
     swing_time_asymmetry_pct: 0.547
     Age: 0.522
+
+Age-matched pairs of the cross-cohort test (same sex, age within 3 years): 56 pairs, by patient's and control's site: NLS-HC 21, NLS-WHC 21, WPD-HC 7, WPD-WHC 7
+  7 pairs within one site (VA Puget Sound is WPD and WHC; NLS and HC are the two Johns Hopkins sites)
+
+Cross-cohort predictions on WearGait-PD (main inputs): Spearman correlation of the predicted probability of PD with age, within each group
+  logreg: controls 0.641 (p = 5.7e-10, n = 75); PD 0.210 (p = 0.042, n = 94)
+  rf: controls 0.556 (p = 2.2e-07, n = 75); PD 0.240 (p = 0.02, n = 94)
