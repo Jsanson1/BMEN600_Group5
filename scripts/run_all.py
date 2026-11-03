@@ -1,4 +1,4 @@
-"""Reproduce every committed output in one go, in the right order.
+"""Reproduce the committed outputs in one go, in the right order.
 
     python scripts/run_all.py [--data data/raw/gaitpdb]
 
@@ -12,6 +12,11 @@ check_weargait_participants and check_weargait_threshold; and last the 20 N
 sensitivity analysis of D-012 (the cleaning, the features, the logistic
 regression within gaitpdb, the feature checks and the cross-cohort test at a
 fixed 20 N, into results/fixed_20N/).
+
+Two kinds of committed output are not made here: those of the exploration
+scripts behind the cleaning rules (scripts/explore_*.py, each run on its own),
+and results/weargait_files_downloaded.csv, written when WearGait-PD was
+downloaded.
 
 WearGait-PD needs a free Synapse account (data/raw/README.md). Without its two
 participant sheets and its task files in data/raw/weargait_pd/, only the steps
@@ -154,7 +159,7 @@ def main() -> None:
         if result.returncode != 0:
             raise SystemExit(f"{step} failed with exit code {result.returncode}")
         print(f"   done in {time.time() - t0:.0f} s", flush=True)
-    done = "all outputs" if with_weargait else "the PhysioNet outputs"
+    done = "every step's outputs" if with_weargait else "the PhysioNet steps' outputs"
     print(f"{done} regenerated; git status shows what changed")
 
 
