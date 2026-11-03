@@ -1,14 +1,14 @@
-"""Figure 2: the three levels of evaluation, drawn from the actual participant counts.
+"""Figure 2: the evaluation design, drawn from the participants the models use.
 
-A schematic for the methods section: how participants are split within a
-protocol (repeated participant-grouped cross-validation), across protocols
-(leave-one-study-out) and across cohorts (external test). The counts are the
-analysed participants (aged 50 or over, gaitpdb.cohort, DECISIONS.md D-006) and
-come from demographics.txt and the record files, so the figure cannot drift from
-the data. The WearGait-PD counts are the article's, before the age rule, until
-that dataset is downloaded.
+A schematic for the methods section: within PhysioNet's protocols (repeated
+participant-grouped cross-validation), across its protocols (leave one sub-study
+out), with the two datasets combined (DECISIONS.md D-007's main analysis) and
+across cohorts (fitted on PhysioNet, tested once on WearGait-PD). The counts are
+the participants in the final feature tables, results/features_gaitpdb.csv and
+results/features_weargait.csv (aged 50 or over, D-006, with enough clean strides
+on each foot, D-011), so the figure cannot drift from the analysis.
 
-    python scripts/make_figure2.py [--data data/raw/gaitpdb]
+    python scripts/make_figure2.py [--results results] [--fig figures]
 """
 
 from __future__ import annotations
@@ -23,10 +23,12 @@ matplotlib.use("Agg")
 matplotlib.rcParams["font.family"] = "DejaVu Sans"
 matplotlib.rcParams["text.hinting"] = "default"
 import matplotlib.pyplot as plt  # noqa: E402
-from matplotlib.patches import FancyBboxPatch, Rectangle  # noqa: E402
+import pandas as pd  # noqa: E402
+from matplotlib.patches import Rectangle  # noqa: E402
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from gaitpdb import MIN_AGE_YEARS, cohort_manifest, find_data_dir  # noqa: E402
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from gaitpdb import MIN_AGE_YEARS  # noqa: E402
 from gaitpdb.evaluation import MODEL_FEATURES  # noqa: E402
 
 COLORS = {"Control": "#3b6ea5", "PD": "#c8552d"}
@@ -35,39 +37,39 @@ STUDY_LABEL = {
     "Ju": "Ju (cueing)",
     "Si": "Si (treadmill study)",
 }
-WEARGAIT = {"PD": 100, "Control": 85}  # sources.md S9, before the age rule
+STUDIES = ("Ga", "Ju", "Si")
+H = 4.6  # bar height
 
 
-def counts(data_dir: Path) -> dict[str, dict[str, int]]:
-    m = cohort_manifest(data_dir)
-    usual = m[m["walk"] == 1]
-    out = {}
-    for study in ("Ga", "Ju", "Si"):
-        sub = usual[usual["study"] == study]
-        out[study] = {
-            g: int(sub[sub["group"] == g]["participant"].nunique())
-            for g in ("PD", "Control")
-        }
-    return out
+def counts(results: Path) -> tuple[dict[str, dict[str, int]], dict[str, int]]:
+    """PD and control counts per gaitpdb sub-study, and for WearGait-PD."""
+    g = pd.read_csv(results / "features_gaitpdb.csv")
+    w = pd.read_csv(results / "features_weargait.csv")
+    per_study = {
+        s: {grp: int(((g["study"] == s) & (g["group"] == grp)).sum()) for grp in COLORS}
+        for s in STUDIES
+    }
+    weargait = {grp: int((w["group"] == grp).sum()) for grp in COLORS}
+    return per_study, weargait
 
 
-def bar(ax, x, y, w, h, n_pd, n_co, label, lw=0.8):
+def bar(ax, x, y, w, n_pd, n_co, label, lw=0.8):
     """A horizontal bar split into PD (left) and control (right) parts, labelled."""
     total = n_pd + n_co
-    ax.add_patch(Rectangle((x, y), w * n_pd / total, h, color=COLORS["PD"], lw=0))
+    ax.add_patch(Rectangle((x, y), w * n_pd / total, H, color=COLORS["PD"], lw=0))
     ax.add_patch(
         Rectangle(
             (x + w * n_pd / total, y),
             w * n_co / total,
-            h,
+            H,
             color=COLORS["Control"],
             lw=0,
         )
     )
-    ax.add_patch(Rectangle((x, y), w, h, fill=False, lw=lw, ec="black"))
+    ax.add_patch(Rectangle((x, y), w, H, fill=False, lw=lw, ec="black"))
     ax.text(
         x + w / 2,
-        y + h / 2,
+        y + H / 2,
         f"{label}: {n_pd} PD, {n_co} control",
         ha="center",
         va="center",
@@ -76,11 +78,11 @@ def bar(ax, x, y, w, h, n_pd, n_co, label, lw=0.8):
     )
 
 
-def heldout(ax, x, y, w, h, text):
-    ax.add_patch(Rectangle((x, y), w, h, fill=False, lw=1.2, ec="black", hatch="///"))
+def heldout(ax, x, y, w, text):
+    ax.add_patch(Rectangle((x, y), w, H, fill=False, lw=1.2, ec="black", hatch="///"))
     ax.text(
         x + w / 2,
-        y + h / 2,
+        y + H / 2,
         text,
         ha="center",
         va="center",
@@ -89,148 +91,124 @@ def heldout(ax, x, y, w, h, text):
     )
 
 
+def folds(ax, y, label="train"):
+    for k in range(5):
+        x = k * 16.5
+        if k == 4:
+            heldout(ax, x, y, 15.5, "test fold")
+        else:
+            ax.add_patch(Rectangle((x, y), 15.5, H, fc="#dddddd", ec="black", lw=0.8))
+            ax.text(x + 7.75, y + H / 2, label, ha="center", va="center", fontsize=7)
+
+
+def title(ax, y, text):
+    ax.text(0, y, text, fontsize=8, weight="bold", va="center")
+
+
 def caption(ax, y, text):
     ax.text(0, y, text, fontsize=6.5, va="top", color="#222222")
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--data", default="data/raw/gaitpdb")
-    ap.add_argument("--fig", default="figures")
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--results", default=str(ROOT / "results"))
+    ap.add_argument("--fig", default=str(ROOT / "figures"))
     args = ap.parse_args()
-    c = counts(find_data_dir(args.data))
+    c, w = counts(Path(args.results))
     n_pd = sum(v["PD"] for v in c.values())
     n_co = sum(v["Control"] for v in c.values())
 
-    fig, ax = plt.subplots(figsize=(7.2, 5.6))
+    fig, ax = plt.subplots(figsize=(7.2, 6.8))
     ax.set_xlim(0, 100)
     ax.set_ylim(0, 100)
     ax.axis("off")
 
-    # Row 0: the data and the model
-    ax.text(
-        0,
-        98,
-        f"Participants aged {MIN_AGE_YEARS} or over with a usual walk",
-        fontsize=8,
-        weight="bold",
-        va="center",
+    title(
+        ax,
+        98.5,
+        f"Participants aged {MIN_AGE_YEARS} or over with enough clean strides on each foot",
     )
-    bar(ax, 0, 90.5, 58, 5.5, n_pd, n_co, "PhysioNet, three sub-studies")
-    ax.add_patch(
-        FancyBboxPatch(
-            (63, 88.5),
-            36,
-            9.5,
-            boxstyle="round,pad=0.4",
-            fc="#f2f2f2",
-            ec="black",
-            lw=0.8,
-        )
-    )
-    ax.text(
-        81,
-        93.25,
-        f"{len(MODEL_FEATURES)} timing features per participant\n(+ age and sex as covariates)\n"
-        "logistic regression, SVM, random forest;\ntuning inside the training fold only",
-        ha="center",
-        va="center",
-        fontsize=6.5,
-    )
-
-    # Row A: repeated grouped CV
-    ax.text(
-        0,
-        81,
-        "A. Within protocol: 5-fold cross-validation grouped by participant, repeated 20 times",
-        fontsize=8,
-        weight="bold",
-        va="center",
-    )
-    y = 72
-    for k in range(5):
-        x = k * 16.5
-        if k == 4:
-            heldout(ax, x, y, 15.5, 5.5, "test fold")
-        else:
-            ax.add_patch(Rectangle((x, y), 15.5, 5.5, fc="#dddddd", ec="black", lw=0.8))
-            ax.text(x + 7.75, y + 2.75, "train", ha="center", va="center", fontsize=7)
+    bar(ax, 0, 92, 48.5, n_pd, n_co, "PhysioNet, three sub-studies")
+    bar(ax, 51.5, 92, 48.5, w["PD"], w["Control"], "WearGait-PD, three sites")
     caption(
         ax,
-        70,
-        "Each fold holds about a fifth of the participants, stratified by group; a participant's "
-        "recordings are never split between train and test. Reshuffled 20 times;\n"
-        "the mean over the 100 test folds is reported with a 95% interval corrected for the "
-        "overlap between training sets.",
+        90.6,
+        f"{len(MODEL_FEATURES)} timing features per participant (+ age and sex as "
+        "covariates); logistic regression, SVM and random forest, their settings tuned "
+        "inside the\ntraining participants only. A participant's strides are never split "
+        "between training and test.",
     )
 
-    # Row B: leave-one-study-out
-    ax.text(
-        0,
-        59,
-        "B. Across protocols: leave one sub-study out",
-        fontsize=8,
-        weight="bold",
-        va="center",
+    title(
+        ax,
+        82.5,
+        "A. Within PhysioNet: 5-fold cross-validation grouped by participant, "
+        "repeated 20 times",
     )
-    studies = ("Ga", "Ju", "Si")
-    for i, held in enumerate(studies):
-        ry = 51 - i * 6.5
-        for j, st in enumerate(studies):
+    folds(ax, 75.5)
+    caption(
+        ax,
+        74.1,
+        "Each fold holds about a fifth of the participants, stratified by group. "
+        "Reshuffled 20 times; the mean over the 100 test folds is reported with a 95% "
+        "interval\ncorrected for the overlap between training sets.",
+    )
+
+    title(ax, 65.5, "B. Across PhysioNet's protocols: leave one sub-study out")
+    for i, held in enumerate(STUDIES):
+        ry = 58.5 - i * 5.6
+        for j, st in enumerate(STUDIES):
             x = j * 27.5
             n = c[st]
             if st == held:
                 heldout(
-                    ax,
-                    x,
-                    ry,
-                    26,
-                    5.5,
-                    f"test: {STUDY_LABEL[st]}, {n['PD'] + n['Control']}",
+                    ax, x, ry, 26, f"test: {STUDY_LABEL[st]}, {n['PD'] + n['Control']}"
                 )
             else:
-                bar(ax, x, ry, 26, 5.5, n["PD"], n["Control"], st)
+                bar(ax, x, ry, 26, n["PD"], n["Control"], st)
     caption(
         ax,
-        36,
-        "Train on two sub-studies, test on the third. The protocols, recording lengths and ages "
-        "differ between sub-studies, so this is the primary comparison;\n"
-        "the interval is a bootstrap over the held-out participants.",
+        46.0,
+        "Train on two sub-studies, test on the third; their protocols, recording lengths "
+        "and ages differ. The interval is a bootstrap over the held-out participants.",
     )
 
-    # Row C: external test
-    ax.text(
-        0,
-        25,
-        "C. Across cohorts: external test",
-        fontsize=8,
-        weight="bold",
-        va="center",
+    title(
+        ax,
+        39.5,
+        "C. Both datasets combined (main analysis): the same cross-validation over all "
+        f"{n_pd + n_co + w['PD'] + w['Control']} participants",
     )
-    bar(ax, 0, 16.5, 40, 5.5, n_pd, n_co, "train: all PhysioNet")
+    folds(ax, 32.5)
+    caption(
+        ax,
+        31.1,
+        "Folds stratified by diagnosis within each dataset; the AUC is reported over all "
+        "test participants and within each dataset's.",
+    )
+
+    title(
+        ax, 24.5, "D. Across cohorts: fitted on PhysioNet, tested once on WearGait-PD"
+    )
+    bar(ax, 0, 17.5, 48.5, n_pd, n_co, "train: all PhysioNet")
     heldout(
-        ax,
-        43,
-        16.5,
-        37.5,
-        5.5,
-        f"test: WearGait-PD, {WEARGAIT['PD']} PD, {WEARGAIT['Control']} control",
+        ax, 51.5, 17.5, 48.5, f"test: WearGait-PD, {w['PD']} PD, {w['Control']} control"
     )
     caption(
         ax,
-        14.5,
-        "A different research group and hardware; the same stride and swing timings from its "
-        "pressure insoles or walkway. Run once, after the models are frozen.\n"
-        "WearGait-PD counts are from its article, before participants under 50 are removed.",
+        16.1,
+        "A different research group, three sites and pressure insoles; the same stride "
+        "and swing timings. Run once, after the analysis code and its\ninputs were "
+        "committed; also within VA Puget Sound (the one site with both groups) and in "
+        "pairs matched on sex and age.",
     )
 
-    # legend
-    ax.add_patch(Rectangle((0, 1), 2.5, 3, color=COLORS["PD"]))
-    ax.text(3.5, 2.5, "PD", fontsize=7, va="center")
-    ax.add_patch(Rectangle((9, 1), 2.5, 3, color=COLORS["Control"]))
-    ax.text(12.5, 2.5, "control", fontsize=7, va="center")
-    ax.add_patch(Rectangle((21, 1), 2.5, 3, fill=False, ec="black", hatch="///"))
-    ax.text(24.5, 2.5, "held out for testing", fontsize=7, va="center")
+    ax.add_patch(Rectangle((0, 3.5), 2.5, 3, color=COLORS["PD"]))
+    ax.text(3.5, 5, "PD", fontsize=7, va="center")
+    ax.add_patch(Rectangle((9, 3.5), 2.5, 3, color=COLORS["Control"]))
+    ax.text(12.5, 5, "control", fontsize=7, va="center")
+    ax.add_patch(Rectangle((21, 3.5), 2.5, 3, fill=False, ec="black", hatch="///"))
+    ax.text(24.5, 5, "held out for testing", fontsize=7, va="center")
 
     fig_dir = Path(args.fig)
     fig_dir.mkdir(parents=True, exist_ok=True)
@@ -239,7 +217,7 @@ def main() -> None:
     fig.savefig(
         fig_dir / "figure2_evaluation_design.pdf", metadata={"CreationDate": None}
     )
-    print("counts used:", c, "| totals", n_pd, "PD,", n_co, "control")
+    print("counts used:", c, "| WearGait-PD", w)
 
 
 if __name__ == "__main__":

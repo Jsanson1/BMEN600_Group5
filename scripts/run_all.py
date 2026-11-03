@@ -4,10 +4,10 @@
 
 Runs, each as a separate process and stopping at the first failure:
 verify_data, make_table1, make_figure1, check_event_detection,
-check_data_quality, check_dual_task, make_figure2 and make_clean_strides (the
-stride tables in data/interim/); make_features and check_features; the models
-(run_logreg, run_random_forest, run_baselines), compare_models,
-run_cross_cohort and the post hoc check_weargait_signal;
+check_data_quality, check_dual_task and make_clean_strides (the stride tables in
+data/interim/); make_features and check_features; make_figure2 (from the feature
+tables), the models (run_logreg, run_random_forest, run_baselines),
+compare_models, run_cross_cohort and the post hoc check_weargait_signal;
 check_weargait_participants and check_weargait_threshold; and last the 20 N
 sensitivity analysis of D-012 (the cleaning, the features, the logistic
 regression within gaitpdb, the feature checks and the cross-cohort test at a
@@ -15,8 +15,9 @@ fixed 20 N, into results/fixed_20N/).
 
 WearGait-PD needs a free Synapse account (data/raw/README.md). Without its two
 participant sheets and its task files in data/raw/weargait_pd/, only the steps
-that need PhysioNet alone run: the first seven above, the cleaning and the
-features of gaitpdb, the models and compare_models. The two summaries that
+that need PhysioNet alone run: the first six above, the cleaning and the
+features of gaitpdb, make_figure2 (which reads the committed WearGait-PD feature
+table), the models and compare_models. The two summaries that
 describe both datasets (clean_strides_summary.txt and features_summary.txt) then
 go to data/interim/physionet_only/ instead of results/, so every committed output
 that needs WearGait-PD keeps its committed version.
@@ -44,7 +45,6 @@ READS_RECORDS = [  # these take --data: they read the PhysioNet record files
     "check_event_detection.py",
     "check_data_quality.py",
     "check_dual_task.py",
-    "make_figure2.py",
     "make_clean_strides.py",  # also reads data/raw/weargait_pd if present
 ]
 READS_CLEAN_STRIDES = [  # read data/interim/ (make_clean_strides.py, T-017)
@@ -52,6 +52,7 @@ READS_CLEAN_STRIDES = [  # read data/interim/ (make_clean_strides.py, T-017)
     "check_features.py",
 ]
 READS_RESULTS = [  # these read what the steps above wrote to results/
+    "make_figure2.py",  # draws its counts from the two feature tables
     "run_logreg.py",
     "run_random_forest.py",
     "run_baselines.py",

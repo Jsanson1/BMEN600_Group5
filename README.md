@@ -50,10 +50,10 @@ python scripts/make_figure1.py           # Figure 1 -> figures/, plus results/fe
 python scripts/check_event_detection.py  # contact threshold (fixed, share of body weight, share of the recording's force) and stride-rule sensitivity -> results/event_detection_checks.{csv,txt}
 python scripts/check_data_quality.py     # data-quality report -> results/data_quality.{txt,csv}
 python scripts/check_dual_task.py        # does the pipeline reproduce the published dual-task effect? -> results/dual_task_check.txt
-python scripts/make_figure2.py           # Figure 2, the evaluation design drawn from the participant counts -> figures/
 # after scripts/make_clean_strides.py (T-017) has written the clean strides to data/interim/:
 python scripts/make_features.py         # participant features of both datasets -> results/features_{gaitpdb,weargait}.csv, results/feature_dictionary.md, results/features_summary.txt
 python scripts/check_features.py        # the two datasets compared without diagnosis labels (shift, task pooling, straight bouts, stride count) -> results/feature_checks.txt, Figure 4 -> figures/
+python scripts/make_figure2.py           # Figure 2, the evaluation design, its counts from the two feature tables -> figures/
 python scripts/run_logreg.py             # logistic regression under the shared evaluation -> results/logreg_*.{txt,csv}
 python scripts/run_random_forest.py      # random forest (tuned by out-of-bag log-loss) under the shared evaluation, with feature importances -> results/rf_*.{txt,csv}
 python scripts/run_baselines.py          # chance and one-feature-at-a-time baselines on the same splits -> results/baselines_*.{txt,csv}
