@@ -58,6 +58,17 @@ def test_forest_generalises_and_is_reproducible():
     assert set(a.predict(Xt)) <= {0, 1}
 
 
+def test_parallel_fit_predicts_in_a_fixed_order():
+    X, y = data(n=150, seed=6)
+    m = OOBTunedForest(n_estimators=80, random_state=0, n_jobs=2).fit(X, y)
+    assert m.best_estimator_.n_jobs is None
+    trees = m.best_estimator_.estimators_
+    total = np.zeros((len(X), 2))
+    for tree in trees:  # the order a single thread adds them in
+        total += tree.predict_proba(X)
+    assert np.array_equal(m.predict_proba(X), total / len(trees))
+
+
 def test_out_of_bag_loss_is_honest_on_noise():
     X, y = data(signal=0.0, seed=5)
     m = OOBTunedForest(n_estimators=100, random_state=0).fit(X, y)

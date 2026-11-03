@@ -62,7 +62,10 @@ class OOBTunedForest(ClassifierMixin, BaseEstimator):
     ``feature_importances_`` (impurity-based, of the chosen forest). Ties go to the
     setting listed first, which is the one with fewer inputs per split and then
     shallower trees. One row must be one participant, so that a participant's OOB
-    prediction never comes from trees that saw them.
+    prediction never comes from trees that saw them. ``n_jobs`` parallelises the
+    fitting only: predictions add up the trees' votes in one thread, in a fixed
+    order, so they are identical from run to run (in parallel, the order of the
+    additions, and with it the last digit of a probability, changes between runs).
     """
 
     def __init__(
@@ -104,6 +107,7 @@ class OOBTunedForest(ClassifierMixin, BaseEstimator):
                 if best is None or loss < best[0]:
                     best = (loss, {"max_features": m, "max_depth": d}, forest)
         self.oob_log_loss_, self.best_params_, self.best_estimator_ = best
+        self.best_estimator_.set_params(n_jobs=None)  # predict in one thread
         self.search_ = pd.DataFrame(rows)
         self.classes_ = self.best_estimator_.classes_
         self.feature_importances_ = self.best_estimator_.feature_importances_
