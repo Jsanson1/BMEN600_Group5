@@ -1,7 +1,7 @@
 Participant features from the clean strides (scripts/make_features.py,
 definitions in gaitpdb.features; column meanings in feature_dictionary.md)
 
-Clean strides from scripts/make_clean_strides.py at commit 3e58c7f
+Clean strides from scripts/make_clean_strides.py at commit 6d0e0b2
   CONTACT_SHARE = 0.05
   FORCE_LEVEL_PERCENTILE = 95
 
