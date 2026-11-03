@@ -16,8 +16,17 @@ seconds (the expected interval). The walk's own rhythm is the Lomb-Scargle peak 
 WearGait-PD (``clean_weargait``, D-011): one recording of one task with its
 video annotation (``GeneralEvent``). A stride is kept only if every sample is
 labelled "Walk"; a stride touching a "Turn" label is a turn stride, with no
-extra margin (TURN_MARGIN["weargait"], D-011); the insoles drop single samples in short bursts, so gaps of up to MAX_INTERP_SAMPLES inside a recording are filled by linear interpolation before strides are found, and strides touching a longer gap are removed (padding at the start and end of a recording is never filled). Strides come from the insole total force with gaitpdb's contact
-threshold, which is not yet validated for these insoles (task T-025).
+extra margin (TURN_MARGIN["weargait"], D-011); the insoles drop single samples in short bursts, so gaps of up to MAX_INTERP_SAMPLES inside a recording are filled by linear interpolation before strides are found, and strides touching a longer gap are removed (padding at the start and end of a recording is never filled). Strides come from the insole total force.
+
+Contact threshold (DECISIONS.md D-012, both datasets): a foot is in contact
+while its total force is above CONTACT_SHARE of the recording's force level,
+the mean over the two feet of each foot's FORCE_LEVEL_PERCENTILE percentile of
+total force, samples without data ignored (``contact_threshold``; 5% of the
+95th percentile). It was chosen on agreement with WearGait-PD's walkway
+(scripts/check_weargait_threshold.py, task T-025) and replaces the fixed 20 N
+of the midterm; ``threshold_n`` overrides it with a fixed value, for the 20 N
+sensitivity analysis. Every stride row records the threshold of its recording
+in ``threshold_n``.
 
 In both datasets strides outside STRIDE_LIMITS_S or with a swing phase outside
 SWING_PCT are removed, and the first and last stride of each foot in a
@@ -35,7 +44,7 @@ import numpy as np
 import pandas as pd
 from scipy.signal import lombscargle
 
-from .events import DEFAULT_THRESHOLD_N, STRIDE_LIMITS_S, stride_table
+from .events import STRIDE_LIMITS_S, stride_table
 from .io import SAMPLE_RATE_HZ
 
 CORRIDOR_M = {"Ga": 25.0, "Ju": 25.0, "Si": 35.0}
@@ -58,6 +67,17 @@ SWING_PCT = (10.0, 70.0)
 MIN_STRIDES = {"gaitpdb": 40, "weargait": 10}  # clean strides per foot (D-011)
 PHASE_TOL = 0.3  # a predicted turn is searched within +/- this x the interval
 MAX_INTERP_SAMPLES = 5  # WearGait-PD gaps up to this long are filled (50 ms)
+CONTACT_SHARE = 0.05  # D-012: share of the recording's force level
+STRIDE_COLUMNS = [
+    "hs_s",
+    "to_s",
+    "next_hs_s",
+    "stride_s",
+    "stance_s",
+    "swing_s",
+    "swing_pct",
+]
+FORCE_LEVEL_PERCENTILE = 95  # D-012: each foot's force level
 
 REASONS = (
     "missing_data",
@@ -69,10 +89,30 @@ REASONS = (
 )
 
 
-def _foot_tables(left: np.ndarray, right: np.ndarray) -> dict[str, pd.DataFrame]:
+def contact_threshold(left: np.ndarray, right: np.ndarray) -> float:
+    """D-012: CONTACT_SHARE of the recording's force level, in newtons.
+
+    The force level is the mean over the two feet of each foot's
+    FORCE_LEVEL_PERCENTILE percentile of total force; samples without data (NaN)
+    are ignored.
+    """
+    level = np.mean(
+        [
+            np.nanpercentile(np.asarray(f, dtype=float), FORCE_LEVEL_PERCENTILE)
+            for f in (left, right)
+        ]
+    )
+    return float(CONTACT_SHARE * level)
+
+
+def _foot_tables(
+    left: np.ndarray, right: np.ndarray, threshold_n: float
+) -> dict[str, pd.DataFrame]:
     out = {}
     for foot, force in (("L", left), ("R", right)):
-        st = stride_table(np.asarray(force, float), DEFAULT_THRESHOLD_N, None)
+        st = stride_table(np.asarray(force, float), threshold_n, None)
+        if st.empty:  # the force never fell below the threshold: no complete stride
+            st = pd.DataFrame(columns=[*STRIDE_COLUMNS, "kept"], dtype=float)
         st = st.drop(columns="kept").reset_index(drop=True)
         st["foot"] = foot
         st["ratio"] = st["stride_s"] / st["stride_s"].median() if len(st) else []
@@ -229,14 +269,19 @@ def _missed_heel_strikes(feet: dict[str, pd.DataFrame], foot: str) -> np.ndarray
 
 
 def clean_gaitpdb(
-    record: pd.DataFrame, study: str, speed_m_s: float
+    record: pd.DataFrame,
+    study: str,
+    speed_m_s: float,
+    threshold_n: float | None = None,
 ) -> tuple[pd.DataFrame, dict]:
     """Clean strides of one gaitpdb walk (output of io.load_record).
 
-    Returns the stride table of both feet (see the module docstring) and a dict with the turn centres (s), the expected and the used turn interval (s) and whether the walk's own rhythm was used. Raises ValueError without a speed.
+    Returns the stride table of both feet (see the module docstring) and a dict with the turn centres (s), the expected and the used turn interval (s), whether the walk's own rhythm was used and the contact threshold (N). ``threshold_n`` None uses D-012's threshold; a number fixes it. Raises ValueError without a speed.
     """
     expected = expected_turn_interval(study, speed_m_s)
-    feet = _foot_tables(record["L_total"].to_numpy(), record["R_total"].to_numpy())
+    left, right = record["L_total"].to_numpy(), record["R_total"].to_numpy()
+    threshold = contact_threshold(left, right) if threshold_n is None else threshold_n
+    feet = _foot_tables(left, right, threshold)
     start = min(st["hs_s"].iloc[0] for st in feet.values())
     end = max(st["next_hs_s"].iloc[-1] for st in feet.values())
     used_rhythm = (end - start) / expected >= MIN_TURNS_FOR_RHYTHM
@@ -256,8 +301,11 @@ def clean_gaitpdb(
         expected_interval_s=expected,
         interval_s=interval,
         used_rhythm=bool(used_rhythm),
+        threshold_n=float(threshold),
     )
-    return pd.concat(out, ignore_index=True).drop(columns="ratio"), info
+    strides = pd.concat(out, ignore_index=True).drop(columns="ratio")
+    strides["threshold_n"] = float(threshold)
+    return strides, info
 
 
 def fill_short_gaps(x: np.ndarray, max_len: int = MAX_INTERP_SAMPLES) -> np.ndarray:
@@ -275,18 +323,29 @@ def fill_short_gaps(x: np.ndarray, max_len: int = MAX_INTERP_SAMPLES) -> np.ndar
     return x
 
 
-def clean_weargait(task: pd.DataFrame) -> pd.DataFrame:
+def clean_weargait(
+    task: pd.DataFrame, threshold_n: float | None = None
+) -> pd.DataFrame:
     """Clean strides of one WearGait-PD recording (one task, one participant).
 
     ``task`` needs the columns GeneralEvent, LTotalForce and RTotalForce, at
     SAMPLE_RATE_HZ. Returns the stride table of both feet (module docstring).
+    ``threshold_n`` None uses D-012's threshold, computed from the samples with
+    data; a number fixes it.
     """
     label = task["GeneralEvent"].astype(str).to_numpy()
     forces = {
         f: fill_short_gaps(task[f"{f}TotalForce"].to_numpy(float)) for f in ("L", "R")
     }
+    threshold = (
+        contact_threshold(forces["L"], forces["R"])
+        if threshold_n is None
+        else threshold_n
+    )
     feet = _foot_tables(
-        np.nan_to_num(forces["L"], nan=0.0), np.nan_to_num(forces["R"], nan=0.0)
+        np.nan_to_num(forces["L"], nan=0.0),
+        np.nan_to_num(forces["R"], nan=0.0),
+        threshold,
     )
     out = []
     for foot, st in feet.items():
@@ -304,7 +363,9 @@ def clean_weargait(task: pd.DataFrame) -> pd.DataFrame:
             "first_last": _first_last(len(st)),
         }
         out.append(_with_reasons(st, flags))
-    return pd.concat(out, ignore_index=True).drop(columns="ratio")
+    strides = pd.concat(out, ignore_index=True).drop(columns="ratio")
+    strides["threshold_n"] = float(threshold)
+    return strides
 
 
 def meets_minimum(strides: pd.DataFrame, dataset: str) -> bool:

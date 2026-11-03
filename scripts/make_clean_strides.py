@@ -5,9 +5,13 @@ scripts/run_all.py, never edited by hand). The cleaning is gaitpdb.clean_data:
 timing-based turns for gaitpdb (DECISIONS.md D-008), the video labels for
 WearGait-PD with its three straight-walking tasks pooled, and the minimum number
 of clean strides per foot (D-011). Analysed participants only (aged 50 or over,
-D-006).
+D-006). Contact threshold: 5% of each recording's force level (D-012), or a
+fixed threshold with --fixed-threshold, for the 20 N sensitivity analysis, whose
+tables go to their own folder:
 
     python scripts/make_clean_strides.py [--data data/raw/gaitpdb]
+    python scripts/make_clean_strides.py --fixed-threshold 20 \
+        --out data/interim/fixed_20N --summary results/fixed_20N/clean_strides_summary.txt
 
 Writes, in data/interim/:
   clean_strides_gaitpdb.csv     one row per stride of each analysed usual walk
@@ -48,6 +52,8 @@ WG_DIR = ROOT / "data" / "raw" / "weargait_pd"
 WG_TASKS = ["SelfPace", "SelfPace_mat", "SelfPace_matTURN"]
 WG_COLUMNS = ["GeneralEvent", "LTotalForce", "RTotalForce"]
 
+FIXED_THRESHOLD_N: float | None = None  # set from --fixed-threshold in main()
+
 lines: list[str] = []
 
 
@@ -56,7 +62,9 @@ def say(text: str = "") -> None:
     lines.append(text)
 
 
-def gaitpdb_strides(data: Path) -> tuple[pd.DataFrame, pd.DataFrame, list[str]]:
+def gaitpdb_strides(
+    data: Path, threshold_n: float | None = None
+) -> tuple[pd.DataFrame, pd.DataFrame, list[str]]:
     walks = cohort_manifest(data)
     walks = walks[walks["walk"] == 1]
     speed = load_demographics(data).set_index("ID")["Speed_01"]
@@ -68,7 +76,9 @@ def gaitpdb_strides(data: Path) -> tuple[pd.DataFrame, pd.DataFrame, list[str]]:
                 f"{w.participant} ({w.group}): no Speed_01, turns cannot be located"
             )
             continue
-        strides, info = cd.clean_gaitpdb(load_record(Path(w.path)), w.study, float(v))
+        strides, info = cd.clean_gaitpdb(
+            load_record(Path(w.path)), w.study, float(v), threshold_n
+        )
         strides.insert(0, "group", w.group)
         strides.insert(0, "study", w.study)
         strides.insert(0, "record", w.record)
@@ -88,7 +98,9 @@ def gaitpdb_strides(data: Path) -> tuple[pd.DataFrame, pd.DataFrame, list[str]]:
     return pd.concat(tables, ignore_index=True), pd.DataFrame(turns), skipped
 
 
-def weargait_strides() -> tuple[pd.DataFrame | None, list[str]]:
+def weargait_strides(
+    threshold_n: float | None = None,
+) -> tuple[pd.DataFrame | None, list[str]]:
     try:
         people = load_participants(WG_DIR)
     except FileNotFoundError as err:
@@ -104,7 +116,7 @@ def weargait_strides() -> tuple[pd.DataFrame | None, list[str]]:
             if not set(WG_COLUMNS) <= set(pd.read_csv(path, nrows=0).columns):
                 continue
             df = pd.read_csv(path, usecols=WG_COLUMNS, low_memory=False)
-            parts.append(cd.clean_weargait(df).assign(task=task))
+            parts.append(cd.clean_weargait(df, threshold_n).assign(task=task))
         if not parts:
             skipped.append(f"{p.participant} ({p.group}): no insole data in any task")
             continue
@@ -119,11 +131,18 @@ def weargait_strides() -> tuple[pd.DataFrame | None, list[str]]:
     return pd.concat(tables, ignore_index=True), skipped
 
 
-def summarise(name: str, d: pd.DataFrame, minimum: int, skipped: list[str]) -> None:
+def summarise(
+    name: str, d: pd.DataFrame, minimum: int, skipped: list[str], recording: list[str]
+) -> None:
     people = d.groupby("participant").agg(
         group=("group", "first"), included=("included", "first")
     )
     say(f"{name}: minimum {minimum} clean strides per foot (D-011)")
+    t = d.drop_duplicates(recording)["threshold_n"]
+    say(
+        f"  contact threshold per recording: median {t.median():.1f} N "
+        f"(range {t.min():.1f} to {t.max():.1f} N, {len(t)} recordings)"
+    )
     for group, g in people.groupby("group"):
         say(f"  {group}: {int(g['included'].sum())} of {len(g)} participants included")
     for x in skipped:
@@ -165,7 +184,12 @@ def provenance() -> dict:
         module="src/gaitpdb/clean_data.py",
         commit=git("rev-parse", "HEAD"),
         uncommitted_changes=bool(git("status", "--porcelain", "--", "src", "scripts")),
-        decisions=["D-006", "D-008", "D-009", "D-011"],
+        decisions=["D-006", "D-008", "D-009", "D-011", "D-012"],
+        contact_threshold=(
+            f"fixed {FIXED_THRESHOLD_N:g} N (sensitivity analysis)"
+            if FIXED_THRESHOLD_N is not None
+            else "D-012: 5% of each recording's force level"
+        ),
         parameters={
             k: list(v) if isinstance(v, tuple) else v for k, v in params.items()
         },
@@ -173,37 +197,52 @@ def provenance() -> dict:
 
 
 def main() -> None:
+    global FIXED_THRESHOLD_N
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--data", default=str(ROOT / "data" / "raw" / "gaitpdb"))
-    data = find_data_dir(ap.parse_args().data)
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    ap.add_argument("--fixed-threshold", type=float, default=None)
+    ap.add_argument("--out", default=str(OUT_DIR))
+    ap.add_argument("--summary", default=str(SUMMARY))
+    args = ap.parse_args()
+    data = find_data_dir(args.data)
+    out, summary = Path(args.out), Path(args.summary)
+    FIXED_THRESHOLD_N = args.fixed_threshold
+    out.mkdir(parents=True, exist_ok=True)
+    summary.parent.mkdir(parents=True, exist_ok=True)
 
     say("Clean strides (scripts/make_clean_strides.py, cleaning in gaitpdb.clean_data)")
     say("Derived tables in data/interim/ (not committed); analysed participants only.")
+    if FIXED_THRESHOLD_N is None:
+        say(
+            "Contact threshold: 5% of each recording's force level (DECISIONS.md D-012)."
+        )
+    else:
+        say(f"Contact threshold: fixed {FIXED_THRESHOLD_N:g} N (sensitivity analysis).")
     say()
-    g, turns, g_skipped = gaitpdb_strides(data)
-    g.to_csv(OUT_DIR / "clean_strides_gaitpdb.csv", index=False)
-    turns.to_csv(OUT_DIR / "clean_strides_turns_gaitpdb.csv", index=False)
-    summarise("gaitpdb, usual walk", g, cd.MIN_STRIDES["gaitpdb"], g_skipped)
+    g, turns, g_skipped = gaitpdb_strides(data, FIXED_THRESHOLD_N)
+    g.to_csv(out / "clean_strides_gaitpdb.csv", index=False)
+    turns.to_csv(out / "clean_strides_turns_gaitpdb.csv", index=False)
+    summarise(
+        "gaitpdb, usual walk", g, cd.MIN_STRIDES["gaitpdb"], g_skipped, ["record"]
+    )
 
-    w, w_skipped = weargait_strides()
+    w, w_skipped = weargait_strides(FIXED_THRESHOLD_N)
     if w is None:
         for x in w_skipped:
             say(x)
     else:
-        w.to_csv(OUT_DIR / "clean_strides_weargait.csv", index=False)
-        say("WearGait-PD stride timing uses gaitpdb's 20 N contact threshold, not yet")
-        say("validated for its insoles (task T-025).")
+        w.to_csv(out / "clean_strides_weargait.csv", index=False)
         summarise(
             "WearGait-PD, three straight-walking tasks pooled",
             w,
             cd.MIN_STRIDES["weargait"],
             w_skipped,
+            ["participant", "task"],
         )
-    (OUT_DIR / "clean_strides_provenance.json").write_text(
+    (out / "clean_strides_provenance.json").write_text(
         json.dumps(provenance(), indent=2) + "\n", encoding="utf-8"
     )
-    SUMMARY.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    summary.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

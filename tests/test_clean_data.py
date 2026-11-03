@@ -5,12 +5,14 @@ import pandas as pd
 import pytest
 
 from gaitpdb.clean_data import (
+    CONTACT_SHARE,
     CORRIDOR_M,
     MIN_STRIDES,
     REASONS,
     TURN_WINDOW_S,
     clean_gaitpdb,
     clean_weargait,
+    contact_threshold,
     expected_turn_interval,
     fill_short_gaps,
     meets_minimum,
@@ -289,3 +291,35 @@ def test_short_gaps_are_filled_and_long_gaps_remove_strides():
     filled = fill_short_gaps(task["LTotalForce"].to_numpy(float))
     assert not np.isnan(filled[700])
     assert np.isnan(filled[1000:1020]).all() and np.isnan(filled[:31]).all()
+
+
+def test_contact_threshold_is_a_share_of_the_two_feet_force_level_ignoring_gaps():
+    left = np.r_[np.zeros(50), np.full(50, 800.0)]
+    right = np.r_[np.zeros(50), np.full(50, 600.0), np.full(30, np.nan)]
+    # each foot's 95th percentile is its plateau; NaN samples do not count
+    assert contact_threshold(left, right) == pytest.approx(CONTACT_SHARE * 700.0)
+
+
+def test_raised_swing_baseline_merges_strides_at_20n_but_not_at_the_d012_threshold():
+    # NLS056-type insole: the swing force never falls below 30 N
+    task = weargait_task(straight(30), (40.0, 41.0))
+    for col in ("LTotalForce", "RTotalForce"):
+        task[col] = np.maximum(task[col], 30.0)
+    fixed = clean_weargait(task, threshold_n=20.0)
+    relative = clean_weargait(task)
+    assert (fixed["threshold_n"] == 20.0).all()
+    assert relative["threshold_n"].iloc[0] == pytest.approx(CONTACT_SHARE * 800.0)
+    for foot in ("L", "R"):
+        assert fixed[(fixed["foot"] == foot) & fixed["clean"]].empty  # all merged
+        good = relative[(relative["foot"] == foot) & relative["clean"]]
+        assert len(good) >= 25
+        assert np.allclose(good["stride_s"], 1.1, atol=0.011)
+
+
+def test_gaitpdb_threshold_defaults_to_d012_and_can_be_fixed():
+    rec = record(straight(60))
+    strides, info = clean_gaitpdb(rec, "Ga", 1.2)
+    assert info["threshold_n"] == pytest.approx(CONTACT_SHARE * 800.0)
+    assert (strides["threshold_n"] == info["threshold_n"]).all()
+    strides20, info20 = clean_gaitpdb(rec, "Ga", 1.2, threshold_n=20.0)
+    assert info20["threshold_n"] == 20.0 and (strides20["threshold_n"] == 20.0).all()
