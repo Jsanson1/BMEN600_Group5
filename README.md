@@ -65,7 +65,7 @@ python scripts/make_figure5.py           # Figure 5, the main results from unsee
 python scripts/check_weargait_participants.py  # participants, task files, and who enters the stride analyses by site -> results/weargait_participants.txt
 python scripts/check_weargait_threshold.py     # insole contact thresholds against the walkway's footfalls -> results/weargait_threshold_*
 python scripts/make_cohort_table.py            # the participants of the final analysis in both datasets, by group -> results/cohort_table.{csv,md}
-# after the 20 N sensitivity analysis (the five steps at the end of scripts/run_all.py):
+# after the 20 N sensitivity analysis (the five 20 N steps of scripts/run_all.py):
 python scripts/make_table_crosscohort.py       # the cross-cohort test and its checks, every model -> results/crosscohort_table.{csv,md}
 ```
 

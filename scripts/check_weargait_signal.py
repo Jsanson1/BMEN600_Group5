@@ -137,8 +137,9 @@ def main() -> None:
         "Age-matched pairs of the cross-cohort test (same sex, age within "
         f"{cross.AGE_CALIPER:g} years): {len(pairs) // 2} pairs, by patient's and "
         "control's site: " + ", ".join(f"{k} {n}" for k, n in counts.items()),
-        f"  {n_same} pairs within one site (VA Puget Sound is WPD and WHC; NLS and HC "
-        "are the two Johns Hopkins sites)",
+        f"  {n_same} pairs within one site and {len(pairs) // 2 - n_same} joining two "
+        "sites (VA Puget Sound is WPD and WHC; NLS and HC are the two Johns Hopkins "
+        "sites)",
         "",
     ]
     pred_path = results / "crosscohort_predictions.csv"
