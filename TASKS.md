@@ -119,3 +119,9 @@ owner: jamie | status: done | branch: jamie/T-031-midterm-snapshots | due: 2026-
 
 ### T-032 · Project: Results section of the final paper: participants, dataset differences, each evaluation (within PhysioNet, across its protocols, combined, across cohorts), the 20 N sensitivity analysis, figures and tables, every number traced to a committed output
 owner: jamie | status: doing | branch: jamie/T-032-results-section | due: 2026-11-20 | updated: 2026-11-06
+
+### T-033 · Project: Dataset and Methods section of the final paper: both datasets, responsible use, the computational workflow, the evaluation and comparisons, software, written from the repository (offered to the group first; hand over if a teammate has claimed it)
+owner: jamie | status: doing | branch: jamie/T-033-methods-section | due: 2026-11-20 | updated: 2026-11-06
+
+### T-034 · Project: end statements of the final paper: Data and Code Availability, AI-Assisted Work, Author Contributions, drafted from members/*/log.md for every member to check their own
+owner: jamie | status: doing | branch: jamie/T-034-end-statements | due: 2026-11-20 | updated: 2026-11-06
