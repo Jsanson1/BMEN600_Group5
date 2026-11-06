@@ -125,3 +125,15 @@ owner: jamie | status: doing | branch: jamie/T-033-methods-section | due: 2026-1
 
 ### T-034 · Project: end statements of the final paper: Data and Code Availability, AI-Assisted Work, Author Contributions, drafted from members/*/log.md for every member to check their own
 owner: jamie | status: doing | branch: jamie/T-034-end-statements | due: 2026-11-20 | updated: 2026-11-06
+
+### T-035 · Project: Introduction of the final paper (1.5 to 2 pages): the biomedical problem and who it affects, what is known and how it has been studied, the closest studies, the unresolved problem, the research question and our contribution; built from the midterm's Introduction (T-011, Anna) and Background (T-009), updated for the final result
+owner: - | status: todo | branch: - | due: 2026-11-20 | updated: 2026-11-06
+
+### T-036 · Project: title page and abstract of the final paper (200 to 250 words: problem and question, datasets and population, approach, main result, interpretation, main limitation), written once the other sections are settled (after T-024, T-032, T-033, T-035)
+owner: - | status: todo | branch: - | due: 2026-11-27 | updated: 2026-11-06
+
+### T-037 · Project: assemble and submit the final paper: all sections into the Word template, figures and tables placed and numbered, citations renumbered in IEEE order, page count (at most 10 excluding title page and references), the repository link and the commit ID of the graded version, a final clean rerun at that commit, PDF on D2L (all; after T-036)
+owner: - | status: todo | branch: - | due: 2026-12-02 | updated: 2026-11-06
+
+### T-038 · Project: final presentation (5 minutes plus questions; everyone speaks at least 1 minute): problem and question, datasets and independent case, workflow and comparison, results, limitations and next steps, interpretation (all)
+owner: - | status: todo | branch: - | due: 2026-11-27 | updated: 2026-11-06
