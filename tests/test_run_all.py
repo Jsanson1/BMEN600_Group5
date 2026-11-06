@@ -39,3 +39,13 @@ def test_without_weargait_nothing_that_describes_both_datasets_is_overwritten():
         s for s in steps if s not in ("make_clean_strides.py", "make_features.py")
     ]
     assert all(extra[s] == [] for s in others)
+
+
+def test_the_paper_figure_runs_without_weargait_and_the_cohort_table_needs_it():
+    without = [step for step, _ in run_all.plan(False)]
+    assert "make_figure5.py" in without  # reads only results/
+    assert "make_cohort_table.py" not in without  # reads WearGait-PD's PD sheet
+    steps = run_all.STEPS
+    assert steps.index("make_figure5.py") > steps.index("run_cross_cohort.py")
+    assert steps.index("make_figure5.py") > steps.index("compare_models.py")
+    assert "make_cohort_table.py" in run_all.TAKE_DATA
