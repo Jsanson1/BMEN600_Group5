@@ -14,7 +14,7 @@ Our within-cohort AUC of 0.79 sits well below the 98% accuracy reported on this 
 
 The two datasets differ in the five features themselves, enough for a model to tell them apart (AUC 0.94). We weighed five explanations against the evidence.
 
-*Walking protocol.* WearGait-PD's straight walking comes in short passes across a 4.9 m walkway [S9], bouts of a median of 2 clean strides against 18 in gaitpdb, and strides after a turn are longer than the rest of a walk, in patients with movement disorders more than in healthy older adults [S21]. Dropping one stride at each bout end would lower WearGait-PD's median variability from 4.96% to 2.83% for stride time and from 8.19% to 5.80% for swing time, against gaitpdb's 2.41% and 3.67%, so bout ends appear to account for most of the excess in stride-time variability but only about half of that in swing-time variability. The trimmed series, a median of 9 strides on the foot with fewer, are too short to settle this [S21], and the models without the variability features transferred no better (0.52 and 0.58).
+*Walking protocol.* WearGait-PD's straight walking comes in short passes across a 4.9 m walkway [S9], bouts of a median of 2 clean strides against 18 in gaitpdb. Its "Walk" label ends where the next turn begins [S20], so a bout's last stride includes the slowing into the turn, and strides after a turn are longer than the rest of a walk, in patients with movement disorders more than in healthy older adults [S21]. Dropping one stride at each bout end would lower WearGait-PD's median variability from 4.96% to 2.83% for stride time and from 8.19% to 5.80% for swing time, against gaitpdb's 2.41% and 3.67%, so bout ends appear to account for most of the excess in stride-time variability but only about half of that in swing-time variability. The trimmed series, a median of 9 strides on the foot with fewer, are too short to settle this [S21], and the models without the variability features transferred no better (0.52 and 0.58).
 
 *Number of strides.* WearGait-PD's participants contributed fewer clean strides (median 32 on the foot with fewer, against 81), but cutting gaitpdb's test participants to those counts cost at most 0.008 AUC.
 
@@ -90,4 +90,5 @@ All files are in `results/` on `jamie/T-022-cross-cohort-run`.
 
 ## Changes since draft 2
 
+- Section C cites the definition of WearGait-PD's "Walk" label (the dataset's Synapse wiki [S20], recorded in `sources.md`) for why a bout's last stride is slower; Section C's first sentence no longer says the datasets differ "before any model is fitted" in a sentence about a model telling them apart.
 - [S9] checked against the published article as well as its preprint: every detail used here matches. The article gives the 5 ft only for the start of each SelfPace pass, so the length of a pass (about 8 m in draft 2, our estimate) is no longer stated.
