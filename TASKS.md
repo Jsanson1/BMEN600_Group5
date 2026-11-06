@@ -116,3 +116,6 @@ owner: group | status: done | branch: - | due: 2026-10-15 | updated: 2026-10-16
 
 ### T-031 · Sync the midterm snapshots in report/midterm/ with the submitted PDF (the AI-Assisted Work paragraph changed after commit 50a86e9; keep the submitted PDF's wording as the record)
 owner: jamie | status: done | branch: jamie/T-031-midterm-snapshots | due: 2026-10-23 | updated: 2026-11-02
+
+### T-032 · Project: Results section of the final paper: participants, dataset differences, each evaluation (within PhysioNet, across its protocols, combined, across cohorts), the 20 N sensitivity analysis, figures and tables, every number traced to a committed output
+owner: jamie | status: doing | branch: jamie/T-032-results-section | due: 2026-11-20 | updated: 2026-11-06
