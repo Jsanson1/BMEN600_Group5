@@ -53,13 +53,13 @@ _Updated 2026-11-06 12:50 by Claude (cloud session) for Jamie · branches `jamie
 - **Not pushed:** nothing.
 
 ## T-023 · Discussion (draft 3 on its branch, for the group's comments)
-_Updated 2026-11-06 13:12 by Claude (cloud session) for Jamie · branch `jamie/T-023-discussion` at `f8fc224`_
+_Updated 2026-11-06 13:30 by Claude (cloud session) for Jamie · branch `jamie/T-023-discussion` at `7a48b2c`_
 
-- **Now:** `report/final/discussion.md`, draft 3 (about 1,700 words, about two pages): cut from draft 2 now that the Results draft carries the detailed numbers; AUCs to two decimals as in the Results; disease stage from Table I. `report/final/sources.md` (also on this branch) now holds S21 to S24 (S22 Breiman, S23 Holm, S24 scikit-learn, added for the Methods draft, each checked against its bibliographic record).
-- **Validated:** draft 1's independent review (taken in by draft 2); a script matched every number in draft 3's prose to the outputs (except S1's 80.6%, a literature value), and every value-and-interval pair jointly. **Not verified:** the group has not read it.
-- **Next:** the group's comments; add the SVM when T-020 lands; paste into the shared Word file and open the pull request (with `sources.md`, which the Methods and Results also cite).
+- **Now:** `report/final/discussion.md`, draft 3 (about 1,670 words, about two pages). `report/final/sources.md` (also on this branch, cited by the Methods and Results too) holds S21 to S24 and, since `7a48b2c`, a row recording the checks of S9's published article behind the Methods: the sites share equipment, software and protocol; the task labels come from frame-by-frame video annotation by two expert reviewers. The label definitions (the article's Supplementary Tables S1 to S3) did not open from the session and are not read.
+- **Validated:** draft 1's independent review (taken in by draft 2); a script listed every number in draft 3's prose not found in the outputs, and each was traced by hand (one, S1's 80.6%, is a literature value); every value-and-interval pair checked jointly. **Not verified:** the group has not read it.
+- **Next:** the group's comments; add the SVM when T-020 lands; paste into the shared Word file and open the pull request (with `sources.md`).
 - **Blocked / needs a decision:** none.
-- **For teammates:** @anna @yassien: comments welcome: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-023-discussion/report/final/discussion.md
+- **For teammates:** @anna @yassien: comments welcome: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-023-discussion/report/final/discussion.md. Whoever can open the WearGait-PD article's supplement (Sci. Data 13, 440, the .docx under Supplementary information), please read Tables S1 to S3 and say what the "Walk" label covers (our cleaning keeps only "Walk" samples).
 - **Not pushed:** nothing.
 
 ## T-025 · WearGait-PD external test (finished: pull request #15 waits for a review; the test itself ran in T-022)
@@ -72,32 +72,32 @@ _Updated 2026-11-06 13:12 by Claude (cloud session) for Jamie · branch `jamie/T
 - **For teammates:** @anna: with #19 merged, the next step is your T-017 pull request to `main`; #17's final feature tables and the run branch wait on it. The earlier first-pass notes still stand (the missed-heel-strike check is gaitpdb-only; freezing and stagger are in `ClinicalEvent`, so the "Walk" filter keeps them).
 - **Not pushed:** nothing.
 
-## T-032 · Results section of the final paper (draft 2 on its branch, for the group's comments)
-_Updated 2026-11-06 12:59 by Claude (cloud session) for Jamie · branch `jamie/T-032-results-section` at `03abbfb`_
+## T-032 · Results section of the final paper (draft 3 on its branch, for the group's comments)
+_Updated 2026-11-06 13:30 by Claude (cloud session) for Jamie · branch `jamie/T-032-results-section` at `0ff4b07`_
 
-- **Now:** `report/final/results.md`, draft 2 (about 1,630 words, likely over the brief's two pages with the tables and figures): the participants with their flow and how the datasets differ before any label is used (Table I, Fig. 4); the AUC from unseen participants to an unseen cohort with its comparisons (Fig. 5); the checks of the cross-cohort result, fixed before the labels were used (Table II); which features carry the separation in gaitpdb; the exploratory checks written after the test. The figure and two tables it uses are made by code on the T-022 run branch.
-- **Validated:** an independent review of draft 1 by a separate agent (all numbers matched; five wording or attribution errors, several overstatements, caption and coverage gaps, all taken in except two, listed at the end of the draft); a script matched 294 of the 296 numbers in draft 2's prose to the output files (the other two are ratios written as percentages, explained in the draft); a joint check of all 46 value-and-interval triples against the outputs, which caught one rounding error (0.60 for 0.5948, now 0.59). **Not verified:** the group has not read it; the Methods it must agree with are not written.
-- **Next:** the group's comments; cut to two pages (Sections A's second paragraph and C are the longest); decide with the group how the primary result is named (see the note at the top of the draft), then write Methods to match; add the SVM when T-020 lands; paste into the shared Word file and open the pull request (after the run branch's).
-- **Blocked / needs a decision:** who writes Methods (not on the board); how the paper names its primary result (D-007's main analysis is the combined one, its research gap the cross-cohort test).
+- **Now:** `report/final/results.md`, draft 3 (about 1,550 words of text, two tables, two figures): the participant flow and the feature definitions now live in the Methods, and Section A and B point to them; numbers cited at `a4b9b73`, whose outputs are identical to `2190b19`'s. Draft 2's word count (1,350) was low and is corrected.
+- **Validated:** draft 1's independent review; a script listed every number in draft 2's prose not found in the outputs (two, ratios written as percentages, explained in the draft); a joint check of all 46 value-and-interval triples. Draft 3 removes text and changes no number. **Not verified:** the group has not read it.
+- **Next:** the group's comments; add the SVM when T-020 lands; paste into the shared Word file and open the pull request (after the run branch's).
+- **Blocked / needs a decision:** none (the Methods draft 2 names the primary result as this draft does).
 - **For teammates:** @anna @yassien: comments welcome: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-032-results-section/report/final/results.md
 - **Not pushed:** nothing.
 
-## T-033 · Dataset and Methods section of the final paper (draft 1 on its branch; an independent review is running)
-_Updated 2026-11-06 13:12 by Claude (cloud session) for Jamie · branch `jamie/T-033-methods-section` at `70a13df`_
+## T-033 · Dataset and Methods section of the final paper (draft 2 on its branch, for the group's comments)
+_Updated 2026-11-06 13:30 by Claude (cloud session) for Jamie · branch `jamie/T-033-methods-section` at `a0cc7d9`_
 
-- **Now:** `report/final/methods.md`, draft 1 (about 1,950 words, over two pages): both datasets, participants and flow, responsible use, the signal processing, cleaning and features, both models, the four levels of evaluation with the pre-specified checks and comparisons, software and reproducibility, the role of AI. Written from the code, `DECISIONS.md`, `data/raw/README.md` and verified sources; a table at the end gives the file behind each setting. Cites S22 to S24 (on `jamie/T-023-discussion`).
-- **Validated:** each setting read from the code or a decision; the turn rule, the stride-matched check, the carried threshold and the corridor lengths checked against the code and the sources; one unsupported attribution removed (that gaitpdb's source studies used the CV). **Not verified:** the independent review (running); the group has not read it.
-- **Next:** take in the review; trim to two pages (Sections D and F; detail can move to the README); the group's answers to the two open points below; the SVM sentence when T-020 lands.
+- **Now:** `report/final/methods.md`, draft 2 (about 2,330 words in Sections A to G), after an independent review of draft 1 by a separate agent. The review was right on every point I checked: the threshold choice was described wrongly (its criterion, the 14 candidates, the tie with 30 N, the changed criterion; and it was chosen on walkway agreement, not before any classification result), 306 recordings come from 165 people not 166, the label-free checks are not label-free in every step, and several settings were missing. All taken in; the list at the end of the draft says what changed. The header gives a page estimate (9 to 10 of the 10 pages, references excluded) and what to cut here first if needed.
+- **Validated:** every number in draft 2 against the outputs and code at `a4b9b73` (participant flow, recordings per person, task files, assistive devices, threshold check, model grids, splits, bootstraps, matching, stride-matched reference, 1% prevalence, 125 tests); S9's points in its published article. **Not verified:** the definitions of WearGait-PD's video labels (marked [UNVERIFIED]); the group has not read it.
+- **Next:** the group's comments; the SVM sentence when T-020 lands; the submitted commit and the final rerun's result in Section G; paste into the Word file and open the pull request.
 - **Blocked / needs a decision:** whether the Synapse terms allow sharing the derived per-participant WearGait-PD tables in `results/`; Fig. 1 still shows the midterm's processing (regenerate with the final cleaning, or drop).
-- **For teammates:** @anna: you wrote the midterm's Methods (Section IV); this draft was written because no one had the final one yet, and it is yours to take over or revise if you want it (tell Jamie, and the board entry moves to you). @anna @yassien: comments welcome: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-033-methods-section/report/final/methods.md
+- **For teammates:** @anna: you wrote the midterm's Methods (Section IV); this one is yours to take over or revise if you want it (tell Jamie, and the board entry moves to you). @anna @yassien: comments welcome: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-033-methods-section/report/final/methods.md
 - **Not pushed:** nothing.
 
-## T-034 · End statements of the final paper (draft 1 on its branch, for each member to check their part)
-_Updated 2026-11-06 13:12 by Claude (cloud session) for Jamie · branch `jamie/T-034-end-statements` at `5e125ff`_
+## T-034 · End statements of the final paper (draft 2 on its branch, for each member to check their part)
+_Updated 2026-11-06 13:30 by Claude (cloud session) for Jamie · branch `jamie/T-034-end-statements` at `5f75504`_
 
-- **Now:** `report/final/statements.md`: Data and Code Availability, AI-Assisted Work and Author Contributions, written from the three logs, with a bracketed placeholder wherever a member has to confirm or add their part (the SVM, the Introduction and the Conclusion are not yet there).
-- **Validated:** each statement about a member traced to their own log or the midterm statements. **Not verified:** no member has confirmed their part; the human checks of Jamie's recent AI-written work are not yet stated (his logs say he has not reviewed it).
-- **Next:** each member confirms or edits their part; Jamie states how he checked the AI-written code and drafts; fill in the submitted commit; paste into the Word file and open the pull request.
+- **Now:** `report/final/statements.md`, draft 2: aligned with the Methods draft 2. The AI's role in Jamie's work now says it designed and ran the analysis and proposed the threshold, the dropped feature and the added checks, which Jamie put to the group (D-012, D-013); the derived tables are listed in full; the dataset versions are named; the check of the numbers is described as it was done (a script listed unmatched numbers, traced by hand), not as a full automatic match.
+- **Validated:** each statement about a member traced to their own log, the midterm statements or `DECISIONS.md`. **Not verified:** no member has confirmed their part; Jamie's own checks of the AI-written work are not stated (his logs say he has not reviewed it).
+- **Next:** each member confirms or edits their part; Jamie confirms the AI description and states how he checked the code and drafts; fill in the submitted commit; paste into the Word file and open the pull request.
 - **Blocked / needs a decision:** the members' confirmations.
 - **For teammates:** @anna @yassien: please check what it says about you: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-034-end-statements/report/final/statements.md
 - **Not pushed:** nothing.
