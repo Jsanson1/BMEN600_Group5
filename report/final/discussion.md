@@ -12,7 +12,7 @@ Our within-cohort AUC of 0.79 sits well below the 98% accuracy reported on this 
 
 ## C. Why the models do not transfer
 
-The two datasets differ before any model is fitted, enough for a model to tell them apart from the five features (AUC 0.94). We weighed five explanations against the evidence.
+The two datasets differ in the five features themselves, enough for a model to tell them apart (AUC 0.94). We weighed five explanations against the evidence.
 
 *Walking protocol.* WearGait-PD's straight walking comes in short passes across a 4.9 m walkway [S9], bouts of a median of 2 clean strides against 18 in gaitpdb, and strides after a turn are longer than the rest of a walk, in patients with movement disorders more than in healthy older adults [S21]. Dropping one stride at each bout end would lower WearGait-PD's median variability from 4.96% to 2.83% for stride time and from 8.19% to 5.80% for swing time, against gaitpdb's 2.41% and 3.67%, so bout ends appear to account for most of the excess in stride-time variability but only about half of that in swing-time variability. The trimmed series, a median of 9 strides on the foot with fewer, are too short to settle this [S21], and the models without the variability features transferred no better (0.52 and 0.58).
 
