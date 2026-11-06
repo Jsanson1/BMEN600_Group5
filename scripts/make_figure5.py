@@ -46,7 +46,7 @@ INK, MUTED, GRID = "#1f1f1f", "#6e6e6e", "#d9d9d9"
 LEVELS = [
     ("Unseen participants", "within gaitpdb's protocols"),
     ("Unseen protocol", "a gaitpdb sub-study held out"),
-    ("Both datasets combined", "main analysis, D-007"),
+    ("Both datasets combined", "the plan's main analysis"),
     ("Unseen cohort", "fitted on gaitpdb, tested on WearGait-PD"),
 ]
 """Section title and subtitle of each level, top to bottom."""

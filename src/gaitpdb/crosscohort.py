@@ -10,7 +10,8 @@ regression, the SVM and the random forest are judged identically:
   reports the AUC inside each dataset's share of the test participants.
 * ``cross_cohort``: a model fitted once on every gaitpdb participant (any
   tuning stays inside gaitpdb) and applied once to every WearGait-PD
-  participant, with no further tuning. This is the plan's main result.
+  participant, with no further tuning. The plan's research gap rests on this
+  test; the pooled analysis above is its main analysis (DECISIONS.md D-007).
 * ``dataset_of_origin``: can a model tell which dataset a participant comes
   from, using the same inputs? If it can, the pooled result may partly reflect
   the source rather than the disease.

@@ -55,7 +55,7 @@ def test_one_row_per_version_with_its_participants_and_every_model(tmp_path):
         by_row.loc["Contact threshold fixed at 20 N", "WearGait-PD participants (PD)"]
         == "28 (14)"
     )
-    assert by_row.loc["Age and sex added", "Random forest"] == "0.510 (0.400 to 0.600)"
+    assert by_row.loc["Age and sex added", "Random forest"] == "0.51 (0.40 to 0.60)"
 
 
 def test_models_tested_on_different_participants_stop_the_table(tmp_path):
