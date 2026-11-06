@@ -10,10 +10,11 @@ tables), the models (run_logreg, run_random_forest, run_baselines),
 compare_models, run_cross_cohort and the post hoc check_weargait_signal;
 make_figure5 (the paper's figure of the main results, from the files above);
 check_weargait_participants, check_weargait_threshold and make_cohort_table
-(the paper's table of participants); and last the 20 N
+(the paper's table of participants); the 20 N
 sensitivity analysis of D-012 (the cleaning, the features, the logistic
 regression within gaitpdb, the feature checks and the cross-cohort test at a
-fixed 20 N, into results/fixed_20N/).
+fixed 20 N, into results/fixed_20N/); and last make_table_crosscohort (the
+paper's table of the cross-cohort test and its checks, which reads both).
 
 Two kinds of committed output are not made here: those of the exploration
 scripts behind the cleaning rules (scripts/explore_*.py, each run on its own),
@@ -24,8 +25,8 @@ WearGait-PD needs a free Synapse account (data/raw/README.md). Without its two
 participant sheets and its task files in data/raw/weargait_pd/, only the steps
 that need PhysioNet alone run: the first six above, the cleaning and the
 features of gaitpdb, make_figure2 (which reads the committed WearGait-PD feature
-table), the models, compare_models and make_figure5 (which reads the committed
-cross-dataset results). The two summaries that
+table), the models, compare_models, make_figure5 and make_table_crosscohort (which
+read the committed cross-dataset results). The two summaries that
 describe both datasets (clean_strides_summary.txt and features_summary.txt) then
 go to data/interim/physionet_only/ instead of results/, so every committed output
 that needs WearGait-PD keeps its committed version.
@@ -100,6 +101,9 @@ SENSITIVITY_20N = [  # D-012's sensitivity analysis at a fixed 20 N, in its own 
         + ["--cross-cohort-only"],
     ),
 ]
+AFTER_20N = [  # read the 20 N results as well, so they come last
+    "make_table_crosscohort.py",  # the paper's table of the cross-cohort checks
+]
 STEPS = READS_RECORDS + READS_CLEAN_STRIDES + READS_RESULTS + READS_WEARGAIT
 TAKE_DATA = {*READS_RECORDS, "make_features.py", "make_cohort_table.py"}
 
@@ -129,14 +133,17 @@ def weargait_present(folder: Path = WEARGAIT_DIR) -> bool:
 
 
 def plan(with_weargait: bool) -> list[tuple[str, list[str]]]:
-    """The steps to run, in order, each with its extra arguments."""
+    """The steps to run, in order, each with its extra arguments. The steps in
+    AFTER_20N read only results/, so without WearGait-PD they run on the
+    committed cross-dataset results."""
+    last = [(step, []) for step in AFTER_20N]
     if with_weargait:
-        return [(step, []) for step in STEPS] + SENSITIVITY_20N
+        return [(step, []) for step in STEPS] + SENSITIVITY_20N + last
     return [
         (step, SUMMARY_ELSEWHERE.get(step, []))
         for step in STEPS
         if step not in NEEDS_WEARGAIT
-    ]
+    ] + last
 
 
 def main() -> None:

@@ -19,17 +19,22 @@ def test_weargait_present_needs_both_sheets_and_a_task_file(tmp_path):
     assert run_all.weargait_present(tmp_path)
 
 
-def test_with_weargait_every_step_runs_then_the_20N_analysis():
+def test_with_weargait_every_step_runs_then_the_20N_analysis_then_its_readers():
     steps = [step for step, _ in run_all.plan(True)]
-    n = len(run_all.STEPS)
+    n, m = len(run_all.STEPS), len(run_all.SENSITIVITY_20N)
     assert steps[:n] == run_all.STEPS
-    assert steps[n:] == [step for step, _ in run_all.SENSITIVITY_20N]
+    assert steps[n : n + m] == [step for step, _ in run_all.SENSITIVITY_20N]
+    assert steps[n + m :] == run_all.AFTER_20N
 
 
 def test_without_weargait_nothing_that_describes_both_datasets_is_overwritten():
     plan = run_all.plan(False)
     steps = [step for step, _ in plan]
-    assert steps == [s for s in run_all.STEPS if s not in run_all.NEEDS_WEARGAIT]
+    assert (
+        steps
+        == [s for s in run_all.STEPS if s not in run_all.NEEDS_WEARGAIT]
+        + run_all.AFTER_20N
+    )
     assert "run_logreg.py" in steps and "compare_models.py" in steps
     extra = dict(plan)
     for step in ("make_clean_strides.py", "make_features.py"):

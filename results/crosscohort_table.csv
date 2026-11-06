@@ -1,0 +1,9 @@
+Version of the test,WearGait-PD participants (PD),Logistic regression,Random forest
+Main test: five gait features,169 (94),0.532 (0.449 to 0.621),0.573 (0.486 to 0.659)
+Each dataset's inputs standardised,169 (94),0.535 (0.449 to 0.622),0.538 (0.453 to 0.624)
+Without the two variability features,169 (94),0.521 (0.435 to 0.609),0.576 (0.491 to 0.662)
+Robust variability in place of the CV,169 (94),0.519 (0.436 to 0.607),0.539 (0.454 to 0.627)
+Age and sex added,169 (94),0.509 (0.424 to 0.596),0.554 (0.471 to 0.643)
+Contact threshold fixed at 20 N,164 (90),0.534 (0.449 to 0.625),0.540 (0.455 to 0.632)
+VA Puget Sound only (both groups),57 (28),0.555 (0.398 to 0.701),0.554 (0.403 to 0.698)
+Pairs matched on sex and age,112 (56),0.646 (0.539 to 0.750),0.670 (0.566 to 0.771)
