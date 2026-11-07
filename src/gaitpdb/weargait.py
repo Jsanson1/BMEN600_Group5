@@ -29,12 +29,20 @@ SHEETS = {
 """Group -> (file name, age column) of the two participant sheets."""
 
 
+WEIGHT_COLUMN = "Weight (kg)"
+ASSISTIVE_COLUMN = "Assistive Device used during testing?"
+
+
 def load_participants(data_dir: str | Path) -> pd.DataFrame:
-    """One row per participant: participant, group, age, sex, site, release.
+    """One row per participant: participant, group, age, sex, site, release,
+    weight_kg, assistive_device.
 
     ``site`` is the letter prefix of the participant ID (NLS, HC, WPD or WHC);
-    ``release`` is the sheet's "Release version" column. Rows without an ID are
-    skipped. Raises if a sheet is missing or an ID appears more than once.
+    ``release`` is the sheet's "Release version" column; ``weight_kg`` and
+    ``assistive_device`` come from the sheets' "Weight (kg)" and "Assistive
+    Device used during testing?" columns (NaN and "" when a sheet lacks them;
+    the body-weight contact thresholds of T-025 use the weight). Rows without an
+    ID are skipped. Raises if a sheet is missing or an ID appears more than once.
     """
     data_dir = Path(data_dir)
     frames = []
@@ -56,6 +64,15 @@ def load_participants(data_dir: str | Path) -> pd.DataFrame:
                 "sex": sheet["Sex"].str.strip(),
                 "site": ids.str.extract(r"^([A-Za-z]+)", expand=False),
                 "release": sheet["Release version"].str.strip(),
+                "weight_kg": pd.to_numeric(
+                    sheet.get(
+                        WEIGHT_COLUMN, pd.Series("", index=sheet.index)
+                    ).str.strip(),
+                    errors="coerce",
+                ),
+                "assistive_device": sheet.get(
+                    ASSISTIVE_COLUMN, pd.Series("", index=sheet.index)
+                ).str.strip(),
             }
         )
         frames.append(frame[frame["participant"] != ""])
