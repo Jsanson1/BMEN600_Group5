@@ -36,6 +36,18 @@ Threshold metrics within protocol (probability 0.5), and Brier score:
   Stride-time asymmetry alone: balanced accuracy 0.49 (0.46 to 0.52), sensitivity 0.96, specificity 0.02, Brier 0.250
   Chance (share of PD in training): balanced accuracy 0.50 (0.50 to 0.50), sensitivity 1.00, specificity 0.00, Brier 0.246
 
+Sensitivity at 90% specificity, read off the ROC curve of the pooled out-of-fold predictions (within protocol) and of the pooled out-of-study predictions (across protocols), 95% participant-bootstrap intervals; and the predictive values of the within-protocol operating point at a prevalence of 1% (Bayes' theorem; the samples are about half PD):
+  Logistic regression: gait features: within 0.52 (0.30 to 0.69), across 0.54 (0.34 to 0.65); PPV 0.058, NPV 0.9947
+  Logistic regression: gait features + age, sex: within 0.52 (0.27 to 0.66), across 0.49 (0.30 to 0.64); PPV 0.050, NPV 0.9946
+  Logistic regression: age and sex only: within 0.13 (0.01 to 0.32), across 0.15 (0.04 to 0.34); PPV 0.013, NPV 0.9904
+  Swing-time asymmetry alone: within 0.45 (0.26 to 0.61), across 0.44 (0.25 to 0.59); PPV 0.044, NPV 0.9939
+  Swing fraction of the stride alone: within 0.45 (0.31 to 0.61), across 0.47 (0.29 to 0.60); PPV 0.044, NPV 0.9939
+  Swing-time variability alone: within 0.23 (0.11 to 0.41), across 0.26 (0.11 to 0.42); PPV 0.027, NPV 0.9916
+  Stride-time variability alone: within 0.11 (0.02 to 0.20), across 0.10 (0.02 to 0.19); PPV 0.011, NPV 0.9901
+  Mean stride time alone: within 0.13 (0.04 to 0.25), across 0.12 (0.05 to 0.25); PPV 0.019, NPV 0.9907
+  Stride-time asymmetry alone: within 0.00 (0.00 to 0.11), across 0.07 (0.02 to 0.14); PPV 0.000, NPV 0.9899
+  Chance (share of PD in training): within 0.11 (0.02 to 0.20), across 0.00 (0.00 to 0.00); PPV 0.011, NPV 0.9901
+
 Paired differences in AUC (first minus second). Within protocol: corrected repeated k-fold cross-validation t-test on the 100 paired folds (Bouckaert and Frank 2004), p values Holm-adjusted over the pairs listed. Across protocols: paired bootstrap of the pooled out-of-study AUC.
   Logistic regression: gait features vs Swing-time asymmetry alone
       within +0.061 (+0.012 to +0.110), t(99) = 2.46, p = 0.016, Holm p = 0.047; across +0.016 (-0.043 to +0.074)
