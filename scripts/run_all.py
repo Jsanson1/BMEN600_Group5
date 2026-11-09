@@ -3,12 +3,15 @@
     python scripts/run_all.py [--data data/raw/gaitpdb]
 
 Runs verify_data, make_table1, make_figure1, check_event_detection,
-check_data_quality, check_dual_task, make_figure2, then the models
-(run_logreg, run_baselines) and compare_models, and last
-check_weargait_participants and check_weargait_threshold (which read
+check_data_quality, check_dual_task and make_figure2; then make_features and
+check_features, which read the clean-stride tables in data/interim/ and skip a
+dataset whose table is missing; then the models (run_logreg,
+run_random_forest, run_baselines) and compare_models; and last
+check_weargait_participants and check_weargait_threshold, which read
 data/raw/weargait_pd and skip themselves if the WearGait-PD files are not
-there), as separate processes, and stops at the first failure. About five
-minutes on a laptop, eight with the WearGait-PD files.
+there. Each runs as a separate process, and the run stops at the first
+failure. About 35 minutes on a two-core machine with the WearGait-PD files,
+25 of them the random forest.
 """
 
 from __future__ import annotations
@@ -28,8 +31,13 @@ READS_RECORDS = [  # these take --data: they read the PhysioNet record files
     "check_dual_task.py",
     "make_figure2.py",
 ]
+READS_CLEAN_STRIDES = [  # read data/interim/ (make_clean_strides.py, T-017)
+    "make_features.py",  # takes --data for gaitpdb's demographics.txt
+    "check_features.py",
+]
 READS_RESULTS = [  # these read what the steps above wrote to results/
     "run_logreg.py",
+    "run_random_forest.py",
     "run_baselines.py",
     "compare_models.py",
 ]
@@ -37,7 +45,8 @@ READS_WEARGAIT = [  # read data/raw/weargait_pd; skip themselves without its fil
     "check_weargait_participants.py",
     "check_weargait_threshold.py",
 ]
-STEPS = READS_RECORDS + READS_RESULTS + READS_WEARGAIT
+STEPS = READS_RECORDS + READS_CLEAN_STRIDES + READS_RESULTS + READS_WEARGAIT
+TAKE_DATA = {*READS_RECORDS, "make_features.py"}
 
 
 def main() -> None:
@@ -47,7 +56,7 @@ def main() -> None:
     here = Path(__file__).resolve().parent
     for step in STEPS:
         cmd = [sys.executable, str(here / step)]
-        if step in READS_RECORDS:
+        if step in TAKE_DATA:
             cmd += ["--data", args.data]
         print(f"== {step}", flush=True)
         t0 = time.time()
