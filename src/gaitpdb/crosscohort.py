@@ -154,10 +154,18 @@ def run_pooled(
 def threshold_at_specificity(
     y_true: np.ndarray, p: np.ndarray, target: float = TARGET_SPECIFICITY
 ) -> float:
-    """The lowest threshold whose specificity is at least ``target``.
+    """Threshold of the point ``sensitivity_at_specificity`` reads off the ROC curve.
 
-    A participant is called PD when p >= threshold. Choosing the lowest such
-    threshold gives the highest sensitivity that keeps the specificity target.
+    A participant is called PD when p >= threshold. The point is the last one
+    with specificity >= ``target`` on the curve as ``roc_curve`` returns it by
+    default (``drop_intermediate=True``, which keeps only the points where the
+    curve turns). With no score tied between the groups, its sensitivity is the
+    highest available at that specificity, and the threshold is the highest one
+    that reaches that sensitivity: the corner of the curve, not the lowest
+    threshold with specificity >= ``target``. Its specificity can therefore be
+    above ``target`` (``tests/test_crosscohort.py`` has an example). The
+    cross-cohort analysis used this rule as it is, and it was kept after the
+    WearGait-PD results were known rather than changed afterwards.
     """
     return _roc_point(y_true, p, target)[2]
 
@@ -167,8 +175,9 @@ def sensitivity_at_specificity(
 ) -> tuple[float, float, float]:
     """(sensitivity, achieved specificity, threshold) at specificity >= ``target``.
 
-    Read off the ROC curve of these predictions, so it describes this test set
-    at its own best threshold; ``cross_cohort`` also reports the threshold
+    Read off the ROC curve of these predictions (see ``threshold_at_specificity``
+    for which point: the achieved specificity can be above ``target``), so it
+    describes this test set at its own best threshold; ``cross_cohort`` also reports the threshold
     carried over from training, which is what a deployed tool would use.
     """
     return _roc_point(y_true, p, target)
