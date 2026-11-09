@@ -22,34 +22,14 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 - **Not pushed:** nothing. (Anything listed here exists on one machine only.)
 -->
 
-## T-018 · Feature extraction (finished: pull request #17 waits for a review; the final tables are on the T-022 run branch)
-_Updated 2026-11-02 18:20 by Claude (cloud session) for Jamie · branch `jamie/T-018-feature-extraction` at `c6f7e8b`; pull request #17 open, no review yet_
+## T-022 · Model comparison and cross-dataset analyses (#16 merged; the run branch is current with main and waits for T-017 and #15)
+_Updated 2026-11-09 13:15 by Claude (cloud session) for Jamie · `jamie/T-022-model-comparison` merged as #16 (branch still to delete); `jamie/T-022-cross-cohort-run` at `3fb9bc8`_
 
-- **Now:** #17 holds the code: participant features from the clean strides, the feature dictionary, the label-free checks and Figure 4. The final tables (T-017's strides with D-012 from #19, D-011 inclusion) were built on `jamie/T-022-cross-cohort-run` (`d0ea809`): 155 gaitpdb and 169 WearGait-PD participants. D-013 is recorded (`f629ab3`); its five inputs were set in `evaluation.MODEL_FEATURES` on the run branch (`4921862`), not in #17.
-- **Validated:** 17 tests on #17, each checked to fail when broken; 108 tests on the run branch; the label-free numbers in the run branch's README re-read from `results/feature_checks.txt`. **Not verified:** no teammate has reviewed the code.
-- **Next:** Yassien reviews #17 (https://github.com/Jsanson1/BMEN600_Group5/pull/17), then merge, mark done, delete the branch. The tables reach `main` with the run branch's pull request.
-- **Blocked / needs a decision:** a reviewer.
-- **For teammates:** @yassien: a first look at #17 please (the feature definitions and the dictionary).
-- **Not pushed:** nothing.
-
-## T-019 · Random forest (finished: pull request #18 waits for a review)
-_Updated 2026-11-02 20:15 by Claude (cloud session) for Jamie · branch `jamie/T-019-random-forest` at `131c31b`; pull request #18 open, no review yet_
-
-- **Now:** final run on D-013's five inputs (run branch): AUC 0.75 (0.65 to 0.85) within protocol, 0.70 (0.62 to 0.78) across protocols, 0.573 (0.486 to 0.659) across cohorts. New on #18 (`131c31b`): the fitted forest predicts in one thread. In parallel threads scikit-learn added the trees' votes in a varying order, so the last digit of some probabilities changed between runs (found by a rerun from a clean checkout; once it moved a 20 N AUC by one patient-control pair, 0.477177 to 0.477252).
-- **Validated:** 7 tests, the new one failing without the fix in 5 of 5 runs; 39 pass on the branch. **Not verified:** no teammate has reviewed the code.
-- **Next:** Yassien reviews #18 (https://github.com/Jsanson1/BMEN600_Group5/pull/18), then merge, mark done, delete the branch. #16 and #18 both regenerate `results/model_comparison.*` and Figure 3: whichever merges second needs `main` merged in and `compare_models.py` rerun (the run branch holds the final versions).
-- **Blocked / needs a decision:** a reviewer.
-- **For teammates:** @anna (T-020): the SVM joins through a `scripts/run_svm.py` with `make_factory(columns)` and outputs written by `evaluation.write_model_outputs(..., "svm")`; `run_cross_cohort.py` and `compare_models.py` pick it up by that file name (`MODEL_FILES` already lists `svm`); add it to `READS_RESULTS` in `scripts/run_all.py`.
-- **Not pushed:** nothing.
-
-## T-022 · Model comparison and cross-dataset analyses (final results on the run branch, reproduced from a clean checkout)
-_Updated 2026-11-06 16:15 by Claude (cloud session) for Jamie · branches `jamie/T-022-model-comparison` at `c203bb7` (pull request #16 open, no review yet) and `jamie/T-022-cross-cohort-run` at `87b45f5` (merges #15 to #18 and #19)_
-
-- **Now:** final results in the run branch's README: no transfer to WearGait-PD (0.532 and 0.573); D-007's combined analysis 0.628 and 0.666, its gain from age and sex a recruitment effect; within gaitpdb 0.831 at 20 N against 0.789 at D-012 (not tested). The paper's Figure 5, cohort table and cross-cohort table are made by `scripts/make_figure5.py`, `make_cohort_table.py` and `make_table_crosscohort.py`, all run by `run_all.py`. A full rerun of `aff8778` from a clean copy (6 November, 91 minutes) reproduced every output `run_all.py` writes byte for byte, these three included, except the commit line in the two `features_summary.txt` files; the README says so (`87b45f5`). Since `aff8778` only `README.md` and `data/raw/README.md` changed (the README no longer says the datasets differ "before any model is fitted", and T-025's label definitions are merged in).
-- **Validated:** 125 tests; the full clean rerun above (Linux, Python 3.13, NumPy 2.5.3, pandas 3.0.5, SciPy 1.18.1, scikit-learn 1.9.1, Matplotlib 3.11.2, two cores); the PhysioNet-only clean rerun of `085c0cf` (28 minutes, no committed file changed). **Not verified:** other operating systems and library versions; a second member reproducing the numbers.
-- **Next:** (1) once #15 to #18 and T-017 are on `main`, merge `main` into the run branch, rerun `run_all.py` from a clean checkout, check that only the two commit lines change (update the README's "last checked" commit), and open its pull request; (2) a teammate reproduces the main numbers on their own machine (`python scripts/run_all.py`, then `git status`; without the WearGait-PD files nothing should change) and reports any difference, even in a last digit; (3) the SVM when T-020 lands.
-- **Blocked / needs a decision:** reviews of #15 to #18; T-017 on `main` (Anna's pull request).
-- **For teammates:** @anna @yassien: the results are in the run branch's README: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-022-cross-cohort-run/README.md#results; how to rerun them: https://github.com/Jsanson1/BMEN600_Group5/blob/jamie/T-022-cross-cohort-run/README.md#how-to-run. @anna: your five `scripts/explore_*.py`, rerun from a clean copy of your branch (`7d3e807`), give every number exactly as committed; four of them (turn timing, stride counts, WearGait-PD tasks, missing data) are not yet described in the README or in `report/T-017_stride_rule_exploration.md`.
+- **Now:** #16, #17 and #18 are merged into `main` after Yassien's approvals and the fixes he asked for: #16's docstrings now say the 90% specificity rule picks the corner of the ROC curve (the code is unchanged, since the cross-cohort run used it) and his example is a test; #17 escapes the bars in the feature dictionary; #18 got `main` merged in with `compare_models.py` rerun. The run branch has `main` merged in (`3fb9bc8`): results identical except the escaped dictionary, and the README records Yassien's full rerun of `87b45f5` on Windows with both datasets (every reported number reproduced; line endings, last digits in 21 CSVs and PNG bytes differ) and limits "byte for byte" to the Linux setup.
+- **Validated:** 126 tests; checks green on each merged pull request; rerunning `make_features.py` and `compare_models.py` after the merge changes only the dictionary; all 79 numbers in the run branch's README Results section are in its outputs; two full reruns (`aff8778` here on Linux; `87b45f5` by Yassien on Windows). **Not verified:** the run branch's full rerun after `3fb9bc8` (the code changes since `aff8778` are docstrings, a test and the dictionary escape).
+- **Next:** (1) T-017 (Anna's pull request) and #15 merged into `main`; (2) merge `main` into the run branch, full rerun from a clean checkout, update the README's "last checked", open its pull request (Yassien or Anna reviews); (3) the SVM when T-020 lands.
+- **Blocked / needs a decision:** Anna's T-017 pull request (her branch has not moved since 2 November); a review of #15.
+- **For teammates:** @yassien: thanks for the rerun and the reviews; the README now says what your Windows run showed (`3fb9bc8`), so your T-022 handoff section can go. Could you also review #15 (https://github.com/Jsanson1/BMEN600_Group5/pull/15)? @anna: the rest of the analysis can only reach `main` after your cleaning code does; please open the pull request from `anna/T-017-preprocessing` when you can.
 - **Not pushed:** nothing.
 
 ## T-023 · Discussion (draft 3 on its branch, for the group's comments)
@@ -63,11 +43,11 @@ _Updated 2026-11-06 16:15 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-025 · WearGait-PD external test (finished: pull request #15 waits for a review; the test itself ran in T-022)
-_Updated 2026-11-06 16:15 by Claude (cloud session) for Jamie · branch `jamie/T-025-weargait-access` at `64b436b`; pull request #15 open (checks green), no review yet_
+_Updated 2026-11-09 13:15 by Claude (cloud session) for Jamie · branch `jamie/T-025-weargait-access` at `64b436b`; pull request #15 open (checks green), no review yet_
 
 - **Now:** data downloaded and checked; walkway threshold check (D-012) and site table done; D-012 applied to T-017's cleaning in #19; the final models ran on WearGait-PD in T-022. `data/raw/README.md` on #15: the SelfPace description fixed (`e6ee563`); "How we use it" describes the final analysis (`274c3a6`); and now what the "Walk" and "Turn" labels cover, from the dataset's Synapse wiki (page "Video annotation"), and that the separate freezing and staggering labels (`ClinicalEvent`) are not used (`76540e6`, `64b436b`). All in #15's description and merged into the run branch.
 - **Validated:** 10 walkway tests; #19's 3 tests; the task descriptions against the published article; the label definitions against the Synapse wiki (read 6 November); that the cleaning reads only `GeneralEvent` (`src/gaitpdb/clean_data.py`, `clean_weargait`). A scratch count (not in the repository) found freezing or staggering labels on about 0.5% of the "Walk" samples, in 23 of the 553 task files. **Not verified:** no teammate has reviewed #15; the article's Supplementary Tables S1 to S3 (did not open from the session).
-- **Next:** Anna or Yassien reviews #15 (https://github.com/Jsanson1/BMEN600_Group5/pull/15), then merge (README conflicts with #16 and #17: merge `main` into whichever goes second), mark done, delete the branch.
+- **Next:** Anna or Yassien reviews #15 (https://github.com/Jsanson1/BMEN600_Group5/pull/15); #16 to #18 are merged, so merge `main` into the branch first (the README will conflict), then merge, mark done, delete the branch.
 - **Blocked / needs a decision:** a reviewer.
 - **For teammates:** @anna: with #19 merged, the next step is your T-017 pull request to `main`; #17's final feature tables and the run branch wait on it. Strides during a labelled freeze are kept if they pass the stride limits; if the group wants them dropped, that is a change to `clean_weargait` and a rerun.
 - **Not pushed:** nothing.
@@ -83,9 +63,9 @@ _Updated 2026-11-06 16:15 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-033 · Dataset and Methods section of the final paper (draft 2 on its branch, for the group's comments)
-_Updated 2026-11-06 16:15 by Claude (cloud session) for Jamie · branch `jamie/T-033-methods-section` at `ea67c5f`_
+_Updated 2026-11-09 13:15 by Claude (cloud session) for Jamie · branch `jamie/T-033-methods-section` at `246e0c4`_
 
-- **Now:** `report/final/methods.md`, draft 2 (about 2,330 words in Sections A to G), after an independent review of draft 1; the list at the end says what changed. Since the last handoff: the "Walk" and "Turn" labels are defined from the dataset's Synapse wiki [S20], replacing the [UNVERIFIED] note, and the cleaning's non-use of the freezing and staggering labels is stated; Section C says what WearGait-PD's licence (CC BY 4.0) and Synapse's open-access type allow for the derived tables. The header gives a page estimate (9 to 10 of the 10 pages, references excluded) and what to cut here first.
+- **Now:** `report/final/methods.md`, draft 2 (about 2,330 words in Sections A to G), after an independent review of draft 1; the list at the end says what changed. Since the last handoff: the "Walk" and "Turn" labels are defined from the dataset's Synapse wiki [S20], replacing the [UNVERIFIED] note, and the cleaning's non-use of the freezing and staggering labels is stated; Section C says what WearGait-PD's licence (CC BY 4.0) and Synapse's open-access type allow for the derived tables; Section F describes the threshold carried to WearGait-PD as the code sets it (the highest threshold reaching the best sensitivity at a specificity of at least 90%), after Yassien's review of #16. The header gives a page estimate (9 to 10 of the 10 pages, references excluded) and what to cut here first.
 - **Validated:** every number against the outputs and code at `a4b9b73`; S9's points in its published article; the label definitions and the licence in S20's Synapse wiki. **Not verified:** the Synapse Pledge's wording (it opens only when signed in); the group has not read it.
 - **Next:** Jamie reads the Synapse Pledge while signed in and removes the bracketed note in Section C if nothing in it stops us sharing the derived tables (same note in the statements); the group's comments; the SVM sentence when T-020 lands; the submitted commit and the final rerun in Section G; paste into the Word file and open the pull request.
 - **Blocked / needs a decision:** Fig. 1 still shows the midterm's processing (regenerate with the final cleaning, or drop).
