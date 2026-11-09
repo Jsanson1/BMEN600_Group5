@@ -107,12 +107,28 @@ def test_roc_point_on_a_known_example():
     called = p >= thr
     assert spec >= 0.9 and (~called[y == 0]).mean() == pytest.approx(spec)
     assert called[y == 1].mean() == pytest.approx(sens)
-    # no lower threshold keeps the specificity target
+    # here the curve rises right after the point, so no lower threshold keeps the target
     lower = np.sort(np.unique(p))
     lower = lower[lower < thr]
     for t in lower:
         assert (p[y == 0] < t).mean() < 0.9
     assert threshold_at_specificity(y, p, 0.9) == thr
+
+
+def test_roc_point_is_the_corner_not_the_lowest_admissible_threshold():
+    # Pull request #16 review: 10 PD scored 0.95 to 0.86, 20 controls at 0.80,
+    # 0.79 and then 0.5 or below. Thresholds 0.86, 0.80 and 0.79 all give
+    # sensitivity 1 at specificity >= 0.9; the rule returns the corner (0.86,
+    # specificity 1.00), not the lowest of them (0.79, specificity 0.90).
+    pd_scores = np.round(np.linspace(0.95, 0.86, 10), 2)
+    controls = np.r_[0.80, 0.79, np.linspace(0.5, 0.05, 18)]
+    y = np.r_[np.ones(10), np.zeros(20)].astype(int)
+    p = np.r_[pd_scores, controls]
+    sens, spec, thr = sensitivity_at_specificity(y, p, 0.9)
+    assert thr == pytest.approx(0.86)
+    assert sens == 1.0 and spec == 1.0
+    assert threshold_at_specificity(y, p, 0.9) == thr
+    assert ((p[y == 0] < 0.79).mean(), (p[y == 1] >= 0.79).mean()) == (0.9, 1.0)
 
 
 def test_roc_point_needs_both_groups():

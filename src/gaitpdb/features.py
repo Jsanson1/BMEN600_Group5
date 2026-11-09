@@ -285,6 +285,11 @@ def feature_dictionary_markdown(columns: list[str]) -> str:
         raise KeyError(f"no dictionary entry for {unknown}")
     lines = ["| Column | Unit | Definition |", "|---|---|---|"]
     for c in columns:
-        unit, text = FEATURE_DICTIONARY[c]
+        unit, text = (_cell(x) for x in FEATURE_DICTIONARY[c])
         lines.append(f"| `{c}` | {unit} | {text} |")
     return "\n".join(lines) + "\n"
+
+
+def _cell(text: str) -> str:
+    """Escape ``|`` so a Markdown table cell is not split (e.g. ``|left - right|``)."""
+    return text.replace("|", "\\|")

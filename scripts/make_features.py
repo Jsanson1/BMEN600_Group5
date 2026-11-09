@@ -17,7 +17,7 @@ Writes, in results/:
                            (commit and contact threshold, from T-017's provenance
                            file); each feature's median over all participants.
 
-scripts/check_features.py compares the two tables without diagnosis labels.
+scripts/check_features.py compares the two tables without WearGait-PD's diagnosis labels.
 
 Nothing in the summary splits WearGait-PD by diagnosis. That dataset is the
 cross-cohort test set, and the features and the threshold are fixed before any

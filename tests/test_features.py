@@ -1,6 +1,7 @@
 """Participant features from clean strides (task T-018), on tables with known values."""
 
 import importlib.util
+import re
 from pathlib import Path
 
 import numpy as np
@@ -179,6 +180,11 @@ def test_every_column_has_a_dictionary_entry():
         assert f"`{c}`" in md and FEATURE_DICTIONARY[c][1]
     with pytest.raises(KeyError):
         feature_dictionary_markdown(["no_such_column"])
+    # every row has exactly the table's four column bars once escaped bars are set
+    # aside, so "|left - right|" in a definition does not split its cell (#17 review)
+    asym = feature_dictionary_markdown(["swing_time_asymmetry_pct"]).splitlines()[-1]
+    assert "\\|left - right\\|" in asym
+    assert len(re.findall(r"(?<!\\)\|", asym)) == 4
 
 
 def weargait_strides(shift: float) -> pd.DataFrame:
