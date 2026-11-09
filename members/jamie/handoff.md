@@ -23,7 +23,7 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 -->
 
 ## T-022 · Model comparison and cross-dataset analyses (#16 merged; the run branch is current with main and waits for T-017 and #15)
-_Updated 2026-11-09 15:20 by Claude (cloud session) for Jamie · `jamie/T-022-model-comparison` merged as #16 (branch still to delete); `jamie/T-022-cross-cohort-run` at `3fb9bc8`; docs fix #20 merged into `main`_
+_Updated 2026-11-09 14:20 by Claude (cloud session) for Jamie · `jamie/T-022-model-comparison` merged as #16 (branch still to delete); `jamie/T-022-cross-cohort-run` at `3fb9bc8`; docs fix #20 merged into `main`_
 
 - **Now:** #16, #17 and #18 are merged into `main` after Yassien's approvals and the fixes he asked for: #16's docstrings now say the 90% specificity rule picks the corner of the ROC curve (the code is unchanged, since the cross-cohort run used it) and his example is a test; #17 escapes the bars in the feature dictionary; #18 got `main` merged in with `compare_models.py` rerun. The run branch has `main` merged in (`3fb9bc8`): results identical except the escaped dictionary, and the README records Yassien's full rerun of `87b45f5` on Windows with both datasets (every reported number reproduced; line endings, last digits in 21 CSVs and PNG bytes differ) and limits "byte for byte" to the Linux setup.
 - **Also:** #20 (self-merged docs fix, `89d51bf`) corrects `main`'s README after #17: `run_all.py` does not stop at `make_features.py` without T-017 (the feature steps skip); a clean run of `main` at `a3e1600` took 31 minutes (25 the random forest) and changed no reported number (PDF creation dates; random forest predictions within 3.3e-16).
@@ -44,7 +44,7 @@ _Updated 2026-11-06 16:15 by Claude (cloud session) for Jamie · branch `jamie/T
 - **Not pushed:** nothing.
 
 ## T-025 · WearGait-PD external test (finished: pull request #15 is current with main and waits for a review)
-_Updated 2026-11-09 15:20 by Claude (cloud session) for Jamie · branch `jamie/T-025-weargait-access` at `0f7cd84`; pull request #15 open (checks green, mergeable), no review yet_
+_Updated 2026-11-09 14:20 by Claude (cloud session) for Jamie · branch `jamie/T-025-weargait-access` at `0f7cd84`; pull request #15 open (checks green, mergeable), no review yet_
 
 - **Now:** #15 has `main` (with #16 to #18 and #20) merged in. Its `results/weargait_participants.txt` is now what its own code writes without T-017 (the stride-inclusion table says it needs T-017's clean strides); the version committed before had been made from T-017's strides at the old 20 N threshold (6 with too few strides against the final 1) and could not be reproduced from this branch. The final table is on the run branch. Earlier: data downloaded and checked; walkway threshold check (D-012); `data/raw/README.md` with the task descriptions, the label definitions from the Synapse wiki and the final use of the data.
 - **Validated:** a clean run of the merge with both datasets (9 November, 34 minutes, exit 0): no other reported number changed (PDF creation dates; random forest predictions within 3.3e-16); 80 tests; checks green. **Not verified:** no teammate has reviewed #15; WearGait-PD's Supplementary Tables S1 to S3.
