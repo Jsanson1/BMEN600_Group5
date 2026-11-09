@@ -29,6 +29,7 @@ READS_RECORDS = [  # these take --data: they read the PhysioNet record files
 ]
 READS_RESULTS = [  # these read what the steps above wrote to results/
     "run_logreg.py",
+    "run_random_forest.py",
     "run_baselines.py",
     "compare_models.py",
 ]

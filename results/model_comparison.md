@@ -3,6 +3,8 @@
 | Logistic regression: gait features            | 0.82 (0.75 to 0.90)   | 0.77 (0.70 to 0.84)             | 0.83 | 0.78 | 0.74 | 0.52 (0.30 to 0.69)              |                0.76 |   0.176 |
 | Logistic regression: gait features + age, sex | 0.81 (0.73 to 0.88)   | 0.77 (0.70 to 0.84)             | 0.83 | 0.77 | 0.75 | 0.52 (0.27 to 0.66)              |                0.74 |   0.181 |
 | Logistic regression: age and sex only         | 0.59 (0.49 to 0.69)   | 0.57 (0.48 to 0.66)             | 0.53 | 0.61 | 0.64 | 0.13 (0.01 to 0.32)              |                0.49 |   0.248 |
+| Random forest: gait features                  | 0.78 (0.70 to 0.87)   | 0.77 (0.69 to 0.84)             | 0.81 | 0.74 | 0.74 | 0.53 (0.30 to 0.66)              |                0.7  |   0.194 |
+| Random forest: gait features + age, sex       | 0.78 (0.70 to 0.86)   | 0.77 (0.70 to 0.84)             | 0.81 | 0.75 | 0.74 | 0.49 (0.26 to 0.63)              |                0.69 |   0.194 |
 | Swing-time asymmetry alone                    | 0.76 (0.69 to 0.84)   | 0.76 (0.68 to 0.83)             | 0.76 | 0.73 | 0.78 | 0.45 (0.26 to 0.61)              |                0.68 |   0.201 |
 | Swing fraction of the stride alone            | 0.76 (0.67 to 0.84)   | 0.75 (0.67 to 0.82)             | 0.88 | 0.74 | 0.64 | 0.45 (0.31 to 0.61)              |                0.69 |   0.203 |
 | Swing-time variability alone                  | 0.68 (0.60 to 0.75)   | 0.66 (0.58 to 0.75)             | 0.72 | 0.58 | 0.74 | 0.23 (0.11 to 0.41)              |                0.62 |   0.224 |
