@@ -3,15 +3,14 @@
     python scripts/run_all.py [--data data/raw/gaitpdb]
 
 Runs verify_data, make_table1, make_figure1, check_event_detection,
-check_data_quality, check_dual_task, make_figure2, then the models
-(run_logreg, run_baselines) and compare_models, and last
-check_weargait_participants (which reads data/raw/weargait_pd and skips itself
-if the WearGait-PD sheets are not there), as separate processes, and stops at
-the first failure. About five minutes on a laptop.
-
-make_features and check_features run right after the record steps: they read
-the clean-stride tables in data/interim/ and skip a dataset whose table is
-missing.
+check_data_quality, check_dual_task and make_figure2; then make_features and
+check_features, which read the clean-stride tables in data/interim/ and skip a
+dataset whose table is missing; then the models (run_logreg,
+run_random_forest, run_baselines) and compare_models; and last
+check_weargait_participants, which reads data/raw/weargait_pd and skips itself
+if the WearGait-PD sheets are not there. Each runs as a separate process, and
+the run stops at the first failure. About 30 minutes on a two-core machine,
+25 of them the random forest.
 """
 
 from __future__ import annotations
