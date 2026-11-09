@@ -8,6 +8,10 @@ check_data_quality, check_dual_task, make_figure2, then the models
 check_weargait_participants (which reads data/raw/weargait_pd and skips itself
 if the WearGait-PD sheets are not there), as separate processes, and stops at
 the first failure. About five minutes on a laptop.
+
+make_features and check_features run right after the record steps: they read
+the clean-stride tables in data/interim/ and skip a dataset whose table is
+missing.
 """
 
 from __future__ import annotations
@@ -27,6 +31,10 @@ READS_RECORDS = [  # these take --data: they read the PhysioNet record files
     "check_dual_task.py",
     "make_figure2.py",
 ]
+READS_CLEAN_STRIDES = [  # read data/interim/ (make_clean_strides.py, T-017)
+    "make_features.py",  # takes --data for gaitpdb's demographics.txt
+    "check_features.py",
+]
 READS_RESULTS = [  # these read what the steps above wrote to results/
     "run_logreg.py",
     "run_random_forest.py",
@@ -36,7 +44,8 @@ READS_RESULTS = [  # these read what the steps above wrote to results/
 READS_WEARGAIT = [  # reads data/raw/weargait_pd; skips itself without the sheets
     "check_weargait_participants.py",
 ]
-STEPS = READS_RECORDS + READS_RESULTS + READS_WEARGAIT
+STEPS = READS_RECORDS + READS_CLEAN_STRIDES + READS_RESULTS + READS_WEARGAIT
+TAKE_DATA = {*READS_RECORDS, "make_features.py"}
 
 
 def main() -> None:
@@ -46,7 +55,7 @@ def main() -> None:
     here = Path(__file__).resolve().parent
     for step in STEPS:
         cmd = [sys.executable, str(here / step)]
-        if step in READS_RECORDS:
+        if step in TAKE_DATA:
             cmd += ["--data", args.data]
         print(f"== {step}", flush=True)
         t0 = time.time()
