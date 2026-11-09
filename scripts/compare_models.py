@@ -13,7 +13,10 @@ on identical folds and participants, and writes:
   (each sub-study held out in turn; per study and pooled, participant-bootstrap
   intervals), and the drop from within to across protocols (pooled AUC of the
   out-of-fold predictions, averaged over the 20 repeats, minus pooled AUC of the
-  out-of-study predictions; paired bootstrap over participants);
+  out-of-study predictions; paired bootstrap over participants); sensitivity at
+  90% specificity within and across protocols, read off the ROC curve of the pooled
+  predictions with participant-bootstrap intervals, and the positive and negative
+  predictive values of the within-protocol operating point at a prevalence of 1%;
 * results/model_comparison_pairs.csv and a section of the .txt: differences in
   AUC between pairs of models, within protocol on identical folds (corrected
   repeated k-fold cross-validation t-test; Holm-adjusted p values over the
@@ -48,6 +51,12 @@ from sklearn.metrics import roc_auc_score  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from gaitpdb.cohort import MIN_AGE_YEARS  # noqa: E402
+from gaitpdb.crosscohort import (  # noqa: E402
+    TARGET_SPECIFICITY,
+    bootstrap_sensitivity_at_specificity,
+    predictive_values,
+    sensitivity_at_specificity,
+)
 from gaitpdb.evaluation import (  # noqa: E402
     METRICS,
     STUDIES,
@@ -58,6 +67,9 @@ from gaitpdb.evaluation import (  # noqa: E402
 )
 
 NOT_MODELS = ("baseline", "single")  # families that are reference points, not models
+SCREENING_PREVALENCE = 0.01
+"""Prevalence for the predictive values: PD affects at least 1% of people over 60
+(StatPearls; report/midterm/sources.md, S15; Midterm Research Plan, Section IV)."""
 FAMILY_ORDER = ["logreg", "svm", "rf"]
 FAMILY_LABEL = {"logreg": "Logistic regression", "svm": "SVM", "rf": "Random forest"}
 INPUT_LABEL = {
@@ -195,6 +207,22 @@ def per_model(models, folds, cvw, losow) -> pd.DataFrame:
             drop_low=lo,
             drop_high=hi,
         )
+        for scheme, p in (
+            ("within", cvw[m].to_numpy()),
+            ("across", losow[m].to_numpy()),
+        ):
+            point, lo, hi = bootstrap_sensitivity_at_specificity(y, p)
+            row.update(
+                {
+                    f"sens90_{scheme}": point,
+                    f"sens90_{scheme}_low": lo,
+                    f"sens90_{scheme}_high": hi,
+                }
+            )
+        sens, spec, _ = sensitivity_at_specificity(y, cvw[m].to_numpy())
+        row["ppv_screening"], row["npv_screening"] = predictive_values(
+            sens, spec, SCREENING_PREVALENCE
+        )
         rows.append(row)
     return pd.DataFrame(rows)
 
@@ -308,6 +336,20 @@ def write_text(table, pairs_table, n, n_pd, reference, path: Path) -> str:
         )
     lines += [
         "",
+        f"Sensitivity at {TARGET_SPECIFICITY:.0%} specificity, read off the ROC curve of the "
+        "pooled out-of-fold predictions (within protocol) and of the pooled out-of-study "
+        "predictions (across protocols), 95% participant-bootstrap intervals; and the "
+        f"predictive values of the within-protocol operating point at a prevalence of "
+        f"{SCREENING_PREVALENCE:.0%} (Bayes' theorem; the samples are about half PD):",
+    ]
+    for r in table.itertuples():
+        lines.append(
+            f"  {r.label}: within {ci(r.sens90_within, r.sens90_within_low, r.sens90_within_high)}, "
+            f"across {ci(r.sens90_across, r.sens90_across_low, r.sens90_across_high)}; "
+            f"PPV {r.ppv_screening:.3f}, NPV {r.npv_screening:.4f}"
+        )
+    lines += [
+        "",
         "Paired differences in AUC (first minus second). Within protocol: corrected repeated "
         "k-fold cross-validation t-test on the 100 paired folds (Bouckaert and Frank 2004), "
         "p values Holm-adjusted over the pairs listed. Across protocols: paired bootstrap of "
@@ -350,6 +392,14 @@ def write_markdown(table: pd.DataFrame, path: Path) -> None:
             "Ga": table["auc_Ga"].map("{:.2f}".format),
             "Ju": table["auc_Ju"].map("{:.2f}".format),
             "Si": table["auc_Si"].map("{:.2f}".format),
+            "Sensitivity at 90% specificity": [
+                ci(a, b, c)
+                for a, b, c in zip(
+                    table["sens90_within"],
+                    table["sens90_within_low"],
+                    table["sens90_within_high"],
+                )
+            ],
             "Balanced accuracy": table["balanced_accuracy_within"].map("{:.2f}".format),
             "Brier": table["brier_within"].map("{:.3f}".format),
         }
