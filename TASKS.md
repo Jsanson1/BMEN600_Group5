@@ -88,16 +88,16 @@ owner: anna | status: doing | branch: anna/T-020-support-vector-machine | due: -
 owner: jamie | status: done | branch: jamie/T-021-logistic-regression | due: 2026-10-23 | updated: 2026-10-13
 
 ### T-022 · Project: compare the three models: shared splits and metrics, comparison tables and figures, statistical comparison where appropriate (lead jamie, collaborators all; after T-019, T-020, T-021)
-owner: jamie | status: doing | branch: jamie/T-022-model-comparison | due: 2026-11-06 | updated: 2026-11-09
+owner: jamie | status: doing | branch: jamie/T-022-model-comparison | due: 2026-11-06 | updated: 2026-11-12
 
 ### T-023 · Project: discussion: interpret the results against the research question and the background, limitations, ethics, future work (lead jamie, collaborators all; after T-022)
-owner: jamie | status: doing | branch: jamie/T-023-discussion | due: 2026-11-23 | updated: 2026-11-06
+owner: jamie | status: doing | branch: jamie/T-023-discussion | due: 2026-11-23 | updated: 2026-11-12
 
 ### T-024 · Project: conclusion: key findings, direct answer to the research question, next steps (lead yassien, collaborators all; after T-023)
 owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
 
 ### T-025 · Project: WearGait-PD external test: Synapse account and data-use terms, loader for its insole or walkway timings, run the final models on it (owner to be agreed; after T-022)
-owner: jamie | status: review | branch: jamie/T-025-weargait-access | due: 2026-11-06 | updated: 2026-11-09
+owner: jamie | status: review | branch: jamie/T-025-weargait-access | due: 2026-11-06 | updated: 2026-11-12
 
 ### T-026 · Data-quality report on the PhysioNet records for §3: missing demographics, recording lengths, pauses and gaps in the force signals, class and study balance (Jamie's reviewer part of T-012 per the Project Timeline sheet; after T-010)
 owner: jamie | status: done | branch: jamie/T-026-data-quality | due: 2026-10-08 | updated: 2026-10-13
@@ -118,13 +118,13 @@ owner: group | status: done | branch: - | due: 2026-10-15 | updated: 2026-10-16
 owner: jamie | status: done | branch: jamie/T-031-midterm-snapshots | due: 2026-10-23 | updated: 2026-11-02
 
 ### T-032 · Project: Results section of the final paper: participants, dataset differences, each evaluation (within PhysioNet, across its protocols, combined, across cohorts), the 20 N sensitivity analysis, figures and tables, every number traced to a committed output
-owner: jamie | status: doing | branch: jamie/T-032-results-section | due: 2026-11-20 | updated: 2026-11-06
+owner: jamie | status: doing | branch: jamie/T-032-results-section | due: 2026-11-20 | updated: 2026-11-12
 
 ### T-033 · Project: Dataset and Methods section of the final paper: both datasets, responsible use, the computational workflow, the evaluation and comparisons, software, written from the repository (offered to the group first; hand over if a teammate has claimed it)
-owner: jamie | status: doing | branch: jamie/T-033-methods-section | due: 2026-11-20 | updated: 2026-11-09
+owner: jamie | status: doing | branch: jamie/T-033-methods-section | due: 2026-11-20 | updated: 2026-11-12
 
 ### T-034 · Project: end statements of the final paper: Data and Code Availability, AI-Assisted Work, Author Contributions, drafted from members/*/log.md for every member to check their own
-owner: jamie | status: doing | branch: jamie/T-034-end-statements | due: 2026-11-20 | updated: 2026-11-06
+owner: jamie | status: doing | branch: jamie/T-034-end-statements | due: 2026-11-20 | updated: 2026-11-12
 
 ### T-035 · Project: Introduction of the final paper (1.5 to 2 pages): the biomedical problem and who it affects, what is known and how it has been studied, the closest studies, the unresolved problem, the research question and our contribution; built from the midterm's Introduction (T-011, Anna) and Background (T-009), updated for the final result
 owner: - | status: todo | branch: - | due: 2026-11-20 | updated: 2026-11-06
