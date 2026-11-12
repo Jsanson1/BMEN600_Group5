@@ -35,3 +35,15 @@ _Updated 2026-11-12 16:50 by Claude Code for Anna · branch `anna/T-017-preproce
   - @jamie: 10 of 53 Ju usual-walk files are shorter than 70% of the 100 m walk implied by `Speed_01` (truncated recordings).
   - All, following D-010: the README still says the project uses plain scripts and no notebooks, and Jupyter is not yet in `requirements-dev.txt`; both change on a branch with a pull request, ideally with the first notebook. (On Anna's Windows machine, Smart App Control blocked the newest matplotlib and Pillow releases, and now a scikit-learn file, so Jupyter may need older versions there too.)
 - **Not pushed:** the simulation scratch scripts exist only on Anna's machine (to be moved into the repo). WearGait-PD data in `data/raw/weargait_pd/` is ignored by git as intended.
+
+## T-020 · Support vector machine
+_Updated 2026-11-12 17:04 by Claude Code for Anna · branch `anna/T-020-support-vector-machine` at `cf2c27c`_
+
+- **Now:** the SVM is written and tested; results not yet committed. `src/gaitpdb/svm.py`: inputs standardised (swing-time asymmetry as log(1 + x), as in the logistic regression); kernel (linear or RBF), C and gamma (17 values each, 1e-4 to 1e4, the Midterm Research Plan's range) chosen inside each outer training set by the log-loss of Platt-scaled inner 5-fold distances; probabilities from the chosen setting's Platt curve (smoothed targets). `scripts/run_svm.py` runs it under the shared evaluation like `run_random_forest.py` and writes `results/svm_*` (read by `compare_models.py`); added to `run_all.py` and the README. Both kernels tuned together, one SVM per input set, and 17 values per grid: Anna's choices.
+- **Validated:** 9 new tests pass (64 in all on Anna's machine; the forest and feature-check tests cannot load there), and each of 4 deliberate breaks (keep the worst setting, drop RBF, refit the wrong setting, no target smoothing) makes a test fail. One search over the 306 settings takes about 7 s on Anna's laptop, so a full run is about 25-30 min. **Not verified:** the first full run is in progress on Anna's machine; no results yet.
+- **Next:** finish the run on Anna's machine and compare with Yassien's; commit `results/svm_*`, rerun `compare_models.py` and commit its outputs; open the pull request (reviewer: Jamie or Yassien). Once T-017 (#21) is on `main`, the final SVM numbers come from the run branch's rerun on the final features.
+- **Blocked / needs a decision:** none.
+- **For teammates:**
+  - @yassien: could you run the SVM on your machine (more computing power, and a second-machine check)? `git fetch && git switch anna/T-020-support-vector-machine`, then `python scripts/run_svm.py` (it needs `results/features_usual_walk.csv`, which is committed). Please report the run time it prints at the end and the contents of `results/svm_summary.txt` in your handoff, and do not commit on Anna's branch; Anna commits the results.
+  - @jamie: `compare_models.py` needed no change: the SVM's rows are named `svm: gait only` and `svm: gait + covariates`.
+- **Not pushed:** nothing.
