@@ -8,16 +8,22 @@ the walkway, chosen on that agreement and never on classification results.
 For every participant aged 50 or over (DECISIONS.md D-006) and each of the
 three straight-walking tasks pooled under D-011 (SelfPace, SelfPace_mat,
 SelfPace_matTURN), the insole contacts found at each candidate threshold are
-matched to the walkway's complete footfalls (gaitpdb.walkway): fixed 10, 20 and
-50 N, 2.5% and 5% of the recording's force level and, when the participant's
-weight is known, 2.5% and 5% of body weight (the same kinds as
-scripts/check_event_detection.py for gaitpdb). For each threshold the script
-reports, overall, by group and by site, the share of walkway footfalls the
-insole matches one to one and the bias, median absolute difference and
-Bland-Altman limits of stance, stride and swing times (insole minus walkway),
-and it lists the participants whose insoles match worst at 20 N. The threshold
-recommended is the one with the highest one-to-one share overall, ties broken by
-the smaller median absolute stance difference.
+matched to the walkway's complete footfalls (gaitpdb.walkway). There are 14
+candidates: fixed 10, 20, 30, 50, 75 and 100 N, and 2.5%, 5%, 7.5% and 10% of
+the recording's force level and, when the participant's weight is known, of
+body weight (the same kinds as scripts/check_event_detection.py for gaitpdb).
+For each threshold the script reports, overall, by group and by site, the share
+of walkway footfalls the insole matches one to one, the share matched one to
+one with a stance time within 30 ms of the walkway's, and the bias, median
+absolute difference and Bland-Altman limits of stance, stride and swing times
+(insole minus walkway), and it lists the participants whose insoles match
+worst at 20 N. It ranks the thresholds by the share within 30 ms, then by the
+smaller median absolute stance difference, and says how far apart the top ones
+are; when they are close, as here, DECISIONS.md D-012 settles the choice on
+other grounds. The limits pool every footfall as
+if independent, so they compare thresholds rather than measure the insoles'
+agreement with the walkway (that would need the repeated-measures form, since
+each participant contributes many footfalls).
 
 Reads data/raw/weargait_pd/ (the two participant sheets and csv/<ID>_<task>.csv;
 see data/raw/README.md) and writes results/weargait_threshold_check.txt and
@@ -51,6 +57,7 @@ from gaitpdb.weargait import SHEETS, load_participants  # noqa: E402
 
 TASKS = ("SelfPace", "SelfPace_mat", "SelfPace_matTURN")
 COLUMNS = list(CONTACT_COLUMNS.values()) + list(FORCE_COLUMNS.values())
+LABEL_COLUMN = "GeneralEvent"
 WORST_SHOWN = 10
 
 
@@ -59,7 +66,8 @@ def task_path(data: Path, participant: str, task: str) -> Path:
 
 
 def read_task(path: Path) -> tuple[pd.DataFrame | None, str]:
-    """The walkway contact and insole force columns of one recording, or a reason."""
+    """The walkway contact, insole force and video label columns of one recording,
+    or a reason."""
     if not path.exists():
         return None, "no file"
     header = set(pd.read_csv(path, nrows=0).columns)
@@ -67,7 +75,9 @@ def read_task(path: Path) -> tuple[pd.DataFrame | None, str]:
         return None, "no insole data"
     if not set(CONTACT_COLUMNS.values()) <= header:
         return None, "no walkway data"
-    return pd.read_csv(path, usecols=COLUMNS), ""
+    # the video labels, so compare_task keeps only straight-walking footfalls
+    labels = [LABEL_COLUMN] if LABEL_COLUMN in header else []
+    return pd.read_csv(path, usecols=COLUMNS + labels), ""
 
 
 def check_participant(
@@ -118,6 +128,33 @@ def recommend(overall: pd.DataFrame) -> str:
     return str(ranked["threshold"].iloc[0])
 
 
+def margin_note(overall: pd.DataFrame, top: int = 4) -> str:
+    """How far apart the best thresholds are by the ranking criterion.
+
+    The criterion alone can leave the top thresholds a few footfalls apart, so
+    the report says so instead of presenting the first as clearly better.
+    """
+    ranked = overall.sort_values(
+        ["agree_pct", "stance_median_abs_diff_s"], ascending=[False, True]
+    ).head(top)
+    counts = (ranked["agree_pct"] * ranked["n_footfalls"] / 100).round().astype(int)
+    first, second = ranked.iloc[0], ranked.iloc[1]
+    gap = int(counts.iloc[0] - counts.iloc[1])
+    spread = float(ranked["agree_pct"].iloc[0] - ranked["agree_pct"].iloc[-1])
+    listed = "; ".join(
+        f"{r.threshold} {c:,} ({r.agree_pct:.1f}%)"
+        for r, c in zip(ranked.itertuples(index=False), counts)
+    )
+    return (
+        f"Margin: {first['threshold']} is ahead of {second['threshold']} by {gap} of "
+        f"{int(first['n_footfalls']):,} footfalls within 30 ms, and the top {len(ranked)} "
+        f"are within {spread:.1f} percentage points ({listed}); with stance "
+        f"median absolute differences of {first['stance_median_abs_diff_s']:.3f} and "
+        f"{second['stance_median_abs_diff_s']:.3f} s for the first two, the criterion "
+        "barely separates them, so the choice rests on other grounds (DECISIONS.md D-012)."
+    )
+
+
 def body_mass(participants: pd.DataFrame) -> pd.Series:
     """Weight in kg per participant if the sheets give it; empty otherwise."""
     if "weight_kg" in participants:
@@ -158,6 +195,7 @@ def main() -> None:
     )
     overall = table[table["subgroup"] == "all"]
     best = recommend(overall)
+    per_head = float(ff[ff["threshold"] == best].groupby("participant").size().median())
     per_person = (
         ff.groupby(["participant", "group", "site", "threshold"], sort=False)
         .apply(lambda g: pd.Series(agreement(g)), include_groups=False)
@@ -176,7 +214,12 @@ def main() -> None:
         "Durations are insole minus walkway, in seconds: median difference, median "
         "absolute difference, and Bland-Altman limits (mean +/- 1.96 SD). One to one: "
         "share of the walkway's complete footfalls matched by exactly one insole contact "
-        "that overlaps no other footfall.",
+        "that overlaps no other footfall. Stride and swing pair a footfall with the "
+        "next one of the same foot and are left out when that one is not straight "
+        "walking.",
+        f"The limits pool all footfalls as if independent (median {per_head:.0f} per "
+        "participant), so they compare thresholds; as the insoles' agreement with the "
+        "walkway they would need the repeated-measures form.",
         "",
     ]
     for r in overall.itertuples(index=False):
@@ -191,7 +234,10 @@ def main() -> None:
         )
     lines += [
         "",
-        f"Recommended threshold (most footfalls matched one to one with stance within 30 ms of the walkway; walkway agreement only, no classification results): {best}",
+        "Ranked first (most footfalls matched one to one with stance within 30 ms of "
+        "the walkway, then the smaller median absolute stance difference; walkway "
+        f"agreement only, no classification results): {best}",
+        margin_note(overall),
         "",
     ]
     for sub in ("group", "site"):
