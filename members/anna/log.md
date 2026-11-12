@@ -157,3 +157,10 @@ Entry format:
   answer check; a rerun of `make_clean_strides.py` reproduces its outputs exactly. **Not verified:**
   WearGait-PD insole stride timing (20 N threshold, T-025); about 4 real gaitpdb turns missed by the
   phase check (GaPt04, GaPt27, SiPt09, SiPt16).
+
+### 2026-11-12 · T-017 · Main merged in, README tidy-up, pull request #21
+- **Did:** brought the branch up to date with Jamie's D-012 threshold change (#19, which Anna merged into the branch on 2 November) and merged `main` (features, random forest, D-012, D-013) into it, combining the one conflict in `scripts/run_all.py`'s docstring. Added the cleaning module, `make_clean_strides.py`, the exploration scripts, `data/interim/README.md` and the T-017 report draft to the README; pointed the corridor-length notes in `scripts/explore_turn_timing.py` and the report draft to `sources.md` (S4, S6, S19) and reran that script (only its header line changed). Installed the GitHub CLI and signed in, then opened pull request #21 (https://github.com/Jsanson1/BMEN600_Group5/pull/21).
+- **CRediT roles:** Software, Project administration.
+- **AI use:** Claude Code (Claude Opus 5.5) found the conflict with a trial merge, proposed the combined docstring, wrote the README and note edits, ran the tests and the rebuild, and drafted the pull request description and this handoff. Anna approved each step after seeing the diffs, installed the GitHub CLI and signed in herself, and approved the pull request text before it was opened.
+- **Verified:** 75 tests pass locally and ruff is clean; a rebuild of `make_clean_strides.py` at `51f953d` reproduces `results/clean_strides_summary.txt` exactly (gaitpdb 155 of 161, WearGait-PD 169 of 170 with insole data). **Not verified:** `tests/test_forest.py` and `tests/test_check_features.py` could not load locally (Smart App Control blocks a scikit-learn file); GitHub's checks on #21 run them.
+
