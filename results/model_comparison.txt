@@ -8,6 +8,10 @@ AUC by model:
       within protocol 0.81 (0.73 to 0.88); across protocols 0.77 (0.70 to 0.84) (Ga 0.83, Ju 0.77, Si 0.75); drop 0.04 (0.01 to 0.07)
   Logistic regression: age and sex only
       within protocol 0.59 (0.49 to 0.69); across protocols 0.57 (0.48 to 0.66) (Ga 0.53, Ju 0.61, Si 0.64); drop -0.01 (-0.06 to 0.03)
+  SVM: gait features
+      within protocol 0.81 (0.73 to 0.89); across protocols 0.75 (0.67 to 0.82) (Ga 0.80, Ju 0.77, Si 0.68); drop 0.07 (0.02 to 0.11)
+  SVM: gait features + age, sex
+      within protocol 0.81 (0.72 to 0.89); across protocols 0.75 (0.67 to 0.83) (Ga 0.81, Ju 0.77, Si 0.70); drop 0.06 (0.01 to 0.11)
   Random forest: gait features
       within protocol 0.78 (0.70 to 0.87); across protocols 0.77 (0.69 to 0.84) (Ga 0.81, Ju 0.74, Si 0.74); drop 0.01 (-0.02 to 0.04)
   Random forest: gait features + age, sex
@@ -32,6 +36,8 @@ Threshold metrics within protocol (probability 0.5), and Brier score:
   Logistic regression: gait features: balanced accuracy 0.76 (0.68 to 0.83), sensitivity 0.80, specificity 0.71, Brier 0.176
   Logistic regression: gait features + age, sex: balanced accuracy 0.74 (0.67 to 0.82), sensitivity 0.81, specificity 0.68, Brier 0.181
   Logistic regression: age and sex only: balanced accuracy 0.49 (0.45 to 0.53), sensitivity 0.89, specificity 0.09, Brier 0.248
+  SVM: gait features: balanced accuracy 0.74 (0.66 to 0.82), sensitivity 0.81, specificity 0.68, Brier 0.179
+  SVM: gait features + age, sex: balanced accuracy 0.73 (0.66 to 0.81), sensitivity 0.80, specificity 0.67, Brier 0.182
   Random forest: gait features: balanced accuracy 0.70 (0.62 to 0.78), sensitivity 0.75, specificity 0.64, Brier 0.194
   Random forest: gait features + age, sex: balanced accuracy 0.69 (0.62 to 0.77), sensitivity 0.75, specificity 0.64, Brier 0.194
   Swing-time asymmetry alone: balanced accuracy 0.68 (0.61 to 0.75), sensitivity 0.78, specificity 0.58, Brier 0.201
@@ -46,6 +52,8 @@ Sensitivity at 90% specificity, read off the ROC curve of the pooled out-of-fold
   Logistic regression: gait features: within 0.52 (0.30 to 0.69), across 0.54 (0.34 to 0.65); PPV 0.058, NPV 0.9947
   Logistic regression: gait features + age, sex: within 0.52 (0.27 to 0.66), across 0.49 (0.30 to 0.64); PPV 0.050, NPV 0.9946
   Logistic regression: age and sex only: within 0.13 (0.01 to 0.32), across 0.15 (0.04 to 0.34); PPV 0.013, NPV 0.9904
+  SVM: gait features: within 0.58 (0.24 to 0.73), across 0.52 (0.35 to 0.64); PPV 0.056, NPV 0.9953
+  SVM: gait features + age, sex: within 0.46 (0.25 to 0.71), across 0.38 (0.16 to 0.60); PPV 0.052, NPV 0.9941
   Random forest: gait features: within 0.53 (0.30 to 0.66), across 0.57 (0.35 to 0.67); PPV 0.051, NPV 0.9947
   Random forest: gait features + age, sex: within 0.49 (0.26 to 0.63), across 0.54 (0.27 to 0.68); PPV 0.048, NPV 0.9944
   Swing-time asymmetry alone: within 0.45 (0.26 to 0.61), across 0.44 (0.25 to 0.59); PPV 0.044, NPV 0.9939
@@ -58,18 +66,28 @@ Sensitivity at 90% specificity, read off the ROC curve of the pooled out-of-fold
 
 Paired differences in AUC (first minus second). Within protocol: corrected repeated k-fold cross-validation t-test on the 100 paired folds (Bouckaert and Frank 2004), p values Holm-adjusted over the pairs listed. Across protocols: paired bootstrap of the pooled out-of-study AUC.
   Logistic regression: gait features vs Swing-time asymmetry alone
-      within +0.061 (+0.012 to +0.110), t(99) = 2.46, p = 0.016, Holm p = 0.110; across +0.016 (-0.043 to +0.074)
+      within +0.061 (+0.012 to +0.110), t(99) = 2.46, p = 0.016, Holm p = 0.188; across +0.016 (-0.043 to +0.074)
   Logistic regression: gait features + age, sex vs Swing-time asymmetry alone
-      within +0.045 (-0.009 to +0.100), t(99) = 1.66, p = 0.100, Holm p = 0.599; across +0.018 (-0.042 to +0.079)
+      within +0.045 (-0.009 to +0.100), t(99) = 1.66, p = 0.100, Holm p = 1.000; across +0.018 (-0.042 to +0.079)
   Logistic regression: age and sex only vs Swing-time asymmetry alone
-      within -0.177 (-0.301 to -0.053), t(99) = -2.84, p = 0.006, Holm p = 0.044; across -0.184 (-0.307 to -0.070)
+      within -0.177 (-0.301 to -0.053), t(99) = -2.84, p = 0.006, Holm p = 0.072; across -0.184 (-0.307 to -0.070)
+  SVM: gait features vs Swing-time asymmetry alone
+      within +0.048 (-0.008 to +0.105), t(99) = 1.70, p = 0.092, Holm p = 1.000; across -0.011 (-0.080 to +0.059)
+  SVM: gait features + age, sex vs Swing-time asymmetry alone
+      within +0.043 (-0.012 to +0.097), t(99) = 1.54, p = 0.126, Holm p = 1.000; across -0.009 (-0.090 to +0.076)
   Random forest: gait features vs Swing-time asymmetry alone
       within +0.022 (-0.040 to +0.084), t(99) = 0.71, p = 0.482, Holm p = 1.000; across +0.009 (-0.060 to +0.082)
   Random forest: gait features + age, sex vs Swing-time asymmetry alone
       within +0.017 (-0.044 to +0.078), t(99) = 0.55, p = 0.581, Holm p = 1.000; across +0.013 (-0.053 to +0.081)
+  Logistic regression: gait features vs SVM: gait features
+      within +0.012 (-0.027 to +0.052), t(99) = 0.62, p = 0.534, Holm p = 1.000; across +0.026 (-0.011 to +0.062)
   Logistic regression: gait features vs Random forest: gait features
-      within +0.039 (-0.013 to +0.091), t(99) = 1.49, p = 0.140, Holm p = 0.700; across +0.007 (-0.030 to +0.043)
+      within +0.039 (-0.013 to +0.091), t(99) = 1.49, p = 0.140, Holm p = 1.000; across +0.007 (-0.030 to +0.043)
+  SVM: gait features vs Random forest: gait features
+      within +0.026 (-0.028 to +0.081), t(99) = 0.96, p = 0.341, Holm p = 1.000; across -0.020 (-0.064 to +0.025)
   Logistic regression: gait features + age, sex vs Logistic regression: gait features
       within -0.015 (-0.046 to +0.015), t(99) = -0.99, p = 0.325, Holm p = 1.000; across +0.002 (-0.022 to +0.025)
+  SVM: gait features + age, sex vs SVM: gait features
+      within -0.006 (-0.050 to +0.039), t(99) = -0.26, p = 0.797, Holm p = 1.000; across +0.001 (-0.064 to +0.067)
   Random forest: gait features + age, sex vs Random forest: gait features
       within -0.005 (-0.032 to +0.022), t(99) = -0.37, p = 0.716, Holm p = 1.000; across +0.004 (-0.010 to +0.018)
