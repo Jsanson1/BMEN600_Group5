@@ -6,7 +6,7 @@ Runs verify_data, make_table1, make_figure1, check_event_detection,
 check_data_quality, check_dual_task and make_figure2; then make_features and
 check_features, which read the clean-stride tables in data/interim/ and skip a
 dataset whose table is missing; then the models (run_logreg,
-run_random_forest, run_baselines) and compare_models; and last
+run_random_forest, run_svm, run_baselines) and compare_models; and last
 check_weargait_participants, which reads data/raw/weargait_pd and skips itself
 if the WearGait-PD sheets are not there. Each runs as a separate process, and
 the run stops at the first failure. About 30 minutes on a two-core machine,
@@ -37,6 +37,7 @@ READS_CLEAN_STRIDES = [  # read data/interim/ (make_clean_strides.py, T-017)
 READS_RESULTS = [  # these read what the steps above wrote to results/
     "run_logreg.py",
     "run_random_forest.py",
+    "run_svm.py",
     "run_baselines.py",
     "compare_models.py",
 ]
