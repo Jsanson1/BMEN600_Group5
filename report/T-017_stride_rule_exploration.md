@@ -78,7 +78,7 @@ Strides marked X are flagged by a provisional artefact rule (outside 0.5 to 2.5 
 
 ## 8. Si walk 01: overground or treadmill?
 
-The Si sub-study comes from a study of treadmill walking in PD (Frenkel-Toledo et al., Mov Disord 2005 **[UNVERIFIED: reference not yet checked into `report/midterm/sources.md`]**), which recorded unassisted, walker and treadmill walking. Walking speed of the Si recordings against the paper's three conditions: section 7.
+The Si sub-study comes from a study of treadmill walking in PD (Frenkel-Toledo et al., Mov Disord 2005; S19 in `report/midterm/sources.md`, full text checked by Anna), which recorded unassisted, walker and treadmill walking. Walking speed of the Si recordings against the paper's three conditions: section 7.
 
 **[Anna]**
 
