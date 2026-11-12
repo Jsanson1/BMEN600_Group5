@@ -82,7 +82,7 @@ owner: jamie | status: done | branch: jamie/T-018-feature-extraction | due: 2026
 owner: jamie | status: done | branch: jamie/T-019-random-forest | due: 2026-11-13 | updated: 2026-11-09
 
 ### T-020 · Project: support vector machine: scaling, kernel and regularisation choice, train, evaluate, report (lead anna)
-owner: anna | status: todo | branch: - | due: - | updated: 2026-10-05
+owner: anna | status: doing | branch: anna/T-020-support-vector-machine | due: - | updated: 2026-11-12
 
 ### T-021 · Project: logistic regression: fit, check assumptions, report coefficients and performance (lead jamie)
 owner: jamie | status: done | branch: jamie/T-021-logistic-regression | due: 2026-10-23 | updated: 2026-10-13
