@@ -3,7 +3,6 @@ Training dataset gaitpdb: 155 participants (87 PD); test dataset WearGait-PD: 16
 Main inputs: stride_time_mean_s, stride_time_cv_pct, swing_time_cv_pct, swing_pct_mean, swing_time_asymmetry_pct. Cross-cohort test only.
 Intervals: cross-cohort, 95% participant bootstrap; pooled and dataset of origin, the corrected interval over 5 folds x 20 repeats.
 
-svm: run_svm.py not found, skipped
 [logreg]
   gait:
     cross-cohort: AUC 0.534 (0.449 to 0.625), n = 164 (90 PD); sensitivity at 90% specificity (its own ROC) 0.14; gaitpdb's threshold carried over: sensitivity 0.96, specificity 0.01, PPV 0.010 and NPV 0.9678 at 1% prevalence
@@ -47,4 +46,26 @@ svm: run_svm.py not found, skipped
     cross-cohort: AUC 0.477 (0.389 to 0.566), n = 164 (90 PD); sensitivity at 90% specificity (its own ROC) 0.08; gaitpdb's threshold carried over: sensitivity 0.94, specificity 0.05, PPV 0.010 and NPV 0.9897 at 1% prevalence
     cross-cohort, VA Puget Sound only: AUC 0.487 (0.332 to 0.639), n = 56 (27 PD); sensitivity at 90% specificity (its own ROC) 0.15; gaitpdb's threshold carried over: sensitivity 0.85, specificity 0.14, PPV 0.010 and NPV 0.9893 at 1% prevalence
     cross-cohort, age-matched: AUC 0.533 (0.422 to 0.638), n = 108 (54 PD); sensitivity at 90% specificity (its own ROC) 0.07; gaitpdb's threshold carried over: sensitivity 0.96, specificity 0.07, PPV 0.010 and NPV 0.9950 at 1% prevalence
+
+[svm]
+  gait:
+    cross-cohort: AUC 0.530 (0.444 to 0.621), n = 164 (90 PD); sensitivity at 90% specificity (its own ROC) 0.14; gaitpdb's threshold carried over: sensitivity 0.96, specificity 0.04, PPV 0.010 and NPV 0.9890 at 1% prevalence
+    cross-cohort, VA Puget Sound only: AUC 0.533 (0.368 to 0.689), n = 56 (27 PD); sensitivity at 90% specificity (its own ROC) 0.22; gaitpdb's threshold carried over: sensitivity 0.85, specificity 0.10, PPV 0.010 and NPV 0.9857 at 1% prevalence
+    cross-cohort, age-matched: AUC 0.636 (0.529 to 0.741), n = 108 (54 PD); sensitivity at 90% specificity (its own ROC) 0.26; gaitpdb's threshold carried over: sensitivity 0.96, specificity 0.06, PPV 0.010 and NPV 0.9933 at 1% prevalence
+  gait, standardised within dataset:
+    cross-cohort: AUC 0.537 (0.450 to 0.627), n = 164 (90 PD); sensitivity at 90% specificity (its own ROC) 0.20; gaitpdb's threshold carried over: sensitivity 0.42, specificity 0.62, PPV 0.011 and NPV 0.9907 at 1% prevalence
+    cross-cohort, VA Puget Sound only: AUC 0.513 (0.354 to 0.667), n = 56 (27 PD); sensitivity at 90% specificity (its own ROC) 0.19; gaitpdb's threshold carried over: sensitivity 0.19, specificity 0.93, PPV 0.026 and NPV 0.9912 at 1% prevalence
+    cross-cohort, age-matched: AUC 0.627 (0.520 to 0.734), n = 108 (54 PD); sensitivity at 90% specificity (its own ROC) 0.26; gaitpdb's threshold carried over: sensitivity 0.41, specificity 0.72, PPV 0.015 and NPV 0.9918 at 1% prevalence
+  gait + covariates:
+    cross-cohort: AUC 0.471 (0.386 to 0.565), n = 164 (90 PD); sensitivity at 90% specificity (its own ROC) 0.07; gaitpdb's threshold carried over: sensitivity 0.90, specificity 0.07, PPV 0.010 and NPV 0.9853 at 1% prevalence
+    cross-cohort, VA Puget Sound only: AUC 0.456 (0.298 to 0.611), n = 56 (27 PD); sensitivity at 90% specificity (its own ROC) 0.15; gaitpdb's threshold carried over: sensitivity 0.74, specificity 0.17, PPV 0.009 and NPV 0.9850 at 1% prevalence
+    cross-cohort, age-matched: AUC 0.590 (0.483 to 0.693), n = 108 (54 PD); sensitivity at 90% specificity (its own ROC) 0.11; gaitpdb's threshold carried over: sensitivity 0.94, specificity 0.09, PPV 0.010 and NPV 0.9940 at 1% prevalence
+  gait without variability:
+    cross-cohort: AUC 0.546 (0.458 to 0.632), n = 164 (90 PD); sensitivity at 90% specificity (its own ROC) 0.14; gaitpdb's threshold carried over: sensitivity 0.82, specificity 0.23, PPV 0.011 and NPV 0.9922 at 1% prevalence
+    cross-cohort, VA Puget Sound only: AUC 0.483 (0.322 to 0.635), n = 56 (27 PD); sensitivity at 90% specificity (its own ROC) 0.11; gaitpdb's threshold carried over: sensitivity 0.59, specificity 0.48, PPV 0.011 and NPV 0.9915 at 1% prevalence
+    cross-cohort, age-matched: AUC 0.580 (0.471 to 0.683), n = 108 (54 PD); sensitivity at 90% specificity (its own ROC) 0.15; gaitpdb's threshold carried over: sensitivity 0.83, specificity 0.31, PPV 0.012 and NPV 0.9947 at 1% prevalence
+  gait, robust variability:
+    cross-cohort: AUC 0.463 (0.376 to 0.551), n = 164 (90 PD); sensitivity at 90% specificity (its own ROC) 0.12; gaitpdb's threshold carried over: sensitivity 0.92, specificity 0.04, PPV 0.010 and NPV 0.9810 at 1% prevalence
+    cross-cohort, VA Puget Sound only: AUC 0.458 (0.308 to 0.617), n = 56 (27 PD); sensitivity at 90% specificity (its own ROC) 0.11; gaitpdb's threshold carried over: sensitivity 0.81, specificity 0.10, PPV 0.009 and NPV 0.9822 at 1% prevalence
+    cross-cohort, age-matched: AUC 0.461 (0.352 to 0.566), n = 108 (54 PD); sensitivity at 90% specificity (its own ROC) 0.13; gaitpdb's threshold carried over: sensitivity 0.94, specificity 0.06, PPV 0.010 and NPV 0.9900 at 1% prevalence
 

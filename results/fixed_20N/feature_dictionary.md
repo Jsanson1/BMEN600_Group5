@@ -21,5 +21,5 @@ Columns of `results/features_gaitpdb.csv` and `results/features_weargait.csv` (`
 | `swing_time_madcv_pct` | % | Robust swing-time variability: as the robust stride-time variability, for swing times. |
 | `stance_time_mean_s` | s | Mean stance time (heel strike to toe off), both feet. |
 | `swing_pct_mean` | % of stride | Mean swing time as a share of its stride. |
-| `stride_time_asymmetry_pct` | % | 100 x |left - right| / mean(left, right) of the two feet's mean stride times. Near zero in a continuous walk (each foot's strides span the same time), so it mostly reflects stride count and the walk's start and end. |
-| `swing_time_asymmetry_pct` | % | Swing asymmetry: 100 x |left - right| / mean(left, right) of the two feet's mean swing times. |
+| `stride_time_asymmetry_pct` | % | 100 x \|left - right\| / mean(left, right) of the two feet's mean stride times. Near zero in a continuous walk (each foot's strides span the same time), so it mostly reflects stride count and the walk's start and end. |
+| `swing_time_asymmetry_pct` | % | Swing asymmetry: 100 x \|left - right\| / mean(left, right) of the two feet's mean swing times. |

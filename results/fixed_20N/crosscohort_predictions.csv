@@ -1639,3 +1639,823 @@ WPD025,WPD,1,0.8970422671582154,69,M,rf,"gait, robust variability"
 WPD026,WPD,1,0.7807017724112765,62,M,rf,"gait, robust variability"
 WPD027,WPD,1,0.6880618463794619,64,M,rf,"gait, robust variability"
 WPD029,WPD,1,0.916733464485485,78,M,rf,"gait, robust variability"
+HC101,HC,0,0.9989074567936443,85,M,svm,gait
+HC102,HC,0,0.9855699581467717,85,F,svm,gait
+HC103,HC,0,0.9892118500714151,72,M,svm,gait
+HC104,HC,0,0.9952435679697701,73,M,svm,gait
+HC105,HC,0,0.9998047848200664,69,M,svm,gait
+HC107,HC,0,0.9996316673765175,84,F,svm,gait
+HC108,HC,0,0.9976186363794087,86,M,svm,gait
+HC110,HC,0,0.9994470777799046,70,F,svm,gait
+HC111,HC,0,0.9978466692448028,79,F,svm,gait
+HC112,HC,0,0.9755735566725348,78,F,svm,gait
+HC113,HC,0,0.9991156282025603,85,F,svm,gait
+HC114,HC,0,0.8608418257327013,77,F,svm,gait
+HC115,HC,0,0.9999466963095676,76,F,svm,gait
+HC116,HC,0,0.9912657051091794,78,M,svm,gait
+HC117,HC,0,0.9772704886221975,75,M,svm,gait
+HC118,HC,0,0.9804434573420132,76,F,svm,gait
+HC120,HC,0,0.8585103415597889,74,F,svm,gait
+HC121,HC,0,0.9948139882808766,82,M,svm,gait
+HC122,HC,0,0.9980764407267232,73,F,svm,gait
+HC123,HC,0,0.9979667793201383,73,F,svm,gait
+HC124,HC,0,0.8538846846080493,72,F,svm,gait
+HC125,HC,0,0.9969394009747541,81,F,svm,gait
+HC126,HC,0,0.9974421162660891,81,F,svm,gait
+HC127,HC,0,0.9999832542801951,83,M,svm,gait
+HC128,HC,0,0.9985777621634483,79,F,svm,gait
+HC129,HC,0,0.9999362749837135,88,F,svm,gait
+HC130,HC,0,0.9926761857953581,77,F,svm,gait
+HC132,HC,0,0.998722100167348,75,M,svm,gait
+HC133,HC,0,0.9951704814612724,90,F,svm,gait
+HC134,HC,0,0.9999983936377101,91,F,svm,gait
+HC135,HC,0,0.9873700116595753,81,M,svm,gait
+HC136,HC,0,0.9998692109807449,81,F,svm,gait
+HC137,HC,0,0.9989154776179355,69,F,svm,gait
+HC139,HC,0,0.9888563292466331,67,F,svm,gait
+HC141,HC,0,0.99774142861132,73,F,svm,gait
+HC142,HC,0,0.9985698843587886,85,M,svm,gait
+HC143,HC,0,0.9987052131342729,81,F,svm,gait
+HC144,HC,0,0.9998738646735328,81,F,svm,gait
+HC145,HC,0,0.9969333672069648,66,F,svm,gait
+HC147,HC,0,0.9889036533130235,74,F,svm,gait
+HC148,HC,0,0.9994178968716733,79,F,svm,gait
+HC149,HC,0,0.9957742838370225,84,F,svm,gait
+HC150,HC,0,0.9941890782048457,84,F,svm,gait
+HC151,HC,0,0.9811282977943112,78,F,svm,gait
+HC153,HC,0,0.9824833029385659,81,M,svm,gait
+NLS002,NLS,1,0.9877894580611908,71,M,svm,gait
+NLS005,NLS,1,0.9975431479584861,69,M,svm,gait
+NLS022,NLS,1,0.9837266598208554,69,F,svm,gait
+NLS033,NLS,1,0.9999681545517248,83,M,svm,gait
+NLS035,NLS,1,0.9468415570175968,55,F,svm,gait
+NLS036,NLS,1,0.9999980971164525,73,M,svm,gait
+NLS069,NLS,1,0.9683341324806134,74,F,svm,gait
+NLS101,NLS,1,0.9811652351502803,72,M,svm,gait
+NLS102,NLS,1,0.9977159087176052,73,F,svm,gait
+NLS121,NLS,1,0.9999476203029641,77,M,svm,gait
+NLS124,NLS,1,0.9999999985990458,59,M,svm,gait
+NLS127,NLS,1,0.9935350956462493,58,M,svm,gait
+NLS130,NLS,1,0.9992516717114313,69,M,svm,gait
+NLS135,NLS,1,0.998089456548041,64,M,svm,gait
+NLS139,NLS,1,0.9999062091412266,67,M,svm,gait
+NLS140,NLS,1,0.9618907634072447,75,M,svm,gait
+NLS141,NLS,1,0.9999995339337876,62,M,svm,gait
+NLS142,NLS,1,0.9785355454686466,62,M,svm,gait
+NLS143,NLS,1,0.9999459276105919,78,F,svm,gait
+NLS146,NLS,1,0.9979387618942447,51,M,svm,gait
+NLS148,NLS,1,0.9928907461644834,76,M,svm,gait
+NLS149,NLS,1,0.9999906197622105,62,F,svm,gait
+NLS150,NLS,1,0.9960235003803742,78,M,svm,gait
+NLS151,NLS,1,0.9943282995324163,58,F,svm,gait
+NLS152,NLS,1,0.9982641286578382,61,M,svm,gait
+NLS153,NLS,1,0.8700229842156757,65,M,svm,gait
+NLS154,NLS,1,0.9881559412120626,72,F,svm,gait
+NLS155,NLS,1,0.9896887997585224,69,F,svm,gait
+NLS157,NLS,1,0.9903854911495548,81,F,svm,gait
+NLS160,NLS,1,0.9990417170802948,68,M,svm,gait
+NLS161,NLS,1,0.9994898436578311,82,F,svm,gait
+NLS163,NLS,1,0.9519466735431075,68,M,svm,gait
+NLS164,NLS,1,0.9931923182840033,65,M,svm,gait
+NLS165,NLS,1,0.999872711055197,67,F,svm,gait
+NLS166,NLS,1,0.9961899793451738,59,M,svm,gait
+NLS167,NLS,1,0.9996185109389002,60,M,svm,gait
+NLS169,NLS,1,0.9709131372507409,54,M,svm,gait
+NLS170,NLS,1,0.998928556514854,61,M,svm,gait
+NLS173,NLS,1,0.9964934260140715,51,F,svm,gait
+NLS174,NLS,1,0.9996346907671216,76,M,svm,gait
+NLS175,NLS,1,0.9973799680400378,52,F,svm,gait
+NLS176,NLS,1,0.9990774342231478,69,F,svm,gait
+NLS177,NLS,1,0.9846059759728883,68,F,svm,gait
+NLS182,NLS,1,0.9930354708899297,50,F,svm,gait
+NLS183,NLS,1,0.9999965336794113,52,F,svm,gait
+NLS184,NLS,1,0.9816518005894821,66,F,svm,gait
+NLS186,NLS,1,0.9866350087985554,64,M,svm,gait
+NLS187,NLS,1,0.9996213062992133,67,F,svm,gait
+NLS188,NLS,1,0.98323461174789,50,F,svm,gait
+NLS189,NLS,1,0.8726996510645412,75,F,svm,gait
+NLS190,NLS,1,0.9331165610061336,61,M,svm,gait
+NLS191,NLS,1,0.9883333711078957,70,M,svm,gait
+NLS192,NLS,1,0.9889281478568569,66,M,svm,gait
+NLS194,NLS,1,0.9974024169501098,78,M,svm,gait
+NLS195,NLS,1,0.9106412815473027,64,F,svm,gait
+NLS196,NLS,1,0.9990414818604807,68,M,svm,gait
+NLS197,NLS,1,0.9996380796564562,68,M,svm,gait
+NLS198,NLS,1,0.9869191357845706,65,M,svm,gait
+NLS201,NLS,1,0.9999869472819414,78,M,svm,gait
+NLS208,NLS,1,0.9979986326884731,72,M,svm,gait
+NLS209,NLS,1,0.9973196924000887,67,M,svm,gait
+NLS210,NLS,1,0.9796882567706973,73,M,svm,gait
+NLS211,NLS,1,0.9665682298419974,63,M,svm,gait
+WHC001,WHC,0,0.7153137309599956,67,M,svm,gait
+WHC002,WHC,0,0.9857453772496074,76,M,svm,gait
+WHC004,WHC,0,0.3452636609303587,77,M,svm,gait
+WHC006,WHC,0,0.8416507594311451,63,F,svm,gait
+WHC007,WHC,0,0.99402036535276,67,M,svm,gait
+WHC008,WHC,0,0.9916212228859485,79,F,svm,gait
+WHC009,WHC,0,0.9943139905595157,68,M,svm,gait
+WHC010,WHC,0,0.8752698604073479,58,M,svm,gait
+WHC011,WHC,0,0.9999700917735656,78,M,svm,gait
+WHC012,WHC,0,0.7303768464609207,67,M,svm,gait
+WHC013,WHC,0,0.7864676788131948,78,M,svm,gait
+WHC014,WHC,0,0.9778986889888102,62,F,svm,gait
+WHC015,WHC,0,0.9936349812025052,82,M,svm,gait
+WHC016,WHC,0,0.9942887008470963,67,M,svm,gait
+WHC017,WHC,0,0.9500075679017276,70,F,svm,gait
+WHC018,WHC,0,0.9303594734000459,68,F,svm,gait
+WHC019,WHC,0,0.9738336003216522,70,M,svm,gait
+WHC020,WHC,0,0.6823239948363942,62,F,svm,gait
+WHC021,WHC,0,0.8539767268245412,71,F,svm,gait
+WHC022,WHC,0,0.9914210170423461,51,M,svm,gait
+WHC024,WHC,0,0.9850791939404631,71,F,svm,gait
+WHC025,WHC,0,0.7125362775000815,67,M,svm,gait
+WHC026,WHC,0,0.7626875901087794,68,M,svm,gait
+WHC027,WHC,0,0.9165849745261002,67,M,svm,gait
+WHC029,WHC,0,0.6891092485967494,79,M,svm,gait
+WHC030,WHC,0,0.9684098122794207,70,M,svm,gait
+WHC031,WHC,0,0.9691240406347155,63,M,svm,gait
+WHC032,WHC,0,0.9808942348347695,67,M,svm,gait
+WHC033,WHC,0,0.7081490223535926,56,F,svm,gait
+WPD001,WPD,1,0.9881567384117594,74,F,svm,gait
+WPD002,WPD,1,0.3584951882047776,66,M,svm,gait
+WPD003,WPD,1,0.9822077896701188,70,M,svm,gait
+WPD004,WPD,1,0.564967249108018,67,M,svm,gait
+WPD005,WPD,1,0.9670342443814274,58,M,svm,gait
+WPD006,WPD,1,0.9955641408603065,80,M,svm,gait
+WPD007,WPD,1,0.8203481743284085,64,M,svm,gait
+WPD008,WPD,1,0.9538482028947132,62,F,svm,gait
+WPD009,WPD,1,0.9967131353806883,76,F,svm,gait
+WPD010,WPD,1,0.9999395998361306,73,M,svm,gait
+WPD012,WPD,1,0.9915646890236427,69,M,svm,gait
+WPD013,WPD,1,0.9156812006011723,78,F,svm,gait
+WPD014,WPD,1,0.6693944329093768,71,M,svm,gait
+WPD015,WPD,1,0.9626160247848277,67,M,svm,gait
+WPD016,WPD,1,0.9750861492055879,77,F,svm,gait
+WPD017,WPD,1,0.7854870482496116,73,M,svm,gait
+WPD018,WPD,1,0.6240815448377826,72,M,svm,gait
+WPD019,WPD,1,0.9902303350514471,62,F,svm,gait
+WPD020,WPD,1,0.757457691946768,63,M,svm,gait
+WPD021,WPD,1,0.873677064402323,55,F,svm,gait
+WPD022,WPD,1,0.7888645599472468,60,M,svm,gait
+WPD023,WPD,1,0.999571509059515,83,M,svm,gait
+WPD024,WPD,1,0.9724042092339235,71,F,svm,gait
+WPD025,WPD,1,0.9999999963240942,69,M,svm,gait
+WPD026,WPD,1,0.9411018254459906,62,M,svm,gait
+WPD027,WPD,1,0.7607650444794662,64,M,svm,gait
+WPD029,WPD,1,0.9962980109150256,78,M,svm,gait
+HC101,HC,0,0.8968633802424807,85,M,svm,"gait, standardised within dataset"
+HC102,HC,0,0.5100754353524303,85,F,svm,"gait, standardised within dataset"
+HC103,HC,0,0.5023731864371187,72,M,svm,"gait, standardised within dataset"
+HC104,HC,0,0.7723081615524685,73,M,svm,"gait, standardised within dataset"
+HC105,HC,0,0.9665450107050756,69,M,svm,"gait, standardised within dataset"
+HC107,HC,0,0.841938612373028,84,F,svm,"gait, standardised within dataset"
+HC108,HC,0,0.8418018313450121,86,M,svm,"gait, standardised within dataset"
+HC110,HC,0,0.9108939474838015,70,F,svm,"gait, standardised within dataset"
+HC111,HC,0,0.7767210053269319,79,F,svm,"gait, standardised within dataset"
+HC112,HC,0,0.3699841830497723,78,F,svm,"gait, standardised within dataset"
+HC113,HC,0,0.8375990079346752,85,F,svm,"gait, standardised within dataset"
+HC114,HC,0,0.22213483941268883,77,F,svm,"gait, standardised within dataset"
+HC115,HC,0,0.9659819101656049,76,F,svm,"gait, standardised within dataset"
+HC116,HC,0,0.7245455341235053,78,M,svm,"gait, standardised within dataset"
+HC117,HC,0,0.3813787034567667,75,M,svm,"gait, standardised within dataset"
+HC118,HC,0,0.36793283637552426,76,F,svm,"gait, standardised within dataset"
+HC120,HC,0,0.1886201334086282,74,F,svm,"gait, standardised within dataset"
+HC121,HC,0,0.7193394893599018,82,M,svm,"gait, standardised within dataset"
+HC122,HC,0,0.8698071515888033,73,F,svm,"gait, standardised within dataset"
+HC123,HC,0,0.8293139355790888,73,F,svm,"gait, standardised within dataset"
+HC124,HC,0,0.14243057920244875,72,F,svm,"gait, standardised within dataset"
+HC125,HC,0,0.7950356802713752,81,F,svm,"gait, standardised within dataset"
+HC126,HC,0,0.7959174209454905,81,F,svm,"gait, standardised within dataset"
+HC127,HC,0,0.9829954430927115,83,M,svm,"gait, standardised within dataset"
+HC128,HC,0,0.8741942006799397,79,F,svm,"gait, standardised within dataset"
+HC129,HC,0,0.9512884848091985,88,F,svm,"gait, standardised within dataset"
+HC130,HC,0,0.6701773572079258,77,F,svm,"gait, standardised within dataset"
+HC132,HC,0,0.8461732832777021,75,M,svm,"gait, standardised within dataset"
+HC133,HC,0,0.6273351260644371,90,F,svm,"gait, standardised within dataset"
+HC134,HC,0,0.990182820536051,91,F,svm,"gait, standardised within dataset"
+HC135,HC,0,0.5429452024669479,81,M,svm,"gait, standardised within dataset"
+HC136,HC,0,0.9501646618398473,81,F,svm,"gait, standardised within dataset"
+HC137,HC,0,0.8647724474419066,69,F,svm,"gait, standardised within dataset"
+HC139,HC,0,0.46541011072292376,67,F,svm,"gait, standardised within dataset"
+HC141,HC,0,0.662067438899685,73,F,svm,"gait, standardised within dataset"
+HC142,HC,0,0.8441127024727811,85,M,svm,"gait, standardised within dataset"
+HC143,HC,0,0.8286627328484962,81,F,svm,"gait, standardised within dataset"
+HC144,HC,0,0.8401104222075096,81,F,svm,"gait, standardised within dataset"
+HC145,HC,0,0.5773291616736358,66,F,svm,"gait, standardised within dataset"
+HC147,HC,0,0.4592658845944813,74,F,svm,"gait, standardised within dataset"
+HC148,HC,0,0.8444021503708997,79,F,svm,"gait, standardised within dataset"
+HC149,HC,0,0.6244204167911843,84,F,svm,"gait, standardised within dataset"
+HC150,HC,0,0.3799536184279556,84,F,svm,"gait, standardised within dataset"
+HC151,HC,0,0.49531828300198727,78,F,svm,"gait, standardised within dataset"
+HC153,HC,0,0.3771957932699843,81,M,svm,"gait, standardised within dataset"
+NLS002,NLS,1,0.5614232302009912,71,M,svm,"gait, standardised within dataset"
+NLS005,NLS,1,0.6881562745030215,69,M,svm,"gait, standardised within dataset"
+NLS022,NLS,1,0.6225374359831679,69,F,svm,"gait, standardised within dataset"
+NLS033,NLS,1,0.9363256904683621,83,M,svm,"gait, standardised within dataset"
+NLS035,NLS,1,0.4061481969107663,55,F,svm,"gait, standardised within dataset"
+NLS036,NLS,1,0.9909816550193136,73,M,svm,"gait, standardised within dataset"
+NLS069,NLS,1,0.2656557962508241,74,F,svm,"gait, standardised within dataset"
+NLS101,NLS,1,0.4320965083298695,72,M,svm,"gait, standardised within dataset"
+NLS102,NLS,1,0.7030506398954239,73,F,svm,"gait, standardised within dataset"
+NLS121,NLS,1,0.9459929023583519,77,M,svm,"gait, standardised within dataset"
+NLS124,NLS,1,0.9995919490266221,59,M,svm,"gait, standardised within dataset"
+NLS127,NLS,1,0.7041668510606615,58,M,svm,"gait, standardised within dataset"
+NLS130,NLS,1,0.8564203117272129,69,M,svm,"gait, standardised within dataset"
+NLS135,NLS,1,0.7989094477086518,64,M,svm,"gait, standardised within dataset"
+NLS139,NLS,1,0.9338793756219947,67,M,svm,"gait, standardised within dataset"
+NLS140,NLS,1,0.3455373565154145,75,M,svm,"gait, standardised within dataset"
+NLS141,NLS,1,0.9923234540664734,62,M,svm,"gait, standardised within dataset"
+NLS142,NLS,1,0.3761430399780926,62,M,svm,"gait, standardised within dataset"
+NLS143,NLS,1,0.9644714564756116,78,F,svm,"gait, standardised within dataset"
+NLS146,NLS,1,0.6508293003581266,51,M,svm,"gait, standardised within dataset"
+NLS148,NLS,1,0.6810734724337943,76,M,svm,"gait, standardised within dataset"
+NLS149,NLS,1,0.9703259534504037,62,F,svm,"gait, standardised within dataset"
+NLS150,NLS,1,0.5690434523446098,78,M,svm,"gait, standardised within dataset"
+NLS151,NLS,1,0.6085751739952323,58,F,svm,"gait, standardised within dataset"
+NLS152,NLS,1,0.8601021295260672,61,M,svm,"gait, standardised within dataset"
+NLS153,NLS,1,0.14927331592838156,65,M,svm,"gait, standardised within dataset"
+NLS154,NLS,1,0.5125370597130718,72,F,svm,"gait, standardised within dataset"
+NLS155,NLS,1,0.570647704913217,69,F,svm,"gait, standardised within dataset"
+NLS157,NLS,1,0.6284254718526754,81,F,svm,"gait, standardised within dataset"
+NLS160,NLS,1,0.8931216974267051,68,M,svm,"gait, standardised within dataset"
+NLS161,NLS,1,0.871897625427952,82,F,svm,"gait, standardised within dataset"
+NLS163,NLS,1,0.35488707598379854,68,M,svm,"gait, standardised within dataset"
+NLS164,NLS,1,0.7340802350902131,65,M,svm,"gait, standardised within dataset"
+NLS165,NLS,1,0.94199824004786,67,F,svm,"gait, standardised within dataset"
+NLS166,NLS,1,0.723263956718892,59,M,svm,"gait, standardised within dataset"
+NLS167,NLS,1,0.9495343845824635,60,M,svm,"gait, standardised within dataset"
+NLS169,NLS,1,0.6024525531405444,54,M,svm,"gait, standardised within dataset"
+NLS170,NLS,1,0.8383760161869765,61,M,svm,"gait, standardised within dataset"
+NLS173,NLS,1,0.7907898963421413,51,F,svm,"gait, standardised within dataset"
+NLS174,NLS,1,0.9144836379674748,76,M,svm,"gait, standardised within dataset"
+NLS175,NLS,1,0.8742158787291746,52,F,svm,"gait, standardised within dataset"
+NLS176,NLS,1,0.919595865406224,69,F,svm,"gait, standardised within dataset"
+NLS177,NLS,1,0.5285392274954487,68,F,svm,"gait, standardised within dataset"
+NLS182,NLS,1,0.7358725511273957,50,F,svm,"gait, standardised within dataset"
+NLS183,NLS,1,0.9854188411066994,52,F,svm,"gait, standardised within dataset"
+NLS184,NLS,1,0.5564819676916923,66,F,svm,"gait, standardised within dataset"
+NLS186,NLS,1,0.5476554465533866,64,M,svm,"gait, standardised within dataset"
+NLS187,NLS,1,0.9538622984897187,67,F,svm,"gait, standardised within dataset"
+NLS188,NLS,1,0.3741624864013441,50,F,svm,"gait, standardised within dataset"
+NLS189,NLS,1,0.2502495139905481,75,F,svm,"gait, standardised within dataset"
+NLS190,NLS,1,0.3426871758073217,61,M,svm,"gait, standardised within dataset"
+NLS191,NLS,1,0.4102242941561472,70,M,svm,"gait, standardised within dataset"
+NLS192,NLS,1,0.4685614737363733,66,M,svm,"gait, standardised within dataset"
+NLS194,NLS,1,0.8229175580365413,78,M,svm,"gait, standardised within dataset"
+NLS195,NLS,1,0.15523994125971,64,F,svm,"gait, standardised within dataset"
+NLS196,NLS,1,0.7591403220315834,68,M,svm,"gait, standardised within dataset"
+NLS197,NLS,1,0.9615429333599964,68,M,svm,"gait, standardised within dataset"
+NLS198,NLS,1,0.38906241402589686,65,M,svm,"gait, standardised within dataset"
+NLS201,NLS,1,0.962226089234296,78,M,svm,"gait, standardised within dataset"
+NLS208,NLS,1,0.7961534942479952,72,M,svm,"gait, standardised within dataset"
+NLS209,NLS,1,0.7971535597390791,67,M,svm,"gait, standardised within dataset"
+NLS210,NLS,1,0.3584925933579093,73,M,svm,"gait, standardised within dataset"
+NLS211,NLS,1,0.42495074754785955,63,M,svm,"gait, standardised within dataset"
+WHC001,WHC,0,0.1040293849802972,67,M,svm,"gait, standardised within dataset"
+WHC002,WHC,0,0.46867406576262877,76,M,svm,"gait, standardised within dataset"
+WHC004,WHC,0,0.04853567643028823,77,M,svm,"gait, standardised within dataset"
+WHC006,WHC,0,0.1566506523864075,63,F,svm,"gait, standardised within dataset"
+WHC007,WHC,0,0.7793180099201306,67,M,svm,"gait, standardised within dataset"
+WHC008,WHC,0,0.5216866420050879,79,F,svm,"gait, standardised within dataset"
+WHC009,WHC,0,0.6510805751234832,68,M,svm,"gait, standardised within dataset"
+WHC010,WHC,0,0.18351165175405496,58,M,svm,"gait, standardised within dataset"
+WHC011,WHC,0,0.9529348840060363,78,M,svm,"gait, standardised within dataset"
+WHC012,WHC,0,0.08940598981642224,67,M,svm,"gait, standardised within dataset"
+WHC013,WHC,0,0.1630121395347197,78,M,svm,"gait, standardised within dataset"
+WHC014,WHC,0,0.35134713280210156,62,F,svm,"gait, standardised within dataset"
+WHC015,WHC,0,0.4467188369875173,82,M,svm,"gait, standardised within dataset"
+WHC016,WHC,0,0.6478655361309286,67,M,svm,"gait, standardised within dataset"
+WHC017,WHC,0,0.34067029349143785,70,F,svm,"gait, standardised within dataset"
+WHC018,WHC,0,0.2987734486427106,68,F,svm,"gait, standardised within dataset"
+WHC019,WHC,0,0.3502245916843116,70,M,svm,"gait, standardised within dataset"
+WHC020,WHC,0,0.12666405363563674,62,F,svm,"gait, standardised within dataset"
+WHC021,WHC,0,0.14005217420814214,71,F,svm,"gait, standardised within dataset"
+WHC022,WHC,0,0.5329558563410693,51,M,svm,"gait, standardised within dataset"
+WHC024,WHC,0,0.6072080196324853,71,F,svm,"gait, standardised within dataset"
+WHC025,WHC,0,0.14123715485136995,67,M,svm,"gait, standardised within dataset"
+WHC026,WHC,0,0.11436764586569928,68,M,svm,"gait, standardised within dataset"
+WHC027,WHC,0,0.2735957666696754,67,M,svm,"gait, standardised within dataset"
+WHC029,WHC,0,0.09476215502700702,79,M,svm,"gait, standardised within dataset"
+WHC030,WHC,0,0.4295465356971474,70,M,svm,"gait, standardised within dataset"
+WHC031,WHC,0,0.4263414470325018,63,M,svm,"gait, standardised within dataset"
+WHC032,WHC,0,0.5332965567441805,67,M,svm,"gait, standardised within dataset"
+WHC033,WHC,0,0.1020377649520534,56,F,svm,"gait, standardised within dataset"
+WPD001,WPD,1,0.39859616289699,74,F,svm,"gait, standardised within dataset"
+WPD002,WPD,1,0.057325268747161234,66,M,svm,"gait, standardised within dataset"
+WPD003,WPD,1,0.28112000392063535,70,M,svm,"gait, standardised within dataset"
+WPD004,WPD,1,0.07767813555598066,67,M,svm,"gait, standardised within dataset"
+WPD005,WPD,1,0.460708488700739,58,M,svm,"gait, standardised within dataset"
+WPD006,WPD,1,0.7035305045693583,80,M,svm,"gait, standardised within dataset"
+WPD007,WPD,1,0.131662956621314,64,M,svm,"gait, standardised within dataset"
+WPD008,WPD,1,0.36769501270963667,62,F,svm,"gait, standardised within dataset"
+WPD009,WPD,1,0.40800969417225197,76,F,svm,"gait, standardised within dataset"
+WPD010,WPD,1,0.9548680517944464,73,M,svm,"gait, standardised within dataset"
+WPD012,WPD,1,0.6169751428445998,69,M,svm,"gait, standardised within dataset"
+WPD013,WPD,1,0.2463004564800739,78,F,svm,"gait, standardised within dataset"
+WPD014,WPD,1,0.0621649010410219,71,M,svm,"gait, standardised within dataset"
+WPD015,WPD,1,0.3485615317414717,67,M,svm,"gait, standardised within dataset"
+WPD016,WPD,1,0.5211234337465648,77,F,svm,"gait, standardised within dataset"
+WPD017,WPD,1,0.12329980059974552,73,M,svm,"gait, standardised within dataset"
+WPD018,WPD,1,0.07316632359233563,72,M,svm,"gait, standardised within dataset"
+WPD019,WPD,1,0.5310348956766427,62,F,svm,"gait, standardised within dataset"
+WPD020,WPD,1,0.13489116765425263,63,M,svm,"gait, standardised within dataset"
+WPD021,WPD,1,0.1456352698528036,55,F,svm,"gait, standardised within dataset"
+WPD022,WPD,1,0.2127654699320472,60,M,svm,"gait, standardised within dataset"
+WPD023,WPD,1,0.9082311165362281,83,M,svm,"gait, standardised within dataset"
+WPD024,WPD,1,0.5175945601106832,71,F,svm,"gait, standardised within dataset"
+WPD025,WPD,1,0.998024401445042,69,M,svm,"gait, standardised within dataset"
+WPD026,WPD,1,0.21312267456156697,62,M,svm,"gait, standardised within dataset"
+WPD027,WPD,1,0.10657719436482586,64,M,svm,"gait, standardised within dataset"
+WPD029,WPD,1,0.6962615220115982,78,M,svm,"gait, standardised within dataset"
+HC101,HC,0,0.9916205440700043,85,M,svm,gait + covariates
+HC102,HC,0,0.9708256038505895,85,F,svm,gait + covariates
+HC103,HC,0,0.9814715147696452,72,M,svm,gait + covariates
+HC104,HC,0,0.9912045373329404,73,M,svm,gait + covariates
+HC105,HC,0,0.9865032531246862,69,M,svm,gait + covariates
+HC107,HC,0,0.9784371327322439,84,F,svm,gait + covariates
+HC108,HC,0,0.9926600446874054,86,M,svm,gait + covariates
+HC110,HC,0,0.9922584498979882,70,F,svm,gait + covariates
+HC111,HC,0,0.9906522820983464,79,F,svm,gait + covariates
+HC112,HC,0,0.9550801906763023,78,F,svm,gait + covariates
+HC113,HC,0,0.9810668299199409,85,F,svm,gait + covariates
+HC114,HC,0,0.909182920322588,77,F,svm,gait + covariates
+HC115,HC,0,0.9941738812167822,76,F,svm,gait + covariates
+HC116,HC,0,0.9878873080088232,78,M,svm,gait + covariates
+HC117,HC,0,0.9622883280658211,75,M,svm,gait + covariates
+HC118,HC,0,0.9528062004811204,76,F,svm,gait + covariates
+HC120,HC,0,0.8172009844335736,74,F,svm,gait + covariates
+HC121,HC,0,0.9363967755368632,82,M,svm,gait + covariates
+HC122,HC,0,0.9920963915365453,73,F,svm,gait + covariates
+HC123,HC,0,0.9907022178929851,73,F,svm,gait + covariates
+HC124,HC,0,0.7597349062535482,72,F,svm,gait + covariates
+HC125,HC,0,0.9906485755294231,81,F,svm,gait + covariates
+HC126,HC,0,0.990619617918536,81,F,svm,gait + covariates
+HC127,HC,0,0.9829093082983056,83,M,svm,gait + covariates
+HC128,HC,0,0.9924845382645283,79,F,svm,gait + covariates
+HC129,HC,0,0.9899107644953172,88,F,svm,gait + covariates
+HC130,HC,0,0.9873692510442557,77,F,svm,gait + covariates
+HC132,HC,0,0.9926161112406919,75,M,svm,gait + covariates
+HC133,HC,0,0.9869043891026128,90,F,svm,gait + covariates
+HC134,HC,0,0.9640689947915376,91,F,svm,gait + covariates
+HC135,HC,0,0.984704776457353,81,M,svm,gait + covariates
+HC136,HC,0,0.9946247385213903,81,F,svm,gait + covariates
+HC137,HC,0,0.9905381099368422,69,F,svm,gait + covariates
+HC139,HC,0,0.9551233517727009,67,F,svm,gait + covariates
+HC141,HC,0,0.9711091023024931,73,F,svm,gait + covariates
+HC142,HC,0,0.9943960876945994,85,M,svm,gait + covariates
+HC143,HC,0,0.9925970770636535,81,F,svm,gait + covariates
+HC144,HC,0,0.9707390970719622,81,F,svm,gait + covariates
+HC145,HC,0,0.9652130021301434,66,F,svm,gait + covariates
+HC147,HC,0,0.9562025067761243,74,F,svm,gait + covariates
+HC148,HC,0,0.9883662496007615,79,F,svm,gait + covariates
+HC149,HC,0,0.9829823328734856,84,F,svm,gait + covariates
+HC150,HC,0,0.9575758587789513,84,F,svm,gait + covariates
+HC151,HC,0,0.962888359034176,78,F,svm,gait + covariates
+HC153,HC,0,0.9641542714778839,81,M,svm,gait + covariates
+NLS002,NLS,1,0.9833301237285471,71,M,svm,gait + covariates
+NLS005,NLS,1,0.9860936611107444,69,M,svm,gait + covariates
+NLS022,NLS,1,0.9646004008290219,69,F,svm,gait + covariates
+NLS033,NLS,1,0.9797815724403437,83,M,svm,gait + covariates
+NLS035,NLS,1,0.8709584955868599,55,F,svm,gait + covariates
+NLS036,NLS,1,0.9787342704548778,73,M,svm,gait + covariates
+NLS069,NLS,1,0.9383826958525974,74,F,svm,gait + covariates
+NLS101,NLS,1,0.9709685532945558,72,M,svm,gait + covariates
+NLS102,NLS,1,0.9842220362243214,73,F,svm,gait + covariates
+NLS121,NLS,1,0.9880016667653232,77,M,svm,gait + covariates
+NLS124,NLS,1,0.6881173307317806,59,M,svm,gait + covariates
+NLS127,NLS,1,0.9823467964232254,58,M,svm,gait + covariates
+NLS130,NLS,1,0.985323261701228,69,M,svm,gait + covariates
+NLS135,NLS,1,0.9889018646110587,64,M,svm,gait + covariates
+NLS139,NLS,1,0.991261848955154,67,M,svm,gait + covariates
+NLS140,NLS,1,0.9621808909380228,75,M,svm,gait + covariates
+NLS141,NLS,1,0.9357091413548678,62,M,svm,gait + covariates
+NLS142,NLS,1,0.9581876929667374,62,M,svm,gait + covariates
+NLS143,NLS,1,0.9857117367097776,78,F,svm,gait + covariates
+NLS146,NLS,1,0.966237339789216,51,M,svm,gait + covariates
+NLS148,NLS,1,0.9885728780213643,76,M,svm,gait + covariates
+NLS149,NLS,1,0.9737113998229118,62,F,svm,gait + covariates
+NLS150,NLS,1,0.9792712941321806,78,M,svm,gait + covariates
+NLS151,NLS,1,0.9651826875769833,58,F,svm,gait + covariates
+NLS152,NLS,1,0.991113738487866,61,M,svm,gait + covariates
+NLS153,NLS,1,0.8015751542148838,65,M,svm,gait + covariates
+NLS154,NLS,1,0.969644495634892,72,F,svm,gait + covariates
+NLS155,NLS,1,0.9756689404665756,69,F,svm,gait + covariates
+NLS157,NLS,1,0.9847443420307371,81,F,svm,gait + covariates
+NLS160,NLS,1,0.9934160065148935,68,M,svm,gait + covariates
+NLS161,NLS,1,0.9907817470075968,82,F,svm,gait + covariates
+NLS163,NLS,1,0.9677793909610242,68,M,svm,gait + covariates
+NLS164,NLS,1,0.9869758195146425,65,M,svm,gait + covariates
+NLS165,NLS,1,0.9918371145493302,67,F,svm,gait + covariates
+NLS166,NLS,1,0.9779845661219508,59,M,svm,gait + covariates
+NLS167,NLS,1,0.9931278529280683,60,M,svm,gait + covariates
+NLS169,NLS,1,0.9748774361909529,54,M,svm,gait + covariates
+NLS170,NLS,1,0.9896541613536919,61,M,svm,gait + covariates
+NLS173,NLS,1,0.9758354442781587,51,F,svm,gait + covariates
+NLS174,NLS,1,0.9941109940588957,76,M,svm,gait + covariates
+NLS175,NLS,1,0.9739698128121594,52,F,svm,gait + covariates
+NLS176,NLS,1,0.9934421674427826,69,F,svm,gait + covariates
+NLS177,NLS,1,0.9594405815361934,68,F,svm,gait + covariates
+NLS182,NLS,1,0.9705882465684125,50,F,svm,gait + covariates
+NLS183,NLS,1,0.9788415018940989,52,F,svm,gait + covariates
+NLS184,NLS,1,0.965709963678681,66,F,svm,gait + covariates
+NLS186,NLS,1,0.9711271896454834,64,M,svm,gait + covariates
+NLS187,NLS,1,0.9871298607618113,67,F,svm,gait + covariates
+NLS188,NLS,1,0.8543337409501924,50,F,svm,gait + covariates
+NLS189,NLS,1,0.871237424330483,75,F,svm,gait + covariates
+NLS190,NLS,1,0.9423586803132633,61,M,svm,gait + covariates
+NLS191,NLS,1,0.9514585754307726,70,M,svm,gait + covariates
+NLS192,NLS,1,0.9527883330829634,66,M,svm,gait + covariates
+NLS194,NLS,1,0.9938959007534572,78,M,svm,gait + covariates
+NLS195,NLS,1,0.7261598433619801,64,F,svm,gait + covariates
+NLS196,NLS,1,0.986112533107696,68,M,svm,gait + covariates
+NLS197,NLS,1,0.9930708327004731,68,M,svm,gait + covariates
+NLS198,NLS,1,0.9567273062506764,65,M,svm,gait + covariates
+NLS201,NLS,1,0.9733988980533788,78,M,svm,gait + covariates
+NLS208,NLS,1,0.9908420837651477,72,M,svm,gait + covariates
+NLS209,NLS,1,0.9911819770768141,67,M,svm,gait + covariates
+NLS210,NLS,1,0.965088612824445,73,M,svm,gait + covariates
+NLS211,NLS,1,0.9623090569514003,63,M,svm,gait + covariates
+WHC001,WHC,0,0.7937839050836573,67,M,svm,gait + covariates
+WHC002,WHC,0,0.9770585289591465,76,M,svm,gait + covariates
+WHC004,WHC,0,0.5014693885913544,77,M,svm,gait + covariates
+WHC006,WHC,0,0.6413509266657473,63,F,svm,gait + covariates
+WHC007,WHC,0,0.9914459873217468,67,M,svm,gait + covariates
+WHC008,WHC,0,0.9736901955557714,79,F,svm,gait + covariates
+WHC009,WHC,0,0.9869955327174453,68,M,svm,gait + covariates
+WHC010,WHC,0,0.7396811390694553,58,M,svm,gait + covariates
+WHC011,WHC,0,0.9818738617059996,78,M,svm,gait + covariates
+WHC012,WHC,0,0.5962613890796874,67,M,svm,gait + covariates
+WHC013,WHC,0,0.8733270856752885,78,M,svm,gait + covariates
+WHC014,WHC,0,0.8548711868541782,62,F,svm,gait + covariates
+WHC015,WHC,0,0.9699216512040808,82,M,svm,gait + covariates
+WHC016,WHC,0,0.9820057162731332,67,M,svm,gait + covariates
+WHC017,WHC,0,0.8894267038322881,70,F,svm,gait + covariates
+WHC018,WHC,0,0.8765029002094461,68,F,svm,gait + covariates
+WHC019,WHC,0,0.9550519563853751,70,M,svm,gait + covariates
+WHC020,WHC,0,0.5934996497046092,62,F,svm,gait + covariates
+WHC021,WHC,0,0.7949060890595144,71,F,svm,gait + covariates
+WHC022,WHC,0,0.9259373224290004,51,M,svm,gait + covariates
+WHC024,WHC,0,0.9723555583164379,71,F,svm,gait + covariates
+WHC025,WHC,0,0.8382659418048076,67,M,svm,gait + covariates
+WHC026,WHC,0,0.7724581487275402,68,M,svm,gait + covariates
+WHC027,WHC,0,0.9110896731729343,67,M,svm,gait + covariates
+WHC029,WHC,0,0.8234874374151522,79,M,svm,gait + covariates
+WHC030,WHC,0,0.972613946965802,70,M,svm,gait + covariates
+WHC031,WHC,0,0.9489276724883945,63,M,svm,gait + covariates
+WHC032,WHC,0,0.9800032787252749,67,M,svm,gait + covariates
+WHC033,WHC,0,0.4673799874044433,56,F,svm,gait + covariates
+WPD001,WPD,1,0.9545899099126263,74,F,svm,gait + covariates
+WPD002,WPD,1,0.4448673917031126,66,M,svm,gait + covariates
+WPD003,WPD,1,0.9373963304350306,70,M,svm,gait + covariates
+WPD004,WPD,1,0.7122936994059339,67,M,svm,gait + covariates
+WPD005,WPD,1,0.9437305705239569,58,M,svm,gait + covariates
+WPD006,WPD,1,0.9907952177969181,80,M,svm,gait + covariates
+WPD007,WPD,1,0.7437514180423249,64,M,svm,gait + covariates
+WPD008,WPD,1,0.8799076133484234,62,F,svm,gait + covariates
+WPD009,WPD,1,0.9383225040446381,76,F,svm,gait + covariates
+WPD010,WPD,1,0.9465069175054965,73,M,svm,gait + covariates
+WPD012,WPD,1,0.9867417032644419,69,M,svm,gait + covariates
+WPD013,WPD,1,0.8769449892670327,78,F,svm,gait + covariates
+WPD014,WPD,1,0.6211515973840633,71,M,svm,gait + covariates
+WPD015,WPD,1,0.9358590695341711,67,M,svm,gait + covariates
+WPD016,WPD,1,0.9618211234101229,77,F,svm,gait + covariates
+WPD017,WPD,1,0.7849725815282015,73,M,svm,gait + covariates
+WPD018,WPD,1,0.6113064481061906,72,M,svm,gait + covariates
+WPD019,WPD,1,0.9530859832868477,62,F,svm,gait + covariates
+WPD020,WPD,1,0.7362303288191201,63,M,svm,gait + covariates
+WPD021,WPD,1,0.4193589830525923,55,F,svm,gait + covariates
+WPD022,WPD,1,0.7446596958165348,60,M,svm,gait + covariates
+WPD023,WPD,1,0.9857676837085457,83,M,svm,gait + covariates
+WPD024,WPD,1,0.970164561128016,71,F,svm,gait + covariates
+WPD025,WPD,1,0.6708840682947069,69,M,svm,gait + covariates
+WPD026,WPD,1,0.8426705291226441,62,M,svm,gait + covariates
+WPD027,WPD,1,0.746994778949881,64,M,svm,gait + covariates
+WPD029,WPD,1,0.989643500894227,78,M,svm,gait + covariates
+HC101,HC,0,0.7821069719238692,85,M,svm,gait without variability
+HC102,HC,0,0.9175543319259625,85,F,svm,gait without variability
+HC103,HC,0,0.8782665727334084,72,M,svm,gait without variability
+HC104,HC,0,0.8673860774867973,73,M,svm,gait without variability
+HC105,HC,0,0.7216702050992796,69,M,svm,gait without variability
+HC107,HC,0,0.8455105528062477,84,F,svm,gait without variability
+HC108,HC,0,0.8181193247179104,86,M,svm,gait without variability
+HC110,HC,0,0.8593177334871203,70,F,svm,gait without variability
+HC111,HC,0,0.8870733379153956,79,F,svm,gait without variability
+HC112,HC,0,0.8798034523790924,78,F,svm,gait without variability
+HC113,HC,0,0.874175327864643,85,F,svm,gait without variability
+HC114,HC,0,0.8381249482624259,77,F,svm,gait without variability
+HC115,HC,0,0.8029198749404295,76,F,svm,gait without variability
+HC116,HC,0,0.8285432486037404,78,M,svm,gait without variability
+HC117,HC,0,0.8414021148997213,75,M,svm,gait without variability
+HC118,HC,0,0.8694651513023278,76,F,svm,gait without variability
+HC120,HC,0,0.7202542929259412,74,F,svm,gait without variability
+HC121,HC,0,0.7409551838342993,82,M,svm,gait without variability
+HC122,HC,0,0.8544599917452813,73,F,svm,gait without variability
+HC123,HC,0,0.8534894716479015,73,F,svm,gait without variability
+HC124,HC,0,0.5212740647212388,72,F,svm,gait without variability
+HC125,HC,0,0.863468989267846,81,F,svm,gait without variability
+HC126,HC,0,0.9063670269575944,81,F,svm,gait without variability
+HC127,HC,0,0.7379675117728949,83,M,svm,gait without variability
+HC128,HC,0,0.840814331394098,79,F,svm,gait without variability
+HC129,HC,0,0.8227061981071392,88,F,svm,gait without variability
+HC130,HC,0,0.9018386646096253,77,F,svm,gait without variability
+HC132,HC,0,0.8880139739862534,75,M,svm,gait without variability
+HC133,HC,0,0.8935378782717202,90,F,svm,gait without variability
+HC134,HC,0,0.8409025554323379,91,F,svm,gait without variability
+HC135,HC,0,0.9166081716795906,81,M,svm,gait without variability
+HC136,HC,0,0.7949208389822402,81,F,svm,gait without variability
+HC137,HC,0,0.8280169300506351,69,F,svm,gait without variability
+HC139,HC,0,0.8779434974053206,67,F,svm,gait without variability
+HC141,HC,0,0.7803090600342192,73,F,svm,gait without variability
+HC142,HC,0,0.8602430238792595,85,M,svm,gait without variability
+HC143,HC,0,0.8864653151482539,81,F,svm,gait without variability
+HC144,HC,0,0.8512051875205926,81,F,svm,gait without variability
+HC145,HC,0,0.8105635188044195,66,F,svm,gait without variability
+HC147,HC,0,0.880421099097971,74,F,svm,gait without variability
+HC148,HC,0,0.9261910628481927,79,F,svm,gait without variability
+HC149,HC,0,0.9116069162672154,84,F,svm,gait without variability
+HC150,HC,0,0.7506307634145036,84,F,svm,gait without variability
+HC151,HC,0,0.8976625120020404,78,F,svm,gait without variability
+HC153,HC,0,0.8069821133391606,81,M,svm,gait without variability
+NLS002,NLS,1,0.9239356767417582,71,M,svm,gait without variability
+NLS005,NLS,1,0.9003935581638239,69,M,svm,gait without variability
+NLS022,NLS,1,0.9184365798698532,69,F,svm,gait without variability
+NLS033,NLS,1,0.9240232258358013,83,M,svm,gait without variability
+NLS035,NLS,1,0.8847073436576975,55,F,svm,gait without variability
+NLS036,NLS,1,0.817800347898632,73,M,svm,gait without variability
+NLS069,NLS,1,0.7278300899243649,74,F,svm,gait without variability
+NLS101,NLS,1,0.8778430293838705,72,M,svm,gait without variability
+NLS102,NLS,1,0.9236317031002552,73,F,svm,gait without variability
+NLS121,NLS,1,0.818131415688484,77,M,svm,gait without variability
+NLS124,NLS,1,0.8236275096496792,59,M,svm,gait without variability
+NLS127,NLS,1,0.8620695147694248,58,M,svm,gait without variability
+NLS130,NLS,1,0.8574722672547707,69,M,svm,gait without variability
+NLS135,NLS,1,0.9120897991692916,64,M,svm,gait without variability
+NLS139,NLS,1,0.90709513188384,67,M,svm,gait without variability
+NLS140,NLS,1,0.8711821349347573,75,M,svm,gait without variability
+NLS141,NLS,1,0.9037993366877762,62,M,svm,gait without variability
+NLS142,NLS,1,0.8407015736376291,62,M,svm,gait without variability
+NLS143,NLS,1,0.7720896909012849,78,F,svm,gait without variability
+NLS146,NLS,1,0.8357610233288876,51,M,svm,gait without variability
+NLS148,NLS,1,0.8651152843257354,76,M,svm,gait without variability
+NLS149,NLS,1,0.9123247160115454,62,F,svm,gait without variability
+NLS150,NLS,1,0.8357305417679911,78,M,svm,gait without variability
+NLS151,NLS,1,0.909535734861219,58,F,svm,gait without variability
+NLS152,NLS,1,0.8443707631170942,61,M,svm,gait without variability
+NLS153,NLS,1,0.7071840064104433,65,M,svm,gait without variability
+NLS154,NLS,1,0.906092392336067,72,F,svm,gait without variability
+NLS155,NLS,1,0.9100481942800672,69,F,svm,gait without variability
+NLS157,NLS,1,0.9107921627578609,81,F,svm,gait without variability
+NLS160,NLS,1,0.8030556342818485,68,M,svm,gait without variability
+NLS161,NLS,1,0.8682861400864444,82,F,svm,gait without variability
+NLS163,NLS,1,0.9063636081434022,68,M,svm,gait without variability
+NLS164,NLS,1,0.8272204933133891,65,M,svm,gait without variability
+NLS165,NLS,1,0.8644002851562935,67,F,svm,gait without variability
+NLS166,NLS,1,0.8432254194173695,59,M,svm,gait without variability
+NLS167,NLS,1,0.761724885604955,60,M,svm,gait without variability
+NLS169,NLS,1,0.8849857806632553,54,M,svm,gait without variability
+NLS170,NLS,1,0.9135255345117411,61,M,svm,gait without variability
+NLS173,NLS,1,0.8928290852062962,51,F,svm,gait without variability
+NLS174,NLS,1,0.8226264883158718,76,M,svm,gait without variability
+NLS175,NLS,1,0.7910795098368413,52,F,svm,gait without variability
+NLS176,NLS,1,0.7982960175695154,69,F,svm,gait without variability
+NLS177,NLS,1,0.9125067857841507,68,F,svm,gait without variability
+NLS182,NLS,1,0.9057522513335113,50,F,svm,gait without variability
+NLS183,NLS,1,0.8617794761819121,52,F,svm,gait without variability
+NLS184,NLS,1,0.923694618530603,66,F,svm,gait without variability
+NLS186,NLS,1,0.9136380214601477,64,M,svm,gait without variability
+NLS187,NLS,1,0.72953602678663,67,F,svm,gait without variability
+NLS188,NLS,1,0.7586649408902832,50,F,svm,gait without variability
+NLS189,NLS,1,0.8543266579732591,75,F,svm,gait without variability
+NLS190,NLS,1,0.9055513858926918,61,M,svm,gait without variability
+NLS191,NLS,1,0.7894791944321738,70,M,svm,gait without variability
+NLS192,NLS,1,0.7676876006934409,66,M,svm,gait without variability
+NLS194,NLS,1,0.8556620072438017,78,M,svm,gait without variability
+NLS195,NLS,1,0.23698111929471924,64,F,svm,gait without variability
+NLS196,NLS,1,0.9015736625643471,68,M,svm,gait without variability
+NLS197,NLS,1,0.7179356155154822,68,M,svm,gait without variability
+NLS198,NLS,1,0.8276727291657681,65,M,svm,gait without variability
+NLS201,NLS,1,0.8371600220627009,78,M,svm,gait without variability
+NLS208,NLS,1,0.8487403041974572,72,M,svm,gait without variability
+NLS209,NLS,1,0.9025141447745865,67,M,svm,gait without variability
+NLS210,NLS,1,0.8097420127959607,73,M,svm,gait without variability
+NLS211,NLS,1,0.9066428318341642,63,M,svm,gait without variability
+WHC001,WHC,0,0.5136362517963067,67,M,svm,gait without variability
+WHC002,WHC,0,0.9032751314184426,76,M,svm,gait without variability
+WHC004,WHC,0,0.2243306943008885,77,M,svm,gait without variability
+WHC006,WHC,0,0.5465631328945113,63,F,svm,gait without variability
+WHC007,WHC,0,0.8841615553317269,67,M,svm,gait without variability
+WHC008,WHC,0,0.8615685644045095,79,F,svm,gait without variability
+WHC009,WHC,0,0.9124950296419749,68,M,svm,gait without variability
+WHC010,WHC,0,0.6892952869533351,58,M,svm,gait without variability
+WHC011,WHC,0,0.8757709796822148,78,M,svm,gait without variability
+WHC012,WHC,0,0.3455038060809833,67,M,svm,gait without variability
+WHC013,WHC,0,0.7355367065041474,78,M,svm,gait without variability
+WHC014,WHC,0,0.7107313715897249,62,F,svm,gait without variability
+WHC015,WHC,0,0.6674453109021125,82,M,svm,gait without variability
+WHC016,WHC,0,0.9179565087662998,67,M,svm,gait without variability
+WHC017,WHC,0,0.8538996078385439,70,F,svm,gait without variability
+WHC018,WHC,0,0.8586570278635819,68,F,svm,gait without variability
+WHC019,WHC,0,0.823540697106573,70,M,svm,gait without variability
+WHC020,WHC,0,0.59118765055353,62,F,svm,gait without variability
+WHC021,WHC,0,0.5051942352499456,71,F,svm,gait without variability
+WHC022,WHC,0,0.873924162566397,51,M,svm,gait without variability
+WHC024,WHC,0,0.9270728769139794,71,F,svm,gait without variability
+WHC025,WHC,0,0.7155597140292063,67,M,svm,gait without variability
+WHC026,WHC,0,0.41162118522885793,68,M,svm,gait without variability
+WHC027,WHC,0,0.841958301643393,67,M,svm,gait without variability
+WHC029,WHC,0,0.5679844303417234,79,M,svm,gait without variability
+WHC030,WHC,0,0.9159175144203396,70,M,svm,gait without variability
+WHC031,WHC,0,0.9060583666457445,63,M,svm,gait without variability
+WHC032,WHC,0,0.9196190525658938,67,M,svm,gait without variability
+WHC033,WHC,0,0.5421634270816169,56,F,svm,gait without variability
+WPD001,WPD,1,0.8427935477223638,74,F,svm,gait without variability
+WPD002,WPD,1,0.32230047641796883,66,M,svm,gait without variability
+WPD003,WPD,1,0.7387543846462084,70,M,svm,gait without variability
+WPD004,WPD,1,0.502570875615085,67,M,svm,gait without variability
+WPD005,WPD,1,0.9169267180030013,58,M,svm,gait without variability
+WPD006,WPD,1,0.8894149205459051,80,M,svm,gait without variability
+WPD007,WPD,1,0.3733152990527135,64,M,svm,gait without variability
+WPD008,WPD,1,0.8441696469305611,62,F,svm,gait without variability
+WPD009,WPD,1,0.7326915625091144,76,F,svm,gait without variability
+WPD010,WPD,1,0.8311691818173074,73,M,svm,gait without variability
+WPD012,WPD,1,0.9159776006075026,69,M,svm,gait without variability
+WPD013,WPD,1,0.7873750104921873,78,F,svm,gait without variability
+WPD014,WPD,1,0.32670391151204703,71,M,svm,gait without variability
+WPD015,WPD,1,0.808590150638746,67,M,svm,gait without variability
+WPD016,WPD,1,0.9293645921849074,77,F,svm,gait without variability
+WPD017,WPD,1,0.5505855509570154,73,M,svm,gait without variability
+WPD018,WPD,1,0.24893250493779245,72,M,svm,gait without variability
+WPD019,WPD,1,0.8851212222201937,62,F,svm,gait without variability
+WPD020,WPD,1,0.6991586574843008,63,M,svm,gait without variability
+WPD021,WPD,1,0.22539923499666806,55,F,svm,gait without variability
+WPD022,WPD,1,0.8188114795115217,60,M,svm,gait without variability
+WPD023,WPD,1,0.8829879566481751,83,M,svm,gait without variability
+WPD024,WPD,1,0.925453314680389,71,F,svm,gait without variability
+WPD025,WPD,1,0.9035757905810966,69,M,svm,gait without variability
+WPD026,WPD,1,0.5672366405726439,62,M,svm,gait without variability
+WPD027,WPD,1,0.49204688100330723,64,M,svm,gait without variability
+WPD029,WPD,1,0.921408450537547,78,M,svm,gait without variability
+HC101,HC,0,0.7417120165090592,85,M,svm,"gait, robust variability"
+HC102,HC,0,0.9058575680185996,85,F,svm,"gait, robust variability"
+HC103,HC,0,0.8429453180166423,72,M,svm,"gait, robust variability"
+HC104,HC,0,0.7844465823347221,73,M,svm,"gait, robust variability"
+HC105,HC,0,0.716972965787174,69,M,svm,"gait, robust variability"
+HC107,HC,0,0.7547877479631683,84,F,svm,"gait, robust variability"
+HC108,HC,0,0.7333945742416266,86,M,svm,"gait, robust variability"
+HC110,HC,0,0.7833285373092645,70,F,svm,"gait, robust variability"
+HC111,HC,0,0.8378312141859982,79,F,svm,"gait, robust variability"
+HC112,HC,0,0.8838796139782413,78,F,svm,"gait, robust variability"
+HC113,HC,0,0.7493921002808918,85,F,svm,"gait, robust variability"
+HC114,HC,0,0.9220909062696784,77,F,svm,"gait, robust variability"
+HC115,HC,0,0.7637873529184841,76,F,svm,"gait, robust variability"
+HC116,HC,0,0.7400992208615857,78,M,svm,"gait, robust variability"
+HC117,HC,0,0.8213658903863864,75,M,svm,"gait, robust variability"
+HC118,HC,0,0.9053202341045433,76,F,svm,"gait, robust variability"
+HC120,HC,0,0.9290199252301977,74,F,svm,"gait, robust variability"
+HC121,HC,0,0.7152703631800044,82,M,svm,"gait, robust variability"
+HC122,HC,0,0.7998802241769121,73,F,svm,"gait, robust variability"
+HC123,HC,0,0.8140009077461385,73,F,svm,"gait, robust variability"
+HC124,HC,0,0.8546781259960109,72,F,svm,"gait, robust variability"
+HC125,HC,0,0.8100064727346981,81,F,svm,"gait, robust variability"
+HC126,HC,0,0.8275671341406633,81,F,svm,"gait, robust variability"
+HC127,HC,0,0.7300641992496101,83,M,svm,"gait, robust variability"
+HC128,HC,0,0.7940999526180608,79,F,svm,"gait, robust variability"
+HC129,HC,0,0.7170412246259628,88,F,svm,"gait, robust variability"
+HC130,HC,0,0.8452305276110966,77,F,svm,"gait, robust variability"
+HC132,HC,0,0.8375469730993969,75,M,svm,"gait, robust variability"
+HC133,HC,0,0.8701131814247978,90,F,svm,"gait, robust variability"
+HC134,HC,0,0.7607682329114263,91,F,svm,"gait, robust variability"
+HC135,HC,0,0.9268541719060648,81,M,svm,"gait, robust variability"
+HC136,HC,0,0.7879076834777717,81,F,svm,"gait, robust variability"
+HC137,HC,0,0.8105992911898876,69,F,svm,"gait, robust variability"
+HC139,HC,0,0.8389741398186931,67,F,svm,"gait, robust variability"
+HC141,HC,0,0.7458928390040419,73,F,svm,"gait, robust variability"
+HC142,HC,0,0.8224563314419981,85,M,svm,"gait, robust variability"
+HC143,HC,0,0.8194132419387,81,F,svm,"gait, robust variability"
+HC144,HC,0,0.7201362156132293,81,F,svm,"gait, robust variability"
+HC145,HC,0,0.7845066011835043,66,F,svm,"gait, robust variability"
+HC147,HC,0,0.9069879743666587,74,F,svm,"gait, robust variability"
+HC148,HC,0,0.8236240233490049,79,F,svm,"gait, robust variability"
+HC149,HC,0,0.9192960447549018,84,F,svm,"gait, robust variability"
+HC150,HC,0,0.747888834827246,84,F,svm,"gait, robust variability"
+HC151,HC,0,0.946120744300499,78,F,svm,"gait, robust variability"
+HC153,HC,0,0.8270529257778841,81,M,svm,"gait, robust variability"
+NLS002,NLS,1,0.849525766431738,71,M,svm,"gait, robust variability"
+NLS005,NLS,1,0.8432012087819318,69,M,svm,"gait, robust variability"
+NLS022,NLS,1,0.93889270199635,69,F,svm,"gait, robust variability"
+NLS033,NLS,1,0.7197627157048028,83,M,svm,"gait, robust variability"
+NLS035,NLS,1,0.9438939720201005,55,F,svm,"gait, robust variability"
+NLS036,NLS,1,0.739405148246109,73,M,svm,"gait, robust variability"
+NLS069,NLS,1,0.8597189348993728,74,F,svm,"gait, robust variability"
+NLS101,NLS,1,0.9419370093748247,72,M,svm,"gait, robust variability"
+NLS102,NLS,1,0.9244688136654816,73,F,svm,"gait, robust variability"
+NLS121,NLS,1,0.7922468499204541,77,M,svm,"gait, robust variability"
+NLS124,NLS,1,0.7152703061207272,59,M,svm,"gait, robust variability"
+NLS127,NLS,1,0.7861654897767761,58,M,svm,"gait, robust variability"
+NLS130,NLS,1,0.8033908134087567,69,M,svm,"gait, robust variability"
+NLS135,NLS,1,0.762833792313359,64,M,svm,"gait, robust variability"
+NLS139,NLS,1,0.8998263326193214,67,M,svm,"gait, robust variability"
+NLS140,NLS,1,0.9409271744450028,75,M,svm,"gait, robust variability"
+NLS141,NLS,1,0.7477471293167377,62,M,svm,"gait, robust variability"
+NLS142,NLS,1,0.8542961080263742,62,M,svm,"gait, robust variability"
+NLS143,NLS,1,0.7201654880909519,78,F,svm,"gait, robust variability"
+NLS146,NLS,1,0.804089549644699,51,M,svm,"gait, robust variability"
+NLS148,NLS,1,0.7558423585828028,76,M,svm,"gait, robust variability"
+NLS149,NLS,1,0.7643103017101649,62,F,svm,"gait, robust variability"
+NLS150,NLS,1,0.8076397367710139,78,M,svm,"gait, robust variability"
+NLS151,NLS,1,0.8489030474386171,58,F,svm,"gait, robust variability"
+NLS152,NLS,1,0.8018512653730575,61,M,svm,"gait, robust variability"
+NLS153,NLS,1,0.873716025660916,65,M,svm,"gait, robust variability"
+NLS154,NLS,1,0.8716473026318866,72,F,svm,"gait, robust variability"
+NLS155,NLS,1,0.7615072544691849,69,F,svm,"gait, robust variability"
+NLS157,NLS,1,0.8371092045607451,81,F,svm,"gait, robust variability"
+NLS160,NLS,1,0.7918617872905775,68,M,svm,"gait, robust variability"
+NLS161,NLS,1,0.777694008847655,82,F,svm,"gait, robust variability"
+NLS163,NLS,1,0.8310711331057018,68,M,svm,"gait, robust variability"
+NLS164,NLS,1,0.6712042491789348,65,M,svm,"gait, robust variability"
+NLS165,NLS,1,0.7843634513508952,67,F,svm,"gait, robust variability"
+NLS166,NLS,1,0.7524699499814947,59,M,svm,"gait, robust variability"
+NLS167,NLS,1,0.7337690331069702,60,M,svm,"gait, robust variability"
+NLS169,NLS,1,0.706875360850311,54,M,svm,"gait, robust variability"
+NLS170,NLS,1,0.7779369355614254,61,M,svm,"gait, robust variability"
+NLS173,NLS,1,0.825844353022307,51,F,svm,"gait, robust variability"
+NLS174,NLS,1,0.7949458387218729,76,M,svm,"gait, robust variability"
+NLS175,NLS,1,0.7232585835942142,52,F,svm,"gait, robust variability"
+NLS176,NLS,1,0.7210449592339765,69,F,svm,"gait, robust variability"
+NLS177,NLS,1,0.9429121471437495,68,F,svm,"gait, robust variability"
+NLS182,NLS,1,0.8534742433234178,50,F,svm,"gait, robust variability"
+NLS183,NLS,1,0.6993021001843361,52,F,svm,"gait, robust variability"
+NLS184,NLS,1,0.9313294446488023,66,F,svm,"gait, robust variability"
+NLS186,NLS,1,0.8512636869102504,64,M,svm,"gait, robust variability"
+NLS187,NLS,1,0.7202279176544748,67,F,svm,"gait, robust variability"
+NLS188,NLS,1,0.8250697730671399,50,F,svm,"gait, robust variability"
+NLS189,NLS,1,0.9137263469051804,75,F,svm,"gait, robust variability"
+NLS190,NLS,1,0.8599770529230878,61,M,svm,"gait, robust variability"
+NLS191,NLS,1,0.8983404618490373,70,M,svm,"gait, robust variability"
+NLS192,NLS,1,0.7942656293169895,66,M,svm,"gait, robust variability"
+NLS194,NLS,1,0.7821634762112167,78,M,svm,"gait, robust variability"
+NLS195,NLS,1,0.8332084703787326,64,F,svm,"gait, robust variability"
+NLS196,NLS,1,0.7924703340477123,68,M,svm,"gait, robust variability"
+NLS197,NLS,1,0.7181671186491199,68,M,svm,"gait, robust variability"
+NLS198,NLS,1,0.845807597430142,65,M,svm,"gait, robust variability"
+NLS201,NLS,1,0.7179124036204593,78,M,svm,"gait, robust variability"
+NLS208,NLS,1,0.793248260595944,72,M,svm,"gait, robust variability"
+NLS209,NLS,1,0.8286372158356919,67,M,svm,"gait, robust variability"
+NLS210,NLS,1,0.8078004834529675,73,M,svm,"gait, robust variability"
+NLS211,NLS,1,0.9195185414474566,63,M,svm,"gait, robust variability"
+WHC001,WHC,0,0.8433503868311469,67,M,svm,"gait, robust variability"
+WHC002,WHC,0,0.9385511285704833,76,M,svm,"gait, robust variability"
+WHC004,WHC,0,0.27067862297582446,77,M,svm,"gait, robust variability"
+WHC006,WHC,0,0.8171382223420037,63,F,svm,"gait, robust variability"
+WHC007,WHC,0,0.6715858447222607,67,M,svm,"gait, robust variability"
+WHC008,WHC,0,0.853582276556958,79,F,svm,"gait, robust variability"
+WHC009,WHC,0,0.907330595243493,68,M,svm,"gait, robust variability"
+WHC010,WHC,0,0.8793536715345317,58,M,svm,"gait, robust variability"
+WHC011,WHC,0,0.8432265894902441,78,M,svm,"gait, robust variability"
+WHC012,WHC,0,0.5103686579877184,67,M,svm,"gait, robust variability"
+WHC013,WHC,0,0.8683101547351516,78,M,svm,"gait, robust variability"
+WHC014,WHC,0,0.9076811682738324,62,F,svm,"gait, robust variability"
+WHC015,WHC,0,0.8815204585684709,82,M,svm,"gait, robust variability"
+WHC016,WHC,0,0.8841624357457417,67,M,svm,"gait, robust variability"
+WHC017,WHC,0,0.9490476621281698,70,F,svm,"gait, robust variability"
+WHC018,WHC,0,0.9413809469149085,68,F,svm,"gait, robust variability"
+WHC019,WHC,0,0.7785791986924743,70,M,svm,"gait, robust variability"
+WHC020,WHC,0,0.7537555932228268,62,F,svm,"gait, robust variability"
+WHC021,WHC,0,0.830964042283857,71,F,svm,"gait, robust variability"
+WHC022,WHC,0,0.9541567218940868,51,M,svm,"gait, robust variability"
+WHC024,WHC,0,0.8583298964623611,71,F,svm,"gait, robust variability"
+WHC025,WHC,0,0.7946330235553514,67,M,svm,"gait, robust variability"
+WHC026,WHC,0,0.762832182596526,68,M,svm,"gait, robust variability"
+WHC027,WHC,0,0.9313823660193521,67,M,svm,"gait, robust variability"
+WHC029,WHC,0,0.810047498651273,79,M,svm,"gait, robust variability"
+WHC030,WHC,0,0.885312935968353,70,M,svm,"gait, robust variability"
+WHC031,WHC,0,0.9426868451581979,63,M,svm,"gait, robust variability"
+WHC032,WHC,0,0.8159875425948115,67,M,svm,"gait, robust variability"
+WHC033,WHC,0,0.745902666302442,56,F,svm,"gait, robust variability"
+WPD001,WPD,1,0.9254844315262425,74,F,svm,"gait, robust variability"
+WPD002,WPD,1,0.2867031076083837,66,M,svm,"gait, robust variability"
+WPD003,WPD,1,0.7687599024358517,70,M,svm,"gait, robust variability"
+WPD004,WPD,1,0.7670366824836243,67,M,svm,"gait, robust variability"
+WPD005,WPD,1,0.9577908783308406,58,M,svm,"gait, robust variability"
+WPD006,WPD,1,0.8523385588803002,80,M,svm,"gait, robust variability"
+WPD007,WPD,1,0.8927462264117294,64,M,svm,"gait, robust variability"
+WPD008,WPD,1,0.9092840509229946,62,F,svm,"gait, robust variability"
+WPD009,WPD,1,0.7515123239277288,76,F,svm,"gait, robust variability"
+WPD010,WPD,1,0.7621671070813671,73,M,svm,"gait, robust variability"
+WPD012,WPD,1,0.9391744876074205,69,M,svm,"gait, robust variability"
+WPD013,WPD,1,0.9088968128704646,78,F,svm,"gait, robust variability"
+WPD014,WPD,1,0.41678824583872925,71,M,svm,"gait, robust variability"
+WPD015,WPD,1,0.9332230006478828,67,M,svm,"gait, robust variability"
+WPD016,WPD,1,0.9456189605378527,77,F,svm,"gait, robust variability"
+WPD017,WPD,1,0.7808131220358224,73,M,svm,"gait, robust variability"
+WPD018,WPD,1,0.7132481170117856,72,M,svm,"gait, robust variability"
+WPD019,WPD,1,0.9499399366158778,62,F,svm,"gait, robust variability"
+WPD020,WPD,1,0.659246759334682,63,M,svm,"gait, robust variability"
+WPD021,WPD,1,0.5567739358912998,55,F,svm,"gait, robust variability"
+WPD022,WPD,1,0.9284503834365546,60,M,svm,"gait, robust variability"
+WPD023,WPD,1,0.7571550635300416,83,M,svm,"gait, robust variability"
+WPD024,WPD,1,0.8769215467997531,71,F,svm,"gait, robust variability"
+WPD025,WPD,1,0.7152703061207272,69,M,svm,"gait, robust variability"
+WPD026,WPD,1,0.9049283365681134,62,M,svm,"gait, robust variability"
+WPD027,WPD,1,0.6067844875554262,64,M,svm,"gait, robust variability"
+WPD029,WPD,1,0.8475326564104143,78,M,svm,"gait, robust variability"

@@ -36,3 +36,4 @@ Age-matched pairs of the cross-cohort test (same sex, age within 3 years): 56 pa
 Cross-cohort predictions on WearGait-PD (main inputs): Spearman correlation of the predicted probability of PD with age, within each group
   logreg: controls 0.641 (p = 5.7e-10, n = 75); PD 0.210 (p = 0.042, n = 94)
   rf: controls 0.556 (p = 2.2e-07, n = 75); PD 0.240 (p = 0.02, n = 94)
+  svm: controls 0.623 (p = 2.4e-09, n = 75); PD 0.221 (p = 0.032, n = 94)
