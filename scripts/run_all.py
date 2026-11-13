@@ -3,15 +3,16 @@
     python scripts/run_all.py [--data data/raw/gaitpdb]
 
 Runs verify_data, make_table1, make_figure1, check_event_detection,
-check_data_quality, check_dual_task and make_figure2; then make_features and
-check_features, which read the clean-stride tables in data/interim/ and skip a
-dataset whose table is missing; then the models (run_logreg,
-run_random_forest, run_baselines) and compare_models; and last
+check_data_quality, check_dual_task and make_figure2; then make_clean_strides,
+which writes the clean-stride tables to data/interim/ (and reads
+data/raw/weargait_pd if present); then make_features and check_features, which
+read those tables and skip a dataset whose table is missing; then the models
+(run_logreg, run_random_forest, run_baselines) and compare_models; and last
 check_weargait_participants and check_weargait_threshold, which read
 data/raw/weargait_pd and skip themselves if the WearGait-PD files are not
 there. Each runs as a separate process, and the run stops at the first
-failure. About 35 minutes on a two-core machine with the WearGait-PD files,
-25 of them the random forest.
+failure. About 40 minutes on a two-core machine with the WearGait-PD files,
+28 of them the random forest.
 """
 
 from __future__ import annotations
@@ -30,6 +31,7 @@ READS_RECORDS = [  # these take --data: they read the PhysioNet record files
     "check_data_quality.py",
     "check_dual_task.py",
     "make_figure2.py",
+    "make_clean_strides.py",  # also reads data/raw/weargait_pd if present
 ]
 READS_CLEAN_STRIDES = [  # read data/interim/ (make_clean_strides.py, T-017)
     "make_features.py",  # takes --data for gaitpdb's demographics.txt
