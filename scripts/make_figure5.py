@@ -138,7 +138,10 @@ def figure(v: pd.DataFrame, png: Path, pdf: Path) -> None:
     models = [m for m in (*FAMILIES, "reference") if m in set(v["model"])]
     k = len(models)
     offsets = {m: 0.26 * (k - 1) / 2 - 0.26 * i for i, m in enumerate(models)}
+    ncol = k if k <= 3 else 2  # four entries do not fit on one line of a column
+    legend_rows = -(-k // ncol)
     height = 0.215 * (len(rows) + len(titles) + 0.35 * len(titles)) + 0.8
+    height += 0.13 * (legend_rows - 1)
     fig, ax = plt.subplots(figsize=(3.5, height))
     ax.axvline(0.5, color=MUTED, lw=0.8, ls=(0, (3, 3)), zorder=1)
     for m in models:
@@ -201,14 +204,17 @@ def figure(v: pd.DataFrame, png: Path, pdf: Path) -> None:
         labels,
         loc="lower center",
         bbox_to_anchor=(0.5, 0.01),
-        ncol=len(handles),
+        ncol=ncol,
         fontsize=6.2,
         frameon=False,
         handletextpad=0.25,
         columnspacing=0.6,
     )
     fig.subplots_adjust(
-        left=0.43, right=0.97, top=1 - 0.08 / height, bottom=0.62 / height
+        left=0.43,
+        right=0.97,
+        top=1 - 0.08 / height,
+        bottom=(0.62 + 0.13 * (legend_rows - 1)) / height,
     )
     fig.savefig(png, dpi=300)
     fig.savefig(pdf, metadata={"CreationDate": None})
