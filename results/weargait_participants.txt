@@ -16,3 +16,19 @@ Analysed:
 
 Analysed, by site (ID prefix): Control HC 51; Control NLS 3; Control WHC 29; PD NLS 70; PD WPD 28
 Release version of the sheet rows, all participants: Release 1.0 70, Release 1.1 56, Release 1.2 59
+
+Task files of the 181 analysed participants (insole = LTotalForce and RTotalForce present):
+  SelfPace: file 178, insole data 169
+  SelfPace_mat: file 178, insole data 169
+  SelfPace_matTURN: file 176, insole data 168
+
+Stride analyses (D-011: at least 10 clean strides per foot, three tasks pooled), by site and group:
+  Johns Hopkins Bayview, Control: analysed 46, no insole data in any task 5
+  Johns Hopkins Outpatient Center, Control: no insole data in any task 3
+  Johns Hopkins Outpatient Center, PD: analysed 66, no insole data in any task 3, too few clean strides 1
+  VA Puget Sound, Seattle, Control: analysed 29
+  VA Puget Sound, Seattle, PD: analysed 28
+  no insole data in any task: HC100, HC106, HC138, HC140, HC154, NLS144, NLS145, NLS147, NLS179, NLS193, NLS207
+  too few clean strides: NLS162
+  Sites with only one group among the analysed: Johns Hopkins Bayview (Control only), Johns Hopkins Outpatient Center (PD only)
+  Assistive device during testing, analysed: No 162, Cane 4, Yes (cane and person) 1, Yes 1, Walker 1

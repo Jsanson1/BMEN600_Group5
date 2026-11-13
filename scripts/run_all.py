@@ -8,10 +8,11 @@ which writes the clean-stride tables to data/interim/ (and reads
 data/raw/weargait_pd if present); then make_features and check_features, which
 read those tables and skip a dataset whose table is missing; then the models
 (run_logreg, run_random_forest, run_baselines) and compare_models; and last
-check_weargait_participants, which reads data/raw/weargait_pd and skips itself
-if the WearGait-PD sheets are not there. Each runs as a separate process, and
-the run stops at the first failure. About 30 minutes on a two-core machine,
-25 of them the random forest.
+check_weargait_participants and check_weargait_threshold, which read
+data/raw/weargait_pd and skip themselves if the WearGait-PD files are not
+there. Each runs as a separate process, and the run stops at the first
+failure. About 40 minutes on a two-core machine with the WearGait-PD files,
+28 of them the random forest.
 """
 
 from __future__ import annotations
@@ -42,8 +43,9 @@ READS_RESULTS = [  # these read what the steps above wrote to results/
     "run_baselines.py",
     "compare_models.py",
 ]
-READS_WEARGAIT = [  # reads data/raw/weargait_pd; skips itself without the sheets
+READS_WEARGAIT = [  # read data/raw/weargait_pd; skip themselves without its files
     "check_weargait_participants.py",
+    "check_weargait_threshold.py",
 ]
 STEPS = READS_RECORDS + READS_CLEAN_STRIDES + READS_RESULTS + READS_WEARGAIT
 TAKE_DATA = {*READS_RECORDS, "make_features.py"}
