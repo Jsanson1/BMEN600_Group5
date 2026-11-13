@@ -58,6 +58,7 @@ from gaitpdb.weargait import SHEETS, load_participants  # noqa: E402
 TASKS = ("SelfPace", "SelfPace_mat", "SelfPace_matTURN")
 COLUMNS = list(CONTACT_COLUMNS.values()) + list(FORCE_COLUMNS.values())
 LABEL_COLUMN = "GeneralEvent"
+NO_LABELS = "no video labels, so every footfall on the walkway counted"
 WORST_SHOWN = 10
 
 
@@ -90,6 +91,8 @@ def check_participant(
         if df is None:
             notes.append(f"{task}: {why}")
             continue
+        if LABEL_COLUMN not in df.columns:
+            notes.append(f"{task}: {NO_LABELS}")
         m = compare_task(df, threshold_candidates(df, body_mass_kg))
         if len(m):
             m.insert(0, "task", task)
@@ -268,8 +271,14 @@ def main() -> None:
             f"  {r.participant} ({r.group}, {r.site}): {r.one_to_one_pct:.0f}% of "
             f"{r.n_footfalls}; at {best}: {at_best}"
         )
-    if notes:
-        lines += ["", "Recordings not used:"] + [f"  {n}" for n in notes]
+    unlabelled = [n for n in notes if n.endswith(NO_LABELS)]
+    unused = [n for n in notes if not n.endswith(NO_LABELS)]
+    lines += [
+        "",
+        f"Task files without video labels (every footfall counted): {len(unlabelled)}",
+    ] + [f"  {n}" for n in unlabelled]
+    if unused:
+        lines += ["", "Recordings not used:"] + [f"  {n}" for n in unused]
     text = "\n".join(lines) + "\n"
     (out / "weargait_threshold_check.txt").write_text(text, encoding="utf-8")
     print(text)

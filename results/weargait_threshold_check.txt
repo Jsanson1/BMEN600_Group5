@@ -65,6 +65,8 @@ Lowest one-to-one share at 20 N (participant, group, site):
   NLS124 (PD, NLS): 58% of 246.0; at 5% of force level: 62%
   NLS176 (PD, NLS): 60% of 55.0; at 5% of force level: 84%
 
+Task files without video labels (every footfall counted): 0
+
 Recordings not used:
   NLS056 (PD) SelfPace_matTURN: no file
   NLS033 (PD) SelfPace_matTURN: no file

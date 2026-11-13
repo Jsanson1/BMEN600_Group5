@@ -185,7 +185,9 @@ def test_threshold_script_on_synthetic_files(tmp_path):
         tmp_path / "csv" / "P001_SelfPace_matTURN.csv", index=False
     )
     ff, notes = script.check_participant(tmp_path, "P001", body_mass_kg=70.0)
-    assert notes == ["SelfPace_matTURN: no insole data"]
+    assert [n for n in notes if not n.endswith(script.NO_LABELS)] == [
+        "SelfPace_matTURN: no insole data"
+    ]
     assert set(ff["task"]) == {"SelfPace", "SelfPace_mat"}
     overall = script.summary_rows(ff, None)
     assert {
@@ -205,6 +207,18 @@ def test_threshold_script_on_synthetic_files(tmp_path):
     assert script.recommend(overall) != "20 N"
     _, why = script.check_participant(tmp_path, "P002")
     assert why == [f"{t}: no file" for t in script.TASKS]
+
+
+def test_threshold_script_says_when_a_file_has_no_labels(tmp_path):
+    # Review of #15 (Yassien): without GeneralEvent every footfall is counted,
+    # so the script must say so rather than fall back silently.
+    script = load_threshold_script()
+    (tmp_path / "csv").mkdir()
+    synthetic_task().to_csv(tmp_path / "csv" / "P001_SelfPace.csv", index=False)
+    _, notes = script.check_participant(tmp_path, "P001")
+    assert any(
+        n.startswith("SelfPace:") and n.endswith(script.NO_LABELS) for n in notes
+    )
 
 
 def test_threshold_script_reads_the_labels_and_keeps_straight_walking(tmp_path):
