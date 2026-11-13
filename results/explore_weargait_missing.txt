@@ -1,0 +1,18 @@
+T-017 WearGait-PD missing insole data (scripts/explore_weargait_missing.py)
+Recordings x feet: 1012 (170 participants)
+
+Median % of samples per recording and foot (IQR in brackets):
+  missing, all: 11.6 (8.0-15.9)
+  padding (start/end): 11.3 (7.8-15.6)
+  dropouts (inside): 0.2 (0.2-0.3)
+  of Walk-labelled time: 0.3 (0.2-0.4)
+  share of all missing samples that is padding: 97.9%
+
+Recordings with any dropout: 1012 of 1012; longest dropout 1.71 s; dropouts over 1 s: 2
+
+By task (median % missing of Walk-labelled time):
+  SelfPace: 0.3
+  SelfPace_mat: 0.3
+  SelfPace_matTURN: 0.2
+
+Walk-labelled time missing, per participant: PD median 0.3% vs control 0.3%, Mann-Whitney p = 0.763

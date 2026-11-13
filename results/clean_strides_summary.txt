@@ -1,0 +1,41 @@
+Clean strides (scripts/make_clean_strides.py, cleaning in gaitpdb.clean_data)
+Derived tables in data/interim/ (not committed); analysed participants only.
+Contact threshold: 5% of each recording's force level (DECISIONS.md D-012).
+
+gaitpdb, usual walk: minimum 40 clean strides per foot (D-011)
+  contact threshold per recording: median 47.9 N (range 31.3 to 84.3 N, 161 recordings)
+  Control: 68 of 71 participants included
+  PD: 87 of 90 participants included
+  not processed: GaPt03 (PD): no Speed_01, turns cannot be located
+  excluded (fewer than 40 on a foot): JuCo01, JuCo02, JuCo03, JuPt03, JuPt05, JuPt08
+  strides by outcome (count, % of all strides in the group):
+    turn: Control 2876 (20.9%), PD 3141 (17.4%), all 6017 (18.9%)
+    limits: Control 0 (0.0%), PD 1 (0.0%), all 1 (0.0%)
+    missed_heel_strike: Control 0 (0.0%), PD 1 (0.0%), all 1 (0.0%)
+    first_last: Control 264 (1.9%), PD 349 (1.9%), all 613 (1.9%)
+    kept (clean): Control 10623 (77.2%), PD 14610 (80.7%), all 25233 (79.2%)
+
+WearGait-PD, three straight-walking tasks pooled: minimum 10 clean strides per foot (D-011)
+  contact threshold per recording: median 51.8 N (range 28.2 to 81.8 N, 506 recordings)
+  Control: 75 of 75 participants included
+  PD: 94 of 95 participants included
+  not processed: HC100 (Control): no insole data in any task
+  not processed: HC106 (Control): no insole data in any task
+  not processed: HC138 (Control): no insole data in any task
+  not processed: HC140 (Control): no insole data in any task
+  not processed: HC154 (Control): no insole data in any task
+  not processed: NLS144 (PD): no insole data in any task
+  not processed: NLS145 (Control): no insole data in any task
+  not processed: NLS147 (PD): no insole data in any task
+  not processed: NLS179 (PD): no insole data in any task
+  not processed: NLS193 (Control): no insole data in any task
+  not processed: NLS207 (Control): no insole data in any task
+  excluded (fewer than 10 on a foot): NLS162
+  strides by outcome (count, % of all strides in the group):
+    missing_data: Control 0 (0.0%), PD 6 (0.0%), all 6 (0.0%)
+    not_walk: Control 513 (4.8%), PD 665 (4.9%), all 1178 (4.9%)
+    turn: Control 4410 (41.3%), PD 5619 (41.7%), all 10029 (41.5%)
+    limits: Control 7 (0.1%), PD 32 (0.2%), all 39 (0.2%)
+    first_last: Control 266 (2.5%), PD 292 (2.2%), all 558 (2.3%)
+    kept (clean): Control 5487 (51.4%), PD 6867 (50.9%), all 12354 (51.1%)
+
