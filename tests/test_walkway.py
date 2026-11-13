@@ -185,7 +185,9 @@ def test_threshold_script_on_synthetic_files(tmp_path):
         tmp_path / "csv" / "P001_SelfPace_matTURN.csv", index=False
     )
     ff, notes = script.check_participant(tmp_path, "P001", body_mass_kg=70.0)
-    assert notes == ["SelfPace_matTURN: no insole data"]
+    assert [n for n in notes if not n.endswith(script.NO_LABELS)] == [
+        "SelfPace_matTURN: no insole data"
+    ]
     assert set(ff["task"]) == {"SelfPace", "SelfPace_mat"}
     overall = script.summary_rows(ff, None)
     assert {
@@ -207,6 +209,35 @@ def test_threshold_script_on_synthetic_files(tmp_path):
     assert why == [f"{t}: no file" for t in script.TASKS]
 
 
+def test_threshold_script_says_when_a_file_has_no_labels(tmp_path):
+    # Review of #15 (Yassien): without GeneralEvent every footfall is counted,
+    # so the script must say so rather than fall back silently.
+    script = load_threshold_script()
+    (tmp_path / "csv").mkdir()
+    synthetic_task().to_csv(tmp_path / "csv" / "P001_SelfPace.csv", index=False)
+    _, notes = script.check_participant(tmp_path, "P001")
+    assert any(
+        n.startswith("SelfPace:") and n.endswith(script.NO_LABELS) for n in notes
+    )
+
+
+def test_threshold_script_reads_the_labels_and_keeps_straight_walking(tmp_path):
+    # The script must load GeneralEvent, or compare_task's walk-only filter
+    # never applies and turn footfalls on the walkway are counted too.
+    script = load_threshold_script()
+    (tmp_path / "csv").mkdir()
+    task = synthetic_task()
+    walk = walkway_footfalls(task[CONTACT_COLUMNS["L"]].to_numpy())
+    labels = np.full(len(task), "Walk", dtype=object)
+    a, b = walk["on"].iloc[3], walk["off"].iloc[3]
+    labels[a:b] = "Turn"
+    task["GeneralEvent"] = labels
+    task.to_csv(tmp_path / "csv" / "P001_SelfPace.csv", index=False)
+    ff, _ = script.check_participant(tmp_path, "P001")
+    left = ff[(ff["foot"] == "L") & (ff["threshold"] == "20 N")]
+    assert len(left) == len(walk) - 1 and a not in set(left["on"])
+
+
 def test_walk_only_keeps_walk_footfalls_but_matches_against_all():
     task = synthetic_task()
     walk = walkway_footfalls(task[CONTACT_COLUMNS["L"]].to_numpy())
@@ -219,3 +250,25 @@ def test_walk_only_keeps_walk_footfalls_but_matches_against_all():
     left = walk_rows[walk_rows["foot"] == "L"]
     assert len(left) == len(walk) - 1 and a not in set(left["on"])
     assert len(every[every["foot"] == "L"]) == len(walk)
+
+
+def test_stride_and_swing_stop_before_a_turn_footfall():
+    # Review of #15: a kept "Walk" footfall followed by a turn footfall of the
+    # same foot gets no stride or swing difference, since that stride ends in
+    # the turn; the footfalls around it keep theirs.
+    task = synthetic_task()
+    walk = walkway_footfalls(task[CONTACT_COLUMNS["L"]].to_numpy())
+    labels = np.full(len(task), "Walk", dtype=object)
+    a, b = walk["on"].iloc[3], walk["off"].iloc[3]
+    labels[a:b] = "Turn"
+    task["GeneralEvent"] = labels
+    left = compare_task(task, {"20 N": 20.0})
+    left = left[left["foot"] == "L"].set_index("on")
+    before = walk["on"].iloc[2]
+    assert np.isnan(left.loc[before, "d_stride_s"])
+    assert np.isnan(left.loc[before, "d_swing_s"])
+    assert np.isfinite(left.loc[walk["on"].iloc[1], "d_stride_s"])
+    assert np.isfinite(left.loc[walk["on"].iloc[4], "d_stride_s"])
+    every = compare_task(task, {"20 N": 20.0}, walk_only=False)
+    every = every[every["foot"] == "L"].set_index("on")
+    assert np.isfinite(every.loc[before, "d_stride_s"])

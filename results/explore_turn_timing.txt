@@ -1,5 +1,5 @@
 T-017 turn timing (scripts/explore_turn_timing.py); exploratory, src/ unchanged
-Paths {'Ga': 25.0, 'Ju': 25.0, 'Si': 35.0} m [UNVERIFIED]; rhythm search (0.7, 1.5) x expected; turn stride >= 1.1 x median; window +/- 2.0 s; plus 1 stride each side
+Paths {'Ga': 25.0, 'Ju': 25.0, 'Si': 35.0} m; rhythm search (0.7, 1.5) x expected; turn stride >= 1.1 x median; window +/- 2.0 s; plus 1 stride each side
 
 No usable Speed_01, skipped: GaPt03_01
 1. Walks analysed: 161

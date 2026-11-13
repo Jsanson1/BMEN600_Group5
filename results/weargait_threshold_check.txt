@@ -1,67 +1,71 @@
 Insole contact threshold against the WearGait-PD walkway (scripts/check_weargait_threshold.py, gaitpdb.walkway)
 Participants aged 50 or over with walkway and insole data in at least one of SelfPace, SelfPace_mat, SelfPace_matTURN: 170 ({'PD': 95, 'Control': 75}).
-Durations are insole minus walkway, in seconds: median difference, median absolute difference, and Bland-Altman limits (mean +/- 1.96 SD). One to one: share of the walkway's complete footfalls matched by exactly one insole contact that overlaps no other footfall.
+Durations are insole minus walkway, in seconds: median difference, median absolute difference, and Bland-Altman limits (mean +/- 1.96 SD). One to one: share of the walkway's complete footfalls matched by exactly one insole contact that overlaps no other footfall. Stride and swing pair a footfall with the next one of the same foot and are left out when that one is not straight walking.
+The limits pool all footfalls as if independent (median 66 per participant), so they compare thresholds; as the insoles' agreement with the walkway they would need the repeated-measures form.
 
-  10 N: within 30 ms 25.7%, one to one 65.4% of 19200 footfalls (unmatched 0.4%); stance +0.040 (abs 0.050; limits -0.238 to +0.363); stride +0.000 (n = 8725); swing -0.040 (abs 0.050)
-  20 N: within 30 ms 39.9%, one to one 75.4% of 19200 footfalls (unmatched 0.4%); stance +0.010 (abs 0.030; limits -0.207 to +0.264); stride +0.000 (n = 10526); swing -0.010 (abs 0.030)
-  30 N: within 30 ms 46.8%, one to one 79.7% of 19200 footfalls (unmatched 0.4%); stance -0.010 (abs 0.030; limits -0.202 to +0.218); stride +0.000 (n = 11394); swing +0.010 (abs 0.030)
-  50 N: within 30 ms 46.4%, one to one 83.2% of 19200 footfalls (unmatched 0.5%); stance -0.020 (abs 0.030; limits -0.150 to +0.110); stride +0.000 (n = 12161); swing +0.020 (abs 0.030)
-  75 N: within 30 ms 38.4%, one to one 85.1% of 19200 footfalls (unmatched 0.5%); stance -0.040 (abs 0.040; limits -0.159 to +0.078); stride +0.000 (n = 12561); swing +0.040 (abs 0.040)
-  100 N: within 30 ms 29.4%, one to one 85.9% of 19200 footfalls (unmatched 0.5%); stance -0.050 (abs 0.050; limits -0.168 to +0.059); stride +0.000 (n = 12764); swing +0.050 (abs 0.050)
-  2.5% of body weight: within 30 ms 38.5%, one to one 74.1% of 19200 footfalls (unmatched 0.4%); stance +0.010 (abs 0.030; limits -0.220 to +0.282); stride +0.000 (n = 10285); swing -0.010 (abs 0.030)
-  5% of body weight: within 30 ms 46.6%, one to one 81.2% of 19200 footfalls (unmatched 0.4%); stance -0.010 (abs 0.030; limits -0.177 to +0.166); stride +0.000 (n = 11734); swing +0.010 (abs 0.030)
-  7.5% of body weight: within 30 ms 43.5%, one to one 83.8% of 19200 footfalls (unmatched 0.5%); stance -0.030 (abs 0.030; limits -0.150 to +0.096); stride +0.000 (n = 12278); swing +0.030 (abs 0.030)
-  10% of body weight: within 30 ms 37.4%, one to one 85.1% of 19200 footfalls (unmatched 0.5%); stance -0.040 (abs 0.040; limits -0.162 to +0.080); stride +0.000 (n = 12573); swing +0.040 (abs 0.040)
-  2.5% of force level: within 30 ms 45.5%, one to one 78.2% of 19200 footfalls (unmatched 0.4%); stance +0.000 (abs 0.030; limits -0.192 to +0.224); stride +0.000 (n = 11061); swing +0.000 (abs 0.030)
-  5% of force level: within 30 ms 46.8%, one to one 83.4% of 19200 footfalls (unmatched 0.4%); stance -0.020 (abs 0.030; limits -0.147 to +0.105); stride +0.000 (n = 12207); swing +0.020 (abs 0.030)
-  7.5% of force level: within 30 ms 37.8%, one to one 85.3% of 19200 footfalls (unmatched 0.5%); stance -0.040 (abs 0.040; limits -0.154 to +0.071); stride +0.000 (n = 12603); swing +0.040 (abs 0.040)
-  10% of force level: within 30 ms 28.0%, one to one 86.1% of 19200 footfalls (unmatched 0.5%); stance -0.050 (abs 0.050; limits -0.168 to +0.057); stride +0.000 (n = 12788); swing +0.050 (abs 0.050)
+  10 N: within 30 ms 28.8%, one to one 74.9% of 12397 footfalls (unmatched 0.3%); stance +0.040 (abs 0.050; limits -0.257 to +0.389); stride +0.000 (n = 5066); swing -0.040 (abs 0.050)
+  20 N: within 30 ms 45.3%, one to one 82.9% of 12397 footfalls (unmatched 0.3%); stance +0.010 (abs 0.030; limits -0.212 to +0.273); stride +0.000 (n = 5724); swing -0.010 (abs 0.030)
+  30 N: within 30 ms 53.4%, one to one 85.5% of 12397 footfalls (unmatched 0.3%); stance +0.000 (abs 0.030; limits -0.210 to +0.229); stride +0.000 (n = 5955); swing +0.000 (abs 0.030)
+  50 N: within 30 ms 53.1%, one to one 87.0% of 12397 footfalls (unmatched 0.3%); stance -0.020 (abs 0.030; limits -0.130 to +0.096); stride +0.000 (n = 6104); swing +0.020 (abs 0.030)
+  75 N: within 30 ms 43.7%, one to one 87.8% of 12397 footfalls (unmatched 0.3%); stance -0.030 (abs 0.040; limits -0.117 to +0.046); stride +0.000 (n = 6187); swing +0.030 (abs 0.030)
+  100 N: within 30 ms 33.7%, one to one 88.1% of 12397 footfalls (unmatched 0.3%); stance -0.040 (abs 0.040; limits -0.129 to +0.033); stride +0.000 (n = 6229); swing +0.040 (abs 0.040)
+  2.5% of body weight: within 30 ms 43.6%, one to one 81.8% of 12397 footfalls (unmatched 0.3%); stance +0.020 (abs 0.030; limits -0.230 to +0.297); stride +0.000 (n = 5625); swing -0.010 (abs 0.030)
+  5% of body weight: within 30 ms 52.9%, one to one 86.1% of 12397 footfalls (unmatched 0.3%); stance -0.010 (abs 0.030; limits -0.171 to +0.165); stride +0.000 (n = 6016); swing +0.010 (abs 0.030)
+  7.5% of body weight: within 30 ms 49.6%, one to one 87.3% of 12397 footfalls (unmatched 0.3%); stance -0.020 (abs 0.030; limits -0.127 to +0.081); stride +0.000 (n = 6133); swing +0.020 (abs 0.030)
+  10% of body weight: within 30 ms 42.8%, one to one 87.8% of 12397 footfalls (unmatched 0.3%); stance -0.030 (abs 0.040; limits -0.125 to +0.053); stride +0.000 (n = 6190); swing +0.030 (abs 0.040)
+  2.5% of force level: within 30 ms 51.8%, one to one 84.6% of 12397 footfalls (unmatched 0.3%); stance +0.000 (abs 0.030; limits -0.198 to +0.234); stride +0.000 (n = 5865); swing +0.000 (abs 0.030)
+  5% of force level: within 30 ms 53.5%, one to one 87.1% of 12397 footfalls (unmatched 0.3%); stance -0.020 (abs 0.030; limits -0.128 to +0.092); stride +0.000 (n = 6116); swing +0.020 (abs 0.030)
+  7.5% of force level: within 30 ms 43.3%, one to one 87.8% of 12397 footfalls (unmatched 0.3%); stance -0.030 (abs 0.040; limits -0.112 to +0.038); stride +0.000 (n = 6183); swing +0.030 (abs 0.030)
+  10% of force level: within 30 ms 32.3%, one to one 88.1% of 12397 footfalls (unmatched 0.3%); stance -0.040 (abs 0.050; limits -0.124 to +0.026); stride +0.000 (n = 6231); swing +0.040 (abs 0.040)
 
-Recommended threshold (most footfalls matched one to one with stance within 30 ms of the walkway; walkway agreement only, no classification results): 5% of force level
+Ranked first (most footfalls matched one to one with stance within 30 ms of the walkway, then the smaller median absolute stance difference; walkway agreement only, no classification results): 5% of force level
+Margin: 5% of force level is ahead of 30 N by 7 of 12,397 footfalls within 30 ms, and the top 4 are within 0.6 percentage points (5% of force level 6,629 (53.5%); 30 N 6,622 (53.4%); 50 N 6,585 (53.1%); 5% of body weight 6,557 (52.9%)); with stance median absolute differences of 0.030 and 0.030 s for the first two, the criterion barely separates them, so the choice rests on other grounds (DECISIONS.md D-012).
 
 By group, one to one (%) and median absolute stance difference (s):
-  10 N: PD 63% / 0.050; Control 68% / 0.050
-  20 N: PD 74% / 0.030; Control 77% / 0.030
-  30 N: PD 79% / 0.030; Control 81% / 0.030
-  50 N: PD 82% / 0.030; Control 85% / 0.030
-  75 N: PD 84% / 0.040; Control 86% / 0.040
-  100 N: PD 85% / 0.050; Control 87% / 0.050
-  2.5% of body weight: PD 72% / 0.030; Control 76% / 0.030
-  5% of body weight: PD 80% / 0.030; Control 83% / 0.030
-  7.5% of body weight: PD 83% / 0.030; Control 85% / 0.030
-  10% of body weight: PD 84% / 0.040; Control 86% / 0.040
-  2.5% of force level: PD 77% / 0.030; Control 80% / 0.030
-  5% of force level: PD 82% / 0.030; Control 85% / 0.030
-  7.5% of force level: PD 85% / 0.040; Control 86% / 0.040
-  10% of force level: PD 85% / 0.050; Control 87% / 0.050
+  10 N: PD 73% / 0.050; Control 78% / 0.050
+  20 N: PD 82% / 0.030; Control 84% / 0.030
+  30 N: PD 85% / 0.030; Control 86% / 0.020
+  50 N: PD 87% / 0.030; Control 88% / 0.030
+  75 N: PD 87% / 0.030; Control 88% / 0.040
+  100 N: PD 88% / 0.040; Control 89% / 0.040
+  2.5% of body weight: PD 81% / 0.030; Control 83% / 0.030
+  5% of body weight: PD 85% / 0.030; Control 87% / 0.030
+  7.5% of body weight: PD 87% / 0.030; Control 88% / 0.030
+  10% of body weight: PD 87% / 0.040; Control 88% / 0.040
+  2.5% of force level: PD 84% / 0.030; Control 86% / 0.030
+  5% of force level: PD 87% / 0.030; Control 88% / 0.030
+  7.5% of force level: PD 87% / 0.030; Control 88% / 0.040
+  10% of force level: PD 88% / 0.040; Control 89% / 0.050
 
 By site, one to one (%) and median absolute stance difference (s):
-  10 N: NLS 59% / 0.060; WPD 75% / 0.030; WHC 74% / 0.030; HC 66% / 0.060
-  20 N: NLS 70% / 0.040; WPD 83% / 0.020; WHC 82% / 0.020; HC 76% / 0.040
-  30 N: NLS 76% / 0.030; WPD 86% / 0.020; WHC 84% / 0.020; HC 80% / 0.030
-  50 N: NLS 80% / 0.030; WPD 88% / 0.040; WHC 87% / 0.030; HC 84% / 0.030
-  75 N: NLS 83% / 0.030; WPD 88% / 0.050; WHC 88% / 0.040; HC 85% / 0.040
-  100 N: NLS 84% / 0.040; WPD 88% / 0.070; WHC 88% / 0.060; HC 86% / 0.050
-  2.5% of body weight: NLS 69% / 0.040; WPD 81% / 0.020; WHC 82% / 0.020; HC 74% / 0.040
-  5% of body weight: NLS 78% / 0.030; WPD 87% / 0.030; WHC 86% / 0.020; HC 81% / 0.030
-  7.5% of body weight: NLS 81% / 0.030; WPD 88% / 0.040; WHC 87% / 0.030; HC 84% / 0.030
-  10% of body weight: NLS 83% / 0.030; WPD 88% / 0.060; WHC 88% / 0.040; HC 85% / 0.040
-  2.5% of force level: NLS 74% / 0.030; WPD 84% / 0.020; WHC 84% / 0.020; HC 78% / 0.040
-  5% of force level: NLS 80% / 0.030; WPD 88% / 0.040; WHC 87% / 0.030; HC 84% / 0.030
-  7.5% of force level: NLS 83% / 0.030; WPD 88% / 0.050; WHC 88% / 0.050; HC 86% / 0.040
-  10% of force level: NLS 84% / 0.040; WPD 88% / 0.070; WHC 88% / 0.060; HC 86% / 0.040
+  10 N: NLS 69% / 0.060; WPD 81% / 0.030; WHC 82% / 0.030; HC 76% / 0.060
+  20 N: NLS 80% / 0.040; WPD 87% / 0.020; WHC 87% / 0.020; HC 83% / 0.040
+  30 N: NLS 83% / 0.030; WPD 88% / 0.020; WHC 88% / 0.010; HC 86% / 0.030
+  50 N: NLS 86% / 0.030; WPD 89% / 0.030; WHC 89% / 0.020; HC 87% / 0.030
+  75 N: NLS 87% / 0.030; WPD 89% / 0.050; WHC 89% / 0.030; HC 88% / 0.040
+  100 N: NLS 87% / 0.040; WPD 90% / 0.060; WHC 89% / 0.050; HC 88% / 0.040
+  2.5% of body weight: NLS 79% / 0.040; WPD 86% / 0.020; WHC 87% / 0.020; HC 82% / 0.040
+  5% of body weight: NLS 84% / 0.030; WPD 89% / 0.020; WHC 88% / 0.020; HC 86% / 0.030
+  7.5% of body weight: NLS 86% / 0.030; WPD 89% / 0.040; WHC 89% / 0.030; HC 88% / 0.030
+  10% of body weight: NLS 87% / 0.030; WPD 89% / 0.050; WHC 89% / 0.040; HC 88% / 0.040
+  2.5% of force level: NLS 82% / 0.030; WPD 88% / 0.020; WHC 87% / 0.010; HC 85% / 0.030
+  5% of force level: NLS 86% / 0.030; WPD 89% / 0.030; WHC 89% / 0.020; HC 87% / 0.030
+  7.5% of force level: NLS 87% / 0.030; WPD 89% / 0.050; WHC 89% / 0.040; HC 88% / 0.040
+  10% of force level: NLS 87% / 0.040; WPD 89% / 0.060; WHC 90% / 0.050; HC 88% / 0.040
 
 Lowest one-to-one share at 20 N (participant, group, site):
-  NLS162 (PD, NLS): 5% of 44.0; at 5% of force level: 14%
-  HC121 (Control, HC): 35% of 106.0; at 5% of force level: 77%
-  NLS172 (PD, NLS): 36% of 119.0; at 5% of force level: 79%
-  NLS056 (PD, NLS): 38% of 89.0; at 5% of force level: 57%
-  HC109 (Control, HC): 42% of 103.0; at 5% of force level: 80%
-  HC105 (Control, HC): 44% of 103.0; at 5% of force level: 86%
-  NLS185 (PD, NLS): 44% of 138.0; at 5% of force level: 80%
-  NLS155 (PD, NLS): 45% of 102.0; at 5% of force level: 73%
-  NLS176 (PD, NLS): 48% of 104.0; at 5% of force level: 76%
-  NLS160 (PD, NLS): 52% of 119.0; at 5% of force level: 66%
+  NLS162 (PD, NLS): 6% of 17.0; at 5% of force level: 18%
+  NLS185 (PD, NLS): 47% of 90.0; at 5% of force level: 81%
+  NLS056 (PD, NLS): 48% of 63.0; at 5% of force level: 73%
+  NLS172 (PD, NLS): 49% of 65.0; at 5% of force level: 88%
+  HC121 (Control, HC): 49% of 73.0; at 5% of force level: 92%
+  NLS187 (PD, NLS): 50% of 101.0; at 5% of force level: 76%
+  HC109 (Control, HC): 53% of 62.0; at 5% of force level: 84%
+  HC105 (Control, HC): 55% of 65.0; at 5% of force level: 92%
+  NLS124 (PD, NLS): 58% of 246.0; at 5% of force level: 62%
+  NLS176 (PD, NLS): 60% of 55.0; at 5% of force level: 84%
+
+Task files without video labels (every footfall counted): 0
 
 Recordings not used:
   NLS056 (PD) SelfPace_matTURN: no file

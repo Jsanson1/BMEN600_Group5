@@ -2,7 +2,7 @@
 
 Exploratory, not part of the analysis pipeline: nothing in src/ is changed. Each
 sub-study walked a corridor of known length (Ga and Ju 25 m, Si 35 m, from the
-sub-studies' papers [UNVERIFIED: references not yet in report/midterm/sources.md]),
+sub-studies' papers: S4, S6 and S19 in report/midterm/sources.md),
 so a walker turns about every path / speed seconds. For each analysed usual walk:
 
 1. expected turn interval = path / Speed_01 (Speed_01 from demographics.txt);
@@ -52,7 +52,7 @@ FIG_DIR = ROOT / "figures" / "explore_stride_rules"
 OUT_TXT = ROOT / "results" / "explore_turn_timing.txt"
 OUT_CSV = ROOT / "results" / "explore_turn_timing.csv"
 
-PATH_M = {"Ga": 25.0, "Ju": 25.0, "Si": 35.0}  # [UNVERIFIED] corridor lengths
+PATH_M = {"Ga": 25.0, "Ju": 25.0, "Si": 35.0}  # corridors: sources.md S4, S6, S19
 SEARCH = (0.7, 1.5)  # rhythm search, x the expected interval
 MIN_TURNS_FOR_RHYTHM = 2.5
 MIN_SEPARATION = 0.6  # x the interval, between two turn centres
@@ -285,7 +285,7 @@ def main() -> None:
         "T-017 turn timing (scripts/explore_turn_timing.py); exploratory, src/ unchanged"
     )
     say(
-        f"Paths {PATH_M} m [UNVERIFIED]; rhythm search {SEARCH} x expected; turn stride "
+        f"Paths {PATH_M} m; rhythm search {SEARCH} x expected; turn stride "
         f">= {MIN_RATIO} x median; window +/- {WINDOW_S} s; plus {PAD} stride each side"
     )
     say()

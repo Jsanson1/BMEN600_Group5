@@ -253,6 +253,8 @@ def compare_task(
     uses (turns and standing on the walkway produce shuffling contacts the
     analysis never keeps); matching is still done against all footfalls, so an
     insole contact that also covers a turn footfall is not counted one to one.
+    A kept footfall's ``d_stride_s`` and ``d_swing_s`` are set only when the next
+    footfall of the same foot is kept too, so they never run into a turn.
     Returns the rows of ``match_footfalls`` with ``foot`` and ``threshold``
     (the label) added.
     """
@@ -271,8 +273,11 @@ def compare_task(
         else:
             keep = np.ones(len(walk), bool)
         force = task[FORCE_COLUMNS[foot]].to_numpy(dtype=float)
+        next_kept = np.r_[keep[1:], False]
         for label, t in thresholds.items():
-            m = match_footfalls(walk, insole_contacts(force, t))[keep]
+            m = match_footfalls(walk, insole_contacts(force, t))
+            m.loc[~next_kept, ["d_stride_s", "d_swing_s"]] = np.nan
+            m = m[keep]
             m.insert(0, "threshold", label)
             m.insert(0, "foot", foot)
             frames.append(m)
