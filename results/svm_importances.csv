@@ -1,0 +1,15 @@
+model,input,permutation_auc_drop,permutation_auc_drop_sd
+svm: gait only,stride_time_mean_s,0.018455861876914448,0.04227721550474316
+svm: gait only,stride_time_cv_pct,0.013935394040657134,0.023130901056554118
+svm: gait only,swing_time_cv_pct,0.013037037037036969,0.013556922123187053
+svm: gait only,swing_pct_mean,0.12695460874408238,0.045732988744864325
+svm: gait only,stride_time_asymmetry_pct,0.0021567808409913196,0.03162776245026311
+svm: gait only,swing_time_asymmetry_pct,0.17876413255360618,0.04225661143077484
+svm: gait + covariates,stride_time_mean_s,0.002133667502088549,0.027521943815615957
+svm: gait + covariates,stride_time_cv_pct,0.006242550821498179,0.02215860353411717
+svm: gait + covariates,swing_time_cv_pct,0.006164856585909215,0.02277895955919433
+svm: gait + covariates,swing_pct_mean,0.12235310498468392,0.03917266783955329
+svm: gait + covariates,stride_time_asymmetry_pct,-0.003869395711500981,0.02358672840601535
+svm: gait + covariates,swing_time_asymmetry_pct,0.1588849902534113,0.025880708400658158
+svm: gait + covariates,Age,0.00424672793093845,0.01609286715673015
+svm: gait + covariates,sex_male,-0.006205792258423837,0.01281462510461198

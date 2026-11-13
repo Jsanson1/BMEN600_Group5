@@ -43,7 +43,7 @@ def test_without_weargait_nothing_that_describes_both_datasets_is_overwritten():
     others = [
         s for s in steps if s not in ("make_clean_strides.py", "make_features.py")
     ]
-    assert all(extra[s] == [] for s in others)
+    assert all(extra[s] == run_all.STEP_ARGS.get(s, []) for s in others)
 
 
 def test_the_paper_figure_runs_without_weargait_and_the_cohort_table_needs_it():
@@ -54,3 +54,10 @@ def test_the_paper_figure_runs_without_weargait_and_the_cohort_table_needs_it():
     assert steps.index("make_figure5.py") > steps.index("run_cross_cohort.py")
     assert steps.index("make_figure5.py") > steps.index("compare_models.py")
     assert "make_cohort_table.py" in run_all.TAKE_DATA
+
+
+def test_the_svm_reads_the_final_feature_table():
+    # run_svm.py defaults to the midterm table; run_all points it at the final one
+    for with_weargait in (True, False):
+        extra = dict(run_all.plan(with_weargait))["run_svm.py"]
+        assert extra == ["--features", "results/features_gaitpdb.csv"]

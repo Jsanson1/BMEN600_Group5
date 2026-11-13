@@ -1,0 +1,325 @@
+model,participant,study,y,p
+svm: gait only,GaCo01,Ga,0,0.4156310561743332
+svm: gait only,GaCo02,Ga,0,0.04797161532505162
+svm: gait only,GaCo03,Ga,0,0.8411114596409223
+svm: gait only,GaCo04,Ga,0,0.5648993468866467
+svm: gait only,GaCo05,Ga,0,0.6899081684191316
+svm: gait only,GaCo06,Ga,0,0.279707599786144
+svm: gait only,GaCo07,Ga,0,0.6432294562302711
+svm: gait only,GaCo08,Ga,0,0.6273620813374402
+svm: gait only,GaCo09,Ga,0,0.0614313987302542
+svm: gait only,GaCo10,Ga,0,0.08234090894736872
+svm: gait only,GaCo11,Ga,0,0.6772109493342585
+svm: gait only,GaCo12,Ga,0,0.2275690643688195
+svm: gait only,GaCo13,Ga,0,0.6872751650699753
+svm: gait only,GaCo14,Ga,0,0.5517031810203447
+svm: gait only,GaCo15,Ga,0,0.6391277620663628
+svm: gait only,GaCo16,Ga,0,0.6152938946435622
+svm: gait only,GaCo17,Ga,0,0.6304468514162554
+svm: gait only,GaCo22,Ga,0,0.6031907633419293
+svm: gait only,GaPt03,Ga,1,0.636450079282099
+svm: gait only,GaPt04,Ga,1,0.8239918389036937
+svm: gait only,GaPt05,Ga,1,0.8469629233672396
+svm: gait only,GaPt06,Ga,1,0.8935584599127715
+svm: gait only,GaPt07,Ga,1,0.6145885450229149
+svm: gait only,GaPt08,Ga,1,0.8551572298710456
+svm: gait only,GaPt09,Ga,1,0.587162506788862
+svm: gait only,GaPt12,Ga,1,0.8180607836653757
+svm: gait only,GaPt13,Ga,1,0.8142785637640615
+svm: gait only,GaPt14,Ga,1,0.8262045659220936
+svm: gait only,GaPt15,Ga,1,0.74000709513025
+svm: gait only,GaPt16,Ga,1,0.15484466505592306
+svm: gait only,GaPt17,Ga,1,0.8298610861107295
+svm: gait only,GaPt18,Ga,1,0.8266615791119247
+svm: gait only,GaPt19,Ga,1,0.5680288023185228
+svm: gait only,GaPt20,Ga,1,0.8768133381324243
+svm: gait only,GaPt21,Ga,1,0.2489581371935933
+svm: gait only,GaPt22,Ga,1,0.49892805122559136
+svm: gait only,GaPt23,Ga,1,0.6331054499037411
+svm: gait only,GaPt24,Ga,1,0.6317937618420066
+svm: gait only,GaPt25,Ga,1,0.8360875508555976
+svm: gait only,GaPt26,Ga,1,0.7494313286102217
+svm: gait only,GaPt27,Ga,1,0.7910602275890395
+svm: gait only,GaPt28,Ga,1,0.8422469081573876
+svm: gait only,GaPt29,Ga,1,0.928507453741936
+svm: gait only,GaPt30,Ga,1,0.7249477503080063
+svm: gait only,GaPt31,Ga,1,0.8680544299177672
+svm: gait only,GaPt32,Ga,1,0.9180569314117724
+svm: gait only,GaPt33,Ga,1,0.6405889982458546
+svm: gait only,JuCo01,Ju,0,0.503057989100452
+svm: gait only,JuCo02,Ju,0,0.19826857357115638
+svm: gait only,JuCo03,Ju,0,0.37543503467110395
+svm: gait only,JuCo04,Ju,0,0.34990749261872484
+svm: gait only,JuCo05,Ju,0,0.06762212887541084
+svm: gait only,JuCo06,Ju,0,0.19074190450855047
+svm: gait only,JuCo07,Ju,0,0.6949874445980422
+svm: gait only,JuCo08,Ju,0,0.4360733988832365
+svm: gait only,JuCo09,Ju,0,0.5952968162313022
+svm: gait only,JuCo11,Ju,0,0.16809900768105013
+svm: gait only,JuCo12,Ju,0,0.22957423893637216
+svm: gait only,JuCo13,Ju,0,0.12492971187127355
+svm: gait only,JuCo14,Ju,0,0.5151635397035383
+svm: gait only,JuCo15,Ju,0,0.2046446935251177
+svm: gait only,JuCo16,Ju,0,0.3058804706922967
+svm: gait only,JuCo17,Ju,0,0.3383662998516532
+svm: gait only,JuCo18,Ju,0,0.4011543960502528
+svm: gait only,JuCo19,Ju,0,0.16691524523502096
+svm: gait only,JuCo20,Ju,0,0.82178231683485
+svm: gait only,JuCo21,Ju,0,0.4218769062292373
+svm: gait only,JuCo22,Ju,0,0.39827078754870465
+svm: gait only,JuCo23,Ju,0,0.8034017990424258
+svm: gait only,JuCo24,Ju,0,0.7404203591265996
+svm: gait only,JuCo25,Ju,0,0.7368206594223891
+svm: gait only,JuCo26,Ju,0,0.4225292539885255
+svm: gait only,JuPt01,Ju,1,0.4225292539885255
+svm: gait only,JuPt02,Ju,1,0.8111181232196047
+svm: gait only,JuPt03,Ju,1,0.19118908059037237
+svm: gait only,JuPt04,Ju,1,0.9179049043087447
+svm: gait only,JuPt05,Ju,1,0.12109692735322196
+svm: gait only,JuPt06,Ju,1,0.8927084670960841
+svm: gait only,JuPt07,Ju,1,0.38787038774788696
+svm: gait only,JuPt08,Ju,1,0.4903631842237896
+svm: gait only,JuPt09,Ju,1,0.8221763195137272
+svm: gait only,JuPt10,Ju,1,0.8808060576249724
+svm: gait only,JuPt11,Ju,1,0.744137327290469
+svm: gait only,JuPt12,Ju,1,0.7538712099110021
+svm: gait only,JuPt13,Ju,1,0.7865998294481965
+svm: gait only,JuPt14,Ju,1,0.6993156098311425
+svm: gait only,JuPt15,Ju,1,0.09597423001159694
+svm: gait only,JuPt16,Ju,1,0.8494156348692875
+svm: gait only,JuPt17,Ju,1,0.9006062358006728
+svm: gait only,JuPt18,Ju,1,0.7708752526929039
+svm: gait only,JuPt19,Ju,1,0.8689328805176475
+svm: gait only,JuPt20,Ju,1,0.6822890207138327
+svm: gait only,JuPt21,Ju,1,0.8995740461186337
+svm: gait only,JuPt22,Ju,1,0.3625147361584101
+svm: gait only,JuPt23,Ju,1,0.3173526777569121
+svm: gait only,JuPt24,Ju,1,0.5890056925336428
+svm: gait only,JuPt26,Ju,1,0.8549171563502395
+svm: gait only,JuPt27,Ju,1,0.5754271044273331
+svm: gait only,JuPt28,Ju,1,0.9092098267797813
+svm: gait only,JuPt29,Ju,1,0.5540999231507393
+svm: gait only,SiCo01,Si,0,0.20015966882570313
+svm: gait only,SiCo03,Si,0,0.2844058992250175
+svm: gait only,SiCo04,Si,0,0.3762024440631333
+svm: gait only,SiCo05,Si,0,0.7629366123865973
+svm: gait only,SiCo06,Si,0,0.25773368510408295
+svm: gait only,SiCo07,Si,0,0.2903256411851393
+svm: gait only,SiCo08,Si,0,0.17515765346841694
+svm: gait only,SiCo09,Si,0,0.32919227437408694
+svm: gait only,SiCo10,Si,0,0.5213746430411149
+svm: gait only,SiCo11,Si,0,0.6786291177900888
+svm: gait only,SiCo13,Si,0,0.3027903610202353
+svm: gait only,SiCo14,Si,0,0.9835485067028379
+svm: gait only,SiCo15,Si,0,0.5245119171501746
+svm: gait only,SiCo16,Si,0,0.6623506083670054
+svm: gait only,SiCo17,Si,0,0.3844459786348684
+svm: gait only,SiCo18,Si,0,0.09115301513571916
+svm: gait only,SiCo19,Si,0,0.1048501541258574
+svm: gait only,SiCo20,Si,0,0.29022892642027814
+svm: gait only,SiCo21,Si,0,0.8127410754958543
+svm: gait only,SiCo22,Si,0,0.66121230673106
+svm: gait only,SiCo23,Si,0,0.20440080564554008
+svm: gait only,SiCo24,Si,0,0.5289823889799294
+svm: gait only,SiCo25,Si,0,0.7732217953685393
+svm: gait only,SiCo26,Si,0,0.3374092768004248
+svm: gait only,SiCo27,Si,0,0.4334111069334565
+svm: gait only,SiCo28,Si,0,0.202453474845229
+svm: gait only,SiCo29,Si,0,0.17386149746819524
+svm: gait only,SiCo30,Si,0,0.5102119451793482
+svm: gait only,SiPt02,Si,1,0.7891505138094065
+svm: gait only,SiPt04,Si,1,0.02431935075942087
+svm: gait only,SiPt05,Si,1,0.09898640665401265
+svm: gait only,SiPt07,Si,1,0.664849011482026
+svm: gait only,SiPt08,Si,1,0.5851158395685425
+svm: gait only,SiPt09,Si,1,0.7448218733923277
+svm: gait only,SiPt10,Si,1,0.18344473572126963
+svm: gait only,SiPt12,Si,1,0.7356176023636893
+svm: gait only,SiPt13,Si,1,0.87306221887961
+svm: gait only,SiPt14,Si,1,0.4862822014098077
+svm: gait only,SiPt15,Si,1,0.9313054445455334
+svm: gait only,SiPt16,Si,1,0.09521251077907632
+svm: gait only,SiPt17,Si,1,0.18992948295438408
+svm: gait only,SiPt18,Si,1,0.5488462529532929
+svm: gait only,SiPt19,Si,1,0.31184219338107677
+svm: gait only,SiPt20,Si,1,0.8930696691364809
+svm: gait only,SiPt21,Si,1,0.9587341068013405
+svm: gait only,SiPt22,Si,1,0.8662578061458047
+svm: gait only,SiPt23,Si,1,0.8702188227067682
+svm: gait only,SiPt25,Si,1,0.4725369149152782
+svm: gait only,SiPt27,Si,1,0.8313990065973927
+svm: gait only,SiPt28,Si,1,0.9329729899353906
+svm: gait only,SiPt29,Si,1,0.5236836932168994
+svm: gait only,SiPt30,Si,1,0.840374480248319
+svm: gait only,SiPt31,Si,1,0.9860431606270675
+svm: gait only,SiPt32,Si,1,0.5641276691266478
+svm: gait only,SiPt33,Si,1,0.722814808565072
+svm: gait only,SiPt34,Si,1,0.43576341518446815
+svm: gait only,SiPt35,Si,1,0.13116046563247477
+svm: gait only,SiPt36,Si,1,0.9315617455896478
+svm: gait only,SiPt37,Si,1,0.22721075502041044
+svm: gait only,SiPt38,Si,1,0.22709728692904732
+svm: gait only,SiPt39,Si,1,0.9335631828933749
+svm: gait only,SiPt40,Si,1,0.8380666052088608
+svm: gait + covariates,GaCo01,Ga,0,0.23627227907997486
+svm: gait + covariates,GaCo02,Ga,0,0.2195197200122378
+svm: gait + covariates,GaCo03,Ga,0,0.9127416804126297
+svm: gait + covariates,GaCo04,Ga,0,0.784593243285926
+svm: gait + covariates,GaCo05,Ga,0,0.6798049732395779
+svm: gait + covariates,GaCo06,Ga,0,0.5726347381978808
+svm: gait + covariates,GaCo07,Ga,0,0.807157376882026
+svm: gait + covariates,GaCo08,Ga,0,0.7504079643679249
+svm: gait + covariates,GaCo09,Ga,0,0.22273046577664318
+svm: gait + covariates,GaCo10,Ga,0,0.3509520366911724
+svm: gait + covariates,GaCo11,Ga,0,0.8542582225883026
+svm: gait + covariates,GaCo12,Ga,0,0.18245167230811216
+svm: gait + covariates,GaCo13,Ga,0,0.5438975121157513
+svm: gait + covariates,GaCo14,Ga,0,0.3973602422612544
+svm: gait + covariates,GaCo15,Ga,0,0.3881955132850207
+svm: gait + covariates,GaCo16,Ga,0,0.7193155100044072
+svm: gait + covariates,GaCo17,Ga,0,0.5921960647687722
+svm: gait + covariates,GaCo22,Ga,0,0.7052392860708375
+svm: gait + covariates,GaPt03,Ga,1,0.755410670647365
+svm: gait + covariates,GaPt04,Ga,1,0.8862421451328464
+svm: gait + covariates,GaPt05,Ga,1,0.8896091135530922
+svm: gait + covariates,GaPt06,Ga,1,0.9356179090993709
+svm: gait + covariates,GaPt07,Ga,1,0.7153186332972494
+svm: gait + covariates,GaPt08,Ga,1,0.8380333102434553
+svm: gait + covariates,GaPt09,Ga,1,0.7194664460670789
+svm: gait + covariates,GaPt12,Ga,1,0.5989445234446563
+svm: gait + covariates,GaPt13,Ga,1,0.90942277456534
+svm: gait + covariates,GaPt14,Ga,1,0.7262096429970795
+svm: gait + covariates,GaPt15,Ga,1,0.8566127180473996
+svm: gait + covariates,GaPt16,Ga,1,0.5641794128248003
+svm: gait + covariates,GaPt17,Ga,1,0.9287409325802398
+svm: gait + covariates,GaPt18,Ga,1,0.9100784115560476
+svm: gait + covariates,GaPt19,Ga,1,0.6242928967640584
+svm: gait + covariates,GaPt20,Ga,1,0.8925032942489899
+svm: gait + covariates,GaPt21,Ga,1,0.6778074725252118
+svm: gait + covariates,GaPt22,Ga,1,0.5931795930815549
+svm: gait + covariates,GaPt23,Ga,1,0.7364526692514772
+svm: gait + covariates,GaPt24,Ga,1,0.7841236255408643
+svm: gait + covariates,GaPt25,Ga,1,0.9095703999581795
+svm: gait + covariates,GaPt26,Ga,1,0.7346609114469949
+svm: gait + covariates,GaPt27,Ga,1,0.839760212039156
+svm: gait + covariates,GaPt28,Ga,1,0.8879425984706292
+svm: gait + covariates,GaPt29,Ga,1,0.9231591288877714
+svm: gait + covariates,GaPt30,Ga,1,0.7793230031533264
+svm: gait + covariates,GaPt31,Ga,1,0.9280730333310592
+svm: gait + covariates,GaPt32,Ga,1,0.8136825303987649
+svm: gait + covariates,GaPt33,Ga,1,0.7800831986296196
+svm: gait + covariates,JuCo01,Ju,0,0.5472391281500469
+svm: gait + covariates,JuCo02,Ju,0,0.5260302106046315
+svm: gait + covariates,JuCo03,Ju,0,0.38557344068117744
+svm: gait + covariates,JuCo04,Ju,0,0.2962496719367635
+svm: gait + covariates,JuCo05,Ju,0,0.08120679316321748
+svm: gait + covariates,JuCo06,Ju,0,0.316177794697017
+svm: gait + covariates,JuCo07,Ju,0,0.6163530281037108
+svm: gait + covariates,JuCo08,Ju,0,0.5652471349492443
+svm: gait + covariates,JuCo09,Ju,0,0.8107072507855444
+svm: gait + covariates,JuCo11,Ju,0,0.19188312701990382
+svm: gait + covariates,JuCo12,Ju,0,0.22123820432827596
+svm: gait + covariates,JuCo13,Ju,0,0.19690339130986506
+svm: gait + covariates,JuCo14,Ju,0,0.4803947974199209
+svm: gait + covariates,JuCo15,Ju,0,0.2592154360783157
+svm: gait + covariates,JuCo16,Ju,0,0.47985913421387283
+svm: gait + covariates,JuCo17,Ju,0,0.3556656506135871
+svm: gait + covariates,JuCo18,Ju,0,0.47070839884582505
+svm: gait + covariates,JuCo19,Ju,0,0.1642130640953983
+svm: gait + covariates,JuCo20,Ju,0,0.7399105909037353
+svm: gait + covariates,JuCo21,Ju,0,0.49951922242754687
+svm: gait + covariates,JuCo22,Ju,0,0.3275650879387464
+svm: gait + covariates,JuCo23,Ju,0,0.7568616906463168
+svm: gait + covariates,JuCo24,Ju,0,0.8156436644447883
+svm: gait + covariates,JuCo25,Ju,0,0.7985292507854244
+svm: gait + covariates,JuCo26,Ju,0,0.5509638765810189
+svm: gait + covariates,JuPt01,Ju,1,0.6132467681737154
+svm: gait + covariates,JuPt02,Ju,1,0.7925428826659701
+svm: gait + covariates,JuPt03,Ju,1,0.39296540266711416
+svm: gait + covariates,JuPt04,Ju,1,0.8896782998175451
+svm: gait + covariates,JuPt05,Ju,1,0.2577038268996677
+svm: gait + covariates,JuPt06,Ju,1,0.9062344979905985
+svm: gait + covariates,JuPt07,Ju,1,0.3784666853725283
+svm: gait + covariates,JuPt08,Ju,1,0.47405275115873485
+svm: gait + covariates,JuPt09,Ju,1,0.859592133161842
+svm: gait + covariates,JuPt10,Ju,1,0.9266678168423819
+svm: gait + covariates,JuPt11,Ju,1,0.8801166191691439
+svm: gait + covariates,JuPt12,Ju,1,0.6926477823829549
+svm: gait + covariates,JuPt13,Ju,1,0.797234322106341
+svm: gait + covariates,JuPt14,Ju,1,0.6965157119307804
+svm: gait + covariates,JuPt15,Ju,1,0.18095954158269653
+svm: gait + covariates,JuPt16,Ju,1,0.8349248866972663
+svm: gait + covariates,JuPt17,Ju,1,0.9419784203328097
+svm: gait + covariates,JuPt18,Ju,1,0.7631297596270135
+svm: gait + covariates,JuPt19,Ju,1,0.8564337795069801
+svm: gait + covariates,JuPt20,Ju,1,0.7909835455275833
+svm: gait + covariates,JuPt21,Ju,1,0.8191676198487099
+svm: gait + covariates,JuPt22,Ju,1,0.535125918809194
+svm: gait + covariates,JuPt23,Ju,1,0.5571688683860226
+svm: gait + covariates,JuPt24,Ju,1,0.6614805214344155
+svm: gait + covariates,JuPt26,Ju,1,0.8292075054394457
+svm: gait + covariates,JuPt27,Ju,1,0.47026139863751815
+svm: gait + covariates,JuPt28,Ju,1,0.8669991869688473
+svm: gait + covariates,JuPt29,Ju,1,0.4680229159434079
+svm: gait + covariates,SiCo01,Si,0,0.1871183169347197
+svm: gait + covariates,SiCo03,Si,0,0.21002027116331076
+svm: gait + covariates,SiCo04,Si,0,0.14879226262857176
+svm: gait + covariates,SiCo05,Si,0,0.9430180979892566
+svm: gait + covariates,SiCo06,Si,0,0.15230954345794398
+svm: gait + covariates,SiCo07,Si,0,0.31955555016458037
+svm: gait + covariates,SiCo08,Si,0,0.20433368178690173
+svm: gait + covariates,SiCo09,Si,0,0.18488478736210523
+svm: gait + covariates,SiCo10,Si,0,0.06189176010539367
+svm: gait + covariates,SiCo11,Si,0,0.2230020905601904
+svm: gait + covariates,SiCo13,Si,0,0.3506131541014622
+svm: gait + covariates,SiCo14,Si,0,0.9001788438922048
+svm: gait + covariates,SiCo15,Si,0,0.8917141597739291
+svm: gait + covariates,SiCo16,Si,0,0.5879001109677794
+svm: gait + covariates,SiCo17,Si,0,0.22377129718088093
+svm: gait + covariates,SiCo18,Si,0,0.13588942137641832
+svm: gait + covariates,SiCo19,Si,0,0.003888076569925646
+svm: gait + covariates,SiCo20,Si,0,0.23286738806671675
+svm: gait + covariates,SiCo21,Si,0,0.16859016968217988
+svm: gait + covariates,SiCo22,Si,0,0.302921704813735
+svm: gait + covariates,SiCo23,Si,0,0.15754807096895165
+svm: gait + covariates,SiCo24,Si,0,0.028052744204808185
+svm: gait + covariates,SiCo25,Si,0,0.16359008527034155
+svm: gait + covariates,SiCo26,Si,0,0.04366342009078748
+svm: gait + covariates,SiCo27,Si,0,0.6545146248084349
+svm: gait + covariates,SiCo28,Si,0,0.06340651956828539
+svm: gait + covariates,SiCo29,Si,0,0.10056236698352154
+svm: gait + covariates,SiCo30,Si,0,0.4049309853766437
+svm: gait + covariates,SiPt02,Si,1,0.8876286005633498
+svm: gait + covariates,SiPt04,Si,1,0.0027634664418559663
+svm: gait + covariates,SiPt05,Si,1,0.9109070354420187
+svm: gait + covariates,SiPt07,Si,1,0.7827007713385591
+svm: gait + covariates,SiPt08,Si,1,0.7979674538066782
+svm: gait + covariates,SiPt09,Si,1,0.8053562365077973
+svm: gait + covariates,SiPt10,Si,1,0.3315778887729929
+svm: gait + covariates,SiPt12,Si,1,0.9121354921595372
+svm: gait + covariates,SiPt13,Si,1,0.17076072750060484
+svm: gait + covariates,SiPt14,Si,1,0.037479929695946476
+svm: gait + covariates,SiPt15,Si,1,0.8701669599001436
+svm: gait + covariates,SiPt16,Si,1,0.022441292773357487
+svm: gait + covariates,SiPt17,Si,1,0.33154663793877426
+svm: gait + covariates,SiPt18,Si,1,0.5222437312973032
+svm: gait + covariates,SiPt19,Si,1,0.4885927780216439
+svm: gait + covariates,SiPt20,Si,1,0.07541204276904452
+svm: gait + covariates,SiPt21,Si,1,0.6096957090774495
+svm: gait + covariates,SiPt22,Si,1,0.7848095036706574
+svm: gait + covariates,SiPt23,Si,1,0.6532103221594631
+svm: gait + covariates,SiPt25,Si,1,0.21469344858401973
+svm: gait + covariates,SiPt27,Si,1,0.6650476038350727
+svm: gait + covariates,SiPt28,Si,1,0.8910657714681418
+svm: gait + covariates,SiPt29,Si,1,0.7875677827664244
+svm: gait + covariates,SiPt30,Si,1,0.48176099290198404
+svm: gait + covariates,SiPt31,Si,1,0.9822077254430894
+svm: gait + covariates,SiPt32,Si,1,0.051175196502101845
+svm: gait + covariates,SiPt33,Si,1,0.17035893525925747
+svm: gait + covariates,SiPt34,Si,1,0.3995917121004783
+svm: gait + covariates,SiPt35,Si,1,0.014434996704875485
+svm: gait + covariates,SiPt36,Si,1,0.9787484567650554
+svm: gait + covariates,SiPt37,Si,1,0.4582916718186366
+svm: gait + covariates,SiPt38,Si,1,0.3228248570967597
+svm: gait + covariates,SiPt39,Si,1,0.9572545283250071
+svm: gait + covariates,SiPt40,Si,1,0.8721331944852615

@@ -1,0 +1,54 @@
+Support vector machine (kernel, C and gamma chosen inside each outer training set by the log-loss of Platt-scaled inner 5-fold distances; linear kernel at 17 values of C, RBF kernel at 289 pairs of C and gamma, each from 0.0001 to 10000 (17 values of gamma); swing-time asymmetry as log(1 + x), inputs standardised; gaitpdb.svm) on 162 participants aged 50 or over (91 PD, 71 controls; DECISIONS.md D-006), one row each, from results/features_usual_walk.csv.
+Inputs: stride_time_mean_s, stride_time_cv_pct, swing_time_cv_pct, swing_pct_mean, stride_time_asymmetry_pct, swing_time_asymmetry_pct; with covariates also Age, sex_male.
+Outer evaluation: 5-fold participant-grouped cross-validation repeated 20 times, and leave-one-study-out. Cross-validation: mean over the 100 test folds, 95% interval corrected for the overlap between training sets (Nadeau and Bengio 2003), then in brackets the 2.5th to 97.5th percentile of the 20 repeat means. Leave-one-study-out: 95% interval from a bootstrap over the held-out participants.
+
+[gait only] repeated grouped CV:
+    auc: 0.811 (0.734 to 0.888) [repeats 0.782 to 0.832]
+    brier: 0.179 (0.140 to 0.219) [repeats 0.169 to 0.190]
+    balanced_accuracy: 0.741 (0.660 to 0.822) [repeats 0.712 to 0.763]
+    sensitivity: 0.805 (0.716 to 0.895) [repeats 0.781 to 0.835]
+    specificity: 0.677 (0.545 to 0.810) [repeats 0.619 to 0.720]
+[gait only] calibration of the out-of-fold probabilities (one CV repeat), quintiles of predicted probability: mean predicted vs observed PD fraction:
+    n = 33: predicted 0.16, observed 0.18
+    n = 32: predicted 0.37, observed 0.34
+    n = 32: predicted 0.61, observed 0.56
+    n = 32: predicted 0.76, observed 0.84
+    n = 33: predicted 0.89, observed 0.88
+[gait only] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.801 (0.656 to 0.917), n = 47 (29 PD)
+    held-out Ju: 0.765 (0.632 to 0.886), n = 53 (28 PD)
+    held-out Si: 0.676 (0.534 to 0.809), n = 62 (34 PD)
+    all out-of-study predictions pooled: 0.746 (0.666 to 0.821)
+    setting chosen by inner log-loss: Ga held out: rbf, C 1, gamma 0.316; Ju held out: rbf, C 0.00316, gamma 0.1; Si held out: rbf, C 10, gamma 0.0316
+[gait only] setting chosen in the 5 folds of repeat 0: rbf, C 0.316, gamma 0.1; rbf, C 1, gamma 0.1; rbf, C 3.16, gamma 0.1; rbf, C 0.316, gamma 0.1; rbf, C 1, gamma 0.1; on all participants: rbf, C 3.16, gamma 0.1
+[gait only] importance: test-fold AUC drop when the input is shuffled (mean (SD) over the 5 folds of repeat 0, 10 shuffles each):
+    swing_time_asymmetry_pct: AUC drop 0.179 (0.042)
+    swing_pct_mean: AUC drop 0.127 (0.046)
+    stride_time_mean_s: AUC drop 0.018 (0.042)
+    stride_time_cv_pct: AUC drop 0.014 (0.023)
+    swing_time_cv_pct: AUC drop 0.013 (0.014)
+    stride_time_asymmetry_pct: AUC drop 0.002 (0.032)
+
+[gait + covariates] repeated grouped CV:
+    auc: 0.805 (0.723 to 0.888) [repeats 0.774 to 0.826]
+    brier: 0.182 (0.143 to 0.221) [repeats 0.172 to 0.200]
+    balanced_accuracy: 0.733 (0.657 to 0.809) [repeats 0.706 to 0.767]
+    sensitivity: 0.799 (0.711 to 0.886) [repeats 0.758 to 0.840]
+    specificity: 0.668 (0.540 to 0.796) [repeats 0.625 to 0.725]
+[gait + covariates] leave-one-study-out AUC (train on the other two):
+    held-out Ga: 0.812 (0.667 to 0.931), n = 47 (29 PD)
+    held-out Ju: 0.769 (0.640 to 0.882), n = 53 (28 PD)
+    held-out Si: 0.699 (0.551 to 0.831), n = 62 (34 PD)
+    all out-of-study predictions pooled: 0.747 (0.668 to 0.825)
+    setting chosen by inner log-loss: Ga held out: rbf, C 0.316, gamma 0.1; Ju held out: rbf, C 1, gamma 0.1; Si held out: rbf, C 1e+03, gamma 0.0316
+[gait + covariates] setting chosen in the 5 folds of repeat 0: rbf, C 1, gamma 0.1; rbf, C 3.16e+03, gamma 0.0001; rbf, C 10, gamma 0.1; rbf, C 1, gamma 0.1; rbf, C 1, gamma 0.0316; on all participants: rbf, C 1, gamma 0.1
+[gait + covariates] importance: test-fold AUC drop when the input is shuffled (mean (SD) over the 5 folds of repeat 0, 10 shuffles each):
+    swing_time_asymmetry_pct: AUC drop 0.159 (0.026)
+    swing_pct_mean: AUC drop 0.122 (0.039)
+    stride_time_cv_pct: AUC drop 0.006 (0.022)
+    swing_time_cv_pct: AUC drop 0.006 (0.023)
+    Age: AUC drop 0.004 (0.016)
+    stride_time_mean_s: AUC drop 0.002 (0.028)
+    stride_time_asymmetry_pct: AUC drop -0.004 (0.024)
+    sex_male: AUC drop -0.006 (0.013)
+

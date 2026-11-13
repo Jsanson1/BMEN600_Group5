@@ -6,7 +6,7 @@ Runs, each as a separate process and stopping at the first failure:
 verify_data, make_table1, make_figure1, check_event_detection,
 check_data_quality, check_dual_task and make_clean_strides (the stride tables in
 data/interim/); make_features and check_features; make_figure2 (from the feature
-tables), the models (run_logreg, run_random_forest, run_baselines),
+tables), the models (run_logreg, run_random_forest, run_svm, run_baselines),
 compare_models, run_cross_cohort and the post hoc check_weargait_signal;
 make_figure5 (the paper's figure of the main results, from the files above);
 check_weargait_participants, check_weargait_threshold and make_cohort_table
@@ -64,6 +64,7 @@ READS_RESULTS = [  # these read what the steps above wrote to results/
     "make_figure2.py",  # draws its counts from the two feature tables
     "run_logreg.py",
     "run_random_forest.py",
+    "run_svm.py",
     "run_baselines.py",
     "compare_models.py",
     "run_cross_cohort.py",  # needs both feature tables and the clean strides
@@ -116,6 +117,9 @@ NEEDS_WEARGAIT = {
     "check_weargait_signal.py",
     *READS_WEARGAIT,
 }
+# Arguments a step always gets: the SVM's script defaults to the midterm feature
+# table, so it is pointed at the final one, as the other models read by default.
+STEP_ARGS = {"run_svm.py": ["--features", "results/features_gaitpdb.csv"]}
 SUMMARY_ELSEWHERE = {
     "make_clean_strides.py": [
         "--summary",
@@ -138,9 +142,11 @@ def plan(with_weargait: bool) -> list[tuple[str, list[str]]]:
     committed cross-dataset results."""
     last = [(step, []) for step in AFTER_20N]
     if with_weargait:
-        return [(step, []) for step in STEPS] + SENSITIVITY_20N + last
+        return (
+            [(step, STEP_ARGS.get(step, [])) for step in STEPS] + SENSITIVITY_20N + last
+        )
     return [
-        (step, SUMMARY_ELSEWHERE.get(step, []))
+        (step, STEP_ARGS.get(step, []) + SUMMARY_ELSEWHERE.get(step, []))
         for step in STEPS
         if step not in NEEDS_WEARGAIT
     ] + last
