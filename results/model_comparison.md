@@ -1,14 +1,15 @@
 | Model                                         | AUC within protocol   | AUC across protocols (pooled)   |   Ga |   Ju |   Si | Sensitivity at 90% specificity   |   Balanced accuracy |   Brier |
 |:----------------------------------------------|:----------------------|:--------------------------------|-----:|-----:|-----:|:---------------------------------|--------------------:|--------:|
-| Logistic regression: gait features            | 0.82 (0.75 to 0.90)   | 0.77 (0.70 to 0.84)             | 0.83 | 0.78 | 0.74 | 0.52 (0.30 to 0.69)              |                0.76 |   0.176 |
-| Logistic regression: gait features + age, sex | 0.81 (0.73 to 0.88)   | 0.77 (0.70 to 0.84)             | 0.83 | 0.77 | 0.75 | 0.52 (0.27 to 0.66)              |                0.74 |   0.181 |
-| Logistic regression: age and sex only         | 0.59 (0.49 to 0.69)   | 0.57 (0.48 to 0.66)             | 0.53 | 0.61 | 0.64 | 0.13 (0.01 to 0.32)              |                0.49 |   0.248 |
-| Random forest: gait features                  | 0.78 (0.70 to 0.87)   | 0.77 (0.69 to 0.84)             | 0.81 | 0.74 | 0.74 | 0.53 (0.30 to 0.66)              |                0.7  |   0.194 |
-| Random forest: gait features + age, sex       | 0.78 (0.70 to 0.86)   | 0.77 (0.70 to 0.84)             | 0.81 | 0.75 | 0.74 | 0.49 (0.26 to 0.63)              |                0.69 |   0.194 |
-| Swing-time asymmetry alone                    | 0.76 (0.69 to 0.84)   | 0.76 (0.68 to 0.83)             | 0.76 | 0.73 | 0.78 | 0.45 (0.26 to 0.61)              |                0.68 |   0.201 |
-| Swing fraction of the stride alone            | 0.76 (0.67 to 0.84)   | 0.75 (0.67 to 0.82)             | 0.88 | 0.74 | 0.64 | 0.45 (0.31 to 0.61)              |                0.69 |   0.203 |
-| Swing-time variability alone                  | 0.68 (0.60 to 0.75)   | 0.66 (0.58 to 0.75)             | 0.72 | 0.58 | 0.74 | 0.23 (0.11 to 0.41)              |                0.62 |   0.224 |
-| Stride-time variability alone                 | 0.60 (0.49 to 0.70)   | 0.57 (0.47 to 0.66)             | 0.46 | 0.55 | 0.74 | 0.11 (0.02 to 0.20)              |                0.58 |   0.241 |
-| Mean stride time alone                        | 0.55 (0.47 to 0.63)   | 0.51 (0.42 to 0.60)             | 0.51 | 0.42 | 0.67 | 0.13 (0.04 to 0.25)              |                0.48 |   0.246 |
-| Stride-time asymmetry alone                   | 0.47 (0.38 to 0.57)   | 0.42 (0.33 to 0.50)             | 0.38 | 0.58 | 0.38 | 0.00 (0.00 to 0.11)              |                0.49 |   0.25  |
-| Chance (share of PD in training)              | 0.50 (0.50 to 0.50)   | 0.46 (0.38 to 0.55)             | 0.5  | 0.5  | 0.5  | 0.11 (0.02 to 0.20)              |                0.5  |   0.246 |
+| Logistic regression: gait features            | 0.79 (0.70 to 0.88)   | 0.73 (0.65 to 0.81)             | 0.8  | 0.8  | 0.66 | 0.53 (0.36 to 0.63)              |                0.68 |   0.187 |
+| Logistic regression: gait features + age, sex | 0.79 (0.71 to 0.88)   | 0.74 (0.67 to 0.81)             | 0.8  | 0.82 | 0.66 | 0.46 (0.32 to 0.65)              |                0.68 |   0.185 |
+| Logistic regression: age and sex only         | 0.60 (0.51 to 0.69)   | 0.58 (0.49 to 0.67)             | 0.52 | 0.64 | 0.62 | 0.14 (0.06 to 0.27)              |                0.5  |   0.246 |
+| SVM: gait features                            | 0.78 (0.68 to 0.87)   | 0.72 (0.64 to 0.79)             | 0.77 | 0.78 | 0.63 | 0.53 (0.37 to 0.63)              |                0.68 |   0.194 |
+| SVM: gait features + age, sex                 | 0.78 (0.70 to 0.87)   | 0.73 (0.65 to 0.80)             | 0.76 | 0.79 | 0.68 | 0.49 (0.34 to 0.66)              |                0.69 |   0.191 |
+| Random forest: gait features                  | 0.75 (0.65 to 0.85)   | 0.70 (0.62 to 0.78)             | 0.79 | 0.69 | 0.65 | 0.43 (0.31 to 0.58)              |                0.66 |   0.205 |
+| Random forest: gait features + age, sex       | 0.74 (0.64 to 0.83)   | 0.73 (0.65 to 0.80)             | 0.78 | 0.74 | 0.69 | 0.45 (0.32 to 0.57)              |                0.65 |   0.208 |
+| Swing-time asymmetry alone                    | 0.73 (0.64 to 0.81)   | 0.71 (0.63 to 0.79)             | 0.68 | 0.73 | 0.77 | 0.46 (0.26 to 0.59)              |                0.66 |   0.213 |
+| Swing fraction of the stride alone            | 0.71 (0.61 to 0.82)   | 0.70 (0.61 to 0.77)             | 0.88 | 0.71 | 0.58 | 0.41 (0.22 to 0.53)              |                0.64 |   0.213 |
+| Swing-time variability alone                  | 0.69 (0.61 to 0.78)   | 0.69 (0.61 to 0.77)             | 0.7  | 0.7  | 0.68 | 0.20 (0.08 to 0.43)              |                0.64 |   0.229 |
+| Stride-time variability alone                 | 0.66 (0.56 to 0.75)   | 0.66 (0.57 to 0.74)             | 0.73 | 0.72 | 0.54 | 0.31 (0.17 to 0.45)              |                0.59 |   0.226 |
+| Mean stride time alone                        | 0.56 (0.46 to 0.65)   | 0.52 (0.43 to 0.60)             | 0.51 | 0.4  | 0.68 | 0.10 (0.02 to 0.26)              |                0.48 |   0.247 |
+| Chance (share of PD in training)              | 0.50 (0.50 to 0.50)   | 0.47 (0.39 to 0.56)             | 0.5  | 0.5  | 0.5  | 0.08 (0.02 to 0.26)              |                0.5  |   0.246 |

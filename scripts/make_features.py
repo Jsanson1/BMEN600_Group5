@@ -17,13 +17,16 @@ Writes, in results/:
                            (commit and contact threshold, from T-017's provenance
                            file); each feature's median over all participants.
 
-scripts/check_features.py compares the two tables without diagnosis labels.
+scripts/check_features.py compares the two tables without WearGait-PD's diagnosis labels.
 
 Nothing in the summary splits WearGait-PD by diagnosis. That dataset is the
 cross-cohort test set, and the features and the threshold are fixed before any
 group comparison on it is looked at (Midterm Research Plan, Section IV).
 
 Without a dataset's clean-stride table, that dataset is skipped with a note.
+``--summary <file>`` writes features_summary.txt there instead of in ``--out``:
+scripts/run_all.py uses it when WearGait-PD's files are absent, so that a summary
+of gaitpdb alone does not overwrite the committed summary of both datasets.
 
     python scripts/make_features.py [--data data/raw/gaitpdb]
 """
@@ -150,9 +153,14 @@ def main() -> None:
         "--weargait-data", default=str(ROOT / "data" / "raw" / "weargait_pd")
     )
     ap.add_argument("--out", default=str(ROOT / "results"))
+    ap.add_argument(
+        "--summary", default=None, help="default: <out>/features_summary.txt"
+    )
     args = ap.parse_args()
     interim, out = Path(args.interim), Path(args.out)
+    summary = Path(args.summary) if args.summary else out / "features_summary.txt"
     out.mkdir(parents=True, exist_ok=True)
+    summary.parent.mkdir(parents=True, exist_ok=True)
 
     say("Participant features from the clean strides (scripts/make_features.py,")
     say("definitions in gaitpdb.features; column meanings in feature_dictionary.md)")
@@ -194,7 +202,7 @@ def main() -> None:
         "(DECISIONS.md D-011).\n\n" + feature_dictionary_markdown(columns),
         encoding="utf-8",
     )
-    (out / "features_summary.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    summary.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

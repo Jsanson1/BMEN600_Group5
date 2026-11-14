@@ -1,0 +1,36 @@
+Participant features from the clean strides (scripts/make_features.py,
+definitions in gaitpdb.features; column meanings in feature_dictionary.md)
+
+Clean strides from scripts/make_clean_strides.py at commit 79228fa
+  CONTACT_SHARE = 0.05
+  FORCE_LEVEL_PERCENTILE = 95
+
+gaitpdb: 155 included participants {'PD': 87, 'Control': 68}
+  clean strides per foot: median 82; weaker foot median 81 (range 40 to 152)
+  feature, median (interquartile range), all participants together:
+    stride_time_mean_s: 1.08 (1.04 to 1.15)
+    stride_time_cv_pct: 2.41 (1.98 to 2.84)
+    stride_time_madcv_pct: 2.14 (1.47 to 2.72)
+    swing_time_mean_s: 0.403 (0.387 to 0.427)
+    swing_time_cv_pct: 3.67 (2.86 to 4.89)
+    swing_time_madcv_pct: 3.66 (3.39 to 3.93)
+    stance_time_mean_s: 0.68 (0.644 to 0.721)
+    swing_pct_mean: 37.3 (35.8 to 38.4)
+    stride_time_asymmetry_pct: 0.0505 (0.0225 to 0.0894)
+    swing_time_asymmetry_pct: 2.84 (1.21 to 5.3)
+
+weargait: 169 included participants {'PD': 94, 'Control': 75}
+  clean strides per foot: median 33; weaker foot median 32 (range 17 to 87)
+  feature, median (interquartile range), all participants together:
+    stride_time_mean_s: 1.16 (1.09 to 1.23)
+    stride_time_cv_pct: 4.96 (4.3 to 6.53)
+    stride_time_madcv_pct: 4.38 (3.55 to 6.18)
+    swing_time_mean_s: 0.396 (0.366 to 0.433)
+    swing_time_cv_pct: 8.19 (6.35 to 10.9)
+    swing_time_madcv_pct: 7.24 (5.13 to 9.34)
+    stance_time_mean_s: 0.764 (0.716 to 0.829)
+    swing_pct_mean: 33.7 (31.8 to 36)
+    stride_time_asymmetry_pct: 0.558 (0.277 to 1.1)
+    swing_time_asymmetry_pct: 4.77 (2.11 to 7.94)
+  tasks contributing clean strides (count: participants): {2: 2, 3: 167}
+

@@ -1,0 +1,60 @@
+Label-free checks of the feature tables (scripts/check_features.py)
+WearGait-PD is never split by diagnosis here; gaitpdb only in section 5.
+
+1. Dataset shift: median (interquartile range), all participants together
+  stride_time_mean_s: gaitpdb 1.08 (1.04 to 1.15); WearGait-PD 1.16 (1.09 to 1.23); ratio 1.07
+  stride_time_cv_pct: gaitpdb 2.41 (1.98 to 2.84); WearGait-PD 4.96 (4.3 to 6.53); ratio 2.06
+  stride_time_madcv_pct: gaitpdb 2.14 (1.47 to 2.72); WearGait-PD 4.38 (3.55 to 6.18); ratio 2.05
+  swing_time_mean_s: gaitpdb 0.403 (0.387 to 0.427); WearGait-PD 0.396 (0.366 to 0.433); ratio 0.98
+  swing_time_cv_pct: gaitpdb 3.67 (2.86 to 4.89); WearGait-PD 8.19 (6.35 to 10.9); ratio 2.23
+  swing_time_madcv_pct: gaitpdb 3.66 (3.39 to 3.93); WearGait-PD 7.24 (5.13 to 9.34); ratio 1.98
+  stance_time_mean_s: gaitpdb 0.68 (0.644 to 0.721); WearGait-PD 0.764 (0.716 to 0.829); ratio 1.12
+  swing_pct_mean: gaitpdb 37.3 (35.8 to 38.4); WearGait-PD 33.7 (31.8 to 36); ratio 0.90
+  stride_time_asymmetry_pct: gaitpdb 0.0505 (0.0225 to 0.0894); WearGait-PD 0.558 (0.277 to 1.1); ratio 11.05
+  swing_time_asymmetry_pct: gaitpdb 2.84 (1.21 to 5.3); WearGait-PD 4.77 (2.11 to 7.94); ratio 1.68
+
+2. Pooling WearGait-PD's three tasks: CV over the pooled strides / CV around
+   each task's own mean (1 = pooling adds no variability)
+  stride_s: median 1.096 (interquartile range 1.026 to 1.253), 169 participants with two or more tasks
+  swing_s: median 1.050 (interquartile range 1.009 to 1.132), 169 participants with two or more tasks
+
+3. Straight bouts (runs of consecutive clean strides of one foot)
+  gaitpdb: 24834 clean strides in 1240 bouts, bout length median 18 strides, median 4 bouts per participant and foot; 10.0% of clean strides open or close a bout
+    stride time / participant's median, in bouts of 5 or more strides:
+      first: mean 1.005 (SD 0.035, 1202 strides)
+      second: mean 0.999 (SD 0.030, 1202 strides)
+      middle: mean 1.000 (SD 0.030, 19905 strides)
+      second to last: mean 1.009 (SD 0.032, 1202 strides)
+      last: mean 1.012 (SD 0.034, 1202 strides)
+    all clean strides: stride-time CV median 2.41%, swing-time CV median 3.67%; weaker foot median 81 strides, 0 of 155 below D-011's minimum of 40
+    one stride dropped at each bout end: stride-time CV median 2.27%, swing-time CV median 3.48%; weaker foot median 73 strides, 7 of 155 below D-011's minimum of 40
+  weargait: 12342 clean strides in 4343 bouts, bout length median 2 strides, median 13 bouts per participant and foot; 62.1% of clean strides open or close a bout
+    stride time / participant's median, in bouts of 5 or more strides:
+      first: mean 1.067 (SD 0.106, 694 strides)
+      second: mean 1.017 (SD 0.092, 694 strides)
+      middle: mean 1.013 (SD 0.104, 1381 strides)
+      second to last: mean 1.015 (SD 0.082, 694 strides)
+      last: mean 1.042 (SD 0.098, 694 strides)
+    all clean strides: stride-time CV median 4.96%, swing-time CV median 8.19%; weaker foot median 32 strides, 0 of 169 below D-011's minimum of 10
+    one stride dropped at each bout end: stride-time CV median 2.83%, swing-time CV median 5.80%; weaker foot median 9 strides, 91 of 169 below D-011's minimum of 10
+
+4. Asymmetry against stride count in gaitpdb: median over participants of the
+   asymmetry from n random clean strides per foot (20 draws, seed 0)
+  n = 10 (155 participants): stride time 0.668%, swing time 3.02%
+  n = 20 (155 participants): stride time 0.445%, swing time 2.85%
+  n = 30 (155 participants): stride time 0.331%, swing time 2.84%
+  n = 40 (155 participants): stride time 0.240%, swing time 2.81%
+  n = all (155 participants): stride time 0.051%, swing time 2.84%
+  (WearGait-PD weaker foot: median 32 clean strides)
+
+5. AUC of each feature alone, PD against controls, gaitpdb only
+  stride_time_mean_s: 0.553
+  stride_time_cv_pct: 0.657
+  stride_time_madcv_pct: 0.730
+  swing_time_mean_s: 0.417
+  swing_time_cv_pct: 0.692
+  swing_time_madcv_pct: 0.689
+  stance_time_mean_s: 0.608
+  swing_pct_mean: 0.283
+  stride_time_asymmetry_pct: 0.516
+  swing_time_asymmetry_pct: 0.728

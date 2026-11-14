@@ -1,0 +1,39 @@
+Post hoc check, written after the pre-specified cross-cohort test: how much
+the inputs separate PD from controls inside each dataset (exploratory).
+
+gaitpdb: 155 participants (87 PD, 68 controls); median age controls 64, PD 68
+  AUC of each input alone (above 0.5: higher in PD):
+    stride_time_mean_s: 0.553
+    stride_time_cv_pct: 0.657
+    swing_time_cv_pct: 0.692
+    swing_pct_mean: 0.283
+    swing_time_asymmetry_pct: 0.728
+    Age: 0.607
+  logistic regression trained and tested inside this dataset (5 x 20 participant-grouped CV): AUC 0.789 (0.698 to 0.879)
+
+weargait: 169 participants (94 PD, 75 controls); median age controls 75, PD 68
+  AUC of each input alone (above 0.5: higher in PD):
+    stride_time_mean_s: 0.525
+    stride_time_cv_pct: 0.520
+    swing_time_cv_pct: 0.543
+    swing_pct_mean: 0.527
+    swing_time_asymmetry_pct: 0.584
+    Age: 0.261
+  logistic regression trained and tested inside this dataset (5 x 20 participant-grouped CV): AUC 0.595 (0.500 to 0.690)
+
+WearGait-PD, VA Puget Sound only: 57 participants (28 PD, 29 controls); median age controls 68, PD 69.5
+  AUC of each input alone (above 0.5: higher in PD):
+    stride_time_mean_s: 0.499
+    stride_time_cv_pct: 0.567
+    swing_time_cv_pct: 0.616
+    swing_pct_mean: 0.429
+    swing_time_asymmetry_pct: 0.547
+    Age: 0.522
+
+Age-matched pairs of the cross-cohort test (same sex, age within 3 years): 56 pairs, by patient's and control's site: NLS-HC 21, NLS-WHC 21, WPD-HC 7, WPD-WHC 7
+  7 pairs within one site and 49 joining two sites (VA Puget Sound is WPD and WHC; NLS and HC are the two Johns Hopkins sites)
+
+Cross-cohort predictions on WearGait-PD (main inputs): Spearman correlation of the predicted probability of PD with age, within each group
+  logreg: controls 0.641 (p = 5.7e-10, n = 75); PD 0.210 (p = 0.042, n = 94)
+  rf: controls 0.556 (p = 2.2e-07, n = 75); PD 0.240 (p = 0.02, n = 94)
+  svm: controls 0.623 (p = 2.4e-09, n = 75); PD 0.221 (p = 0.032, n = 94)

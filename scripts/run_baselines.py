@@ -10,14 +10,14 @@
   people the fit has not seen. This shows which features carry the separation,
   and how much the multivariable models add to the best of them.
 
-Reads results/features_usual_walk.csv (made by scripts/make_figure1.py) through
+Reads results/features_gaitpdb.csv (made by scripts/make_features.py) through
 gaitpdb.evaluation.load_feature_table, which keeps the participants aged 50 or
 over (DECISIONS.md D-006), and
 writes results/baselines_summary.txt and results/baselines_folds.csv,
 results/baselines_cv_predictions.csv and results/baselines_loso_predictions.csv
 (the files scripts/compare_models.py reads).
 
-    python scripts/run_baselines.py [--features results/features_usual_walk.csv]
+    python scripts/run_baselines.py [--features results/features_gaitpdb.csv]
 """
 
 from __future__ import annotations
@@ -66,13 +66,13 @@ def single_feature_factory(feature: str):
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--features", default="results/features_usual_walk.csv")
+    ap.add_argument("--features", default="results/features_gaitpdb.csv")
     ap.add_argument("--out", default="results")
     args = ap.parse_args()
     out = Path(args.out)
     if not Path(args.features).exists():
         raise SystemExit(
-            f"{args.features} not found: run scripts/make_figure1.py first"
+            f"{args.features} not found: run scripts/make_features.py first"
         )
     df = load_feature_table(args.features)
 
