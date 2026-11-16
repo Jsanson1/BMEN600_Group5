@@ -127,7 +127,7 @@ owner: jamie | status: doing | branch: jamie/T-033-methods-section | due: 2026-1
 owner: jamie | status: doing | branch: jamie/T-034-end-statements | due: 2026-11-20 | updated: 2026-11-13
 
 ### T-035 · Project: Introduction of the final paper (1.5 to 2 pages): the biomedical problem and who it affects, what is known and how it has been studied, the closest studies, the unresolved problem, the research question and our contribution; built from the midterm's Introduction (T-011, Anna) and Background (T-009), updated for the final result
-owner: - | status: todo | branch: - | due: 2026-11-20 | updated: 2026-11-06
+owner: jamie | status: doing | branch: jamie/T-035-introduction | due: 2026-11-20 | updated: 2026-11-16
 
 ### T-036 · Project: title page and abstract of the final paper (200 to 250 words: problem and question, datasets and population, approach, main result, interpretation, main limitation), written once the other sections are settled (after T-024, T-032, T-033, T-035)
 owner: - | status: todo | branch: - | due: 2026-11-27 | updated: 2026-11-06
