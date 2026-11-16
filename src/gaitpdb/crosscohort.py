@@ -252,10 +252,12 @@ def cross_cohort(
     participant, study, y, p), ``auc`` with its 95% participant-bootstrap
     interval (``auc_low``, ``auc_high``), the ROC-read ``sensitivity_at_spec``
     (with the achieved ``specificity_roc``), and the transferred operating
-    point: ``threshold`` is the lowest threshold reaching ``target_specificity``
-    among gaitpdb's out-of-fold predictions (one repeat of the shared
+    point: ``threshold`` is the one ``threshold_at_specificity`` reads off the ROC
+    curve of gaitpdb's out-of-fold predictions (one repeat of the shared
     cross-validation, so the threshold never comes from a model that saw the
-    participant), and ``sensitivity_transferred`` and
+    participant): the highest threshold with the best sensitivity at a
+    specificity of at least ``target_specificity``, so its specificity there can
+    be above the target. ``sensitivity_transferred`` and
     ``specificity_transferred`` are what that threshold gives in WearGait-PD.
     """
     _check(df)
