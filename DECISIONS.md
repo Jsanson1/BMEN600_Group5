@@ -104,3 +104,11 @@ Status: Accepted (proposed by Jamie on 12 November after the bug fix in #15; agr
 Status: Accepted (proposed by Jamie on 12 November; agreed by Yassien in the group chat and confirmed by Jamie on 16 November, a majority under the team contract; Anna not yet asked)
 - The paper's AI-Assisted Work section is the short version (about 250 words) in `report/final/statements.md`, to fit the 10-page limit; the long version (about 770 words) would have cost about half a page.
 - The detailed account moves, unchanged, to `report/final/ai_use.md`, which the paper's statement points to; each member checks the part about themselves there, and the members' logs remain the record behind both.
+
+### D-016 · 2026-11-16 · Finishing the final paper and the presentation
+Status: Accepted (proposed by Jamie's session on 16 November; approved by Jamie for the group the same afternoon, "keep working and assume we approve on all", then "you have permission from the team to do anything you need"; recorded by Jamie on 16 November)
+- The evaluation-design figure (`figures/figure2_evaluation_design.png`) stays out of the paper, whose Section II-F describes the four levels of testing, and is used in the presentation: at a readable size it would push the paper past 10 pages.
+- Page 1 counts toward the 10 pages until the brief's "excluding title page" is confirmed with the instructors: the paper's text before the References has to end on page 10.
+- The abstract and keywords keep the IEEE template's "Abstract—" and "Keywords—".
+- To finish on time, Jamie's AI drafts the title, abstract and keywords (T-036), the Conclusion (T-024, Yassien's task) and the presentation deck (T-038), for the group to check and change. This replaces the split proposed earlier the same day (abstract to Yassien, presentation led by Anna).
+- Under the same go-ahead, pull request #22 was merged on 16 November with its checks green and an independent first-pass review, but without a teammate's approval on GitHub as D-003 asks; its description says so.

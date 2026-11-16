@@ -22,74 +22,42 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 - **Not pushed:** nothing. (Anything listed here exists on one machine only.)
 -->
 
-## T-022 · Model comparison and cross-dataset analyses (pull request #22 open, for review)
-_Updated 2026-11-13 17:45 by Claude (cloud session) for Jamie · `jamie/T-022-cross-cohort-run` at `ae2542e`; `jamie/T-022-model-comparison` merged as #16 (branch still to delete)_
+## T-037 · Assemble the final paper (draft pull request #23; final rerun running)
+_Updated 2026-11-16 15:20 by Claude (cloud session) for Jamie · branch `jamie/T-037-paper-assembly` at `e2ecfed`; main at `02e69c9`_
 
-- **Now:** the final rerun with Anna's SVM is done and committed (`56364d4`), and pull request #22 is open: https://github.com/Jsanson1/BMEN600_Group5/pull/22 (checks green). It ran from a fresh clone of `79228fa` in three parts (one command in this cloud session stops after 2 hours; a container restart stopped the second part, and the third resumed from the kept results): about 3.4 hours of computing. Figure 5's legend now goes on two lines with four entries (`e30209a`); the README has the SVM in its Results and the record of this rerun (`56364d4`, `ae2542e`). The SVM tells the same story: 0.78 and 0.72 within gaitpdb, 0.53 (0.45 to 0.62) across cohorts, 0.63 combined. With 13 paired tests the Holm-adjusted p values rose (0.43 to 0.80, 0.47 to 0.86); none significant, before or now.
-- **Validated:** every output of the logistic regression and random forest identical to the committed one, cell for cell in every CSV; the other changed lines are the SVM's additions, the commit line in the two `features_summary.txt` files and #17's escaped `|` in `fixed_20N/feature_dictionary.md`; Figures 3 and 5 looked at; 139 tests; ruff clean. **Not verified:** the SVM's outputs by a second run (asked of Yassien in #22: one `python scripts/run_all.py` in one go); first code review of `run_cross_cohort.py`, `check_weargait_signal.py` and the figure and table scripts (about 1,650 lines with their tests).
-- **Next:** Anna opens her SVM pull request and it is merged first (#22 contains her two commits); review of #22 (Yassien or Anna); merge; mark T-022 done; delete the branches.
-- **Blocked / needs a decision:** none (the correction note to D-012 is now D-014, appended on 16 November after Jamie confirmed the group agreed).
-- **For teammates:** @anna: please open your SVM pull request (reviewer Jamie or Yassien) so it can be merged before #22; `svm.py` cites Platt under the preprint's title and 1999, while the published chapter is "Probabilities for SV machines", MIT Press, 2000, pp. 61–74, doi: 10.7551/mitpress/1113.003.0008 (S25 in `report/final/sources.md`). @yassien: #22 asks for one uninterrupted `python scripts/run_all.py` on your PC; the SVM's probabilities may differ from this rerun in about the fifth decimal (most likely the stopping tolerance of the logistic curve fitted to its distances, not tested), the rest should match to the last digits.
+- **Now:** #22 is merged into main (`02e69c9`) after an independent read-only review (no code or statistical error; four wording mismatches, all fixed: `6cdc106` on the run branch, `264a886` here), and main is merged into this branch (`ead07df`). The paper is complete in draft (D-016): title, abstract and keywords, Introduction, Methods, Results, Discussion, Conclusion and the three statements. Without the IEEE template, the assembly now numbers the references itself (`4ee45f0`). About 190 words were cut for the page limit (`e2ecfed`); in LibreOffice's layout the References start three quarters of the way down page 10. Running: the final clean rerun of every step from a fresh clone of `02e69c9` (in two-hour parts, as on 13 November), and an independent review of the whole assembled paper.
+- **Validated:** 146 tests pass on this branch, ruff clean; the threshold wording against `crosscohort.py` and `bd4c61f`; the positive predictive values against `model_comparison.txt` and `crosscohort_summary.txt`. **Not verified:** the layout in Word; the group has not read the abstract, the Conclusion or the cuts.
+- **Next:** take in the paper review's confirmed findings; when the rerun ends, compare its outputs with the committed ones and write the Methods' reproducibility sentence from it; fill the commit ID at assembly; a README section on how the paper is assembled; undraft and merge #23 (https://github.com/Jsanson1/BMEN600_Group5/pull/23); build the final PDF from the merged commit and run `check_submission.py`; PDF on D2L by a human.
+- **Blocked / needs a decision:** none.
+- **For teammates:** @anna @yassien: the whole paper is in #23; please read your own lines in `report/final/statements.md` and `report/final/ai_use.md`, now written from your logs and GitHub reviews, and say if anything is wrong. @anna: #21 was merged on 13 November and your SVM reached main with #22 today, so T-017 and T-020 can be set to done when you next start.
 - **Not pushed:** nothing.
 
-## T-023 · Discussion (in draft pull request #23, for the group's comments)
-_Updated 2026-11-16 14:31 by Claude (cloud session) for Jamie · branch `jamie/T-023-discussion`, merged into `jamie/T-037-paper-assembly` for #23_
+## T-036, T-024 · Title, abstract, keywords and Conclusion (drafted for the group, D-016)
+_Updated 2026-11-16 15:20 by Claude (cloud session) for Jamie · branch `jamie/T-037-paper-assembly` at `4ee45f0`_
 
-- **Now:** `report/final/discussion.md`, draft 3 (about 1,900 words), with the SVM (13 November) and the ledger `report/final/sources.md` (S21 to S32).
-- **Validated:** every number in the prose found in the output files at `56364d4`, except S1's 80.6%. **Not verified:** the group has not read it.
-- **Next:** the group's comments on #23 (https://github.com/Jsanson1/BMEN600_Group5/pull/23, a draft pull request that holds all five section drafts and the assembly script; merge after #22); from 16 November, changes go straight onto `jamie/T-037-paper-assembly` (this task's own branch is no longer updated); once #23 is merged, mark done and delete the branch.
+- **Now:** `report/final/abstract.md` (title, a 250-word abstract, keywords) and `report/final/conclusion.md` (about 275 words), drafted by Jamie's AI at the team's request; they summarise the other sections and add nothing to them, and each ends with a table of where every number or statement comes from.
+- **Validated:** every number against `results/model_comparison.txt` and `results/crosscohort_summary.txt`; every statement against the Results and Discussion. **Not verified:** the group, and Yassien for his Conclusion, has not read them.
+- **Next:** the group's comments on #23; merged with #23, then done.
+- **Blocked / needs a decision:** none.
+- **For teammates:** @yassien: the Conclusion was your task; change anything you like (a comment on #23, or your own branch from `jamie/T-037-paper-assembly`).
+- **Not pushed:** nothing.
+
+## T-038 · Final presentation (deck drafted, D-016)
+_Updated 2026-11-16 15:20 by Claude (cloud session) for Jamie · a Slides artifact in Jamie's Claude account, private until Jamie shares it; no branch_
+
+- **Now:** a nine-slide deck for the 5-minute talk, with speaker notes, drafted by Jamie's AI: the problem, question and datasets (Anna, about 1 min 45 s); the workflow with the evaluation-design figure and the result within gaitpdb (Jamie, about 1 min 25 s); the cross-cohort result with Figure 5, why it does not transfer, and what it means (Yassien, about 1 min 50 s).
+- **Validated:** every number against the outputs; each slide rendered and looked at. **Not verified:** the timing spoken aloud; the group has not seen it.
+- **Next:** Jamie shares the deck with Anna and Yassien from its Share menu; each rehearses their part and changes the split or wording as they like.
+- **Blocked / needs a decision:** none.
+- **For teammates:** @anna @yassien: your parts and speaker notes are in the deck once Jamie shares it.
+- **Not pushed:** nothing (the deck lives in the artifact).
+
+## T-023, T-032, T-033, T-034, T-035 · Section drafts of the final paper (in draft pull request #23)
+_Updated 2026-11-16 15:20 by Claude (cloud session) for Jamie · edited on `jamie/T-037-paper-assembly` since 16 November; the five task branches are no longer updated_
+
+- **Now:** Discussion (T-023), Results (T-032), Methods (T-033), statements (T-034, draft 5) and Introduction (T-035) are all in #23. Today: the threshold carried to WearGait-PD is described as the code sets it (one cross-validation repeat; Methods II-F, Results III-B) and the Results give the positive predictive values (`264a886`); the statements' notes are resolved from the members' logs and GitHub reviews (`26b88ab`); about 190 words of repetition cut (`e2ecfed`).
+- **Validated:** each change against the code or the output files named in its commit. **Not verified:** the group has not read the drafts.
+- **Next:** merged with #23 (https://github.com/Jsanson1/BMEN600_Group5/pull/23); then set the five tasks to done and delete their branches (on GitHub, by hand: the session cannot delete branches).
 - **Blocked / needs a decision:** none.
 - **For teammates:** @anna @yassien: comment inline on #23.
-- **Not pushed:** nothing.
-
-## T-032 · Results section of the final paper (in draft pull request #23, for the group's comments)
-_Updated 2026-11-16 14:31 by Claude (cloud session) for Jamie · branch `jamie/T-032-results-section`, merged into `jamie/T-037-paper-assembly` for #23_
-
-- **Now:** `report/final/results.md`, draft 4 (about 1,700 words), with the SVM from the final rerun and the captions of Tables I and II and of the paper's two figures (the repository's Figs. 4 and 5).
-- **Validated:** every number in the prose found in the output files at `56364d4`, except two percentages traced by hand. **Not verified:** the group has not read it.
-- **Next:** the group's comments on #23 (https://github.com/Jsanson1/BMEN600_Group5/pull/23, a draft pull request that holds all five section drafts and the assembly script; merge after #22); from 16 November, changes go straight onto `jamie/T-037-paper-assembly` (this task's own branch is no longer updated); once #23 is merged, mark done and delete the branch.
-- **Blocked / needs a decision:** none.
-- **For teammates:** @anna @yassien: comment inline on #23.
-- **Not pushed:** nothing.
-
-## T-033 · Dataset and Methods section of the final paper (in draft pull request #23, for the group's comments)
-_Updated 2026-11-16 14:31 by Claude (cloud session) for Jamie · branch `jamie/T-033-methods-section`, merged into `jamie/T-037-paper-assembly` for #23_
-
-- **Now:** `report/final/methods.md`, draft 2 (about 2,350 words). On 16 November: about 85 words cut; no figure cited (the evaluation-design figure goes to the presentation, as the group agreed through Jamie); the Synapse Pledge and Section G's AI sentence confirmed by Jamie.
-- **Validated:** every number against the outputs and code; the SVM's settings against `svm.py`. **Not verified:** the group has not read it.
-- **Next:** the group's comments on #23 (https://github.com/Jsanson1/BMEN600_Group5/pull/23, a draft pull request that holds all five section drafts and the assembly script; merge after #22); from 16 November, changes go straight onto `jamie/T-037-paper-assembly` (this task's own branch is no longer updated); once #23 is merged, mark done and delete the branch.
-- **Blocked / needs a decision:** none.
-- **For teammates:** @anna @yassien: comment inline on #23.
-- **Not pushed:** nothing.
-
-## T-034 · End statements of the final paper (in draft pull request #23, for the group's comments)
-_Updated 2026-11-16 14:31 by Claude (cloud session) for Jamie · branch `jamie/T-034-end-statements`, merged into `jamie/T-037-paper-assembly` for #23_
-
-- **Now:** `report/final/statements.md`, draft 4: the short AI statement (D-015) pointing to `report/final/ai_use.md`; Jamie's contributions confirmed; Anna's and Yassien's parts with their bracketed notes for them to resolve.
-- **Validated:** each statement about a member traced to their log, `DECISIONS.md` or the pull requests; the short statement restored word for word after the error in `a286bfe` (see the log). **Not verified:** the group has not read it.
-- **Next:** the group's comments on #23 (https://github.com/Jsanson1/BMEN600_Group5/pull/23, a draft pull request that holds all five section drafts and the assembly script; merge after #22); from 16 November, changes go straight onto `jamie/T-037-paper-assembly` (this task's own branch is no longer updated); once #23 is merged, mark done and delete the branch.
-- **Blocked / needs a decision:** none.
-- **For teammates:** @anna @yassien: comment inline on #23.
-- **Not pushed:** nothing.
-
-## T-035 · Introduction of the final paper (in draft pull request #23, for the group's comments)
-_Updated 2026-11-16 14:31 by Claude (cloud session) for Jamie · branch `jamie/T-035-introduction`, merged into `jamie/T-037-paper-assembly` for #23_
-
-- **Now:** `report/final/introduction.md`, draft 1 (about 1,350 words), built from Anna's midterm Introduction and Jamie's midterm Background, with seven new checked sources (S26 to S32).
-- **Validated:** each new source against Crossref and its text (four from the abstract only); the closing numbers against the outputs at `56364d4`. **Not verified:** the group has not read it.
-- **Next:** the group's comments on #23 (https://github.com/Jsanson1/BMEN600_Group5/pull/23, a draft pull request that holds all five section drafts and the assembly script; merge after #22); from 16 November, changes go straight onto `jamie/T-037-paper-assembly` (this task's own branch is no longer updated); once #23 is merged, mark done and delete the branch.
-- **Blocked / needs a decision:** none.
-- **For teammates:** @anna @yassien: comment inline on #23.
-- **Not pushed:** nothing.
-
-## T-037 · Assemble the final paper (draft pull request #23 open; abstract and conclusion to come)
-_Updated 2026-11-16 14:50 by Claude (cloud session) for Jamie · branch `jamie/T-037-paper-assembly` at `7e0c7b9`_
-
-- **Now:** claimed for Jamie on 16 November as lead of the assembly; the submission itself stays everyone's. `scripts/assemble_paper.py` (7 tests; 110 pass on the branch) puts the drafts in `report/final/` into one .docx in the IEEE conference layout for the midterm's `renumber_docx_citations.py` and `check_submission.py`; with `--template` it fills the IEEE Word template (not yet in hand). The five section drafts are merged into this branch, and draft pull request #23 (https://github.com/Jsanson1/BMEN600_Group5/pull/23) holds them all for the group's comments; it is to be merged after #22. Third full draft generated and sent to Jamie, after a consistency pass on the assembled text: section cross-references renumbered for the final order (II-A, II-B, II-D, III-C), AUC, UPDRS, CI and CV defined at first use, the Introduction naming the database gaitpdb like the other sections, and the note on D-015 moved out of the paper's text.
-- **Decided on 16 November (Jamie, approving for the group):** the evaluation-design figure stays out of the paper and goes to the presentation; page 1 counts toward the 10 pages until the meaning of "title page" is confirmed; the IEEE template's "Abstract—" and "Keywords—" are kept; the task split: abstract to Yassien (with his Conclusion), the presentation led by Anna, the assembly by Jamie (Anna and Yassien still to accept).
-- **Page budget:** in the second draft (LibreOffice layout, outputs of #22) the References start a fifth of the way down page 10, so the text takes about 9.2 pages; the abstract and conclusion add about half a page, leaving about 0.3 of a page. To check in Word.
-- **Validated:** citation labels all in the ledgers and numbered in order of first appearance; figures and tables placed after their first mention; `check_submission.py` lists only the expected open items. **Not verified:** the layout in Word or the IEEE template.
-- **Next:** the group's comments on #23; Yassien's abstract and conclusion (`report/final/abstract.md` with a heading `## Abstract`, `report/final/conclusion.md` with `## Conclusion`, the headings the script looks for); the IEEE Word template from the midterm's file; the final pass in Word; the commit ID; a final clean rerun at that commit; PDF on D2L.
-- **Blocked / needs a decision:** Anna's and Yassien's acceptance of the task split.
-- **For teammates:** @yassien: if you take the abstract, put it in `report/final/abstract.md` under `## Abstract`, and the Conclusion in `report/final/conclusion.md` under `## Conclusion`, on your own branch; the script picks them up. @anna: if you lead the presentation, `figures/figure2_evaluation_design.png` (on #22) is the evaluation-design figure the paper no longer uses.
 - **Not pushed:** nothing.

@@ -88,13 +88,13 @@ owner: anna | status: doing | branch: anna/T-020-support-vector-machine | due: -
 owner: jamie | status: done | branch: jamie/T-021-logistic-regression | due: 2026-10-23 | updated: 2026-10-13
 
 ### T-022 · Project: compare the three models: shared splits and metrics, comparison tables and figures, statistical comparison where appropriate (lead jamie, collaborators all; after T-019, T-020, T-021)
-owner: jamie | status: review | branch: jamie/T-022-model-comparison | due: 2026-11-06 | updated: 2026-11-13
+owner: jamie | status: done | branch: jamie/T-022-model-comparison | due: 2026-11-06 | updated: 2026-11-16
 
 ### T-023 · Project: discussion: interpret the results against the research question and the background, limitations, ethics, future work (lead jamie, collaborators all; after T-022)
 owner: jamie | status: review | branch: jamie/T-023-discussion | due: 2026-11-23 | updated: 2026-11-16
 
 ### T-024 · Project: conclusion: key findings, direct answer to the research question, next steps (lead yassien, collaborators all; after T-023)
-owner: yassien | status: todo | branch: - | due: - | updated: 2026-10-05
+owner: jamie | status: review | branch: jamie/T-037-paper-assembly | due: - | updated: 2026-11-16
 
 ### T-025 · Project: WearGait-PD external test: Synapse account and data-use terms, loader for its insole or walkway timings, run the final models on it (owner to be agreed; after T-022)
 owner: jamie | status: done | branch: jamie/T-025-weargait-access | due: 2026-11-06 | updated: 2026-11-13
@@ -130,10 +130,10 @@ owner: jamie | status: review | branch: jamie/T-034-end-statements | due: 2026-1
 owner: jamie | status: review | branch: jamie/T-035-introduction | due: 2026-11-20 | updated: 2026-11-16
 
 ### T-036 · Project: title page and abstract of the final paper (200 to 250 words: problem and question, datasets and population, approach, main result, interpretation, main limitation), written once the other sections are settled (after T-024, T-032, T-033, T-035)
-owner: - | status: todo | branch: - | due: 2026-11-27 | updated: 2026-11-06
+owner: jamie | status: review | branch: jamie/T-037-paper-assembly | due: 2026-11-27 | updated: 2026-11-16
 
 ### T-037 · Project: assemble and submit the final paper: all sections into the Word template, figures and tables placed and numbered, citations renumbered in IEEE order, page count (at most 10 excluding title page and references), the repository link and the commit ID of the graded version, a final clean rerun at that commit, PDF on D2L (all; after T-036)
 owner: jamie | status: doing | branch: jamie/T-037-paper-assembly | due: 2026-12-02 | updated: 2026-11-16
 
 ### T-038 · Project: final presentation (5 minutes plus questions; everyone speaks at least 1 minute): problem and question, datasets and independent case, workflow and comparison, results, limitations and next steps, interpretation (all)
-owner: - | status: todo | branch: - | due: 2026-11-27 | updated: 2026-11-06
+owner: jamie | status: review | branch: - | due: 2026-11-27 | updated: 2026-11-16
