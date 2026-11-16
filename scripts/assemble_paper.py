@@ -2,6 +2,7 @@
 
     python scripts/assemble_paper.py -o paper_labelled.docx [--template ieee.docx]
         [--section NAME=PATH ...] [--results results] [--figures figures]
+        [--commit <the graded version's commit>]
     python scripts/renumber_docx_citations.py paper_labelled.docx -o paper_numbered.docx
     python scripts/check_submission.py paper_numbered.docx --pdf paper_numbered.pdf
 
@@ -451,6 +452,37 @@ class Paper:
 
 # ---------------------------------------------------------------- assembly
 
+COMMIT_PLACEHOLDER = "[to fill at submission]"
+
+
+def fill_commit(texts: dict[str, str | None], commit: str) -> dict[str, str | None]:
+    """The drafts with the graded version's commit ID where they hold the placeholder
+    (the Methods' software paragraph and the Data and Code Availability statement)."""
+    return {
+        name: text.replace(COMMIT_PLACEHOLDER, commit) if text else text
+        for name, text in texts.items()
+    }
+
+
+def short_commit(ref: str) -> str:
+    """The 7-character ID of `ref`, which must name a commit in this repository; a
+    warning if origin/main does not contain it (the graded version must be public)."""
+    r = subprocess.run(
+        ["git", "rev-parse", "--verify", "--quiet", "--short=7", f"{ref}^{{commit}}"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if r.returncode != 0:
+        raise SystemExit(f"--commit: {ref!r} is not a commit in this repository")
+    sha = r.stdout.strip()
+    on_main = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", sha, "origin/main"], cwd=ROOT
+    )
+    if on_main.returncode != 0:
+        print(f"  warning: {sha} is not on origin/main; the graded version should be")
+    return sha
+
 
 def load_sections(overrides: dict[str, Path]) -> dict[str, str | None]:
     out: dict[str, str | None] = {}
@@ -565,10 +597,19 @@ def main() -> None:
     ap.add_argument("--figures", type=Path, default=ROOT / "figures")
     ap.add_argument("--ledger", type=Path, action="append", help="source ledgers")
     ap.add_argument("--pdf", action="store_true", help="also convert with LibreOffice")
+    ap.add_argument(
+        "--commit",
+        help="the graded version's commit, written where the drafts say "
+        f"{COMMIT_PLACEHOLDER!r}",
+    )
     args = ap.parse_args()
     overrides = dict(s.split("=", 1) for s in args.section)
     overrides = {k: Path(v) for k, v in overrides.items()}
     texts = load_sections(overrides)
+    if args.commit:
+        sha = short_commit(args.commit)
+        texts = fill_commit(texts, sha)
+        print(f"  commit: {sha}")
     cap_path = overrides.get("captions", ROOT / CAPTIONS.path)
     captions_md = extract(
         cap_path.read_text(encoding="utf-8"), CAPTIONS.start, CAPTIONS.stop

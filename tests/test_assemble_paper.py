@@ -90,6 +90,18 @@ def test_cited_labels_in_order_and_captions():
     }
 
 
+def test_commit_fills_only_the_placeholder():
+    texts = {
+        "methods": "repository (submitted version: commit [to fill at submission]).",
+        "statements": "is commit [to fill at submission]. [Anna: check.]",
+        "conclusion": None,
+    }
+    filled = ap.fill_commit(texts, "abc1234")
+    assert filled["methods"] == "repository (submitted version: commit abc1234)."
+    assert filled["statements"] == "is commit abc1234. [Anna: check.]"
+    assert filled["conclusion"] is None
+
+
 def test_assembled_document_is_numbered_by_the_midterm_renumbering(tmp_path):
     fig_dir, res_dir = tmp_path / "figures", tmp_path / "results"
     fig_dir.mkdir()
