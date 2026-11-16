@@ -100,6 +100,11 @@ FIGURE_CAPTIONS = {  # captions not drafted with the Results
         "to WearGait-PD. Hatched blocks are held out for testing."
     ),
 }
+FALLBACK_STYLES = {  # when a template lacks a style name, the nearest it has
+    "Affiliation": ("Author",),
+    "Keywords": ("Abstract",),
+    "Body Text": ("Normal",),
+}
 COLUMN_IN, PAGE_IN = 3.5, 7.0  # IEEE conference column and text widths (inches)
 
 CITE_GROUP = re.compile(r"\[(S\d+(?:\s*,\s*S\d+)*)\]")
@@ -320,8 +325,16 @@ class Paper:
             sec._sectPr.append(cols)
         self.columns = n
 
+    def style(self, name: str) -> str:
+        """`name` if the document has that style, else the nearest one it has."""
+        names = {s.name for s in self.doc.styles}
+        for candidate in (name, *FALLBACK_STYLES.get(name, ()), "Normal"):
+            if candidate in names:
+                return candidate
+        return "Normal"
+
     def paragraph(self, text: str, style: str = "Body Text", lead: str = ""):
-        p = self.doc.add_paragraph(style=style)
+        p = self.doc.add_paragraph(style=self.style(style))
         if lead:
             r = p.add_run(lead)
             r.italic = True
@@ -337,14 +350,14 @@ class Paper:
 
     def heading(self, number: str, text: str, level: int) -> None:
         label = text if self.numbered_headings else f"{number}. {text}"
-        self.doc.add_paragraph(label, style=f"Heading {level}")
+        self.doc.add_paragraph(label, style=self.style(f"Heading {level}"))
 
     def figure(self, path: Path, number: int, caption: str) -> None:
         w, h = Image.open(path).size
         dpi = Image.open(path).info.get("dpi", (200, 200))[0] or 200
         width = min(w / dpi, PAGE_IN)
         self.set_columns(1 if width > COLUMN_IN + 0.05 else 2)
-        p = self.doc.add_paragraph(style="Body Text")
+        p = self.doc.add_paragraph(style=self.style("Body Text"))
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         p.paragraph_format.first_line_indent = Inches(0)
         p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
@@ -356,7 +369,7 @@ class Paper:
         width_need = [max(len(r[j]) for r in rows) for j in range(len(rows[0]))]
         total = PAGE_IN if sum(width_need) > 60 else COLUMN_IN
         self.set_columns(1 if total > COLUMN_IN else 2)
-        self.doc.add_paragraph(f"Table {label}", style="table head")
+        self.doc.add_paragraph(f"Table {label}", style=self.style("table head"))
         self.paragraph(caption, "figure caption")
         t = self.doc.add_table(rows=len(rows), cols=len(rows[0]))
         t.style = "Table Grid"
@@ -370,10 +383,10 @@ class Paper:
                 cell = t.cell(i, j)
                 cell.width = Inches(widths[j])
                 para = cell.paragraphs[0]
-                para.style = self.doc.styles["references"]
+                para.style = self.doc.styles[self.style("references")]
                 run = para.add_run(re.sub(r"[*`]", "", value))
                 run.bold = i == 0
-        self.doc.add_paragraph(style="Body Text")
+        self.doc.add_paragraph(style=self.style("Body Text"))
         self.set_columns(2)
 
     def save(self, path: Path) -> None:
@@ -410,15 +423,10 @@ def assemble(
     pending_tables = ["I", "II"]
     paper = Paper(template)
 
-    paper.doc.add_paragraph(
-        "[Title to be decided with the abstract, T-036]", style="paper title"
-    ).runs[0].font.highlight_color = WD_COLOR_INDEX.YELLOW
-    paper.doc.add_paragraph(
-        "Anna Klygina, Jamie Sanson, Yassien Tawfik", style="Author"
-    )
-    paper.doc.add_paragraph(
-        "Biomedical Engineering, University of Calgary, Calgary, Canada",
-        style="Affiliation",
+    paper.paragraph("[Title to be decided with the abstract, T-036]", "paper title")
+    paper.paragraph("Anna Klygina, Jamie Sanson, Yassien Tawfik", "Author")
+    paper.paragraph(
+        "Biomedical Engineering, University of Calgary, Calgary, Canada", "Affiliation"
     )
     paper.set_columns(2)
     abstract = texts["abstract"] or "[Abstract to come, T-036.]"
@@ -458,14 +466,14 @@ def assemble(
 
     if texts["statements"]:
         first = SECTIONS["statements"].start[3:]
-        paper.doc.add_paragraph(first, style="Heading 5")
+        paper.doc.add_paragraph(first, style=paper.style("Heading 5"))
         for kind, piece in blocks(texts["statements"]):
             if kind == "h2":
-                paper.doc.add_paragraph(piece, style="Heading 5")
+                paper.doc.add_paragraph(piece, style=paper.style("Heading 5"))
             else:
                 paper.paragraph(renumber_figures(piece, mapping))
 
-    paper.doc.add_paragraph("References", style="Heading 5")
+    paper.doc.add_paragraph("References", style=paper.style("Heading 5"))
     entries = ledger_entries(ledgers)
     for label, entry in entries.items():
         paper.paragraph(f"[{label}] {entry}", "references")
