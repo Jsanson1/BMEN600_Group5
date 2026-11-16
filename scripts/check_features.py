@@ -1,11 +1,12 @@
-"""Label-free checks of the two feature tables before any cross-cohort result (T-018).
+"""Checks of the two feature tables that never use WearGait-PD's diagnosis labels (T-018).
 
 The cross-cohort test applies a model trained on gaitpdb to WearGait-PD. Before
 any group comparison on WearGait-PD is looked at, this script compares the two
-datasets without their diagnosis labels, so the choice of model inputs can be
-fixed on how the features behave as measurements (Midterm Research Plan,
-Section IV). It reads the feature tables of scripts/make_features.py and the
-clean strides of scripts/make_clean_strides.py (task T-017) and reports:
+datasets without WearGait-PD's diagnosis labels (only section 5 splits gaitpdb
+by diagnosis), so the choice of model inputs can be fixed on how the features
+behave as measurements (Midterm Research Plan, Section IV). It reads the feature
+tables of scripts/make_features.py and the clean strides of
+scripts/make_clean_strides.py (task T-017) and reports:
 
 1. Dataset shift: each feature's median and interquartile range in each
    dataset, all participants together, and the ratio of the medians.

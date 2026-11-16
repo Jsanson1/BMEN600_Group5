@@ -3,7 +3,7 @@
 Three input sets are run so the value of the gait features is visible:
 
 * covariates only (age, sex): what the group imbalance alone predicts;
-* gait only: the six timing features in gaitpdb.evaluation.MODEL_FEATURES;
+* gait only: the five timing features in gaitpdb.evaluation.MODEL_FEATURES (D-013);
 * gait + covariates: the model the plan calls for.
 
 Each is a Pipeline of standardisation and an L2-penalised logistic regression
@@ -20,7 +20,7 @@ the transformed value it passes. Evaluated under repeated participant-grouped
 cross-validation (5 folds x 20 repeats) and leave-one-study-out, with the
 splits fixed in gaitpdb.evaluation.
 
-Reads results/features_usual_walk.csv (made by scripts/make_figure1.py) through
+Reads results/features_gaitpdb.csv (made by scripts/make_features.py) through
 gaitpdb.evaluation.load_feature_table, which keeps the participants aged 50 or
 over (DECISIONS.md D-006), and
 writes results/logreg_summary.txt; results/logreg_folds.csv (every fold),
@@ -30,7 +30,7 @@ and results/logreg_coefficients.csv (odds ratios per SD with bootstrap
 intervals, for the gait-only and the gait + covariates model fitted on all
 participants).
 
-    python scripts/run_logreg.py [--features results/features_usual_walk.csv]
+    python scripts/run_logreg.py [--features results/features_gaitpdb.csv]
 """
 
 from __future__ import annotations
@@ -190,14 +190,14 @@ def linearity_check(X: np.ndarray, y: np.ndarray, names: list[str]) -> pd.DataFr
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--features", default="results/features_usual_walk.csv")
+    ap.add_argument("--features", default="results/features_gaitpdb.csv")
     ap.add_argument("--out", default="results")
     args = ap.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     if not Path(args.features).exists():
         raise SystemExit(
-            f"{args.features} not found: run scripts/make_figure1.py first"
+            f"{args.features} not found: run scripts/make_features.py first"
         )
     df = load_feature_table(args.features)
 

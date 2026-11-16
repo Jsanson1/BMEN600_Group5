@@ -1,75 +1,89 @@
-Model comparison on the usual walk: 162 participants aged 50 or over (91 PD, 71 controls; DECISIONS.md D-006), one recording each, identical splits for every model (checked fold by fold).
+Model comparison on the usual walk: 155 participants aged 50 or over (87 PD, 68 controls; DECISIONS.md D-006), one recording each, identical splits for every model (checked fold by fold).
 Within protocol: 5-fold participant-grouped cross-validation repeated 20 times; mean over the 100 test folds, 95% interval corrected for the overlap between training sets (Nadeau and Bengio 2003). Across protocols: each sub-study held out in turn, the model trained on the other two; AUC per held-out study and for all out-of-study predictions pooled, 95% participant-bootstrap intervals (2000 resamples). Drop: pooled AUC of the out-of-fold predictions (averaged over the 20 repeats) minus pooled out-of-study AUC, paired bootstrap.
 
 AUC by model:
   Logistic regression: gait features
-      within protocol 0.82 (0.75 to 0.90); across protocols 0.77 (0.70 to 0.84) (Ga 0.83, Ju 0.78, Si 0.74); drop 0.05 (0.02 to 0.09)
+      within protocol 0.79 (0.70 to 0.88); across protocols 0.73 (0.65 to 0.81) (Ga 0.80, Ju 0.80, Si 0.66); drop 0.05 (0.02 to 0.09)
   Logistic regression: gait features + age, sex
-      within protocol 0.81 (0.73 to 0.88); across protocols 0.77 (0.70 to 0.84) (Ga 0.83, Ju 0.77, Si 0.75); drop 0.04 (0.01 to 0.07)
+      within protocol 0.79 (0.71 to 0.88); across protocols 0.74 (0.67 to 0.81) (Ga 0.80, Ju 0.82, Si 0.66); drop 0.05 (0.02 to 0.09)
   Logistic regression: age and sex only
-      within protocol 0.59 (0.49 to 0.69); across protocols 0.57 (0.48 to 0.66) (Ga 0.53, Ju 0.61, Si 0.64); drop -0.01 (-0.06 to 0.03)
+      within protocol 0.60 (0.51 to 0.69); across protocols 0.58 (0.49 to 0.67) (Ga 0.52, Ju 0.64, Si 0.62); drop -0.01 (-0.06 to 0.04)
+  SVM: gait features
+      within protocol 0.78 (0.68 to 0.87); across protocols 0.72 (0.64 to 0.79) (Ga 0.77, Ju 0.78, Si 0.63); drop 0.06 (0.02 to 0.10)
+  SVM: gait features + age, sex
+      within protocol 0.78 (0.70 to 0.87); across protocols 0.73 (0.65 to 0.80) (Ga 0.76, Ju 0.79, Si 0.68); drop 0.06 (0.02 to 0.10)
   Random forest: gait features
-      within protocol 0.78 (0.70 to 0.87); across protocols 0.77 (0.69 to 0.84) (Ga 0.81, Ju 0.74, Si 0.74); drop 0.01 (-0.02 to 0.04)
+      within protocol 0.75 (0.65 to 0.85); across protocols 0.70 (0.62 to 0.78) (Ga 0.79, Ju 0.69, Si 0.65); drop 0.05 (0.01 to 0.08)
   Random forest: gait features + age, sex
-      within protocol 0.78 (0.70 to 0.86); across protocols 0.77 (0.70 to 0.84) (Ga 0.81, Ju 0.75, Si 0.74); drop 0.01 (-0.02 to 0.04)
+      within protocol 0.74 (0.64 to 0.83); across protocols 0.73 (0.65 to 0.80) (Ga 0.78, Ju 0.74, Si 0.69); drop 0.01 (-0.02 to 0.05)
   Swing-time asymmetry alone
-      within protocol 0.76 (0.69 to 0.84); across protocols 0.76 (0.68 to 0.83) (Ga 0.76, Ju 0.73, Si 0.78); drop -0.00 (-0.01 to 0.01)
+      within protocol 0.73 (0.64 to 0.81); across protocols 0.71 (0.63 to 0.79) (Ga 0.68, Ju 0.73, Si 0.77); drop 0.01 (-0.01 to 0.03)
   Swing fraction of the stride alone
-      within protocol 0.76 (0.67 to 0.84); across protocols 0.75 (0.67 to 0.82) (Ga 0.88, Ju 0.74, Si 0.64); drop 0.00 (-0.01 to 0.02)
+      within protocol 0.71 (0.61 to 0.82); across protocols 0.70 (0.61 to 0.77) (Ga 0.88, Ju 0.71, Si 0.58); drop 0.01 (-0.00 to 0.03)
   Swing-time variability alone
-      within protocol 0.68 (0.60 to 0.75); across protocols 0.66 (0.58 to 0.75) (Ga 0.72, Ju 0.58, Si 0.74); drop 0.01 (-0.01 to 0.02)
+      within protocol 0.69 (0.61 to 0.78); across protocols 0.69 (0.61 to 0.77) (Ga 0.70, Ju 0.70, Si 0.68); drop -0.01 (-0.02 to 0.00)
   Stride-time variability alone
-      within protocol 0.60 (0.49 to 0.70); across protocols 0.57 (0.47 to 0.66) (Ga 0.46, Ju 0.55, Si 0.74); drop 0.02 (-0.01 to 0.04)
+      within protocol 0.66 (0.56 to 0.75); across protocols 0.66 (0.57 to 0.74) (Ga 0.73, Ju 0.72, Si 0.54); drop -0.01 (-0.02 to 0.01)
   Mean stride time alone
-      within protocol 0.55 (0.47 to 0.63); across protocols 0.51 (0.42 to 0.60) (Ga 0.51, Ju 0.42, Si 0.67); drop 0.03 (-0.01 to 0.07)
-  Stride-time asymmetry alone
-      within protocol 0.47 (0.38 to 0.57); across protocols 0.42 (0.33 to 0.50) (Ga 0.38, Ju 0.58, Si 0.38); drop 0.04 (-0.05 to 0.12)
+      within protocol 0.56 (0.46 to 0.65); across protocols 0.52 (0.43 to 0.60) (Ga 0.51, Ju 0.40, Si 0.68); drop 0.02 (-0.01 to 0.06)
   Chance (share of PD in training)
-      within protocol 0.50 (0.50 to 0.50); across protocols 0.46 (0.38 to 0.55) (Ga 0.50, Ju 0.50, Si 0.50); drop 0.00 (-0.12 to 0.13)
-  Pooled AUCs mix predictions from different fitted models (one per fold or per held-out study). The chance model, whose AUC is exactly 0.5 within every fold and every study, shows how far pooling alone can move them: 0.47 for the pooled out-of-fold and 0.46 for the pooled out-of-study predictions.
+      within protocol 0.50 (0.50 to 0.50); across protocols 0.47 (0.39 to 0.56) (Ga 0.50, Ju 0.50, Si 0.50); drop -0.03 (-0.16 to 0.10)
+  Pooled AUCs mix predictions from different fitted models (one per fold or per held-out study). The chance model, whose AUC is exactly 0.5 within every fold and every study, shows how far pooling alone can move them: 0.44 for the pooled out-of-fold and 0.47 for the pooled out-of-study predictions.
 
 Threshold metrics within protocol (probability 0.5), and Brier score:
-  Logistic regression: gait features: balanced accuracy 0.76 (0.68 to 0.83), sensitivity 0.80, specificity 0.71, Brier 0.176
-  Logistic regression: gait features + age, sex: balanced accuracy 0.74 (0.67 to 0.82), sensitivity 0.81, specificity 0.68, Brier 0.181
-  Logistic regression: age and sex only: balanced accuracy 0.49 (0.45 to 0.53), sensitivity 0.89, specificity 0.09, Brier 0.248
-  Random forest: gait features: balanced accuracy 0.70 (0.62 to 0.78), sensitivity 0.75, specificity 0.64, Brier 0.194
-  Random forest: gait features + age, sex: balanced accuracy 0.69 (0.62 to 0.77), sensitivity 0.75, specificity 0.64, Brier 0.194
-  Swing-time asymmetry alone: balanced accuracy 0.68 (0.61 to 0.75), sensitivity 0.78, specificity 0.58, Brier 0.201
-  Swing fraction of the stride alone: balanced accuracy 0.69 (0.61 to 0.77), sensitivity 0.72, specificity 0.66, Brier 0.203
-  Swing-time variability alone: balanced accuracy 0.62 (0.54 to 0.69), sensitivity 0.73, specificity 0.50, Brier 0.224
-  Stride-time variability alone: balanced accuracy 0.58 (0.51 to 0.65), sensitivity 0.82, specificity 0.33, Brier 0.241
-  Mean stride time alone: balanced accuracy 0.48 (0.43 to 0.53), sensitivity 0.90, specificity 0.07, Brier 0.246
-  Stride-time asymmetry alone: balanced accuracy 0.49 (0.46 to 0.52), sensitivity 0.96, specificity 0.02, Brier 0.250
+  Logistic regression: gait features: balanced accuracy 0.68 (0.59 to 0.77), sensitivity 0.74, specificity 0.62, Brier 0.187
+  Logistic regression: gait features + age, sex: balanced accuracy 0.68 (0.60 to 0.76), sensitivity 0.74, specificity 0.62, Brier 0.185
+  Logistic regression: age and sex only: balanced accuracy 0.50 (0.46 to 0.55), sensitivity 0.86, specificity 0.15, Brier 0.246
+  SVM: gait features: balanced accuracy 0.68 (0.59 to 0.77), sensitivity 0.71, specificity 0.65, Brier 0.194
+  SVM: gait features + age, sex: balanced accuracy 0.69 (0.60 to 0.77), sensitivity 0.73, specificity 0.65, Brier 0.191
+  Random forest: gait features: balanced accuracy 0.66 (0.58 to 0.74), sensitivity 0.72, specificity 0.60, Brier 0.205
+  Random forest: gait features + age, sex: balanced accuracy 0.65 (0.57 to 0.74), sensitivity 0.72, specificity 0.59, Brier 0.208
+  Swing-time asymmetry alone: balanced accuracy 0.66 (0.58 to 0.73), sensitivity 0.75, specificity 0.56, Brier 0.213
+  Swing fraction of the stride alone: balanced accuracy 0.64 (0.56 to 0.73), sensitivity 0.72, specificity 0.57, Brier 0.213
+  Swing-time variability alone: balanced accuracy 0.64 (0.56 to 0.71), sensitivity 0.70, specificity 0.58, Brier 0.229
+  Stride-time variability alone: balanced accuracy 0.59 (0.50 to 0.67), sensitivity 0.67, specificity 0.51, Brier 0.226
+  Mean stride time alone: balanced accuracy 0.48 (0.42 to 0.54), sensitivity 0.88, specificity 0.08, Brier 0.247
   Chance (share of PD in training): balanced accuracy 0.50 (0.50 to 0.50), sensitivity 1.00, specificity 0.00, Brier 0.246
 
 Sensitivity at 90% specificity, read off the ROC curve of the pooled out-of-fold predictions (within protocol) and of the pooled out-of-study predictions (across protocols), 95% participant-bootstrap intervals; and the predictive values of the within-protocol operating point at a prevalence of 1% (Bayes' theorem; the samples are about half PD):
-  Logistic regression: gait features: within 0.52 (0.30 to 0.69), across 0.54 (0.34 to 0.65); PPV 0.058, NPV 0.9947
-  Logistic regression: gait features + age, sex: within 0.52 (0.27 to 0.66), across 0.49 (0.30 to 0.64); PPV 0.050, NPV 0.9946
-  Logistic regression: age and sex only: within 0.13 (0.01 to 0.32), across 0.15 (0.04 to 0.34); PPV 0.013, NPV 0.9904
-  Random forest: gait features: within 0.53 (0.30 to 0.66), across 0.57 (0.35 to 0.67); PPV 0.051, NPV 0.9947
-  Random forest: gait features + age, sex: within 0.49 (0.26 to 0.63), across 0.54 (0.27 to 0.68); PPV 0.048, NPV 0.9944
-  Swing-time asymmetry alone: within 0.45 (0.26 to 0.61), across 0.44 (0.25 to 0.59); PPV 0.044, NPV 0.9939
-  Swing fraction of the stride alone: within 0.45 (0.31 to 0.61), across 0.47 (0.29 to 0.60); PPV 0.044, NPV 0.9939
-  Swing-time variability alone: within 0.23 (0.11 to 0.41), across 0.26 (0.11 to 0.42); PPV 0.027, NPV 0.9916
-  Stride-time variability alone: within 0.11 (0.02 to 0.20), across 0.10 (0.02 to 0.19); PPV 0.011, NPV 0.9901
-  Mean stride time alone: within 0.13 (0.04 to 0.25), across 0.12 (0.05 to 0.25); PPV 0.019, NPV 0.9907
-  Stride-time asymmetry alone: within 0.00 (0.00 to 0.11), across 0.07 (0.02 to 0.14); PPV 0.000, NPV 0.9899
-  Chance (share of PD in training): within 0.11 (0.02 to 0.20), across 0.00 (0.00 to 0.00); PPV 0.011, NPV 0.9901
+  Logistic regression: gait features: within 0.53 (0.36 to 0.63), across 0.47 (0.34 to 0.57); PPV 0.057, NPV 0.9948
+  Logistic regression: gait features + age, sex: within 0.46 (0.32 to 0.65), across 0.47 (0.36 to 0.60); PPV 0.059, NPV 0.9941
+  Logistic regression: age and sex only: within 0.14 (0.06 to 0.27), across 0.14 (0.04 to 0.30); PPV 0.031, NPV 0.9910
+  SVM: gait features: within 0.53 (0.37 to 0.63), across 0.43 (0.28 to 0.56); PPV 0.057, NPV 0.9948
+  SVM: gait features + age, sex: within 0.49 (0.34 to 0.66), across 0.46 (0.28 to 0.61); PPV 0.054, NPV 0.9944
+  Random forest: gait features: within 0.43 (0.31 to 0.58), across 0.32 (0.22 to 0.56); PPV 0.046, NPV 0.9937
+  Random forest: gait features + age, sex: within 0.45 (0.32 to 0.57), across 0.41 (0.26 to 0.56); PPV 0.058, NPV 0.9940
+  Swing-time asymmetry alone: within 0.46 (0.26 to 0.59), across 0.39 (0.21 to 0.55); PPV 0.050, NPV 0.9941
+  Swing fraction of the stride alone: within 0.41 (0.22 to 0.53), across 0.31 (0.19 to 0.48); PPV 0.045, NPV 0.9935
+  Swing-time variability alone: within 0.20 (0.08 to 0.43), across 0.18 (0.09 to 0.43); PPV 0.022, NPV 0.9912
+  Stride-time variability alone: within 0.31 (0.17 to 0.45), across 0.31 (0.19 to 0.46); PPV 0.034, NPV 0.9924
+  Mean stride time alone: within 0.10 (0.02 to 0.26), across 0.11 (0.05 to 0.25); PPV 0.012, NPV 0.9902
+  Chance (share of PD in training): within 0.08 (0.02 to 0.26), across 0.00 (0.00 to 0.00); PPV 0.009, NPV 0.9899
 
 Paired differences in AUC (first minus second). Within protocol: corrected repeated k-fold cross-validation t-test on the 100 paired folds (Bouckaert and Frank 2004), p values Holm-adjusted over the pairs listed. Across protocols: paired bootstrap of the pooled out-of-study AUC.
   Logistic regression: gait features vs Swing-time asymmetry alone
-      within +0.061 (+0.012 to +0.110), t(99) = 2.46, p = 0.016, Holm p = 0.110; across +0.016 (-0.043 to +0.074)
+      within +0.063 (-0.006 to +0.131), t(99) = 1.82, p = 0.072, Holm p = 0.796; across +0.023 (-0.048 to +0.090)
   Logistic regression: gait features + age, sex vs Swing-time asymmetry alone
-      within +0.045 (-0.009 to +0.100), t(99) = 1.66, p = 0.100, Holm p = 0.599; across +0.018 (-0.042 to +0.079)
+      within +0.068 (+0.006 to +0.130), t(99) = 2.19, p = 0.031, Holm p = 0.402; across +0.033 (-0.043 to +0.110)
   Logistic regression: age and sex only vs Swing-time asymmetry alone
-      within -0.177 (-0.301 to -0.053), t(99) = -2.84, p = 0.006, Holm p = 0.044; across -0.184 (-0.307 to -0.070)
+      within -0.125 (-0.255 to +0.005), t(99) = -1.90, p = 0.060, Holm p = 0.718; across -0.128 (-0.257 to -0.002)
+  SVM: gait features vs Swing-time asymmetry alone
+      within +0.051 (-0.026 to +0.128), t(99) = 1.30, p = 0.196, Holm p = 1.000; across +0.010 (-0.063 to +0.083)
+  SVM: gait features + age, sex vs Swing-time asymmetry alone
+      within +0.058 (-0.008 to +0.124), t(99) = 1.73, p = 0.086, Holm p = 0.861; across +0.021 (-0.059 to +0.099)
   Random forest: gait features vs Swing-time asymmetry alone
-      within +0.022 (-0.040 to +0.084), t(99) = 0.71, p = 0.482, Holm p = 1.000; across +0.009 (-0.060 to +0.082)
+      within +0.025 (-0.055 to +0.104), t(99) = 0.62, p = 0.538, Holm p = 1.000; across -0.009 (-0.090 to +0.073)
   Random forest: gait features + age, sex vs Swing-time asymmetry alone
-      within +0.017 (-0.044 to +0.078), t(99) = 0.55, p = 0.581, Holm p = 1.000; across +0.013 (-0.053 to +0.081)
+      within +0.013 (-0.058 to +0.083), t(99) = 0.35, p = 0.726, Holm p = 1.000; across +0.017 (-0.069 to +0.100)
+  Logistic regression: gait features vs SVM: gait features
+      within +0.012 (-0.027 to +0.051), t(99) = 0.61, p = 0.546, Holm p = 1.000; across +0.013 (-0.011 to +0.039)
   Logistic regression: gait features vs Random forest: gait features
-      within +0.039 (-0.013 to +0.091), t(99) = 1.49, p = 0.140, Holm p = 0.700; across +0.007 (-0.030 to +0.043)
+      within +0.038 (-0.006 to +0.082), t(99) = 1.70, p = 0.093, Holm p = 0.861; across +0.032 (-0.019 to +0.082)
+  SVM: gait features vs Random forest: gait features
+      within +0.026 (-0.020 to +0.072), t(99) = 1.12, p = 0.267, Holm p = 1.000; across +0.019 (-0.037 to +0.071)
   Logistic regression: gait features + age, sex vs Logistic regression: gait features
-      within -0.015 (-0.046 to +0.015), t(99) = -0.99, p = 0.325, Holm p = 1.000; across +0.002 (-0.022 to +0.025)
+      within +0.006 (-0.031 to +0.043), t(99) = 0.31, p = 0.760, Holm p = 1.000; across +0.010 (-0.027 to +0.046)
+  SVM: gait features + age, sex vs SVM: gait features
+      within +0.007 (-0.044 to +0.059), t(99) = 0.29, p = 0.776, Holm p = 1.000; across +0.011 (-0.039 to +0.062)
   Random forest: gait features + age, sex vs Random forest: gait features
-      within -0.005 (-0.032 to +0.022), t(99) = -0.37, p = 0.716, Holm p = 1.000; across +0.004 (-0.010 to +0.018)
+      within -0.012 (-0.053 to +0.028), t(99) = -0.60, p = 0.552, Holm p = 1.000; across +0.025 (-0.010 to +0.060)
