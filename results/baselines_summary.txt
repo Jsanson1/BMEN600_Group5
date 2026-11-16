@@ -1,11 +1,10 @@
-Baselines on 162 participants aged 50 or over (91 PD, 71 controls; DECISIONS.md D-006), one usual-walk recording each, under the same splits as the models (5-fold participant-grouped cross-validation repeated 20 times; leave-one-study-out).
+Baselines on 155 participants aged 50 or over (87 PD, 68 controls; DECISIONS.md D-006), one usual-walk recording each, under the same splits as the models (5-fold participant-grouped cross-validation repeated 20 times; leave-one-study-out).
 Cross-validation: mean over the test folds with the corrected 95% interval (Nadeau and Bengio 2003). Leave-one-study-out: all out-of-study predictions pooled, 95% participant-bootstrap interval.
 
 model                                    AUC within protocol      AUC across protocols     Brier
-baseline: chance                         0.500 (0.500-0.500)      0.462 (0.382-0.549)      0.246
-single: stride_time_mean_s               0.549 (0.467-0.632)      0.510 (0.420-0.598)      0.246
-single: stride_time_cv_pct               0.596 (0.493-0.699)      0.565 (0.471-0.661)      0.241
-single: swing_time_cv_pct                0.676 (0.597-0.755)      0.662 (0.579-0.746)      0.224
-single: swing_pct_mean                   0.756 (0.673-0.839)      0.745 (0.666-0.819)      0.203
-single: stride_time_asymmetry_pct        0.474 (0.378-0.569)      0.416 (0.331-0.504)      0.250
-single: swing_time_asymmetry_pct         0.763 (0.688-0.837)      0.757 (0.680-0.829)      0.201
+baseline: chance                         0.500 (0.500-0.500)      0.467 (0.386-0.559)      0.246
+single: stride_time_mean_s               0.555 (0.457-0.654)      0.516 (0.427-0.604)      0.247
+single: stride_time_cv_pct               0.657 (0.562-0.752)      0.657 (0.568-0.739)      0.226
+single: swing_time_cv_pct                0.694 (0.608-0.780)      0.691 (0.609-0.772)      0.229
+single: swing_pct_mean                   0.714 (0.610-0.817)      0.696 (0.609-0.772)      0.213
+single: swing_time_asymmetry_pct         0.726 (0.639-0.813)      0.711 (0.629-0.787)      0.213

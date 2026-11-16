@@ -173,7 +173,7 @@ def column_figure(ex: pd.DataFrame, record: str, feats: pd.DataFrame, fig_dir: P
         )
         fig.subplots_adjust(left=0.15, right=0.98, top=0.94, bottom=0.08)
         fig.savefig(fig_dir / "figure1_column.png", dpi=600)
-        fig.savefig(fig_dir / "figure1_column.pdf")
+        fig.savefig(fig_dir / "figure1_column.pdf", metadata={"CreationDate": None})
     plt.close(fig)
 
 
@@ -305,7 +305,10 @@ def main() -> None:
     )
     fig.tight_layout()
     fig.savefig(fig_dir / "figure1_events_and_variability.png", dpi=200)
-    fig.savefig(fig_dir / "figure1_events_and_variability.pdf")
+    fig.savefig(
+        fig_dir / "figure1_events_and_variability.pdf",
+        metadata={"CreationDate": None},
+    )
     plt.close(fig)
     column_figure(ex, parse_record_name(ex_path).record, feats, fig_dir)
 

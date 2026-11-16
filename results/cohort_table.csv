@@ -1,0 +1,5 @@
+Dataset,Group,Participants,Sub-study or site,"Age, years","Women, n (%)",Hoehn and Yahr stage,"Clean strides, foot with fewer"
+gaitpdb,PD,87,"Si 34, Ga 28, Ju 25",68 (60 to 72),31 (36%),2 (2 to 3),82 (75 to 90)
+gaitpdb,Control,68,"Si 28, Ju 22, Ga 18",64 (57 to 68),30 (44%),,80 (58 to 89)
+WearGait-PD,PD,94,"JH Outpatient Center 66, VA Puget Sound 28",68 (62 to 73),33 (35%),"2 (1 to 4), 5 missing",31 (28 to 37)
+WearGait-PD,Control,75,"JH Bayview 46, VA Puget Sound 29",75 (68 to 81),41 (55%),,33 (26 to 42)

@@ -70,12 +70,14 @@ MODEL_FEATURES = [
     "stride_time_cv_pct",
     "swing_time_cv_pct",
     "swing_pct_mean",
-    "stride_time_asymmetry_pct",
     "swing_time_asymmetry_pct",
 ]
-"""Six timing features. Cadence, mean swing time and mean stance time are left out
-because they are functions of the others (cadence is 60 / stride time; swing and
-stance sum to the stride), which would add nothing but collinearity."""
+"""Five timing features (DECISIONS.md D-013). Cadence, mean swing time and mean
+stance time are left out because they are functions of the others (cadence is
+60 / stride time; swing and stance sum to the stride), which would add nothing
+but collinearity. Stride-time asymmetry, the midterm's sixth feature, is left out
+because it is near zero in any continuous walk and mostly measures how many
+strides a participant has (results/feature_checks.txt)."""
 
 LOG_TRANSFORMED = ["swing_time_asymmetry_pct"]
 """Inputs that enter the models as log(1 + x). Swing-time asymmetry is skewed and
@@ -109,7 +111,7 @@ def log_transform(columns: list[str]) -> FunctionTransformer:
 
 
 def load_feature_table(path: str) -> pd.DataFrame:
-    """Read results/features_usual_walk.csv (one usual-walk record per participant).
+    """Read a feature table with one row per participant (results/features_gaitpdb.csv).
 
     Keeps the participants who meet the age rule (``gaitpdb.cohort``, DECISIONS.md
     D-006), adds ``sex_male`` (1 = male) and ``y`` (1 = PD) and drops participants
