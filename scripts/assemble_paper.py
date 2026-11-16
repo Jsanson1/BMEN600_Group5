@@ -35,6 +35,7 @@ from __future__ import annotations
 import argparse
 import re
 import subprocess
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -53,12 +54,15 @@ FINAL = "report/final"
 
 @dataclass(frozen=True)
 class Section:
-    """Where one part of the paper is in its draft: from `start` up to `stop`."""
+    """Where one part of the paper is in its draft: from `start` up to `stop`. With
+    `keep_start`, the line `start` begins is part of the text: a section whose start
+    marker is its own first subsection heading ("## A. Datasets") keeps that heading."""
 
     path: str
     start: str
     stop: str | None = None  # None: to the end of the file
     heading: str | None = None  # the paper's heading; None for the end statements
+    keep_start: bool = False
 
 
 SECTIONS = {
@@ -73,12 +77,21 @@ SECTIONS = {
         "## A. Datasets",
         "## Settings and where",
         "Dataset and Methods",
+        keep_start=True,
     ),
     "results": Section(
-        f"{FINAL}/results.md", "## A. Participants", "## Tables and figures", "Results"
+        f"{FINAL}/results.md",
+        "## A. Participants",
+        "## Tables and figures",
+        "Results",
+        keep_start=True,
     ),
     "discussion": Section(
-        f"{FINAL}/discussion.md", "## A. Answer", "## Numbers and where", "Discussion"
+        f"{FINAL}/discussion.md",
+        "## A. Answer",
+        "## Numbers and where",
+        "Discussion",
+        keep_start=True,
     ),
     "conclusion": Section(
         f"{FINAL}/conclusion.md", "## Conclusion", "## Where each", "Conclusion"
@@ -108,10 +121,14 @@ FALLBACK_STYLES = {  # when a template lacks a style name, the nearest it has
     "Affiliation": ("Author",),
     "Keywords": ("Abstract",),
     "Body Text": ("Normal",),
+    "table footnote": ("figure caption",),
 }
+SENTENCE_END = re.compile(r"(?<=\.)\s+(?=[A-Z(])")
 COLUMN_IN, PAGE_IN = 3.5, 7.0  # IEEE conference column and text widths (inches)
+CHAR_IN, CELL_PAD_IN = 0.062, 0.16  # an 8-pt bold character; a cell's side margins
 
 CITE_GROUP = re.compile(r"\[(S\d+(?:\s*,\s*S\d+)*)\]")
+CITE_RUN = re.compile(r"\[S\d+(?:\s*,\s*S\d+)*\](?:,\s*\[S\d+(?:\s*,\s*S\d+)*\])+")
 FIG_REF = re.compile(r"\b(Figs?)\. (\d+)([A-Z]?)\b")
 TABLE_REF = re.compile(r"\bTables? (I{1,3}|IV)\b")
 NOTE = re.compile(r"\[(?!S\d+(?:\s*,\s*S\d+)*\])[^\[\]]*\s[^\[\]]*\]")
@@ -119,12 +136,13 @@ LINK = re.compile(r"\[([^\]]+)\]\((https?://[^)]+)\)")
 INLINE = re.compile(r"(\*\*[^*]+\*\*|\*[^*\s][^*]*\*|`[^`]+`)")
 
 
-def extract(text: str, start: str, stop: str | None) -> str:
-    """The text after the line `start` and before `stop` (or the end)."""
+def extract(text: str, start: str, stop: str | None, keep_start: bool = False) -> str:
+    """The text after the line `start` (from the start of that line with
+    `keep_start`) and before `stop` (or the end)."""
     i = text.find(start)
     if i < 0:
         raise ValueError(f"heading {start!r} not found")
-    body = text[i + len(start) :]
+    body = text[i:] if keep_start else text[i + len(start) :]
     if stop is not None:
         j = body.find(stop)
         if j < 0:
@@ -220,6 +238,14 @@ def ledger_entries(paths: list[Path]) -> dict[str, str]:
     return out
 
 
+def merge_citation_runs(text: str) -> str:
+    """Adjacent citation groups as one, "[S15], [S26]" -> "[S15, S26]", so that the
+    renumbering writes their numbers in ascending order ("[1], [2]", not "[2], [1]")."""
+    return CITE_RUN.sub(
+        lambda m: "[" + ", ".join(re.findall(r"S\d+", m.group(0))) + "]", text
+    )
+
+
 def cited_labels(texts: list[str]) -> list[str]:
     order = []
     for t in texts:
@@ -251,11 +277,63 @@ def md_table(path: Path) -> list[list[str]]:
 # ---------------------------------------------------------------- Word output
 
 
+def load_template(path: Path):
+    """The template as python-docx opens it. Word can save a document in Strict Open
+    XML, which python-docx cannot read, and IEEE's own conference template comes that
+    way; such a file is converted to Transitional Open XML with LibreOffice first."""
+    try:
+        return Document(str(path))
+    except KeyError:  # no Transitional officeDocument relationship
+        out = Path(tempfile.mkdtemp())
+        subprocess.run(
+            ["soffice", "--headless", "--convert-to", "docx:MS Word 2007 XML"]
+            + ["--outdir", str(out), str(path)],
+            check=True,
+            capture_output=True,
+        )
+        print(f"  template: {path.name} converted from Strict Open XML by LibreOffice")
+        return Document(str(out / f"{path.stem}.docx"))
+
+
+def column_widths(rows: list[list[str]], total: float) -> list[float]:
+    """Column widths (inches) summing to `total`. Each column is at least as wide as
+    its longest word, so no word breaks inside a cell; the space left goes to the
+    columns in equal shares, each column taking no more than it needs to set its
+    longest entry on one line, so short columns reach one line first."""
+    cells = [[re.sub(r"[*`]", "", c) for c in row] for row in rows]
+    n = len(cells[0])
+    longest = [max(len(r[j]) for r in cells) for j in range(n)]
+    word = [
+        max((len(w) for r in cells for w in r[j].split()), default=1) for j in range(n)
+    ]
+    mins = [k * CHAR_IN + CELL_PAD_IN for k in word]
+    if sum(mins) >= total:
+        return [total * m / sum(mins) for m in mins]
+    need = [max(k * CHAR_IN + CELL_PAD_IN - m, 0.0) for k, m in zip(longest, mins)]
+    extra = [0.0] * n
+    spare = total - sum(mins)
+    active = [j for j in range(n) if need[j] > 0]
+    while active and spare > 1e-9:
+        share = spare / len(active)
+        filled = [j for j in active if need[j] - extra[j] <= share]
+        if not filled:
+            for j in active:
+                extra[j] += share
+            spare = 0.0
+            break
+        for j in filled:
+            spare -= need[j] - extra[j]
+            extra[j] = need[j]
+        active = [j for j in active if j not in filled]
+    widths = [m + e for m, e in zip(mins, extra)]
+    return [w * total / sum(widths) for w in widths]
+
+
 class Paper:
     """A .docx in the IEEE conference layout, with the template's style names."""
 
     def __init__(self, template: Path | None):
-        self.doc = Document(str(template)) if template else Document()
+        self.doc = load_template(template) if template else Document()
         if template:
             body = self.doc.element.body
             for child in list(body):
@@ -265,7 +343,7 @@ class Paper:
             self._setup()
         self.columns = 1
         # The template numbers its headings itself (I., A.); the fallback styles do not.
-        self.numbered_headings = template is not None
+        self.numbered_headings = self.numbers_itself("Heading 1")
 
     def _setup(self) -> None:
         sec = self.doc.sections[0]
@@ -306,6 +384,9 @@ class Paper:
                 st = styles.add_style(name, WD_STYLE_TYPE.PARAGRAPH)
                 st.base_style = styles["Normal"]
             st.font.name, st.font.size = "Times New Roman", Pt(size)
+            rfonts = st.element.get_or_add_rPr().find(qn("w:rFonts"))
+            for attr in ("asciiTheme", "hAnsiTheme", "eastAsiaTheme", "cstheme"):
+                rfonts.attrib.pop(qn(f"w:{attr}"), None)  # the theme font would win
             st.font.bold, st.font.italic, st.font.small_caps = bold, italic, caps
             st.font.color.rgb = None
             st.paragraph_format.alignment = align[al]
@@ -382,13 +463,16 @@ class Paper:
             sec._sectPr.append(cols)
         self.columns = n
 
-    def style(self, name: str) -> str:
-        """`name` if the document has that style, else the nearest one it has."""
-        names = {s.name for s in self.doc.styles}
+    def style(self, name: str):
+        """The document's style called `name`, else the nearest one it has. Found by
+        scanning the styles rather than by name lookup, which python-docx makes
+        through Word's internal names ("heading 1") and so misses a template saved
+        with "Heading 1" as the stored name."""
+        by_name = {s.name: s for s in self.doc.styles}
         for candidate in (name, *FALLBACK_STYLES.get(name, ()), "Normal"):
-            if candidate in names:
-                return candidate
-        return "Normal"
+            if candidate in by_name:
+                return by_name[candidate]
+        return by_name["Normal"]
 
     def paragraph(self, text: str, style: str = "Body Text", lead: str = ""):
         p = self.doc.add_paragraph(style=self.style(style))
@@ -419,20 +503,39 @@ class Paper:
         p.paragraph_format.first_line_indent = Inches(0)
         p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
         p.add_run().add_picture(str(path), width=Inches(width))
-        self.paragraph(caption, "figure caption", lead=f"Fig. {number}. ")
+        # The IEEE template's caption style writes "Fig. 1." itself.
+        lead = "" if self.numbers_itself("figure caption") else f"Fig. {number}. "
+        self.paragraph(caption, "figure caption", lead=lead)
         self.set_columns(2)
+
+    def numbers_itself(self, name: str) -> bool:
+        """Whether the document's style `name` carries list numbering (the IEEE
+        template's figure caption, table head, references and Heading 1-2 do)."""
+        style = self.style(name)
+        ppr = style.element.pPr
+        return ppr is not None and ppr.find(qn("w:numPr")) is not None
 
     def table(self, label: str, caption: str, rows: list[list[str]]) -> None:
         width_need = [max(len(r[j]) for r in rows) for j in range(len(rows[0]))]
         total = PAGE_IN if sum(width_need) > 60 else COLUMN_IN
         self.set_columns(1 if total > COLUMN_IN else 2)
-        self.doc.add_paragraph(f"Table {label}", style=self.style("table head"))
-        self.paragraph(caption, "figure caption")
+        notes = ""
+        if self.numbers_itself("table head"):
+            # IEEE layout: the style writes "TABLE I."; the caption's first sentence
+            # is the table's title above it, the rest a note below it.
+            parts = SENTENCE_END.split(caption, maxsplit=1)
+            title, notes = parts[0].rstrip("."), (parts[1] if len(parts) > 1 else "")
+            self.paragraph(title, "table head")
+        else:
+            self.doc.add_paragraph(f"Table {label}", style=self.style("table head"))
+            self.paragraph(caption, "figure caption")
         t = self.doc.add_table(rows=len(rows), cols=len(rows[0]))
-        t.style = "Table Grid"
+        if "Table Grid" in {s.name for s in self.doc.styles}:
+            t.style = "Table Grid"
+        else:
+            self._rule_lines(t)
         t.autofit = False
-        weights = [n**0.8 for n in width_need]
-        widths = [total * w / sum(weights) for w in weights]
+        widths = column_widths(rows, total)
         for gc, w in zip(t._tbl.tblGrid.findall(qn("w:gridCol")), widths):
             gc.set(qn("w:w"), str(int(w * 1440)))
         for i, row in enumerate(rows):
@@ -440,11 +543,34 @@ class Paper:
                 cell = t.cell(i, j)
                 cell.width = Inches(widths[j])
                 para = cell.paragraphs[0]
-                para.style = self.doc.styles[self.style("table copy")]
+                para.style = self.style("table copy")
+                para.alignment = WD_ALIGN_PARAGRAPH.LEFT
                 run = para.add_run(re.sub(r"[*`]", "", value))
                 run.bold = i == 0
+        if notes:
+            note = self.paragraph(notes, "table footnote")
+            # The template's table footnote style letters each note (a., b.); a
+            # table here has one note, so the letter is switched off.
+            num_pr = note._p.get_or_add_pPr().get_or_add_numPr()
+            num_pr.get_or_add_ilvl().val = 0
+            num_pr.get_or_add_numId().val = 0
         self.doc.add_paragraph(style=self.style("Body Text"))
         self.set_columns(2)
+
+    @staticmethod
+    def _rule_lines(t) -> None:
+        """Single 0.5 pt lines around and between the cells, for a template with no
+        "Table Grid" style."""
+        tbl_pr = t._tbl.tblPr
+        borders = OxmlElement("w:tblBorders")
+        for edge in ("top", "left", "bottom", "right", "insideH", "insideV"):
+            el = OxmlElement(f"w:{edge}")
+            el.set(qn("w:val"), "single")
+            el.set(qn("w:sz"), "4")
+            el.set(qn("w:space"), "0")
+            el.set(qn("w:color"), "auto")
+            borders.append(el)
+        tbl_pr.append(borders)
 
     def save(self, path: Path) -> None:
         self.doc.save(str(path))
@@ -492,7 +618,10 @@ def load_sections(overrides: dict[str, Path]) -> dict[str, str | None]:
         if not path.exists():
             out[name] = None
             continue
-        out[name] = extract(path.read_text(encoding="utf-8"), sec.start, sec.stop)
+        text = extract(
+            path.read_text(encoding="utf-8"), sec.start, sec.stop, sec.keep_start
+        )
+        out[name] = merge_citation_runs(text)
     return out
 
 

@@ -34,6 +34,19 @@ def test_extract_keeps_only_the_text_between_the_headings():
         ap.extract(text, "## B. Missing", None)
 
 
+def test_sections_that_start_at_a_subsection_keep_its_heading():
+    # A section whose start marker is its first subsection heading must keep that
+    # heading, or the paper loses it and prints the rest of the line as text.
+    text = "# Draft\n\nnotes\n\n## A. Participants and the two datasets\n\nBody.\n\n## B. Next\n\nMore."
+    for name in ("methods", "results", "discussion"):
+        assert ap.SECTIONS[name].keep_start
+    body = ap.extract(text, "## A. Participants", None, keep_start=True)
+    assert ap.blocks(body)[:2] == [
+        ("h2", "Participants and the two datasets"),
+        ("p", "Body."),
+    ]
+
+
 def test_blocks_make_headings_without_their_letters_and_join_lines():
     md = "## A. Datasets\n\nFirst line\nsecond line.\n\n| a | b |\n|---|---|\n\n## B. Models"
     assert ap.blocks(md) == [
@@ -81,6 +94,12 @@ def test_ledgers_stop_at_their_first_section_and_must_not_overlap(tmp_path):
         ap.ledger_entries([a, a])
 
 
+def test_adjacent_citation_groups_merge():
+    assert ap.merge_citation_runs(
+        "gait [S15], [S26]. Data [S7], [S8, S9]; and [S1]."
+    ) == ("gait [S15, S26]. Data [S7, S8, S9]; and [S1].")
+
+
 def test_cited_labels_in_order_and_captions():
     assert ap.cited_labels(["[S3], then [S1, S3]", "[S2]"]) == ["S3", "S1", "S2"]
     md = "**Table I.** Participants.\n\n**Fig. 4.** The two datasets\ncompared.\n"
@@ -88,6 +107,14 @@ def test_cited_labels_in_order_and_captions():
         "Table I": "Participants.",
         "Fig. 4": "The two datasets compared.",
     }
+
+
+def test_column_widths_fit_the_longest_word_and_sum_to_the_total():
+    rows = [["Dataset", "Participants"], ["WearGait-PD", "87"], ["gaitpdb", "155"]]
+    widths = ap.column_widths(rows, 3.5)
+    assert abs(sum(widths) - 3.5) < 1e-9
+    assert widths[0] >= len("WearGait-PD") * ap.CHAR_IN + ap.CELL_PAD_IN
+    assert widths[1] >= len("Participants") * ap.CHAR_IN + ap.CELL_PAD_IN
 
 
 def test_commit_fills_only_the_placeholder():
