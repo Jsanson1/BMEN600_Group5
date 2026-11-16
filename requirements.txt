@@ -6,3 +6,6 @@ scipy>=1.13,<2
 matplotlib>=3.8,<4
 scikit-learn>=1.5,<2
 tabulate>=0.9,<1
+# For assembling the paper's Word file (scripts/assemble_paper.py) only:
+python-docx>=1.1,<2
+pillow>=10
