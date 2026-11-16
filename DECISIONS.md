@@ -99,3 +99,8 @@ Status: Accepted (proposed by Jamie on 12 November after the bug fix in #15; agr
 - The threshold check behind D-012 counted every walkway footfall, turns and stops included, because its script did not load the video labels (fixed in #15, `24037b8`).
 - On the 12,397 straight-walking footfalls, 5% of the force level still ranks first (53.5% of footfalls within 30 ms, against 53.4% at 30 N), with more footfalls matched one to one (87.1% against 85.5%) and narrower stance limits (-0.13 to +0.09 s, against -0.21 to +0.23 s).
 - D-012's decision stands. The figures quoted in D-012 are superseded by `results/weargait_threshold_check.txt`, written by `scripts/check_weargait_threshold.py`.
+
+### D-015 · 2026-11-16 · AI-Assisted Work: the short statement in the paper, the full account in the repository
+Status: Accepted (proposed by Jamie on 12 November; agreed by Yassien in the group chat and confirmed by Jamie on 16 November, a majority under the team contract; Anna not yet asked)
+- The paper's AI-Assisted Work section is the short version (about 250 words) in `report/final/statements.md`, to fit the 10-page limit; the long version (about 770 words) would have cost about half a page.
+- The detailed account moves, unchanged, to `report/final/ai_use.md`, which the paper's statement points to; each member checks the part about themselves there, and the members' logs remain the record behind both.
