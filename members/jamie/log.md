@@ -385,3 +385,9 @@ Entry format:
 - **CRediT roles:** Writing – review & editing, Project administration, Software.
 - **AI use:** Claude (cloud session, Claude Opus 5.5) made the edits, the merges, the draft and the pull request. Jamie made the decisions above; he has not read the second draft.
 - **Verified:** 110 tests pass on the T-037 branch; in the second draft every citation label is in a ledger and numbered in order of first appearance, and the figures (the repository's Figs. 4 and 5, now Figs. 1 and 2) and Tables I and II follow their first mention. The page position from LibreOffice's PDF. Not verified: the layout in Word.
+
+### 2026-11-16 · T-037 · consistency pass on the assembled paper
+- **Did:** Read the assembled text for consistency across sections and fixed what crosses them, on `jamie/T-037-paper-assembly` (`075470a`, `7e0c7b9`): four cross-references written for an earlier order of sections (Methods as Section III) now point to Sections II-A, II-B, II-D and III-C; AUC, UPDRS, CI and CV are defined where they first appear; the Introduction names the database gaitpdb as the other sections do; the note on D-015 left the paper's text for the draft's header. From now on the section texts are edited on that branch only. Third full draft sent to Jamie.
+- **CRediT roles:** Writing – review & editing.
+- **AI use:** Claude (cloud session, Claude Opus 5.5) found and made the fixes, listing every abbreviation's first use and every section reference in the assembled text by script. Jamie has not reviewed them.
+- **Verified:** the Results' and Discussion's numbers rechecked by script after the edits (unchanged: only the three numbers traced by hand earlier are not in the outputs); the References still start on page 10 in LibreOffice's layout; `check_submission.py` lists 15 open items, all expected (placeholders, teammates' notes, the commit ID, Jamie's longer pass).
