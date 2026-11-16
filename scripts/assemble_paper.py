@@ -25,7 +25,8 @@ IV Discussion, V Conclusion, the end statements and the References. It
 
 With --template (the IEEE conference template .docx), the template's page setup
 and styles are used and its body is replaced; without it, the same style names
-are created with the template's sizes, so the result can be pasted into it.
+are created with the template's sizes, so the result can be pasted into it, and
+the "references" style numbers its entries [1], [2], ... as the template's does.
 """
 
 from __future__ import annotations
@@ -60,7 +61,9 @@ class Section:
 
 
 SECTIONS = {
-    "abstract": Section(f"{FINAL}/abstract.md", "## Abstract"),
+    "title": Section(f"{FINAL}/abstract.md", "## Title", "## Abstract"),
+    "abstract": Section(f"{FINAL}/abstract.md", "## Abstract", "## Keywords"),
+    "keywords": Section(f"{FINAL}/abstract.md", "## Keywords", "## Numbers and where"),
     "introduction": Section(
         f"{FINAL}/introduction.md", "## I. Introduction", None, "Introduction"
     ),
@@ -77,7 +80,7 @@ SECTIONS = {
         f"{FINAL}/discussion.md", "## A. Answer", "## Numbers and where", "Discussion"
     ),
     "conclusion": Section(
-        f"{FINAL}/conclusion.md", "## Conclusion", None, "Conclusion"
+        f"{FINAL}/conclusion.md", "## Conclusion", "## Where each", "Conclusion"
     ),
     "statements": Section(f"{FINAL}/statements.md", "## Data and Code Availability"),
 }
@@ -286,6 +289,7 @@ class Paper:
             "Heading 5": (8, False, False, True, "center", 8, 3),
             "figure caption": (8, False, False, False, "justify", 2, 6),
             "table head": (8, False, False, True, "center", 6, 2),
+            "table copy": (8, False, False, False, "left", 0, 0),
             "references": (8, False, False, False, "justify", 0, 1),
         }
         align = {
@@ -311,6 +315,58 @@ class Paper:
             st.paragraph_format.keep_with_next = name.startswith("Heading")
             if name == "Body Text":
                 st.paragraph_format.first_line_indent = Inches(0.2)
+        self._number_references(styles["references"])
+
+    def _number_references(self, style) -> None:
+        """Give the fallback "references" style the template's list numbering,
+        [1], [2], ..., with a hanging indent: renumber_docx_citations.py removes
+        each entry's label and leaves the number to the style."""
+        numbering = self.doc.part.numbering_part.element
+        used = [
+            int(n.get(qn("w:abstractNumId")))
+            for n in numbering.findall(qn("w:abstractNum"))
+        ]
+        used += [int(n.get(qn("w:numId"))) for n in numbering.findall(qn("w:num"))]
+        num_id = str(max(used, default=0) + 1)
+        abstract = OxmlElement("w:abstractNum")
+        abstract.set(qn("w:abstractNumId"), num_id)
+        level_type = OxmlElement("w:multiLevelType")
+        level_type.set(qn("w:val"), "singleLevel")
+        lvl = OxmlElement("w:lvl")
+        lvl.set(qn("w:ilvl"), "0")
+        for tag, value in (
+            ("w:start", "1"),
+            ("w:numFmt", "decimal"),
+            ("w:pStyle", style.style_id),
+            ("w:lvlText", "[%1]"),
+            ("w:lvlJc", "left"),
+        ):
+            el = OxmlElement(tag)
+            el.set(qn("w:val"), value)
+            lvl.append(el)
+        ppr = OxmlElement("w:pPr")
+        ind = OxmlElement("w:ind")
+        ind.set(qn("w:left"), "360")
+        ind.set(qn("w:hanging"), "360")
+        ppr.append(ind)
+        lvl.append(ppr)
+        abstract.append(level_type)
+        abstract.append(lvl)
+        nums = numbering.findall(qn("w:num"))  # every abstractNum precedes every num
+        if nums:
+            nums[0].addprevious(abstract)
+        else:
+            numbering.append(abstract)
+        num = OxmlElement("w:num")
+        num.set(qn("w:numId"), num_id)
+        ref = OxmlElement("w:abstractNumId")
+        ref.set(qn("w:val"), num_id)
+        num.append(ref)
+        numbering.append(num)
+        num_pr = style.element.get_or_add_pPr().get_or_add_numPr()
+        num_pr.get_or_add_numId().val = int(num_id)
+        style.paragraph_format.left_indent = Inches(0.25)
+        style.paragraph_format.first_line_indent = Inches(-0.25)
 
     def set_columns(self, n: int) -> None:
         """Start a continuous section with n columns (0.25 in apart)."""
@@ -383,7 +439,7 @@ class Paper:
                 cell = t.cell(i, j)
                 cell.width = Inches(widths[j])
                 para = cell.paragraphs[0]
-                para.style = self.doc.styles[self.style("references")]
+                para.style = self.doc.styles[self.style("table copy")]
                 run = para.add_run(re.sub(r"[*`]", "", value))
                 run.bold = i == 0
         self.doc.add_paragraph(style=self.style("Body Text"))
@@ -399,7 +455,8 @@ class Paper:
 def load_sections(overrides: dict[str, Path]) -> dict[str, str | None]:
     out: dict[str, str | None] = {}
     for name, sec in SECTIONS.items():
-        path = overrides.get(name, ROOT / sec.path)
+        same_file = "abstract" if name in ("title", "keywords") else name
+        path = overrides.get(name, overrides.get(same_file, ROOT / sec.path))
         if not path.exists():
             out[name] = None
             continue
@@ -423,7 +480,8 @@ def assemble(
     pending_tables = ["I", "II"]
     paper = Paper(template)
 
-    paper.paragraph("[Title to be decided with the abstract, T-036]", "paper title")
+    title = texts.get("title") or "[Title to be decided with the abstract, T-036]"
+    paper.paragraph(" ".join(title.split()), "paper title")
     paper.paragraph("Anna Klygina, Jamie Sanson, Yassien Tawfik", "Author")
     paper.paragraph(
         "Biomedical Engineering, University of Calgary, Calgary, Canada", "Affiliation"
@@ -431,7 +489,8 @@ def assemble(
     paper.set_columns(2)
     abstract = texts["abstract"] or "[Abstract to come, T-036.]"
     paper.paragraph(" ".join(abstract.split()), "Abstract", lead="Abstract—")
-    paper.paragraph("[Keywords to choose, T-036.]", "Keywords", lead="Keywords—")
+    keywords = texts.get("keywords") or "[Keywords to choose, T-036.]"
+    paper.paragraph(" ".join(keywords.split()), "Keywords", lead="Keywords—")
 
     def place_floats(text: str) -> None:
         for m in FIG_REF.finditer(text):

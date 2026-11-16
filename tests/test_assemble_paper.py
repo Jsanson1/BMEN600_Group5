@@ -8,6 +8,7 @@ import zipfile
 from pathlib import Path
 
 import pytest
+from docx.oxml.ns import qn
 from PIL import Image
 
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
@@ -122,9 +123,27 @@ def test_assembled_document_is_numbered_by_the_midterm_renumbering(tmp_path):
         "Fig. 4": "Fig. 3",
     }
     assert report["figures_not_placed"] == [] and report["tables_not_placed"] == []
-    assert report["missing_sections"] == ["abstract", "discussion", "conclusion"]
+    assert report["missing_sections"] == [
+        "title",
+        "abstract",
+        "keywords",
+        "discussion",
+        "conclusion",
+    ]
     out = tmp_path / "paper.docx"
     paper.save(out)
+    # Without a template, the reference entries are numbered by their style, and
+    # table cells use a different style, so only the entries get [1], [2], ...
+    refs = paper.doc.styles["references"].element
+    assert refs.find(qn("w:pPr")).find(qn("w:numPr")) is not None
+    cell_styles = {
+        p.style.name
+        for t in paper.doc.tables
+        for row in t.rows
+        for c in row.cells
+        for p in c.paragraphs
+    }
+    assert cell_styles == {"table copy"}
     xml = zipfile.ZipFile(out).read("word/document.xml").decode("utf-8")
     numbered, numbering = renumber_docx.renumber(xml)
     assert numbering["order"] == ["S2", "S1"]
