@@ -59,18 +59,18 @@ All files are in `results/` on `jamie/T-022-cross-cohort-run`.
 | 0.94 | `crosscohort_summary.txt` | dataset of origin |
 | 0.009 | `crosscohort_summary.txt` | stride-matched reference, drop (largest of 0.008, 0.009, 0.001) |
 | 0.65 and 0.67 | `crosscohort_table.md` | pairs matched on sex and age (0.65, 0.65, 0.67) |
-| 0.55 or 0.56; 57 participants | `crosscohort_table.md` | VA Puget Sound only (0.56, 0.55, 0.55) |
+| 0.55 to 0.56; 57 participants | `crosscohort_table.md` | VA Puget Sound only (0.56, 0.55, 0.55) |
 | 0.54 | `crosscohort_table.md` | inputs standardised |
 | 0.52 to 0.58 | `crosscohort_table.md` | without the two variability features (0.52, 0.53, 0.58) |
 | 0.53 to 0.54 | `crosscohort_table.md` | contact threshold fixed at 20 N (0.53, 0.53, 0.54) |
-| 0.52 to 0.58; 0.59 (0.50 to 0.69); 0.53, 0.43; ages 75, 68, 64 | `weargait_signal_check.txt` | dataset blocks (0.595 is 0.5948 unrounded) |
+| 0.52 to 0.58; 0.59 (0.50 to 0.69); 0.53, 0.43 | `weargait_signal_check.txt` | dataset blocks (0.595 is 0.5948 unrounded) |
 | ρ 0.556 to 0.641 (0.641, 0.623, 0.556); 49 of 56 pairs across sites | `weargait_signal_check.txt` | age-matched pairs; cross-cohort predictions |
-| bouts 2 and 18; most and about half of the excess (stride-time CV 4.96 to 2.83 against 2.41, about 84% of the excess; swing-time CV 8.19 to 5.80 against 3.67, about 53%); 9 strides; 32 and 81 | `feature_checks.txt` | sections 1 and 3 |
-| 0.66, 0.69, 0.73, 0.73 | `feature_checks.txt` | section 5 (0.657, 0.692, 0.728, 0.730) |
-| about 10% | `feature_checks.txt` | section 2 (stride_s median 1.096) |
-| 83%; limits −0.09 to +0.09, −0.15 to +0.11, −0.10 to +0.15 s; 80%, 84% to 88% | `weargait_threshold_check.txt`, `weargait_threshold_check.csv` | 5% of force level: all, by site |
-| stage 2 to 3; modified stage 1 to 4 | `cohort_table.md` | Hoehn and Yahr stage |
-| 155, 169; 11 of 181, 8 controls | `clean_strides_summary.txt`, `weargait_participants.txt` | inclusion counts, not processed |
+| bouts 2 and 18; most and about half of the excess (stride-time CV 4.96 to 2.83 against 2.41, about 84% of the excess; swing-time CV 8.19 to 5.80 against 3.67, about 53%) | `feature_checks.txt` | sections 1 and 3 |
+| 0.66, 0.69, 0.73 | `feature_checks.txt` | section 5 (0.657, 0.692, 0.728) |
+| median absolute differences 0.01 s (stride) and 0.03 s (stance, swing) | `weargait_threshold_check.csv` | 5% of force level, subgroup all (stride_median_abs_diff_s 0.01; stance and swing 0.03). Until 16 November this row gave the limits of the first, superseded run of the check (D-014) |
+| 155, 169; 11 of 181 | `clean_strides_summary.txt`, `weargait_participants.txt` | inclusion counts, not processed (the 8 controls among the 11 are now in the Methods) |
+| balanced accuracy 0.68 | `model_comparison.txt` | logistic regression, gait features, threshold metrics within protocol |
+| Jin's gait-only 0.84 and 0.50 to 0.85 | [S14], `report/final/sources.md` | check of 16 November, Sections 3.8 and 3.9 |
 
 ## Changes from draft 2
 
