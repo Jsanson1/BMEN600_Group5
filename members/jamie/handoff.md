@@ -23,7 +23,7 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 -->
 
 ## T-037 · Assemble and submit the final paper (merged; only the upload to D2L is left)
-_Updated 2026-11-16 18:35 by Claude (cloud session) for Jamie · merged into main as `4a660d6` (#23)_
+_Updated 2026-11-16 18:27 by Claude (cloud session) for Jamie · merged into main as `4a660d6` (#23)_
 
 - **Now:** the paper is complete and merged. The final PDF was built from a fresh clone of `4a660d6` in IEEE's conference template, with that commit ID written in (`scripts/assemble_paper.py --template conference-template-letter.docx --commit 4a660d6`, then `renumber_docx_citations.py`, LibreOffice and `check_submission.py`, which reports "ready to submit"): 11 pages, the text ending on page 10, then the References. Jamie has the PDF and the Word file from the session. The final rerun from a clean clone of `02e69c9` rewrote 83 of the 106 committed outputs byte for byte (only the commit line of the two `features_summary.txt` differs), and the paper's version changes no analysis code.
 - **Validated:** `check_submission.py` on the final build; main's checks green at `4a660d6`; every result number in the paper found in an output by script and traced by an independent review; 150 tests. **Not verified:** the layout if the Word file is saved from Word (the PDF uses Liberation Serif, LibreOffice's metric twin of Times New Roman); the group has not read the final paper.
@@ -33,7 +33,7 @@ _Updated 2026-11-16 18:35 by Claude (cloud session) for Jamie · merged into mai
 - **Not pushed:** nothing.
 
 ## T-038 · Final presentation (deck drafted, D-016)
-_Updated 2026-11-16 18:35 by Claude (cloud session) for Jamie · a Slides artifact in Jamie's Claude account, private until Jamie shares it; no branch_
+_Updated 2026-11-16 18:27 by Claude (cloud session) for Jamie · a Slides artifact in Jamie's Claude account, private until Jamie shares it; no branch_
 
 - **Now:** a nine-slide deck for the 5-minute talk with speaker notes, its title matching the paper's: the problem, question and datasets (Anna, about 1 min 45 s); the workflow with the evaluation-design figure and the result within gaitpdb (Jamie, about 1 min 25 s); the cross-cohort result with Figure 5, why it does not transfer, and what it means (Yassien, about 1 min 50 s).
 - **Validated:** every number against the outputs; each slide rendered and looked at. **Not verified:** the timing spoken aloud; the group has not seen it.
