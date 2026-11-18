@@ -409,3 +409,9 @@ Entry format:
 - **CRediT roles:** Validation, Software, Writing – review & editing, Project administration.
 - **AI use:** Claude (cloud session, Claude Opus 5.5) ran and compared the rerun, wrote the reproducibility text, merged #23 under the team's go-ahead and built the PDF. Jamie has not yet read the final paper.
 - **Verified:** the rerun by `git status` and per-file timestamps in the clone (83 rewritten after the checkout time, none different but the two commit lines); that the paper's version adds only paper tooling to `02e69c9` (`git diff --stat 02e69c9 4a660d6 -- src scripts tests`); the final PDF by `check_submission.py` ("ready to submit": 31 references in order, two figures and two tables in order and cited, repository link and commit ID present, no notes, References from page 10) and by looking at every page; main's checks green at `4a660d6`. Not verified: a save of the Word file from Word; the group's read-through.
+
+### 2026-11-18 · T-037, T-038 · submission held for review; deck sent; merged branches checked
+- **Did:** Recorded that the group will hold the D2L submission until it has reviewed the paper further, and that Jamie sent Anna and Yassien the deck as a PowerPoint download on 17 November. Checked through GitHub's compare API that each of the 22 merged `jamie/` branches has no commit missing from `main`, so they can be deleted without losing work (the session cannot delete branches; Jamie does it by hand).
+- **CRediT roles:** Project administration.
+- **AI use:** Claude (cloud session, Claude Opus 5.5) checked the branches and the deck's download code (the PowerPoint export writes each slide's speaker notes into PowerPoint's notes) and wrote these updates. Jamie sent the deck.
+- **Verified:** the branch check (ahead by 0 for every branch); all nine slides have speaker notes naming the speaker. Not verified: a downloaded copy of the deck opened in PowerPoint.
