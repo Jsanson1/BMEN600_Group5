@@ -22,6 +22,16 @@ _Updated 2026-10-02 15:40 by Claude Code for Jamie · branch `jamie/T-007-short-
 - **Not pushed:** nothing. (Anything listed here exists on one machine only.)
 -->
 
+## T-039 · Frame the abstract and Introduction around what the study tests (pull request #24, waiting for review)
+_Updated 2026-11-23 13:42 by Claude (cloud session) for Jamie · branch `jamie/T-039-framing`, https://github.com/Jsanson1/BMEN600_Group5/pull/24_
+
+- **Now:** after a slide in class (23 November) contrasted "dataset, models, best accuracy" with "what the field measures wrong, a question that changes a decision, a method that answers it, evidence that survives attack", the abstract and the Introduction's last paragraph now lead with what the study tests. The abstract says that gait classifiers for PD are mostly tested within one database, which cannot show whether they will work in another clinic, and it ends with what follows for validation. The Introduction's question is whether performance within one database tells a clinic that a model will work on its own patients, device and protocol. No result changes.
+- **Validated:** abstract 250 words; every number in the changed text is already in the outputs and the paper; the paper rebuilt from the branch passes `check_submission.py` (11 pages, References from page 10). **Not verified:** the group's agreement with the framing; the layout in Word.
+- **Next:** Anna and Yassien review #24; merge; set T-039 to done; rebuild the final PDF with the new commit ID (T-037).
+- **Blocked / needs a decision:** none.
+- **For teammates:** @anna @yassien: please read the new abstract and the last paragraph of the Introduction in #24.
+- **Not pushed:** nothing.
+
 ## T-037 · Assemble and submit the final paper (merged; submission held for the group's review)
 _Updated 2026-11-18 11:05 by Claude (cloud session) for Jamie · merged into main as `4a660d6` (#23)_
 
