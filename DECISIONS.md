@@ -112,3 +112,8 @@ Status: Accepted (proposed by Jamie's session on 16 November; approved by Jamie 
 - The abstract and keywords keep the IEEE template's "Abstract—" and "Keywords—".
 - To finish on time, Jamie's AI drafts the title, abstract and keywords (T-036), the Conclusion (T-024, Yassien's task) and the presentation deck (T-038), for the group to check and change. This replaces the split proposed earlier the same day (abstract to Yassien, presentation led by Anna).
 - Under the same go-ahead, pull request #22 was merged on 16 November with its checks green and an independent first-pass review, but without a teammate's approval on GitHub as D-003 asks; its description says so.
+
+### D-017 · 2026-11-23 · Framing of the abstract and Introduction (T-039)
+Status: Accepted (proposed by Jamie's session on 23 November after a slide shown in class; agreed by Anna and Yassien in person the same day, relayed by Jamie; recorded by Jamie on 23 November)
+- The abstract and the Introduction's last paragraph lead with what the study tests: whether performance on unseen participants of one database tells a clinic that a model will work on its own patients, device and walking protocol. The abstract ends with what follows, that such models need validating where they will be used. No result changed.
+- Pull request #24 was merged on this in-person approval, with the checks green, rather than an approval on GitHub as D-003 asks; its comment says so.

@@ -139,4 +139,4 @@ owner: jamie | status: doing | branch: jamie/T-037-paper-assembly | due: 2026-12
 owner: jamie | status: review | branch: - | due: 2026-11-27 | updated: 2026-11-16
 
 ### T-039 · Paper: frame the abstract and Introduction around the evaluation problem the study tests (what within-database validation cannot show, the decision it informs, the evaluation built to answer it), without new results (jamie)
-owner: jamie | status: review | branch: jamie/T-039-framing | due: 2026-11-27 | updated: 2026-11-23
+owner: jamie | status: done | branch: jamie/T-039-framing | due: 2026-11-27 | updated: 2026-11-23

@@ -421,3 +421,9 @@ Entry format:
 - **CRediT roles:** Writing – review & editing, Conceptualization (framing), Visualization (deck).
 - **AI use:** Claude (cloud session, Claude Opus 5.5) assessed the paper against the slide, drafted the new wording, rebuilt the paper and redesigned the deck. Jamie has not yet reviewed #24.
 - **Verified:** word count by script; that no model was significantly better than swing-time asymmetry alone, against the paired tests in `results/model_comparison.txt`; that the abstract's checks are the ones fixed in advance (Results III-C); `check_submission.py` on the rebuilt paper ("ready to submit"). Not verified: the group's agreement; the layout in Word.
+
+### 2026-11-23 · T-039, T-037 · #24 merged on the team's in-person approval; final PDF rebuilt at `735cc85`
+- **Did:** Anna and Yassien agreed to the reframed abstract and Introduction in person (relayed by Jamie). Recorded that on #24, merged it (`735cc85`, checks green) and recorded D-017. Rebuilt the final PDF and Word file from a fresh clone of `735cc85` with that commit ID written in, and sent both to Jamie. Set T-039 to done.
+- **CRediT roles:** Project administration, Writing – review & editing.
+- **AI use:** Claude (cloud session, Claude Opus 5.5) merged, built and recorded. Jamie relayed the approval.
+- **Verified:** `check_submission.py` "ready to submit" (11 pages, References from page 10, commit `735cc85` in the text); 150 tests pass in the clone. Not verified: the layout in Word.
