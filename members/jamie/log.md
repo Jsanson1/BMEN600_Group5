@@ -427,3 +427,9 @@ Entry format:
 - **CRediT roles:** Project administration, Writing – review & editing.
 - **AI use:** Claude (cloud session, Claude Opus 5.5) merged, built and recorded. Jamie relayed the approval.
 - **Verified:** `check_submission.py` "ready to submit" (11 pages, References from page 10, commit `735cc85` in the text); 150 tests pass in the clone. Not verified: the layout in Word.
+
+### 2026-11-27 · T-038 · presentation condensed, rescripted and timed
+- **Did:** Reviewed the brief's oral-presentation requirements and rubric (5 minutes, at least 1 minute each, six required elements, five criteria) against the deck Anna had restyled in Google Slides. Cut the on-slide text on all nine slides with find-and-replace (formatting untouched), corrected two slide-2 labels and its source line, and replaced every slide's speaker notes with a new, timed script (about 640 words, about 4:40 at 150 words a minute, everyone over 1 minute). Made Jamie printable flash cards: running order with start times, rubric coverage, one card per slide, Q&A and contribution cards.
+- **CRediT roles:** Writing – review & editing, Visualization.
+- **AI use:** Claude (cloud session, Claude Opus 5.5) wrote the script, chose the cuts and made the edits in the shared deck through Jamie's Chrome while Anna was also editing it (Jamie chose to edit all slides at once), and built the flash cards. Jamie asked for the work and chose how to handle the concurrent editing.
+- **Verified:** every number against the paper (including Table II for the claim that every prespecified check except the matched pairs stayed near chance); word counts and timing by script; the deck re-exported, its notes identical to the script; the flash cards rendered and looked at. Not verified: the timing spoken aloud; the group's agreement with the new script.

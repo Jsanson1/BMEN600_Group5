@@ -32,12 +32,12 @@ _Updated 2026-11-23 13:46 by Claude (cloud session) for Jamie · paper at main `
 - **For teammates:** @anna @yassien: please read the final paper (the PDF Jamie shares) and your own lines in `report/final/statements.md` and `report/final/ai_use.md`. @yassien: the Conclusion was your task and was drafted by Jamie's AI (D-016); change anything you like through a pull request. @anna: #21 and your SVM are merged, so T-017 and T-020 can be set to done.
 - **Not pushed:** nothing.
 
-## T-038 · Final presentation (deck drafted, D-016)
-_Updated 2026-11-16 18:27 by Claude (cloud session) for Jamie · a Slides artifact in Jamie's Claude account, private until Jamie shares it; no branch_
+## T-038 · Final presentation (in Google Slides, condensed and rescripted 27 November)
+_Updated 2026-11-27 13:51 by Claude (cloud session) for Jamie · Google Slides deck "BMEN 600 Group 5 Final Presentation" in Jamie's Drive, shared with Anna and Yassien; no branch_
 
-- **Now:** a nine-slide deck for the 5-minute talk with speaker notes, its title matching the paper's: the problem, question and datasets (Anna, about 1 min 45 s); the workflow with the evaluation-design figure and the result within gaitpdb (Jamie, about 1 min 25 s); the cross-cohort result with Figure 5, why it does not transfer, and what it means (Yassien, about 1 min 50 s).
-- **Validated:** every number against the outputs; each slide rendered and looked at. **Not verified:** the timing spoken aloud; the group has not seen it.
-- **Next:** Jamie sent Anna and Yassien the deck as a downloaded PowerPoint on 17 November (a copy: a later change to the deck means sending it again); each rehearses their part and changes the split or wording as they like; set to done after the talk.
-- **Blocked / needs a decision:** none.
-- **For teammates:** @anna @yassien: your parts are in the speaker notes of the PowerPoint Jamie sent (Anna slides 1 to 4, Jamie 5 and 6, Yassien 7 to 9).
-- **Not pushed:** nothing (the deck lives in the artifact).
+- **Now:** the deck moved to Google Slides, where Anna restyled it and cut it to nine slides. On 27 November, after the teaching team said every slide had too many words, Jamie's session cut the on-slide text (about 650 words across the deck to about 420, mostly on slides 5 to 9) with find-and-replace, so Anna's formatting is untouched; it also corrected two slide-2 labels whose shortening had changed their meaning, and swapped the slide-2 source Rizzo for Tolosa (the 80.6% card is gone). The speaker notes now hold a new script of about 640 words, about 4:40 at a steady pace: Jamie slides 1, 5, 6 (about 1:25), Anna 2 to 4 (about 1:40), Yassien 7 to 9 (about 1:35). Jamie has it as printable flash cards with Q&A and contribution cards (Word file, not in the repository).
+- **Validated:** every number in the script and on the edited slides against the paper's text and Table II; the deck re-exported after the edits, its notes identical to the script. **Not verified:** the timing spoken aloud; Anna and Yassien have not yet seen the new notes; Anna's old note that turn removal took more data from controls, who walk faster, is in neither the paper nor the repository and was left out.
+- **Next:** each rehearses with a timer (over 5:00 means speaking slower than about 150 words a minute); the talk is on 30 November; set to done after it.
+- **Blocked / needs a decision:** whether the 1-minute (brief) or 2-minute (course-introduction slide) speaking minimum applies; three people cannot each speak 2 minutes in 5.
+- **For teammates:** @anna @yassien: your new lines are in the speaker notes of the Google Slides deck; the PowerPoint from 17 November is out of date.
+- **Not pushed:** nothing (the deck lives in Google Slides).
