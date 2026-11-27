@@ -133,10 +133,10 @@ owner: jamie | status: done | branch: jamie/T-035-introduction | due: 2026-11-20
 owner: jamie | status: done | branch: jamie/T-037-paper-assembly | due: 2026-11-27 | updated: 2026-11-16
 
 ### T-037 · Project: assemble and submit the final paper: all sections into the Word template, figures and tables placed and numbered, citations renumbered in IEEE order, page count (at most 10 excluding title page and references), the repository link and the commit ID of the graded version, a final clean rerun at that commit, PDF on D2L (all; after T-036)
-owner: jamie | status: doing | branch: jamie/T-037-paper-assembly | due: 2026-12-02 | updated: 2026-11-16
+owner: jamie | status: doing | branch: jamie/T-037-paper-assembly | due: 2026-12-02 | updated: 2026-11-27
 
 ### T-038 · Project: final presentation (5 minutes plus questions; everyone speaks at least 1 minute): problem and question, datasets and independent case, workflow and comparison, results, limitations and next steps, interpretation (all)
-owner: jamie | status: review | branch: - | due: 2026-11-27 | updated: 2026-11-16
+owner: jamie | status: doing | branch: - | due: 2026-11-27 | updated: 2026-11-27
 
 ### T-039 · Paper: frame the abstract and Introduction around the evaluation problem the study tests (what within-database validation cannot show, the decision it informs, the evaluation built to answer it), without new results (jamie)
 owner: jamie | status: done | branch: jamie/T-039-framing | due: 2026-11-27 | updated: 2026-11-23
